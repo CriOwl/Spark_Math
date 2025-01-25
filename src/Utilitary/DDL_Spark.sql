@@ -23,8 +23,7 @@ CREATE TABLE IF NOT EXISTS
         email TEXT NOT NULL,
         password TEXT NOT NULL,
         birthdate DATE,
-        id_role INTEGER NOT NULL,
-        id_institution INTEGER NOT NULL,
+        id_role INTEGER NOT NULL REFERENCES Role (id_role),
         state INTEGER DEFAULT 1 CONSTRAINT states CHECK (state IN (0, 1)),
         date_created DATETIME DEFAULT (datetime('now', 'localtime')),
         date_updated DATETIME

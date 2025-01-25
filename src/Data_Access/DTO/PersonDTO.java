@@ -8,7 +8,6 @@ public class PersonDTO {
     private String email;
     private String password;
     private String birthdate;
-    private Integer id_instution;
     private Integer id_role;
     private Integer state;
     private String date_created;
@@ -27,7 +26,7 @@ public class PersonDTO {
     }
 
     public PersonDTO(Integer id_person, String name, String last_name, String dNI, String email, String password,
-            String birthdate, Integer id_role, Integer id_instution, Integer state, String date_created,
+            String birthdate, Integer id_role, Integer state, String date_created,
             String date_update) {
         this.id_person = id_person;
         this.name = name;
@@ -37,7 +36,6 @@ public class PersonDTO {
         this.email = email;
         this.password = password;
         this.birthdate = birthdate;
-        this.id_instution = id_instution;
         this.state = state;
         this.date_created = date_created;
         this.date_update = date_update;
@@ -101,14 +99,6 @@ public class PersonDTO {
         this.birthdate = birthdate;
     }
 
-    public Integer getId_instution() {
-        return id_instution;
-    }
-
-    public void setId_instution(Integer id_instution) {
-        this.id_instution = id_instution;
-    }
-
     public Integer getId_state() {
         return state;
     }
@@ -152,7 +142,6 @@ public class PersonDTO {
                 + "\n Clave"                + getPassword()
                 + "\n Fecha_Nacimiento"     + getBirthdate()
                 + "\n id_Role"              + getId_role()
-                + "\n id_Institucion"       + getId_instution()
                 + "\n estado"               + getId_state()
                 + "\n fecha_creacion"       + getDate_created()
                 + "\n fecha_modificacion"   + getDate_update();
