@@ -5,12 +5,6 @@ DROP TABLE IF EXISTS Game2;
 DROP TABLE IF EXISTS Game1;
 DROP TABLE IF EXISTS Activity;
 DROP TABLE IF EXISTS Student_course;
-DROP TABLE IF EXISTS Course;            --luego
-DROP TABLE IF EXISTS Institution;   --luego
-DROP TABLE IF EXISTS Persona;        -- luego
-    DROP TABLE IF EXISTS Role;           --yo
-    DROP TABLE IF EXISTS Permission_role;--yo
-    DROP TABLE IF EXISTS Permission;     --yo
 DROP TABLE IF EXISTS Course;            
 DROP TABLE IF EXISTS Institution;   
 DROP TABLE IF EXISTS Persona;        
@@ -93,11 +87,11 @@ CREATE TABLE IF NOT EXISTS
     Course (
         id_course INTEGER PRIMARY KEY AUTOINCREMENT,
         id_teacher INTEGER NOT NULL REFERENCES Persona (id_person),
-        id_catalog_level INTEGER NOT NULL REFERENCES Catalog (id_catalog_level),
-        id_catalog_parallel INTEGER NOT NULL REFERENCES Catalog (id_catalog_parallel),
+        id_catalog_level INTEGER NOT NULL REFERENCES Catalog (id_catalog),
+        id_catalog_parallel INTEGER NOT NULL REFERENCES Catalog (id_catalog),
         id_institution INTEGER NOT NULL REFERENCES Institution (id_institution),
-        id_catalog_time INTEGER NOT NULL REFERENCES Catalog (id_catalog_time),
-        id_catalog_period INTEGER NOT NULL REFERENCES Catalog (id_catalog_period),
+        id_catalog_time INTEGER NOT NULL REFERENCES Catalog (id_catalog),
+        id_catalog_period INTEGER NOT NULL REFERENCES Catalog (id_catalog),
         state INTEGER DEFAULT 1 CONSTRAINT states CHECK (state IN (0, 1)),
         date_created DATETIME DEFAULT (datetime('now', 'localtime')),
         date_updated DATETIME
@@ -110,7 +104,7 @@ CREATE TABLE IF NOT EXISTS
         id_activity INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         id_course INTEGER NOT NULL REFERENCES Course (id_course),
-        id_catalog_activity_type INTEGER NOT NULL REFERENCES Catalog (id_activity_type),
+        id_catalog_activity_type INTEGER NOT NULL REFERENCES Catalog (id_catalog),
         description TEXT NOT NULL,
         state INTEGER DEFAULT 1 CONSTRAINT states CHECK (state IN (0, 1)),
         date_created DATETIME DEFAULT (datetime('now', 'localtime')),
@@ -145,7 +139,7 @@ CREATE INDEX indx_id_catalog_level ON Catalog_level (id_catalog_level);
 CREATE TABLE IF NOT EXISTS
     Catalog (
         id_catalog INTEGER PRIMARY KEY AUTOINCREMENT,
-        name VARCHAR(20) NOT NULL,
+        name VARCHAR(50) NOT NULL,
         id_catalog_level INTEGER REFERENCES Catalog_level(id_catalog_level),
         state INTEGER DEFAULT 1 CONSTRAINT states CHECK (state IN (0, 1)),
         date_created DATETIME DEFAULT (datetime('now', 'localtime')),
