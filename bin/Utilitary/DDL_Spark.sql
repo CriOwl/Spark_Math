@@ -87,10 +87,10 @@ CREATE INDEX indx_id_permission ON Permission (id_permission);
 CREATE TABLE IF NOT EXISTS
     Course (
         id_course INTEGER PRIMARY KEY AUTOINCREMENT,
+        id_teacher INTEGER NOT NULL REFERENCES Persona (id_person),
         id_catalog_level INTEGER NOT NULL REFERENCES Catalog (id_catalog_level),
         id_catalog_parallel INTEGER NOT NULL REFERENCES Catalog (id_catalog_parallel),
         id_institution INTEGER NOT NULL REFERENCES Institution (id_institution),
-        id_teacher INTEGER NOT NULL REFERENCES Persona (id_person),
         id_catalog_time INTEGER NOT NULL REFERENCES Catalog (id_catalog_time),
         id_catalog_period INTEGER NOT NULL REFERENCES Catalog (id_catalog_period),
         state INTEGER DEFAULT 1 CONSTRAINT states CHECK (state IN (0, 1)),
