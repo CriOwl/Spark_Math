@@ -55,6 +55,7 @@ public class RoleDTO {
         return getClass().getName()
         +"\n    id_role"            +getId_Role()
         +"\n    nombre"             +getName()
+        +"\n    estado"             +getState()
         +"\n    fecha_creacion"     +getDate_created()
         +"\n    fecha_modificacion" +getDate_update();
     }
