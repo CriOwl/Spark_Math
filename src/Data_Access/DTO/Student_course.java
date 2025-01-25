@@ -25,8 +25,7 @@ public class Student_course {
         this.id_student = id_student;
         this.id_course  = id_course;
     }
-
-
+    
     public Integer getId_student_course() {
         return id_student_course;
     }

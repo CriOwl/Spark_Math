@@ -1,8 +1,8 @@
 -- database: ../../database/MathSpark.sqlite
-DROP TABLE IF EXISTS Game2;
-DROP TABLE IF EXISTS Game1;
 DROP TABLE IF EXISTS Grades_activity_game1;
 DROP TABLE IF EXISTS Grades_activity_game2;
+DROP TABLE IF EXISTS Game2;
+DROP TABLE IF EXISTS Game1;
 DROP TABLE IF EXISTS Activity;
 DROP TABLE IF EXISTS Student_course;
 DROP TABLE IF EXISTS Course;            --luego
@@ -11,6 +11,12 @@ DROP TABLE IF EXISTS Persona;        -- luego
     DROP TABLE IF EXISTS Role;           --yo
     DROP TABLE IF EXISTS Permission_role;--yo
     DROP TABLE IF EXISTS Permission;     --yo
+DROP TABLE IF EXISTS Course;            
+DROP TABLE IF EXISTS Institution;   
+DROP TABLE IF EXISTS Persona;        
+DROP TABLE IF EXISTS Permission_role;
+DROP TABLE IF EXISTS Role;          
+DROP TABLE IF EXISTS Permission;     
 DROP TABLE IF EXISTS Catalog;
 DROP TABLE IF EXISTS Catalog_level;
 
