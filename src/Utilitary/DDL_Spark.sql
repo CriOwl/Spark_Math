@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS
         birthdate DATE,
         id_role INTEGER NOT NULL,
         id_institution INTEGER NOT NULL,
-        id_state INTEGER DEFAULT 1 CONSTRAINT states CHECK (id_state IN (0, 1)),
+        state INTEGER DEFAULT 1 CONSTRAINT states CHECK (state IN (0, 1)),
         date_created DATETIME DEFAULT (datetime('now', 'localtime')),
         date_updated DATETIME
     );
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS
     Role (
         id_role INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
-        id_state INTEGER DEFAULT 1 CONSTRAINT states CHECK (id_state IN (0, 1)),
+        state INTEGER DEFAULT 1 CONSTRAINT states CHECK (state IN (0, 1)),
         date_created DATETIME DEFAULT (datetime('now', 'localtime')),
         date_updated DATETIME
     );
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS
         id_manager INTEGER NOT NULL REFERENCES Persona (id_person),
         name TEXT NOT NULL,
         amie VARCHAR(8) UNIQUE NOT NULL,
-        id_state INTEGER DEFAULT 1 CONSTRAINT states CHECK (id_state IN (0, 1)),
+        state INTEGER DEFAULT 1 CONSTRAINT states CHECK (state IN (0, 1)),
         date_created DATETIME DEFAULT (datetime('now', 'localtime')),
         date_updated DATETIME
     );
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS
         id_permission_role INTEGER PRIMARY KEY AUTOINCREMENT,
         id_role INTEGER NOT NULL REFERENCES Role (id_role),
         id_permission INTEGER NOT NULL REFERENCES Permission (id_permission),
-        id_state INTEGER DEFAULT 1 CONSTRAINT states CHECK (id_state IN (0, 1)),
+        state INTEGER DEFAULT 1 CONSTRAINT states CHECK (state IN (0, 1)),
         date_created DATETIME DEFAULT (datetime('now', 'localtime')),
         date_updated DATETIME
     );
@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS
         id_permission INTEGER PRIMARY KEY AUTOINCREMENT,
         name VARCHAR(30) NOT NULL,
         description TEXT NOT NULL,
-        id_state INTEGER DEFAULT 1 CONSTRAINT states CHECK (id_state IN (0, 1)),
+        state INTEGER DEFAULT 1 CONSTRAINT states CHECK (state IN (0, 1)),
         date_created DATETIME DEFAULT (datetime('now', 'localtime')),
         date_updated DATETIME
     );
@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS
         id_institution INTEGER NOT NULL REFERENCES Institution (id_institution),
         id_catalog_time INTEGER NOT NULL REFERENCES Catalog (id_catalog_time),
         id_catalog_period INTEGER NOT NULL REFERENCES Catalog (id_catalog_period),
-        id_state INTEGER DEFAULT 1 CONSTRAINT states CHECK (id_state IN (0, 1)),
+        state INTEGER DEFAULT 1 CONSTRAINT states CHECK (state IN (0, 1)),
         date_created DATETIME DEFAULT (datetime('now', 'localtime')),
         date_updated DATETIME
     );
@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS
         id_course INTEGER NOT NULL REFERENCES Course (id_course),
         id_catalog_activity_type INTEGER NOT NULL REFERENCES Catalog (id_activity_type),
         description TEXT NOT NULL,
-        id_state INTEGER DEFAULT 1 CONSTRAINT states CHECK (id_state IN (0, 1)),
+        state INTEGER DEFAULT 1 CONSTRAINT states CHECK (state IN (0, 1)),
         date_created DATETIME DEFAULT (datetime('now', 'localtime')),
         date_updated DATETIME
     );
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS
         id_student_course INTEGER PRIMARY KEY AUTOINCREMENT,
         id_student INTEGER NOT NULL REFERENCES Persona (id_person),
         id_course INTEGER NOT NULL REFERENCES Course (id_course),
-        id_state INTEGER DEFAULT 1 CONSTRAINT states CHECK (id_state IN (0, 1)),
+        state INTEGER DEFAULT 1 CONSTRAINT states CHECK (state IN (0, 1)),
         date_created DATETIME DEFAULT (datetime('now', 'localtime')),
         date_updated DATETIME
     );
@@ -128,7 +128,7 @@ CREATE TABLE IF NOT EXISTS
     Catalog_level (
         id_catalog_level INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
-        id_state INTEGER DEFAULT 1 CONSTRAINT states CHECK (id_state IN (0, 1)),
+        state INTEGER DEFAULT 1 CONSTRAINT states CHECK (state IN (0, 1)),
         date_created DATETIME DEFAULT (datetime('now', 'localtime')),
         date_updated DATETIME
     );
@@ -138,7 +138,7 @@ CREATE INDEX indx_id_catalog_level ON Catalog_level (id_catalog_level);
 CREATE TABLE IF NOT EXISTS
     Catalog (
         id_catalog INTEGER PRIMARY KEY AUTOINCREMENT,
-        id_state INTEGER DEFAULT 1 CONSTRAINT states CHECK (id_state IN (0, 1)),
+        state INTEGER DEFAULT 1 CONSTRAINT states CHECK (state IN (0, 1)),
         date_created DATETIME DEFAULT (datetime('now', 'localtime')),
         date_updated DATETIME
     );
@@ -151,7 +151,7 @@ CREATE TABLE IF NOT EXISTS
         id_Student_course INTEGER NOT NULL REFERENCES Student_course (id_student_course),
         answer1 TEXT NOT NULL,
         id_game1 INTEGER NOT NULL REFERENCES Game1 (id_game1),
-        id_state INTEGER DEFAULT 1 CONSTRAINT states CHECK (id_state IN (0, 1)),
+        state INTEGER DEFAULT 1 CONSTRAINT states CHECK (state IN (0, 1)),
         date_created DATETIME DEFAULT (datetime('now', 'localtime')),
         date_updated DATETIME
     );
@@ -162,7 +162,7 @@ CREATE TABLE IF NOT EXISTS
         id_Student_course INTEGER NOT NULL REFERENCES Student_course (id_student_course),
         answer1 TEXT NOT NULL,
         id_game2 INTEGER NOT NULL REFERENCES Game2 (id_game2),
-        id_state INTEGER DEFAULT 1 CONSTRAINT states CHECK (id_state IN (0, 1)),
+        state INTEGER DEFAULT 1 CONSTRAINT states CHECK (state IN (0, 1)),
         date_created DATETIME DEFAULT (datetime('now', 'localtime')),
         date_updated DATETIME
     );
@@ -172,7 +172,7 @@ CREATE TABLE IF NOT EXISTS Game1 (
     answer1 TEXT NOT NULL,
     answer2 TEXT NOT NULL,
     correct_answer INTEGER NOT NULL,
-    id_state INTEGER DEFAULT 1 CONSTRAINT states CHECK (id_state IN (0, 1)),
+    state INTEGER DEFAULT 1 CONSTRAINT states CHECK (state IN (0, 1)),
     date_created DATETIME DEFAULT (datetime('now', 'localtime')),
     date_updated DATETIME
 );
@@ -183,7 +183,7 @@ CREATE TABLE IF NOT EXISTS Game2 (
     answer2 TEXT NOT NULL,
     answer3 TEXT NOT NULL,
     correct_answer INTEGER NOT NULL,
-    id_state INTEGER DEFAULT 1 CONSTRAINT states CHECK (id_state IN (0, 1)),
+    state INTEGER DEFAULT 1 CONSTRAINT states CHECK (state IN (0, 1)),
     date_created DATETIME DEFAULT (datetime('now', 'localtime')),
     date_updated DATETIME
 );
