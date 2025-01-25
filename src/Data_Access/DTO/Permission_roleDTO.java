@@ -7,8 +7,10 @@ public class Permission_roleDTO {
     private Integer state;
     private String date_created;
     private String date_updated;
+
     public Permission_roleDTO() {
     }
+    
     public Permission_roleDTO(Integer id_permission_role, Integer id_role, Integer id_permission, Integer state,
             String date_created, String date_updated) {
         this.id_permission_role = id_permission_role;
