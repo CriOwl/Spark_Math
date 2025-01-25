@@ -144,18 +144,18 @@ public class PersonDTO {
     @Override
     public String toString() {
         return getClass().getName()
-                + "\n Id_persona" + getId_person()
-                + "\n Nombre" + getName()
-                + "\n Apellido" + getLast_name()
-                + "\n DNI" + getDNI()
-                + "\n Email" + getEmail()
-                + "\n Clave" + getPassword()
-                + "\n Fecha_Nacimiento" + getBirthdate()
-                + "\n id_Role" + getId_role()
-                + "\n id_Institucion" + getId_instution()
-                + "\n estado" + getId_state()
-                + "\n fecha_creacion" + getDate_created()
-                + "\n fecha_modificacion" + getDate_update();
+                + "\n Id_persona"           + getId_person()
+                + "\n Nombre"               + getName()
+                + "\n Apellido"             + getLast_name()
+                + "\n DNI"                  + getDNI()
+                + "\n Email"                + getEmail()
+                + "\n Clave"                + getPassword()
+                + "\n Fecha_Nacimiento"     + getBirthdate()
+                + "\n id_Role"              + getId_role()
+                + "\n id_Institucion"       + getId_instution()
+                + "\n estado"               + getId_state()
+                + "\n fecha_creacion"       + getDate_created()
+                + "\n fecha_modificacion"   + getDate_update();
     }
 
 }
