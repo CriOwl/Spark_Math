@@ -124,15 +124,15 @@ public class CourseDTO {
     @Override
     public String toString(){
         return getClass().getName()
-        +"\n    id_curso"+getId_course()
-        +"\n    id_profesor"+getId_teacher()
-        +"\n    id_nivel"+getId_catalog_level()
-        +"\n    id_paralelo"+getId_catalog_parallel()
-        +"\n    id_institucion"+getId_institution()
-        +"\n    id_jornada"+getId_catalog_time()
-        +"\n    id_periodo"+getId_catalog_period()
-        +"\n    estado"+getState()
-        +"\n    fecha_creacion"+getDate_created()
-        +"\n    fecha_modificacion"+getDate_update();
+        +"\n    id_curso"               +getId_course()
+        +"\n    id_profesor"            +getId_teacher()
+        +"\n    id_nivel"               +getId_catalog_level()
+        +"\n    id_paralelo"            +getId_catalog_parallel()
+        +"\n    id_institucion"         +getId_institution()
+        +"\n    id_jornada"             +getId_catalog_time()
+        +"\n    id_periodo"             +getId_catalog_period()
+        +"\n    estado"                 +getState()
+        +"\n    fecha_creacion"         +getDate_created()
+        +"\n    fecha_modificacion"     +getDate_update();
     }
 }
