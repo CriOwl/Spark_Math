@@ -7,21 +7,25 @@ public class CatalogDTO {
     private Integer state;
     private String date_created;
     private String date_update;
-    public CatalogDTO(Integer id_catalog, String name, Integer id_catalog_level, Integer state, String date_created,
-            String date_update) {
-        this.id_catalog = id_catalog;
-        this.name = name;
-        this.id_catalog_level = id_catalog_level;
-        this.state = state;
-        this.date_created = date_created;
-        this.date_update = date_update;
-    }
+
     public CatalogDTO() {
     }
-    public CatalogDTO(String name, Integer id_catalog_level) {
-        this.name = name;
-        this.id_catalog_level = id_catalog_level;
+    
+    public CatalogDTO(Integer id_catalog, String name, Integer id_catalog_level, Integer state, String date_created,
+            String date_update) {
+        this.id_catalog         = id_catalog;
+        this.name               = name;
+        this.id_catalog_level   = id_catalog_level;
+        this.state              = state;
+        this.date_created       = date_created;
+        this.date_update        = date_update;
     }
+
+    public CatalogDTO(String name, Integer id_catalog_level) {
+        this.name               = name;
+        this.id_catalog_level   = id_catalog_level;
+    }
+
     public Integer getId_catalog() {
         return id_catalog;
     }
@@ -58,14 +62,15 @@ public class CatalogDTO {
     public void setDate_update(String date_update) {
         this.date_update = date_update;
     }
+
     @Override
     public String toString(){
         return getClass().getName()
-        +"\n id_catalago "          +getId_catalog()
-        +"\n nombre "               +getName()
-        +"\n id_catalogo_padre"     +getId_catalog_level()
-        +"\n estado"                +getState()
-        +"\n fecha_creacion"        +getDate_created()
-        +"\n fecha_modificacion"    +getDate_update();
+        +"\n id_catalago: "           +getId_catalog()
+        +"\n Nombre: "                +getName()
+        +"\n id_catalogo_padre: "     +getId_catalog_level()
+        +"\n Estado: "                +getState()
+        +"\n Fecha_creacion: "        +getDate_created()
+        +"\n Fecha_modificacion: "    +getDate_update();
     }
 }

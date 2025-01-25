@@ -10,26 +10,26 @@ public class ActivityDTO {
     private String date_created;
     private String date_update;
     
-    public ActivityDTO(String name, Integer id_course, Integer id_catalog_activity_type, String description) {
-        this.name = name;
-        this.id_course = id_course;
-        this.id_catalog_activity_type = id_catalog_activity_type;
-        this.description = description;
-    }
-
     public ActivityDTO() {
+    }
+    
+    public ActivityDTO(String name, Integer id_course, Integer id_catalog_activity_type, String description) {
+        this.name                       = name;
+        this.id_course                  = id_course;
+        this.id_catalog_activity_type   = id_catalog_activity_type;
+        this.description                = description;
     }
 
     public ActivityDTO(Integer id_activity, String name, Integer id_course, Integer id_catalog_activity_type,
             String description, Integer state, String date_created, String date_update) {
-        this.id_activity = id_activity;
-        this.name = name;
-        this.id_course = id_course;
-        this.id_catalog_activity_type = id_catalog_activity_type;
-        this.description = description;
-        this.state = state;
-        this.date_created = date_created;
-        this.date_update = date_update;
+        this.id_activity                = id_activity;
+        this.name                       = name;
+        this.id_course                  = id_course;
+        this.id_catalog_activity_type   = id_catalog_activity_type;
+        this.description                = description;
+        this.state                      = state;
+        this.date_created               = date_created;
+        this.date_update                = date_update;
     }
 
     public Integer getId_activity() {
@@ -98,13 +98,13 @@ public class ActivityDTO {
     @Override
     public String toString(){
         return getClass().getName()
-        +"\n id_actividad"          +getId_activity()
-        +"\n nombre"                +getName()
-        +"\n id_curso"              +getId_course()
-        +"\n Tipo_de_actividad"     +getId_catalog_activity_type()
-        +"\n Descripcion"           +getDescription()
-        +"\n    estado"             +getState()
-        +"\n Fecha_creacion"        +getDate_created()
-        +"\n fecha_modificacion"    +getDate_update();
+        +"\n id_actividad: "          +getId_activity()
+        +"\n Nombre: "                +getName()
+        +"\n id_curso: "              +getId_course()
+        +"\n Tipo_de_actividad: "     +getId_catalog_activity_type()
+        +"\n Descripcion: "           +getDescription()
+        +"\n Estado: "                +getState()
+        +"\n Fecha_creacion: "        +getDate_created()
+        +"\n Fecha_modificacion: "    +getDate_update();
     }
 }

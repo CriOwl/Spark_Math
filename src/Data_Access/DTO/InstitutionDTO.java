@@ -8,23 +8,23 @@ public class InstitutionDTO {
     private Integer state;
     private String date_created;
     private String date_updated;
+    
+    public InstitutionDTO() {
+    }
 
     public InstitutionDTO(String amie, String date_created, String date_updated, Integer id_institution, Integer id_manager, String name, Integer state) {
-        this.amie = amie;
-        this.date_created = date_created;
-        this.date_updated = date_updated;
+        this.amie           = amie;
+        this.date_created   = date_created;
+        this.date_updated   = date_updated;
         this.id_institution = id_institution;
-        this.id_manager = id_manager;
-        this.name = name;
-        this.state = state;
+        this.id_manager     = id_manager;
+        this.name           = name;
+        this.state          = state;
     }
 
     public InstitutionDTO(String name, String amie) {
         this.name = name;
         this.amie = amie;
-    }
-
-    public InstitutionDTO() {
     }
 
     public Integer getId_institution() {
@@ -85,12 +85,12 @@ public class InstitutionDTO {
     @Override
     public String toString(){
         return getClass().getName()
-        +"\n Director"              +getId_manager()
-        +"\n Registro Unico"        +getAmie()
-        +"\n Nombre"                +getName()
-        +"\n Estado"                +getState()
-        +"\n Fecha_creacion"        +getDate_created()
-        +"\n fecha_modificacion"    +getDate_updated();
+        +"\n Director: "              +getId_manager()
+        +"\n Registro Unico: "        +getAmie()
+        +"\n Nombre: "                +getName()
+        +"\n Estado: "                +getState()
+        +"\n Fecha_creacion: "        +getDate_created()
+        +"\n Fecha_modificacion: "    +getDate_updated();
     }
 
 }

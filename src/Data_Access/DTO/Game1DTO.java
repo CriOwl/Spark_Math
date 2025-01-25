@@ -10,26 +10,28 @@ public class Game1DTO {
     private String date_created;
     private String date_updated;
 
+    public Game1DTO() {
+    }
+
     public Game1DTO(String question, String answer1, String answer2, String correct_answer) {
-        this.question = question;
-        this.answer1 = answer1;
-        this.answer2 = answer2;
-        this.correct_answer = correct_answer;
+        this.question           = question;
+        this.answer1            = answer1;
+        this.answer2            = answer2;
+        this.correct_answer     = correct_answer;
     }
 
     public Game1DTO(Integer id_game1, String question, String answer1, String answer2, String correct_answer,
             Integer state, String date_created, String date_updated) {
-        this.id_game1 = id_game1;
-        this.question = question;
-        this.answer1 = answer1;
-        this.answer2 = answer2;
+        this.id_game1       = id_game1;
+        this.question       = question;
+        this.answer1        = answer1;
+        this.answer2        = answer2;
         this.correct_answer = correct_answer;
-        this.state = state;
-        this.date_created = date_created;
-        this.date_updated = date_updated;
+        this.state          = state;
+        this.date_created   = date_created;
+        this.date_updated   = date_updated;
     }
 
-    
     public Integer getId_game1() {
         return id_game1;
     }
@@ -82,13 +84,13 @@ public class Game1DTO {
     @Override
     public String toString(){
         return getClass().getName()
-        +"\n id_game1: "          +getId_game1()
-        +"\n question: "          +getQuestion()
-        +"\n answer1: "           +getAnswer1()
-        +"\n answer2: "           +getAnswer2()
-        +"\n correct_answer: "    +getCorrect_answer()
-        +"\n state: "             +getState()
-        +"\n date_created: "      +getDate_created()
-        +"\n date_updated: "      +getDate_updated();
+        +"\n id_game1: "            +getId_game1()
+        +"\n Pregunta: "            +getQuestion()
+        +"\n Respuesta1: "          +getAnswer1()
+        +"\n Respuesta2: "          +getAnswer2()
+        +"\n Respuesta_Correcta: "  +getCorrect_answer()
+        +"\n Estado: "              +getState()
+        +"\n Fecha_creacion: "      +getDate_created()
+        +"\n Fecha_modificacion: "  +getDate_updated();
     }
 }

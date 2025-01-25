@@ -7,20 +7,23 @@ public class PermissionDTO {
     private Integer state;
     private String date_created;
     private String date_updated;
-    public PermissionDTO(Integer id_permission, String name, String description, Integer state, String date_created,
-            String date_updated) {
-        this.id_permission = id_permission;
-        this.name = name;
-        this.description = description;
-        this.state = state;
-        this.date_created = date_created;
-        this.date_updated = date_updated;
-    }
+
     public PermissionDTO() {
     }
+
     public PermissionDTO(String name, String description) {
-        this.name = name;
-        this.description = description;
+        this.name           = name;
+        this.description    = description;
+    }
+
+    public PermissionDTO(Integer id_permission, String name, String description, Integer state, String date_created,
+            String date_updated) {
+        this.id_permission  = id_permission;
+        this.name           = name;
+        this.description    = description;
+        this.state          = state;
+        this.date_created   = date_created;
+        this.date_updated   = date_updated;
     }
     public Integer getId_permission() {
         return id_permission;
@@ -58,14 +61,15 @@ public class PermissionDTO {
     public void setDate_updated(String date_updated) {
         this.date_updated = date_updated;
     }
+    
     @Override
     public String toString(){
         return getClass().getName()
         +"\n    id_permiso"             +getId_permission()
-        +"\n    nombre"                 +getName()
-        +"\n    descripcion"            +getDescription()
-        +"\n    estado"                 +getState()
-        +"\n    fecha_creacion"         +getDate_created()
-        +"\n    fecha_modificacion"     +getDate_updated();
+        +"\n    Nombre"                 +getName()
+        +"\n    Descripcion"            +getDescription()
+        +"\n    Estado"                 +getState()
+        +"\n    Fecha_creacion"         +getDate_created()
+        +"\n    Fecha_modificacion"     +getDate_updated();
     }
 }
