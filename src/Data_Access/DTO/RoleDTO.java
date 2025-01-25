@@ -7,17 +7,19 @@ public class RoleDTO {
     private String date_created;
     private String date_update;
 
+    public RoleDTO() {
+    }
+
     public RoleDTO(String name) {
         this.name = name;
     }
+
     public RoleDTO(Integer id_Role, String name, Integer state, String date_created, String date_update) {
-        this.id_Role = id_Role;
-        this.name = name;
-        this.state = state;
-        this.date_created = date_created;
-        this.date_update = date_update;
-    }
-    public RoleDTO() {
+        this.id_Role        = id_Role;
+        this.name           = name;
+        this.state          = state;
+        this.date_created   = date_created;
+        this.date_update    = date_update;
     }
     
     public Integer getId_Role() {
@@ -53,10 +55,10 @@ public class RoleDTO {
     @Override
     public String toString(){
         return getClass().getName()
-        +"\n    id_role"            +getId_Role()
-        +"\n    nombre"             +getName()
-        +"\n    estado"             +getState()
-        +"\n    fecha_creacion"     +getDate_created()
-        +"\n    fecha_modificacion" +getDate_update();
+        +"\n    id_role: "            +getId_Role()
+        +"\n    Nombre: "             +getName()
+        +"\n    Estado: "             +getState()
+        +"\n    Fecha_creacion: "     +getDate_created()
+        +"\n    Fecha_modificacion: " +getDate_update();
     }
 }

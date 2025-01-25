@@ -12,28 +12,31 @@ public class CourseDTO {
     private String date_created;
     private String date_update;
 
+    public CourseDTO() {
+    }
+    
     public CourseDTO(Integer id_teacher, Integer id_catalog_level, Integer id_catalog_parallel, Integer id_catalog_time,
             Integer id_catalog_period) {
-        this.id_teacher = id_teacher;
-        this.id_catalog_level = id_catalog_level;
-        this.id_catalog_parallel = id_catalog_parallel;
-        this.id_catalog_time = id_catalog_time;
-        this.id_catalog_period = id_catalog_period;
+        this.id_teacher             = id_teacher;
+        this.id_catalog_level       = id_catalog_level;
+        this.id_catalog_parallel    = id_catalog_parallel;
+        this.id_catalog_time        = id_catalog_time;
+        this.id_catalog_period      = id_catalog_period;
     }
 
     public CourseDTO(Integer id_course, Integer id_teacher, Integer id_catalog_level, Integer id_catalog_parallel,
             Integer id_institution, Integer id_catalog_time, Integer id_catalog_period, Integer state,
             String date_created, String date_update) {
-        this.id_course = id_course;
-        this.id_teacher = id_teacher;
-        this.id_catalog_level = id_catalog_level;
-        this.id_catalog_parallel = id_catalog_parallel;
-        this.id_institution = id_institution;
-        this.id_catalog_time = id_catalog_time;
-        this.id_catalog_period = id_catalog_period;
-        this.state = state;
-        this.date_created = date_created;
-        this.date_update = date_update;
+        this.id_course              = id_course;
+        this.id_teacher             = id_teacher;
+        this.id_catalog_level       = id_catalog_level;
+        this.id_catalog_parallel    = id_catalog_parallel;
+        this.id_institution         = id_institution;
+        this.id_catalog_time        = id_catalog_time;
+        this.id_catalog_period      = id_catalog_period;
+        this.state                  = state;
+        this.date_created           = date_created;
+        this.date_update            = date_update;
     }
 
     public Integer getState() {
@@ -42,9 +45,6 @@ public class CourseDTO {
 
     public void setState(Integer state) {
         this.state = state;
-    }
-
-    public CourseDTO() {
     }
 
     public Integer getId_course() {
@@ -122,15 +122,15 @@ public class CourseDTO {
     @Override
     public String toString(){
         return getClass().getName()
-        +"\n    id_curso"               +getId_course()
-        +"\n    id_profesor"            +getId_teacher()
-        +"\n    id_nivel"               +getId_catalog_level()
-        +"\n    id_paralelo"            +getId_catalog_parallel()
-        +"\n    id_institucion"         +getId_institution()
-        +"\n    id_jornada"             +getId_catalog_time()
-        +"\n    id_periodo"             +getId_catalog_period()
-        +"\n    estado"                 +getState()
-        +"\n    fecha_creacion"         +getDate_created()
-        +"\n    fecha_modificacion"     +getDate_update();
+        +"\n    id_curso: "               +getId_course()
+        +"\n    id_profesor: "            +getId_teacher()
+        +"\n    id_nivel: "               +getId_catalog_level()
+        +"\n    id_paralelo: "            +getId_catalog_parallel()
+        +"\n    id_institucion: "         +getId_institution()
+        +"\n    id_jornada: "             +getId_catalog_time()
+        +"\n    id_periodo: "             +getId_catalog_period()
+        +"\n    Estado: "                 +getState()
+        +"\n    Fecha_creacion: "         +getDate_created()
+        +"\n    Fecha_modificacion: "     +getDate_update();
     }
 }

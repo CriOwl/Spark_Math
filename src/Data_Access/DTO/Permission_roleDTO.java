@@ -11,14 +11,20 @@ public class Permission_roleDTO {
     public Permission_roleDTO() {
     }
     
+    public Permission_roleDTO(Integer id_permission_role, Integer id_role, Integer id_permission) {
+        this.id_permission_role = id_permission_role;
+        this.id_role            = id_role;
+        this.id_permission      = id_permission;
+    }
+
     public Permission_roleDTO(Integer id_permission_role, Integer id_role, Integer id_permission, Integer state,
             String date_created, String date_updated) {
-        this.id_permission_role = id_permission_role;
-        this.id_role = id_role;
-        this.id_permission = id_permission;
-        this.state = state;
-        this.date_created = date_created;
-        this.date_updated = date_updated;
+        this.id_permission_role     = id_permission_role;
+        this.id_role                = id_role;
+        this.id_permission          = id_permission;
+        this.state                  = state;
+        this.date_created           = date_created;
+        this.date_updated           = date_updated;
     }
     
     public Integer getId_permission_role() {
@@ -61,11 +67,11 @@ public class Permission_roleDTO {
     @Override
     public String toString(){
         return getClass().getName()
-        +"\n    id_permiso_role"        +getId_permission_role()
-        +"\n    id_rol"                 +getId_role()
-        +"\n    id_permiso"             +getId_permission()
-        +"\n    Estado"                 +getState()
-        +"\n    fecha_creacion"         +getDate_created()
-        +"\n    fecha_modificacion"     +getDate_updated();
+        +"\n    id_permiso_role: "        +getId_permission_role()
+        +"\n    id_rol: "                 +getId_role()
+        +"\n    id_permiso: "             +getId_permission()
+        +"\n    Estado: "                 +getState()
+        +"\n    Fecha_creacion: "         +getDate_created()
+        +"\n    Fecha_modificacion: "     +getDate_updated();
     }
 }

@@ -16,33 +16,32 @@ public class PersonDTO {
     public PersonDTO() {
     }
 
-    public PersonDTO(String name, String last_name, String dNI, String email, String password, String birthdate) {
-        this.name = name;
-        this.last_name = last_name;
-        DNI = dNI;
-        this.email = email;
-        this.password = password;
-        this.birthdate = birthdate;
+    public PersonDTO(String name, String last_name, String DNI, String email, String password, String birthdate) {
+        this.name       = name;
+        this.last_name  = last_name;
+        this.DNI        = DNI;
+        this.email      = email;
+        this.password   = password;
+        this.birthdate  = birthdate;
     }
 
     public PersonDTO(Integer id_person, String name, String last_name, String dNI, String email, String password,
             String birthdate, Integer id_role, Integer state, String date_created,
             String date_update) {
-        this.id_person = id_person;
-        this.name = name;
-        this.last_name = last_name;
-        this.DNI = dNI;
-        this.id_role = id_role;
-        this.email = email;
-        this.password = password;
-        this.birthdate = birthdate;
-        this.state = state;
-        this.date_created = date_created;
-        this.date_update = date_update;
+        this.id_person      = id_person;
+        this.name           = name;
+        this.last_name      = last_name;
+        this.DNI            = dNI;
+        this.id_role        = id_role;
+        this.email          = email;
+        this.password       = password;
+        this.birthdate      = birthdate;
+        this.state          = state;
+        this.date_created   = date_created;
+        this.date_update    = date_update;
     }
 
     
-
     public Integer getId_person() {
         return id_person;
     }
@@ -71,8 +70,8 @@ public class PersonDTO {
         return DNI;
     }
 
-    public void setDNI(String dNI) {
-        DNI = dNI;
+    public void setDNI(String DNI) {
+        this.DNI = DNI;
     }
 
     public String getEmail() {
@@ -134,17 +133,16 @@ public class PersonDTO {
     @Override
     public String toString() {
         return getClass().getName()
-                + "\n Id_persona"           + getId_person()
-                + "\n Nombre"               + getName()
-                + "\n Apellido"             + getLast_name()
-                + "\n DNI"                  + getDNI()
-                + "\n Email"                + getEmail()
-                + "\n Clave"                + getPassword()
-                + "\n Fecha_Nacimiento"     + getBirthdate()
-                + "\n id_Role"              + getId_role()
-                + "\n estado"               + getId_state()
-                + "\n fecha_creacion"       + getDate_created()
-                + "\n fecha_modificacion"   + getDate_update();
+        + "\n Id_persona"           + getId_person()
+        + "\n Nombre"               + getName()
+        + "\n Apellido"             + getLast_name()
+        + "\n DNI"                  + getDNI()
+        + "\n Email"                + getEmail()
+        + "\n Clave"                + getPassword()
+        + "\n Fecha_Nacimiento"     + getBirthdate()
+        + "\n id_Role"              + getId_role()
+        + "\n Estado"               + getId_state()
+        + "\n Fecha_creacion"       + getDate_created()
+        + "\n Fecha_modificacion"   + getDate_update();
     }
-
 }

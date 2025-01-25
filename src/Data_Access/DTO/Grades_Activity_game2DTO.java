@@ -4,31 +4,31 @@ public class Grades_Activity_game2DTO {
     private Integer id_grade_activity_game2;
     private Integer id_student_course;
     private String  answer1;
-    private Integer id_game1;
+    private Integer id_game2;
     private Integer state;
     private String date_created;
     private String date_update;
 
-    
     public Grades_Activity_game2DTO() {
     }
 
-    public Grades_Activity_game2DTO(Integer id_student_course, String answer1, Integer id_game1) {
-        this.id_student_course = id_student_course;
-        this.answer1 = answer1;
-        this.id_game1 = id_game1;
+    public Grades_Activity_game2DTO(Integer id_student_course, String answer1, Integer id_game2) {
+        this.id_student_course  = id_student_course;
+        this.answer1            = answer1;
+        this.id_game2           = id_game2;
     }
 
     public Grades_Activity_game2DTO(Integer id_grade_activity_game2, Integer id_student_course, String answer1,
-            Integer id_game1, Integer state, String date_created, String date_update) {
-        this.id_grade_activity_game2 = id_grade_activity_game2;
-        this.id_student_course = id_student_course;
-        this.answer1 = answer1;
-        this.id_game1 = id_game1;
-        this.state = state;
-        this.date_created = date_created;
-        this.date_update = date_update;
+            Integer id_game2, Integer state, String date_created, String date_update) {
+        this.id_grade_activity_game2    = id_grade_activity_game2;
+        this.id_student_course          = id_student_course;
+        this.answer1                    = answer1;
+        this.id_game2                   = id_game2;
+        this.state                      = state;
+        this.date_created               = date_created;
+        this.date_update                = date_update;
     }
+    
     public Integer getId_grade_activity_game2() {
         return id_grade_activity_game2;
     }
@@ -48,10 +48,10 @@ public class Grades_Activity_game2DTO {
         this.answer1 = answer1;
     }
     public Integer getId_game1() {
-        return id_game1;
+        return id_game2;
     }
-    public void setId_game1(Integer id_game1) {
-        this.id_game1 = id_game1;
+    public void setId_game1(Integer id_game2) {
+        this.id_game2 = id_game2;
     }
     public Integer getState() {
         return state;
@@ -71,4 +71,17 @@ public class Grades_Activity_game2DTO {
     public void setDate_update(String date_update) {
         this.date_update = date_update;
     }
+
+    @Override
+    public String toString(){
+        return getClass().getName()
+        +"\n    id_calificacion_activiadad_juego_2: "       +getId_grade_activity_game2()
+        +"\n    id_estudiante: "                            +getId_student_course()
+        +"\n    id_respuesta: "                             +getAnswer1()
+        +"\n    id_juego2: "                                +getId_game1()
+        +"\n    Estado: "                                   +getState()
+        +"\n    Fecha_creacion: "                           +getDate_created()
+        +"\n    Fecha_modificacion: "                       +getDate_update();
+    }
+
 }
