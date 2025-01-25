@@ -24,7 +24,7 @@ public abstract class Data_Helper_Sqlite {
 
     protected static void closeConnection() throws SQLException {
         try {
-            if (conexion == null) {
+            if (conexion != null) {
                 conexion.close();
             }
         } catch (SQLException es) {

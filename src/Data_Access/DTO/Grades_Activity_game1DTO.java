@@ -71,13 +71,13 @@ public class Grades_Activity_game1DTO {
     @Override
     public String toString(){
         return getClass().getName()
-        +"\n id_calificacion_activiadad_juego_1"+getId_grade_activity_game1()
-        +"\n id_estudiante"+getId_student_course()
-        +"\n id_respuesta"+getAnswer()
-        +"\n id_juego1"+getId_game1()
-        +"\n    estado"             +getState()
-        +"\n Fecha_creacion"        +getDate_created()
-        +"\n fecha_modificacion"    +getDate_update();
+        +"\n id_calificacion_activiadad_juego_1"    +getId_grade_activity_game1()
+        +"\n id_estudiante"                         +getId_student_course()
+        +"\n id_respuesta"                          +getAnswer()
+        +"\n id_juego1"                             +getId_game1()
+        +"\n    estado"                             +getState()
+        +"\n Fecha_creacion"                        +getDate_created()
+        +"\n fecha_modificacion"                    +getDate_update();
     }
     
 }
