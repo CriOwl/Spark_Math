@@ -140,8 +140,6 @@ CREATE INDEX indx_id_catalog_level ON Catalog_level (id_catalog_level);
 CREATE TABLE IF NOT EXISTS
     Catalog (
         id_catalog INTEGER PRIMARY KEY AUTOINCREMENT,
-        name VARCHAR(20) NOT NULL,
-        id_catalog_level INTEGER REFERENCES Catalog_level(id_catalog_level),
         state INTEGER DEFAULT 1 CONSTRAINT states CHECK (state IN (0, 1)),
         date_created DATETIME DEFAULT (datetime('now', 'localtime')),
         date_updated DATETIME

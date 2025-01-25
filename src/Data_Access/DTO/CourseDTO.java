@@ -9,8 +9,6 @@ public class CourseDTO {
     private Integer id_catalog_time;
     private Integer id_catalog_period;
     private Integer state;
-    
-
     private String date_created;
     private String date_update;
 
