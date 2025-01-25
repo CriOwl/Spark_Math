@@ -8,9 +8,9 @@ DROP TABLE IF EXISTS Student_course;
 DROP TABLE IF EXISTS Course;            --luego
 DROP TABLE IF EXISTS Institution;   --luego
 DROP TABLE IF EXISTS Persona;        -- luego
-DROP TABLE IF EXISTS Role;           --yo
-DROP TABLE IF EXISTS Permission_role;--yo
-DROP TABLE IF EXISTS Permission;     --yo
+    DROP TABLE IF EXISTS Role;           --yo
+    DROP TABLE IF EXISTS Permission_role;--yo
+    DROP TABLE IF EXISTS Permission;     --yo
 DROP TABLE IF EXISTS Catalog;
 DROP TABLE IF EXISTS Catalog_level;
 
