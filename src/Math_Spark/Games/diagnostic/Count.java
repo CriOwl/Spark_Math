@@ -6,6 +6,7 @@ public class Count {
     private final int a = 25, error = -1;
     private int state,main_number;
     private final int[][] matrix={
+                        //number,+,-,_
                         {1,error,error,error},
                         {1,2,2,error},
                         {3,error,error,error},
@@ -15,14 +16,14 @@ public class Count {
     public void game() {
         String word;
         String[] word_matrix=new String[4];
-        System.out.println("Enter the main number:");
+        for (int times = 0; times < 4; times++) {
+            System.out.println("Enter the main number:");
         while (!Utilitary.keyboard.hasNextInt()) { 
             System.out.println("Enter a int number");
             Utilitary.keyboard.nextLine();
         }
         main_number=Utilitary.keyboard.nextInt();
         Utilitary.keyboard.nextLine();
-        for (int times = 0; times < 4; times++) {
             System.out.println("Enter the operations");
             word=Utilitary.keyboard.nextLine();
             if(validate(word)){
