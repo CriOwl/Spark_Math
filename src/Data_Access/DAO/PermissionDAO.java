@@ -2,6 +2,7 @@ package Data_Access.DAO;
 
 import Data_Access.DTO.PermissionDTO;
 import Data_Access.Data_Helper_Sqlite;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,7 +18,7 @@ import java.util.List;
 
 public class PermissionDAO extends Data_Helper_Sqlite implements IDAO<PermissionDTO> {
     @Override
-    public PermissionDTO readBy(Integer id) throws Exception {
+    public PermissionDTO readby(Integer id) throws Exception {
         PermissionDTO permission = new PermissionDTO();
         String query = "SELECT " 
                      + "p.id_permission, "

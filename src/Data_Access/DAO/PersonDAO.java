@@ -2,6 +2,7 @@ package Data_Access.DAO;
 
 import Data_Access.DTO.PersonDTO;
 import Data_Access.Data_Helper_Sqlite;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +17,7 @@ import java.util.List;
 
 public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
     @Override
-    public PersonDTO readBy(Integer id)throws Exception{
+    public PersonDTO readby(Integer id)throws Exception{
         PersonDTO registro=new PersonDTO();
         String query=  "SELECT "
                         +"p.id_person, "
