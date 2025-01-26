@@ -65,11 +65,11 @@ public class PermissionDTO {
     @Override
     public String toString(){
         return getClass().getName()
-        +"\n    id_permiso"             +getId_permission()
-        +"\n    Nombre"                 +getName()
-        +"\n    Descripcion"            +getDescription()
-        +"\n    Estado"                 +getState()
-        +"\n    Fecha_creacion"         +getDate_created()
-        +"\n    Fecha_modificacion"     +getDate_updated();
+        +"\n    id_permiso: "             +getId_permission()
+        +"\n    Nombre: "                 +getName()
+        +"\n    Descripcion: "            +getDescription()
+        +"\n    Estado: "                 +getState()
+        +"\n    Fecha_creacion: "         +getDate_created()
+        +"\n    Fecha_modificacion: "     +getDate_updated();
     }
 }

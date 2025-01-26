@@ -1,3 +1,9 @@
+ /**
+     * @param entity
+     * @return
+     * @throws Exception
+     */
+
 package Data_Access.DAO;
 
 import Data_Access.DTO.InstitutionDTO;
@@ -80,6 +86,7 @@ public class InstitutionDAO extends Data_Helper_Sqlite implements IDAO<Instituti
         return tabla;
     }
 
+   
     @Override
     public boolean create(InstitutionDTO entity) throws Exception {
         String query = " INSERT INTO INSTITUTION (Nombre, Amie) VALUES (?, ?)";
