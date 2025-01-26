@@ -16,7 +16,7 @@ import java.util.List;
 
 public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
     @Override
-    public PersonDTO readby(Integer id)throws Exception{
+    public PersonDTO readBy(Integer id)throws Exception{
         PersonDTO registro=new PersonDTO();
         String query =  "SELECT "
                         +"p.id_person,"
@@ -30,11 +30,11 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
                         +"p.state,"
                         +"p.date_created,"
                         +"p.date_updated"
-                        +"FROM Persona p"
-                        +"WHERE p.state=1 AND p.id_person = "+id+";";
+                        +"FROM Persona p "
+                        +"WHERE p.state=1 AND p.id_person = " + id + ";";
         try {
             Connection conn = opConnection();
-            Statement stmt= connect.createStatement();
+            Statement stmt= conn.createStatement();
             ResultSet rs=stmt.executeQuery(query);
             while (rs.next()) {
                 registro= new PersonDTO(rs.getInt(1),
@@ -54,6 +54,7 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
         }
         return registro;
     }
+
     @Override
     public List<PersonDTO> readall(){
         List<PersonDTO> tabla=new ArrayList<>();
@@ -69,13 +70,13 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
                         +"p.state,"
                         +"p.date_created,"
                         +"p.date_updated"
-                        +"FROM Persona p;";
+                        +"FROM Persona p; ";
         try {
-            Connection connect= opConnection();
-            Statement stmt= connect.createStatement();
+            Connection conn = opConnection();
+            Statement stmt= conn.createStatement();
             ResultSet rs=stmt.executeQuery(query);
             while (rs.next()) {
-                PersonDTO list= new PersonDTO(rs.getInt(1),
+                PersonDTO list = new PersonDTO(rs.getInt(1),
                                     rs.getString(2),
                                     rs.getString(3),
                                     rs.getString(4),
@@ -94,10 +95,10 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
         return tabla;
     }
     @Override
-    public boolean created(PersonDTO entity) throws Exception{
+    public boolean create (PersonDTO entity) throws Exception{
         String query="INSERT INTO Person (name, last_name,DNI,email,password,birthdate) VALUES(?);";
         try {
-            Connection connect= opConnection();
+            Connection conn = opConnection();
             PreparedStatement pstmt= connect.prepareStatement(query);
             pstmt.setString(1, entity.getName());
             pstmt.setString(2, entity.getLast_name());
@@ -150,4 +151,3 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
             throw new PatException(e.getMessage(), getClass().getName(), "create()");
         }
     }
-}

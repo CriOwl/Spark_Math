@@ -18,7 +18,7 @@ public class InstitutionDAO extends Data_Helper_Sqlite implements IDAO<Instituti
     @Override
     public InstitutionDTO readBy(Integer id) throws Exception {
         InstitutionDTO institution = new InstitutionDTO();
-        String query = " SELECT" 
+        String query = "SELECT " 
                      + "i.id_institution,"
                      + "i.id_manager,"
                      + "i.nombre,"
@@ -26,11 +26,11 @@ public class InstitutionDAO extends Data_Helper_Sqlite implements IDAO<Instituti
                      + "i.state,"
                      + "i.date_created,"
                      + "i.date_updated"
-                     + " FROM INSTITUTION "
-                     + " WHERE state = 'A' AND i.id_institution = " +id+";";
+                     + "FROM Institution i "
+                     + "WHERE i.state = 'A' AND i.id_institution = " + id + ";";
         try {
             Connection conn = openConnection();
-            Statement stmt = connect.createStatement();
+            Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 institution = new InstitutionDTO(rs.getString(4),
@@ -39,8 +39,7 @@ public class InstitutionDAO extends Data_Helper_Sqlite implements IDAO<Instituti
                                                 rs.getInt(1),
                                                 rs.getInt(2),
                                                 rs.getString(3),
-                                                rs.getInt(5)     
-);
+                                                rs.getInt(5));
             }
         } catch (SQLException e) {
             throw new PatException(e.getMessage(), getClass().getName(), "readBy()");
@@ -49,32 +48,36 @@ public class InstitutionDAO extends Data_Helper_Sqlite implements IDAO<Instituti
     }
 
     @Override
-    public List<InstitutionDTO> readAll() throws Exception {
-        List<InstitutionDTO> institutions = new ArrayList<>();
-        String query = " SELECT IdInstitution, IdManager, Nombre, Amie, Estado, FechaCrea, FechaModifica "
-                     + " FROM INSTITUTION "
-                     + " WHERE Estado = 'A' ";
+    public List<InstitutionDTO> readAll(){
+        List<InstitutionDTO> tabla = new ArrayList<>();
+        String query = "SELECT "
+                        + "i.id_institution,"
+                        + "i.id_manager,"
+                        + "i.nombre,"
+                        + "i.amie,"
+                        + "i.state,"
+                        + "i.date_created,"
+                        + "i.date_updated"
+                        + "FROM Institution i; ";
 
         try {
             Connection conn = openConnection();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                InstitutionDTO institution = new InstitutionDTO(
-                    rs.getString(4), // Amie
-                    rs.getString(6), // FechaCrea
-                    rs.getString(7), // FechaModifica
-                    rs.getInt(1),    // IdInstitution
-                    rs.getInt(2),    // IdManager
-                    rs.getString(3), // Nombre
-                    rs.getInt(5)     // Estado
-                );
-                institutions.add(institution);
+                InstitutionDTO list = new InstitutionDTO(rs.getString(4),
+                                                        rs.getString(6),
+                                                        rs.getString(7),
+                                                        rs.getInt(1),
+                                                        rs.getInt(2),
+                                                        rs.getString(3),
+                                                        rs.getInt(5));
+                tabla.add(list);
             }
         } catch (SQLException e) {
             throw new PatException(e.getMessage(), getClass().getName(), "readAll()");
         }
-        return institutions;
+        return tabla;
     }
 
     @Override
@@ -96,7 +99,7 @@ public class InstitutionDAO extends Data_Helper_Sqlite implements IDAO<Instituti
     public boolean update(InstitutionDTO entity) throws Exception {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        String query = " UPDATE INSTITUTION SET Nombre = ?, Amie = ?, FechaModifica = ? WHERE IdInstitution = ?";
+        String query = " UPDATE Institution SET Nombre = ?, Amie = ?, FechaModifica = ? WHERE IdInstitution = ?";
         try {
             Connection conn = openConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
@@ -113,31 +116,16 @@ public class InstitutionDAO extends Data_Helper_Sqlite implements IDAO<Instituti
 
     @Override
     public boolean delete(Integer id) throws Exception {
-        String query = " UPDATE INSTITUTION SET Estado = ? WHERE IdInstitution = ?";
+        String query = " UPDATE Institution SET state = ? WHERE IdInstitution = ?";
         try {
-            Connection conn = openConnection();
+            Connection conet = openConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, "X");
+            pstmt.setInt(1, 0);
             pstmt.setInt(2, id);
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
             throw new PatException(e.getMessage(), getClass().getName(), "delete()");
         }
-    }
-
-    public Integer getMaxRow() throws Exception {
-        String query = " SELECT COUNT(*) TotalReg FROM INSTITUTION WHERE Estado = 'A' ";
-        try {
-            Connection conn = openConnection();
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                return rs.getInt(1);
-            }
-        } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "getMaxRow()");
-        }
-        return 0;
     }
 }
