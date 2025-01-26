@@ -1,4 +1,5 @@
 package Data_Access.DAO;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,30 +11,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Data_Access.Data_Helper_Sqlite;
-import Data_Access.DTO.Catalog_levelDTO;
+import Data_Access.DTO.CatalogDTO;
 
-public class Catalog_levelDAO extends Data_Helper_Sqlite implements IDAO<Catalog_levelDTO> {
+public class CatalogDAO extends Data_Helper_Sqlite implements IDAO<CatalogDTO>{
 
     @Override
-    public Catalog_levelDTO readby(Integer id) throws Exception {
-        Catalog_levelDTO oS = new Catalog_levelDTO();
-        String query =" SELECT id_catalog_level  " 
+    public CatalogDTO readby(Integer id) throws Exception {
+        CatalogDTO oS = new CatalogDTO();
+        String query =" SELECT id_catalog " 
                      +" ,name                    " 
+                     +" ,id_catalog_level        " 
                      +" ,state                   " 
                      +" ,date_created            " 
                      +" ,date_updated "
-                     +" FROM    Catalog_level   "
-                     +" WHERE   state ='1' AND id_catalog_level =   "+ id.toString() ;
+                     +" FROM    Catalog   "
+                     +" WHERE   state ='1' AND id_catalog =   "+ id.toString() ;
         try {
             Connection conn = opConnection();         // conectar a DB     
             Statement  stmt = conn.createStatement();   // CRUD : select * ...    
             ResultSet rs   = stmt.executeQuery(query);  // ejecutar la
             while (rs.next()) {
-                oS = new Catalog_levelDTO(rs.getInt(1)       // Id_catalog_level
-                                ,rs.getString(2)             // name             
-                                ,rs.getInt(3)                // state        
-                                ,rs.getString(4)             // date_created      
-                                ,rs.getString(5));           // date_update
+                oS = new CatalogDTO(rs.getInt(1)                // Id_catalog_level
+                                ,rs.getString(2)                // name
+                                ,rs.getInt(3)                   // id_catalog_level         
+                                ,rs.getInt(4)                   // state        
+                                ,rs.getString(5)                // date_created      
+                                ,rs.getString(6));              // date_update
             }
         } 
         catch (SQLException e) {
@@ -43,14 +46,15 @@ public class Catalog_levelDAO extends Data_Helper_Sqlite implements IDAO<Catalog
     }
 
     @Override
-    public List<Catalog_levelDTO> readall() throws Exception {
-        List <Catalog_levelDTO> lst = new ArrayList<>();
-        String query =" SELECT id_catalog_level  " 
+    public List<CatalogDTO> readall() throws Exception {
+        List <CatalogDTO> lst = new ArrayList<>();
+        String query =" SELECT id_catalog  " 
                      +" ,name                    " 
+                     +" ,id_catalog_level        " 
                      +" ,state                   " 
                      +" ,date_created            " 
-                     +" ,date_updated "
-                     +" FROM    Catalog_level   "
+                     +" ,date_updated            "
+                     +" FROM    Catalog          "
                      +" WHERE   state='1'";
 
         try {
@@ -58,11 +62,12 @@ public class Catalog_levelDAO extends Data_Helper_Sqlite implements IDAO<Catalog
             Statement  stmt = conn.createStatement();   // CRUD : select * ...    
             ResultSet rs   = stmt.executeQuery(query);    // ejecutar la
             while (rs.next()) {
-                Catalog_levelDTO s = new Catalog_levelDTO(rs.getInt(1)       // Id_catalog_level
-                                                ,rs.getString(2)             // name             
-                                                ,rs.getInt(3)                // state        
-                                                ,rs.getString(4)             // date_created      
-                                                ,rs.getString(5));           // date_update
+                CatalogDTO s = new CatalogDTO(rs.getInt(1)                // Id_catalog_level
+                                        ,rs.getString(2)                // name
+                                        ,rs.getInt(3)                   // id_catalog_level         
+                                        ,rs.getInt(4)                   // state        
+                                        ,rs.getString(5)                // date_created      
+                                        ,rs.getString(6));              // date_update
              lst.add(s);
             }
         } 
@@ -72,13 +77,15 @@ public class Catalog_levelDAO extends Data_Helper_Sqlite implements IDAO<Catalog
         return lst; 
     }
 
+
     @Override
-    public boolean created(Catalog_levelDTO entity) throws Exception {
-        String query = " INSERT INTO Catalog_level (name) VALUES (?)";
+    public boolean created(CatalogDTO entity) throws Exception {
+        String query = " INSERT INTO Catalogo (name, id_catalog_level) VALUES (?)";
         try {
             Connection        conn  = opConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, entity.getName());
+            pstmt.setInt(1, entity.getId_catalog_level());
             pstmt.executeUpdate();
             return true;
         } 
@@ -88,14 +95,15 @@ public class Catalog_levelDAO extends Data_Helper_Sqlite implements IDAO<Catalog
     }
 
     @Override
-    public boolean update(Catalog_levelDTO entity) throws Exception {
+    public boolean update(CatalogDTO entity) throws Exception {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  
         LocalDateTime now = LocalDateTime.now();
-        String query = " UPDATE Catalog_level SET name = ?, date_update = ? WHERE id_catalog_level = ?";
+        String query = " UPDATE Catalog SET name = ?, id_catalog_level = ?, date_update = ? WHERE id_catalog = ?";
         try {
             Connection          conn = opConnection();
             PreparedStatement pstmt  = conn.prepareStatement(query);
             pstmt.setString(1, entity.getName());
+            pstmt.setInt(1, entity.getId_catalog_level());
             pstmt.setString(2, dtf.format(now).toString());
             pstmt.setInt(3, entity.getId_catalog_level());
             pstmt.executeUpdate();
@@ -108,7 +116,7 @@ public class Catalog_levelDAO extends Data_Helper_Sqlite implements IDAO<Catalog
 
     @Override
     public boolean delete(Integer id) throws Exception {
-        String query = " UPDATE Catalog_level SET state = ? WHERE id_catalog_level = ?";
+        String query = " UPDATE Catalog SET state = ? WHERE id_catalog = ?";
         try {
             Connection          conn = opConnection();
             PreparedStatement  pstmt = conn.prepareStatement(query);
@@ -123,7 +131,7 @@ public class Catalog_levelDAO extends Data_Helper_Sqlite implements IDAO<Catalog
     }
 
     public Integer getMaxRow()  throws Exception  {
-        String query =" SELECT COUNT(*) TotalReg FROM Catalog_level "
+        String query =" SELECT COUNT(*) TotalReg FROM Catalog "
                      +" WHERE   state ='A' ";
         try {
             Connection conn = opConnection();         // conectar a DB     
@@ -138,4 +146,5 @@ public class Catalog_levelDAO extends Data_Helper_Sqlite implements IDAO<Catalog
         }
         return 0;
     }
+
 }
