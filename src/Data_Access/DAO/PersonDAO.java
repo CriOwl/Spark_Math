@@ -36,7 +36,7 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
         try {
             Connection connect= opConnection();
             Statement stmt= connect.createStatement();
-            System.out.println(query);
+            //System.out.println(query);
             ResultSet rs=stmt.executeQuery(query);
             while (rs.next()) {
                 registro= new PersonDTO(rs.getInt(1),
@@ -94,17 +94,17 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
                 tabla.add(list);
             }
         } catch (SQLException e) {
-            
-System.out.println(e);
+            System.out.println(e);
         }
         return tabla;
     }
+
     @Override
     public boolean created(PersonDTO entity) throws Exception{
         String query="INSERT INTO Person (name, last_name,DNI,email,password,birthdate,id_role) VALUES(?,?,?,?,?,?,?);";
         try {
             Connection conn = opConnection();
-            PreparedStatement pstmt= connect.prepareStatement(query);
+            PreparedStatement pstmt= conn.prepareStatement(query);
             pstmt.setString(1, entity.getName());
             pstmt.setString(2, entity.getLast_name());
             pstmt.setString(3, entity.getDNI());
@@ -118,6 +118,7 @@ System.out.println(e);
             throw new PatException(e.getMessage(), getClass().getName(), "create()");
         }
     }
+
     @Override
     public boolean update(PersonDTO entity)throws Exception{
         DateTimeFormatter dtf= DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -140,6 +141,7 @@ System.out.println(e);
             throw new PatException(e.getMessage(), getClass().getName(), "create()");
         }
     }
+    
     @Override
     public boolean delete(Integer id)throws Exception{
         DateTimeFormatter dtf= DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
