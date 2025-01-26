@@ -15,11 +15,12 @@ public class CourseDTO {
     public CourseDTO() {
     }
     
-    public CourseDTO(Integer id_teacher, Integer id_catalog_level, Integer id_catalog_parallel, Integer id_catalog_time,
+    public CourseDTO(Integer id_teacher, Integer id_catalog_level, Integer id_catalog_parallel, Integer id_institucion, Integer id_catalog_time,
             Integer id_catalog_period) {
         this.id_teacher             = id_teacher;
         this.id_catalog_level       = id_catalog_level;
         this.id_catalog_parallel    = id_catalog_parallel;
+        this.id_institution         = id_institucion;
         this.id_catalog_time        = id_catalog_time;
         this.id_catalog_period      = id_catalog_period;
     }

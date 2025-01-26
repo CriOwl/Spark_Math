@@ -174,7 +174,7 @@ CREATE TABLE IF NOT EXISTS Game1 (
     question TEXT NOT NULL,
     answer1 TEXT NOT NULL,
     answer2 TEXT NOT NULL,
-    correct_answer INTEGER NOT NULL,
+    correct_answer TEXT NOT NULL,
     state INTEGER DEFAULT 1 CONSTRAINT states CHECK (state IN (0, 1)),
     date_created DATETIME DEFAULT (datetime('now', 'localtime')),
     date_updated DATETIME
@@ -185,12 +185,8 @@ CREATE TABLE IF NOT EXISTS Game2 (
     answer1 TEXT NOT NULL,
     answer2 TEXT NOT NULL,
     answer3 TEXT NOT NULL,
-    correct_answer INTEGER NOT NULL,
+    correct_answer TEXT NOT NULL,
     state INTEGER DEFAULT 1 CONSTRAINT states CHECK (state IN (0, 1)),
     date_created DATETIME DEFAULT (datetime('now', 'localtime')),
     date_updated DATETIME
 );
-SELECT p.id_person,p.name,p.last_name,p.DNI,p.email,p.password,p.birthdate,r.name, p.state,p.date_created,p.date_updated
- FROM Persona p
- JOIN Role r ON p.id_role=r.id_role
- WHERE p.state= 1 AND p.id_person =2;
