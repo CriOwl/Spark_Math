@@ -1,4 +1,5 @@
 -- database: ../../database/MathSpark.sqlite
+
 CREATE VIEW vw_persona AS
 SELECT 
     p.id_person,
