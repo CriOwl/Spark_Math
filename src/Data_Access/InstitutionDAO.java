@@ -9,40 +9,43 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import DataAccess.DTO.RoleDTO;
+import DataAccess.DTO.InstitutionDTO;
 import Framework.PatException;
 
-public class RoleDAO extends Data_Helper_Sqlite implements IDAO<RoleDTO> {
+public class InstitutionDAO extends Data_Helper_Sqlite implements IDAO<InstitutionDTO> {
 
     @Override
-    public RoleDTO readBy(Integer id) throws Exception {
-        RoleDTO role = new RoleDTO();
-        String query = " SELECT IdRole, Nombre, Estado, FechaCrea, FechaModifica "
-                     + " FROM ROLE "
-                     + " WHERE Estado = 'A' AND IdRole = " + id.toString();
+    public InstitutionDTO readBy(Integer id) throws Exception {
+        InstitutionDTO institution = new InstitutionDTO();
+        String query = " SELECT IdInstitution, IdManager, Nombre, Amie, Estado, FechaCrea, FechaModifica "
+                     + " FROM INSTITUTION "
+                     + " WHERE Estado = 'A' AND IdInstitution = " + id.toString();
         try {
             Connection conn = openConnection();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                role = new RoleDTO(rs.getInt(1),  // IdRole
-                                   rs.getString(2), // Nombre
-                                   rs.getInt(3),    // Estado
-                                   rs.getString(4), // FechaCrea
-                                   rs.getString(5)  // FechaModifica
+                institution = new InstitutionDTO(
+                    rs.getString(4), // Amie
+                    rs.getString(6), // FechaCrea
+                    rs.getString(7), // FechaModifica
+                    rs.getInt(1),    // IdInstitution
+                    rs.getInt(2),    // IdManager
+                    rs.getString(3), // Nombre
+                    rs.getInt(5)     // Estado
                 );
             }
         } catch (SQLException e) {
             throw new PatException(e.getMessage(), getClass().getName(), "readBy()");
         }
-        return role;
+        return institution;
     }
 
     @Override
-    public List<RoleDTO> readAll() throws Exception {
-        List<RoleDTO> roles = new ArrayList<>();
-        String query = " SELECT IdRole, Nombre, Estado, FechaCrea, FechaModifica "
-                     + " FROM ROLE "
+    public List<InstitutionDTO> readAll() throws Exception {
+        List<InstitutionDTO> institutions = new ArrayList<>();
+        String query = " SELECT IdInstitution, IdManager, Nombre, Amie, Estado, FechaCrea, FechaModifica "
+                     + " FROM INSTITUTION "
                      + " WHERE Estado = 'A' ";
 
         try {
@@ -50,27 +53,31 @@ public class RoleDAO extends Data_Helper_Sqlite implements IDAO<RoleDTO> {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                RoleDTO role = new RoleDTO(rs.getInt(1),  // IdRole
-                                          rs.getString(2), // Nombre
-                                          rs.getInt(3),    // Estado
-                                          rs.getString(4), // FechaCrea
-                                          rs.getString(5)  // FechaModifica
+                InstitutionDTO institution = new InstitutionDTO(
+                    rs.getString(4), // Amie
+                    rs.getString(6), // FechaCrea
+                    rs.getString(7), // FechaModifica
+                    rs.getInt(1),    // IdInstitution
+                    rs.getInt(2),    // IdManager
+                    rs.getString(3), // Nombre
+                    rs.getInt(5)     // Estado
                 );
-                roles.add(role);
+                institutions.add(institution);
             }
         } catch (SQLException e) {
             throw new PatException(e.getMessage(), getClass().getName(), "readAll()");
         }
-        return roles;
+        return institutions;
     }
 
     @Override
-    public boolean create(RoleDTO entity) throws Exception {
-        String query = " INSERT INTO ROLE (Nombre) VALUES (?)";
+    public boolean create(InstitutionDTO entity) throws Exception {
+        String query = " INSERT INTO INSTITUTION (Nombre, Amie) VALUES (?, ?)";
         try {
             Connection conn = openConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, entity.getName());
+            pstmt.setString(2, entity.getAmie());
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -79,16 +86,17 @@ public class RoleDAO extends Data_Helper_Sqlite implements IDAO<RoleDTO> {
     }
 
     @Override
-    public boolean update(RoleDTO entity) throws Exception {
+    public boolean update(InstitutionDTO entity) throws Exception {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        String query = " UPDATE ROLE SET Nombre = ?, FechaModifica = ? WHERE IdRole = ?";
+        String query = " UPDATE INSTITUTION SET Nombre = ?, Amie = ?, FechaModifica = ? WHERE IdInstitution = ?";
         try {
             Connection conn = openConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, entity.getName());
-            pstmt.setString(2, dtf.format(now));
-            pstmt.setInt(3, entity.getId_Role());
+            pstmt.setString(2, entity.getAmie());
+            pstmt.setString(3, dtf.format(now));
+            pstmt.setInt(4, entity.getId_institution());
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -98,7 +106,7 @@ public class RoleDAO extends Data_Helper_Sqlite implements IDAO<RoleDTO> {
 
     @Override
     public boolean delete(Integer id) throws Exception {
-        String query = " UPDATE ROLE SET Estado = ? WHERE IdRole = ?";
+        String query = " UPDATE INSTITUTION SET Estado = ? WHERE IdInstitution = ?";
         try {
             Connection conn = openConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
@@ -112,7 +120,7 @@ public class RoleDAO extends Data_Helper_Sqlite implements IDAO<RoleDTO> {
     }
 
     public Integer getMaxRow() throws Exception {
-        String query = " SELECT COUNT(*) TotalReg FROM ROLE WHERE Estado = 'A' ";
+        String query = " SELECT COUNT(*) TotalReg FROM INSTITUTION WHERE Estado = 'A' ";
         try {
             Connection conn = openConnection();
             Statement stmt = conn.createStatement();
