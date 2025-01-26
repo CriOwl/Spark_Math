@@ -16,7 +16,7 @@ import java.util.List;
 
 public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
     @Override
-    public PersonDTO readby(Integer id)throws Exception{
+    public PersonDTO readBy(Integer id)throws Exception{
         PersonDTO registro=new PersonDTO();
         String query=  "SELECT "
                         +"p.id_person, "
@@ -56,6 +56,7 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
         }
         return registro;
     }
+
     @Override
     public List<PersonDTO> readall(){
         List<PersonDTO> tabla=new ArrayList<>();
@@ -75,11 +76,11 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
                         +"JOIN Role r ON p.id_role=r.id_role "
                         +"WHERE p.state= 1 ";
         try {
-            Connection connect= opConnection();
-            Statement stmt= connect.createStatement();
+            Connection conn = opConnection();
+            Statement stmt= conn.createStatement();
             ResultSet rs=stmt.executeQuery(query);
             while (rs.next()) {
-                PersonDTO list= new PersonDTO(rs.getInt(1),
+                PersonDTO list = new PersonDTO(rs.getInt(1),
                                     rs.getString(2),
                                     rs.getString(3),
                                     rs.getString(4),
@@ -102,7 +103,7 @@ System.out.println(e);
     public boolean created(PersonDTO entity) throws Exception{
         String query="INSERT INTO Person (name, last_name,DNI,email,password,birthdate,id_role) VALUES(?,?,?,?,?,?,?);";
         try {
-            Connection connect= opConnection();
+            Connection conn = opConnection();
             PreparedStatement pstmt= connect.prepareStatement(query);
             pstmt.setString(1, entity.getName());
             pstmt.setString(2, entity.getLast_name());
