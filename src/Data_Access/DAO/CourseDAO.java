@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Data_Access.Data_Helper_Sqlite;
-import Data_Access.DTO.Catalog_levelDTO;
 import Data_Access.DTO.CourseDTO;
 
 public class CourseDAO extends Data_Helper_Sqlite implements IDAO<CourseDTO>{
@@ -40,7 +39,7 @@ public class CourseDAO extends Data_Helper_Sqlite implements IDAO<CourseDTO>{
                                 ,rs.getInt(2)          // id_teacher 
                                 ,rs.getInt(3)          // id_catalog_level
                                 ,rs.getInt(4)          // id_catalog_parallel
-                                ,rs.getInt(5)          // id_institucion
+                                ,rs.getInt(5)          // id_institution
                                 ,rs.getInt(6)          // id_catalog_time 
                                 ,rs.getInt(7)          // id_catalog_period 
                                 ,rs.getInt(8)          // state        
@@ -79,7 +78,7 @@ public class CourseDAO extends Data_Helper_Sqlite implements IDAO<CourseDTO>{
                                         ,rs.getInt(2)          // id_teacher 
                                         ,rs.getInt(3)          // id_catalog_level
                                         ,rs.getInt(4)          // id_catalog_parallel
-                                         ,rs.getInt(5)          // id_institucion
+                                         ,rs.getInt(5)          // id_institution
                                         ,rs.getInt(6)          // id_catalog_time 
                                         ,rs.getInt(7)          // id_catalog_period 
                                         ,rs.getInt(8)          // state        

@@ -5,7 +5,7 @@ public class Game1DTO {
     private String question;
     private String answer1;
     private String answer2;
-    private String correct_answer;
+    private Integer correct_answer;
     private Integer state;
     private String date_created;
     private String date_updated;
@@ -13,14 +13,14 @@ public class Game1DTO {
     public Game1DTO() {
     }
 
-    public Game1DTO(String question, String answer1, String answer2, String correct_answer) {
+    public Game1DTO(String question, String answer1, String answer2, Integer correct_answer) {
         this.question           = question;
         this.answer1            = answer1;
         this.answer2            = answer2;
         this.correct_answer     = correct_answer;
     }
 
-    public Game1DTO(Integer id_game1, String question, String answer1, String answer2, String correct_answer,
+    public Game1DTO(Integer id_game1, String question, String answer1, String answer2, Integer correct_answer,
             Integer state, String date_created, String date_updated) {
         this.id_game1       = id_game1;
         this.question       = question;
@@ -56,10 +56,10 @@ public class Game1DTO {
     public void setAnswer2(String answer2) {
         this.answer2 = answer2;
     }
-    public String getCorrect_answer() {
+    public Integer getCorrect_answer() {
         return correct_answer;
     }
-    public void setCorrect_answer(String correct_answer) {
+    public void setCorrect_answer(Integer correct_answer) {
         this.correct_answer = correct_answer;
     }
     public Integer getState() {

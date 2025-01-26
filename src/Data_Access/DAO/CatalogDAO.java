@@ -27,9 +27,9 @@ public class CatalogDAO extends Data_Helper_Sqlite implements IDAO<CatalogDTO>{
                      +" FROM    Catalog   "
                      +" WHERE   state ='1' AND id_catalog =   "+ id.toString() ;
         try {
-            Connection conn = opConnection();         // conectar a DB     
-            Statement  stmt = conn.createStatement();   // CRUD : select * ...    
-            ResultSet rs   = stmt.executeQuery(query);  // ejecutar la
+            Connection conn = opConnection();          
+            Statement  stmt = conn.createStatement();    
+            ResultSet rs   = stmt.executeQuery(query);  
             while (rs.next()) {
                 oS = new CatalogDTO(rs.getInt(1)                // Id_catalog_level
                                 ,rs.getString(2)                // name
@@ -40,7 +40,7 @@ public class CatalogDAO extends Data_Helper_Sqlite implements IDAO<CatalogDTO>{
             }
         } 
         catch (SQLException e) {
-            throw e;// new PatException(e.getMessage(), getClass().getName(), "readBy()");
+            throw e;
         }
         return oS;
     }
@@ -58,9 +58,9 @@ public class CatalogDAO extends Data_Helper_Sqlite implements IDAO<CatalogDTO>{
                      +" WHERE   state='1'";
 
         try {
-            Connection conn = opConnection();         // conectar a DB     
-            Statement  stmt = conn.createStatement();   // CRUD : select * ...    
-            ResultSet rs   = stmt.executeQuery(query);    // ejecutar la
+            Connection conn = opConnection();             
+            Statement  stmt = conn.createStatement();       
+            ResultSet rs   = stmt.executeQuery(query);    
             while (rs.next()) {
                 CatalogDTO s = new CatalogDTO(rs.getInt(1)                // Id_catalog_level
                                         ,rs.getString(2)                // name
@@ -72,7 +72,7 @@ public class CatalogDAO extends Data_Helper_Sqlite implements IDAO<CatalogDTO>{
             }
         } 
         catch (SQLException e) {
-            throw e;// new PatException(e.getMessage(), getClass().getName(), "readAll()");
+            throw e;
         }
         return lst; 
     }
@@ -90,7 +90,7 @@ public class CatalogDAO extends Data_Helper_Sqlite implements IDAO<CatalogDTO>{
             return true;
         } 
         catch (SQLException e) {
-            throw e;// new PatException(e.getMessage(), getClass().getName(), "create()");
+            throw e;
         }
     }
 
