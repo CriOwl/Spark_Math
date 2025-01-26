@@ -19,22 +19,24 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
     public PersonDTO readby(Integer id)throws Exception{
         PersonDTO registro=new PersonDTO();
         String query=  "SELECT "
-                        +"p.id_person,"
-                        +"p.name,"
-                        +"p.last_name,"
-                        +"p.DNI,"
-                        +"p.email,"
-                        +"p.pasword,"
-                        +"p.birthdate,"
-                        +"p.id_role,"
-                        +"p.state,"
-                        +"p.date_created,"
-                        +"p.date_updated"
-                        +"FROM Persona p"
-                        +"WHERE p.state=1 AND p.id_person = "+id+";";
+                        +"p.id_person, "
+                        +"p.name, "
+                        +"p.last_name, "
+                        +"p.DNI, "
+                        +"p.email, "
+                        +"p.password, "
+                        +"p.birthdate, "
+                        +"r.name," 
+                        +"p.state, "
+                        +"p.date_created, "
+                        +"p.date_updated "
+                        +"FROM Persona p "
+                        +"JOIN Role r ON p.id_role=r.id_role "
+                        +"WHERE p.state= 1 AND p.id_person = "+id;
         try {
             Connection connect= opConnection();
             Statement stmt= connect.createStatement();
+            System.out.println(query);
             ResultSet rs=stmt.executeQuery(query);
             while (rs.next()) {
                 registro= new PersonDTO(rs.getInt(1),
@@ -44,13 +46,13 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
                                         rs.getString(5),
                                         rs.getString(6),
                                         rs.getString(7),
-                                        rs.getInt(8),
+                                        rs.getString(8),
                                         rs.getInt(9),
                                         rs.getString(10),
                                         rs.getString(11));          
             }
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "readby()");
+            System.out.println(e);
         }
         return registro;
     }
@@ -58,18 +60,20 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
     public List<PersonDTO> readall(){
         List<PersonDTO> tabla=new ArrayList<>();
         String query=   "SELECT "
-                        +"p.id_person,"
-                        +"p.name,"
-                        +"p.last_name,"
-                        +"p.DNI,"
-                        +"p.email,"
-                        +"p.pasword,"
-                        +"p.birthdate,"
-                        +"p.id_role,"
-                        +"p.state,"
-                        +"p.date_created,"
-                        +"p.date_updated"
-                        +"FROM Persona p;";
+                        +"p.id_person, "
+                        +"p.name, "
+                        +"p.last_name, "
+                        +"p.DNI, "
+                        +"p.email, "
+                        +"p.password, "
+                        +"p.birthdate, "
+                        +"r.name," 
+                        +"p.state, "
+                        +"p.date_created, "
+                        +"p.date_updated "
+                        +"FROM Persona p "
+                        +"JOIN Role r ON p.id_role=r.id_role "
+                        +"WHERE p.state= 1 ";
         try {
             Connection connect= opConnection();
             Statement stmt= connect.createStatement();
@@ -82,20 +86,21 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
                                     rs.getString(5),
                                     rs.getString(6),
                                     rs.getString(7),
-                                    rs.getInt(8),
+                                    rs.getString(8),
                                     rs.getInt(9),
                                     rs.getString(10),
                                     rs.getString(11));   
                 tabla.add(list);
             }
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "readall()");
+            
+System.out.println(e);
         }
         return tabla;
     }
     @Override
     public boolean created(PersonDTO entity) throws Exception{
-        String query="INSERT INTO Person (name, last_name,DNI,email,password,birthdate) VALUES(?);";
+        String query="INSERT INTO Person (name, last_name,DNI,email,password,birthdate,id_role) VALUES(?,?,?,?,?,?,?);";
         try {
             Connection connect= opConnection();
             PreparedStatement pstmt= connect.prepareStatement(query);
@@ -105,6 +110,7 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
             pstmt.setString(4, entity.getEmail());
             pstmt.setString(5, entity.getPassword());
             pstmt.setString(6, entity.getBirthdate());
+            pstmt.setInt(7, (int)entity.getId_role());
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -115,7 +121,7 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
     public boolean update(PersonDTO entity)throws Exception{
         DateTimeFormatter dtf= DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime now= LocalDateTime.now();
-        String query="UPDATE Person SET name=?,last_name=?,DNI=?,email=?,password=?,date_update=? Where id_person=?";
+        String query="UPDATE Person SET name=?,last_name=?,DNI=?,email=?,password=?,id_role=?,date_update=? Where id_person=?";
         try {
             Connection conect= opConnection();
             PreparedStatement pstmt= conect.prepareStatement(query);
@@ -124,8 +130,9 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
             pstmt.setString(3, entity.getDNI());
             pstmt.setString(4, entity.getEmail());
             pstmt.setString(5, entity.getPassword());
-            pstmt.setString(6, dtf.format(now).toString());
-            pstmt.setInt(7, entity.getId_person());
+            pstmt.setInt(6, (int)entity.getId_role());
+            pstmt.setString(7, dtf.format(now).toString());
+            pstmt.setInt(8, entity.getId_person());
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -147,7 +154,7 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
             return true;
 
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "create()");
+            throw new PatException(e.getMessage(), getClass().getName(), "delete()");
         }
     }
 }

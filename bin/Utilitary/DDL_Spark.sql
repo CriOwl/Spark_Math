@@ -190,3 +190,7 @@ CREATE TABLE IF NOT EXISTS Game2 (
     date_created DATETIME DEFAULT (datetime('now', 'localtime')),
     date_updated DATETIME
 );
+SELECT p.id_person,p.name,p.last_name,p.DNI,p.email,p.password,p.birthdate,r.name, p.state,p.date_created,p.date_updated
+ FROM Persona p
+ JOIN Role r ON p.id_role=r.id_role
+ WHERE p.state= 1 AND p.id_person =2;
