@@ -85,7 +85,7 @@ public class CatalogDAO extends Data_Helper_Sqlite implements IDAO<CatalogDTO>{
             Connection        conn  = opConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, entity.getName());
-            pstmt.setInt(1, entity.getId_catalog_level());
+            pstmt.setInt(2, entity.getId_catalog_level());
             pstmt.executeUpdate();
             return true;
         } 
@@ -103,9 +103,9 @@ public class CatalogDAO extends Data_Helper_Sqlite implements IDAO<CatalogDTO>{
             Connection          conn = opConnection();
             PreparedStatement pstmt  = conn.prepareStatement(query);
             pstmt.setString(1, entity.getName());
-            pstmt.setInt(1, entity.getId_catalog_level());
-            pstmt.setString(2, dtf.format(now).toString());
-            pstmt.setInt(3, entity.getId_catalog_level());
+            pstmt.setInt(2, entity.getId_catalog_level());
+            pstmt.setString(3, dtf.format(now).toString());
+            pstmt.setInt(4, entity.getId_catalog_level());
             pstmt.executeUpdate();
             return true;
         } 

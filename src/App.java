@@ -1,8 +1,10 @@
 import Data_Access.DAO.CatalogDAO;
 import Data_Access.DAO.Catalog_levelDAO;
+import Data_Access.DAO.CourseDAO;
 import Data_Access.DAO.PersonDAO;
 import Data_Access.DTO.CatalogDTO;
 import Data_Access.DTO.Catalog_levelDTO;
+import Data_Access.DTO.CourseDTO;
 import Data_Access.DTO.PersonDTO;
 
 public class App {
@@ -16,8 +18,9 @@ public class App {
         // } finally {
         // }
 
-            CatalogDAO pdsa = new CatalogDAO();
-                
-                System.out.println(pdsa.readby(26));        
+        CourseDAO cs = new CourseDAO();
+        for(CourseDTO cdt : cs.readall()){
+        System.out.println(cdt);
+        }
     }
 }
