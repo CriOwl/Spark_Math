@@ -18,7 +18,7 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
     @Override
     public PersonDTO readby(Integer id)throws Exception{
         PersonDTO registro=new PersonDTO();
-        String query=  "SELECT "
+        String query =  "SELECT "
                         +"p.id_person,"
                         +"p.name,"
                         +"p.last_name,"
@@ -33,7 +33,7 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
                         +"FROM Persona p"
                         +"WHERE p.state=1 AND p.id_person = "+id+";";
         try {
-            Connection connect= opConnection();
+            Connection conn = opConnection();
             Statement stmt= connect.createStatement();
             ResultSet rs=stmt.executeQuery(query);
             while (rs.next()) {
