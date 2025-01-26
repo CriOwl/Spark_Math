@@ -1,6 +1,7 @@
 package Data_Access.DTO;
 
 public class PersonDTO {
+    
     private Integer id_person;
     private String name;
     private String last_name;
@@ -9,20 +10,36 @@ public class PersonDTO {
     private String password;
     private String birthdate;
     private Integer id_role;
+    private String name_role;
     private Integer state;
     private String date_created;
     private String date_update;
-
+    
     public PersonDTO() {
     }
-
-    public PersonDTO(String name, String last_name, String DNI, String email, String password, String birthdate) {
+    
+    public PersonDTO(Integer id_person, String name, String last_name, String dNI, String email, String password,
+            String birthdate, String name_role, Integer state, String date_created, String date_update) {
+        this.id_person = id_person;
+        this.name = name;
+        this.last_name = last_name;
+        DNI = dNI;
+        this.email = email;
+        this.password = password;
+        this.birthdate = birthdate;
+        this.name_role = name_role;
+        this.state = state;
+        this.date_created = date_created;
+        this.date_update = date_update;
+    }
+    public PersonDTO(String name, String last_name, String DNI, String email, String password, String birthdate, Integer id_role) {
         this.name       = name;
         this.last_name  = last_name;
         this.DNI        = DNI;
         this.email      = email;
         this.password   = password;
         this.birthdate  = birthdate;
+        this.id_role    = id_role;
     }
 
     public PersonDTO(Integer id_person, String name, String last_name, String dNI, String email, String password,
@@ -133,16 +150,25 @@ public class PersonDTO {
     @Override
     public String toString() {
         return getClass().getName()
-        + "\n Id_persona"           + getId_person()
-        + "\n Nombre"               + getName()
-        + "\n Apellido"             + getLast_name()
-        + "\n DNI"                  + getDNI()
-        + "\n Email"                + getEmail()
-        + "\n Clave"                + getPassword()
-        + "\n Fecha_Nacimiento"     + getBirthdate()
-        + "\n id_Role"              + getId_role()
-        + "\n Estado"               + getId_state()
-        + "\n Fecha_creacion"       + getDate_created()
-        + "\n Fecha_modificacion"   + getDate_update();
+        + "\n Id_persona: "           + getId_person()
+        + "\n Nombre: "               + getName()
+        + "\n Apellido: "             + getLast_name()
+        + "\n DNI: "                  + getDNI()
+        + "\n Email: "                + getEmail()
+        + "\n Clave: "                + getPassword()
+        + "\n Fecha_Nacimiento: "     + getBirthdate()
+        + "\n id_Role: "              + getId_role()
+        + "\n Role: "                 + getName_role()
+        + "\n Estado: "               + getId_state()
+        + "\n Fecha_creacion: "       + getDate_created()
+        + "\n Fecha_modificacion: "   + getDate_update();
+    }
+
+    public String getName_role() {
+        return name_role;
+    }
+
+    public void setName_role(String name_role) {
+        this.name_role = name_role;
     }
 }
