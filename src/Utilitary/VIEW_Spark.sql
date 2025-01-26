@@ -179,9 +179,3 @@ SELECT
     date_updated AS catalog_level_date_updated
 FROM 
     Catalog_level;
-
-
-
-
-
-
