@@ -1,3 +1,19 @@
+<<<<<<< HEAD
+import BusinessLogic.User;
+public class App {
+    public static void main(String[] args) throws Exception {
+        User system=new User();
+        system.sistema(); 
+        /* PermissionRoleDAO consulta=new PermissionRoleDAO();
+        for (Permission_roleDTO registo : consulta.role_permission_read(1)) {
+            System.out.println(registo.getPermission_name());
+        } */
+            
+        }
+
+        
+    }
+=======
 import Data_Access.DAO.Grades_Activity_game2DAO;
 import Data_Access.DAO.InstitutionDAO;
 import Data_Access.DAO.PermissionDAO;
@@ -77,3 +93,4 @@ public class App {
     }
 
 }
+>>>>>>> 0296549c0af69ea1b3dd04b65d95e26a3442a689

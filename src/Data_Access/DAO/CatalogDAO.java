@@ -1,5 +1,7 @@
 package Data_Access.DAO;
 
+import Data_Access.DTO.CatalogDTO;
+import Data_Access.Data_Helper_Sqlite;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,9 +11,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-
-import Data_Access.Data_Helper_Sqlite;
-import Data_Access.DTO.CatalogDTO;
 
 public class CatalogDAO extends Data_Helper_Sqlite implements IDAO<CatalogDTO>{
 
@@ -62,7 +61,7 @@ public class CatalogDAO extends Data_Helper_Sqlite implements IDAO<CatalogDTO>{
             Statement  stmt = conn.createStatement();       
             ResultSet rs   = stmt.executeQuery(query);    
             while (rs.next()) {
-                CatalogDTO s = new CatalogDTO(rs.getInt(1)                // Id_catalog_level
+                CatalogDTO s = new CatalogDTO(rs.getInt(1)              // Id_catalog_level
                                         ,rs.getString(2)                // name
                                         ,rs.getInt(3)                   // id_catalog_level         
                                         ,rs.getInt(4)                   // state        

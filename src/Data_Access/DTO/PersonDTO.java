@@ -57,8 +57,19 @@ public class PersonDTO {
         this.date_created   = date_created;
         this.date_update    = date_update;
     }
+    
 
     
+    public PersonDTO(Integer id_person, String name, String last_name, String dNI,String password,
+            Integer id_role) {
+        this.id_person = id_person;
+        this.name = name;
+        this.last_name = last_name;
+        DNI = dNI;
+        this.password = password;
+        this.id_role = id_role;
+    }
+
     public Integer getId_person() {
         return id_person;
     }

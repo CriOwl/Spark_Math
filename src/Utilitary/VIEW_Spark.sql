@@ -1,14 +1,16 @@
 -- database: ../../database/MathSpark.sqlite
-
+DROP VIEW vw_persona;
 CREATE VIEW vw_persona AS
 SELECT 
     p.id_person,
-    p.name AS first_name,
+    p.name,
     p.last_name,
     p.DNI,
     p.email,
+    p.password
     p.birthdate,
-    r.name AS role_name,
+    p.id_role,
+    r.name,
     p.state,
     p.date_created,
     p.date_updated

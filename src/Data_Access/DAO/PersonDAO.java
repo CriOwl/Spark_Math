@@ -35,7 +35,6 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
         try {
             Connection connect= opConnection();
             Statement stmt= connect.createStatement();
-            //System.out.println(query);
             ResultSet rs=stmt.executeQuery(query);
             while (rs.next()) {
                 registro= new PersonDTO(rs.getInt(1),
@@ -49,6 +48,34 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
                                         rs.getInt(9),
                                         rs.getString(10),
                                         rs.getString(11));          
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return registro;
+    }
+    public PersonDTO readbylogin(String user)throws Exception{
+        PersonDTO registro=new PersonDTO();
+        String query=  "SELECT "
+                        +"p.id_person, "
+                        +"p.name, "
+                        +"p.last_name, "
+                        +"p.DNI, "
+                        +"p.password, "
+                        +"p.id_role," 
+                        +"FROM Persona p "
+                        +"WHERE p.state= 1 AND p.DNI = "+user;
+        try {
+            Connection connect= opConnection();
+            Statement stmt= connect.createStatement();
+            ResultSet rs=stmt.executeQuery(query);
+            while (rs.next()) {
+                registro= new PersonDTO(
+                    rs.getInt(1),
+                    rs.getString(2),
+                    rs.getString(3),
+                    rs.getString(4),
+                );          
             }
         } catch (SQLException e) {
             System.out.println(e);
