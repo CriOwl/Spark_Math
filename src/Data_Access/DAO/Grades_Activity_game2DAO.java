@@ -48,7 +48,7 @@ public class Grades_Activity_game2DAO extends Data_Helper_Sqlite implements IDAO
                 );
             }
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "readby()");
+            throw e; //new PatException(e.getMessage(), getClass().getName(), "readby()");
         }
         return registro;
     }
@@ -106,7 +106,7 @@ public class Grades_Activity_game2DAO extends Data_Helper_Sqlite implements IDAO
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "created()");
+            throw e; //new PatException(e.getMessage(), getClass().getName(), "created()");
         }
     }
 
@@ -127,7 +127,7 @@ public class Grades_Activity_game2DAO extends Data_Helper_Sqlite implements IDAO
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "update()");
+            throw e; // new PatException(e.getMessage(), getClass().getName(), "update()");
         }
     }
 
@@ -145,7 +145,7 @@ public class Grades_Activity_game2DAO extends Data_Helper_Sqlite implements IDAO
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "delete()");
+            throw e; //new PatException(e.getMessage(), getClass().getName(), "delete()");
         }
     }
 }

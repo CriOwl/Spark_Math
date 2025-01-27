@@ -15,7 +15,7 @@ public class Grades_Activity_game2DTO {
     
 
     public Grades_Activity_game2DTO(Integer id_student_course, String answer1, Integer id_game2, Integer state,
-            String date_created, String date_update) {
+            String date_created, String date_updated) {
         this.id_student_course  = id_student_course;
         this.answer1            = answer1;
         this.id_game2           = id_game2;

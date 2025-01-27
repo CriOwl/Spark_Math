@@ -88,7 +88,7 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
     }
 
     @Override
-    public boolean create(Permission_roleDTO entity) throws Exception {
+    public boolean created(Permission_roleDTO entity) throws Exception {
         String query = "INSERT INTO permission_role (id_role, id_permission) VALUES (?, ?);";
         try {
             Connection conn = opConnection();
@@ -98,7 +98,7 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "create()");
+            throw e; //new PatException(e.getMessage(), getClass().getName(), "create()");
         }
     }
 
@@ -117,7 +117,7 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "update()");
+            throw e; //new PatException(e.getMessage(), getClass().getName(), "update()");
         }
     }
 
@@ -136,7 +136,7 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
             return true;
         } catch (SQLException e) {
             
-            throw new PatException(e.getMessage(), getClass().getName(), "delete()");
+            throw e; //new PatException(e.getMessage(), getClass().getName(), "delete()");
         }
     }
 }

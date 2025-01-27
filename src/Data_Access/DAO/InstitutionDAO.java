@@ -51,7 +51,7 @@ public class InstitutionDAO extends Data_Helper_Sqlite implements IDAO<Instituti
                 );
             }
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "readBy()");
+            throw e; //new PatException(e.getMessage(), getClass().getName(), "readBy()");
         }
         return institution;
     }
@@ -106,7 +106,7 @@ public class InstitutionDAO extends Data_Helper_Sqlite implements IDAO<Instituti
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "create()");
+            throw e; // new PatException(e.getMessage(), getClass().getName(), "create()");
         }
     }
 
@@ -125,7 +125,7 @@ public class InstitutionDAO extends Data_Helper_Sqlite implements IDAO<Instituti
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "update()");
+            throw e;//new PatException(e.getMessage(), getClass().getName(), "update()");
         }
     }
 
@@ -143,7 +143,7 @@ public class InstitutionDAO extends Data_Helper_Sqlite implements IDAO<Instituti
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "delete()");
+            throw  e;//new PatException(e.getMessage(), getClass().getName(), "delete()");
         }
     }
 }

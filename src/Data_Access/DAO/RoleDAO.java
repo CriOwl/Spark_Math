@@ -39,7 +39,7 @@ public class RoleDAO extends Data_Helper_Sqlite implements IDAO<RoleDTO> {
                                     rs.getString(5));
             }
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "readBy()");
+            throw e; //new PatException(e.getMessage(), getClass().getName(), "readBy()");
         }
         return registro;
     }
@@ -75,7 +75,7 @@ public class RoleDAO extends Data_Helper_Sqlite implements IDAO<RoleDTO> {
     }
 
     @Override
-    public boolean create(RoleDTO entity) throws Exception {
+    public boolean created(RoleDTO entity) throws Exception {
         String query = "INSERT INTO role (name, state, date_created, date_updated) VALUES (?, ?, ?, ?);";
         try {
             Connection conn = opConnection();
@@ -87,7 +87,7 @@ public class RoleDAO extends Data_Helper_Sqlite implements IDAO<RoleDTO> {
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "create()");
+            throw e; //new PatException(e.getMessage(), getClass().getName(), "create()");
         }
     }
 
@@ -106,7 +106,7 @@ public class RoleDAO extends Data_Helper_Sqlite implements IDAO<RoleDTO> {
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "update()");
+            throw e; //new PatException(e.getMessage(), getClass().getName(), "update()");
         }
     }
 
@@ -124,7 +124,7 @@ public class RoleDAO extends Data_Helper_Sqlite implements IDAO<RoleDTO> {
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "delete()");
+            throw e; //new PatException(e.getMessage(), getClass().getName(), "delete()");
         }
     }
 }

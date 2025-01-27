@@ -6,11 +6,9 @@ import Data_Access.Data_Helper_Sqlite;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.sql.Statement;
-import java.security.Permission;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +40,7 @@ public class PermissionDAO extends Data_Helper_Sqlite implements IDAO<Permission
                                                 rs.getString(6));
             }
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "readBy()");
+            throw e; //new PatException(e.getMessage(), getClass().getName(), "readBy()");
         }
         return permission;
     }
@@ -71,10 +69,10 @@ public class PermissionDAO extends Data_Helper_Sqlite implements IDAO<Permission
                                             rs.getString(5),
                                             rs.getString(6));
                                             tabla.add(list);
-            }
+                }
 
         } catch (SQLException e) {
-            //throw new PatException(e.getMessage(), getClass().getName(), "readAll()");
+            
         }
         return tabla;
     }
@@ -91,7 +89,7 @@ public class PermissionDAO extends Data_Helper_Sqlite implements IDAO<Permission
             pstmt.executeUpdate();
             return true;
         }catch(SQLException e){
-            throw new PatException(e.getMessage(), getClass().getName(), "create()");
+            throw e; //new PatException(e.getMessage(), getClass().getName(), "create()");
         }   
     }
 
@@ -109,7 +107,7 @@ public class PermissionDAO extends Data_Helper_Sqlite implements IDAO<Permission
             pstmt.executeUpdate();
             return true;
         }catch(SQLException e){
-            throw new PatException(e.getMessage(), getClass().getName(), "update()");
+            throw e; //new PatException(e.getMessage(), getClass().getName(), "update()");
         }
     }
 
@@ -127,7 +125,7 @@ public class PermissionDAO extends Data_Helper_Sqlite implements IDAO<Permission
             pstmt.executeUpdate();
             return true;
         }catch(SQLException e){
-            throw new PatException(e.getMessage(), getClass().getName(), "delete()");
+            throw e;// new PatException(e.getMessage(), getClass().getName(), "delete()");
         }
     }
 }
