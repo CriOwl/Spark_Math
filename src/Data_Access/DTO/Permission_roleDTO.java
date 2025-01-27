@@ -17,6 +17,12 @@ public class Permission_roleDTO {
         this.id_permission      = id_permission;
     }
 
+    
+    public Permission_roleDTO(Integer id_role, Integer id_permission) {
+        this.id_role        = id_role;
+        this.id_permission  = id_permission;
+    }
+
     public Permission_roleDTO(Integer id_permission_role, Integer id_role, Integer id_permission, Integer state,
             String date_created, String date_updated) {
         this.id_permission_role     = id_permission_role;
@@ -26,7 +32,18 @@ public class Permission_roleDTO {
         this.date_created           = date_created;
         this.date_updated           = date_updated;
     }
+
     
+    
+    public Permission_roleDTO(Integer id_role, Integer id_permission, Integer state, String date_created,
+            String date_updated) {
+        this.id_role        = id_role;
+        this.id_permission  = id_permission;
+        this.state          = state;
+        this.date_created   = date_created;
+        this.date_updated   = date_updated;
+    }
+
     public Integer getId_permission_role() {
         return id_permission_role;
     }

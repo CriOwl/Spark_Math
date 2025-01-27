@@ -12,6 +12,21 @@ public class InstitutionDTO {
     public InstitutionDTO() {
     }
 
+    
+
+    public InstitutionDTO(Integer id_institution, Integer id_manager, String name, String amie, Integer state,
+            String date_created, String date_updated) {
+        this.id_institution     = id_institution;
+        this.id_manager         = id_manager;
+        this.name               = name;
+        this.amie               = amie;
+        this.state              = state;
+        this.date_created       = date_created;
+        this.date_updated       = date_updated;
+    }
+
+
+
     public InstitutionDTO(String amie, String date_created, String date_updated, Integer id_institution, Integer id_manager, String name, Integer state) {
         this.amie           = amie;
         this.date_created   = date_created;
