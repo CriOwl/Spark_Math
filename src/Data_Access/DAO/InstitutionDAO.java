@@ -48,7 +48,7 @@ public class InstitutionDAO extends Data_Helper_Sqlite implements IDAO<Instituti
                                                 rs.getInt(5));
             }
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "readBy()");
+            System.out.println(e);
         }
         return institution;
     }

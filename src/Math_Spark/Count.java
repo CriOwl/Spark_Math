@@ -1,4 +1,4 @@
-package Math_Spark.Games.diagnostic;
+package Math_Spark;
 
 import java.util.Scanner;
 

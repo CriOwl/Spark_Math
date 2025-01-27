@@ -7,6 +7,22 @@ public class Permission_roleDTO {
     private Integer state;
     private String date_created;
     private String date_updated;
+    private String role_name;
+    private String permission_name;
+
+    
+    public Permission_roleDTO(String permission_name) {
+        this.permission_name = permission_name;
+    }
+
+    public String getRole_name() {
+        return role_name;
+    }
+
+    public void setRole_name(String role_name) {
+        this.role_name = role_name;
+    }
+
 
     public Permission_roleDTO() {
     }
@@ -70,8 +86,18 @@ public class Permission_roleDTO {
         +"\n    id_permiso_role: "        +getId_permission_role()
         +"\n    id_rol: "                 +getId_role()
         +"\n    id_permiso: "             +getId_permission()
+        +"\n    nombre_permiso: "         +getPermission_name()
         +"\n    Estado: "                 +getState()
+        +"\n    Nombre_role: "            +getRole_name()
         +"\n    Fecha_creacion: "         +getDate_created()
         +"\n    Fecha_modificacion: "     +getDate_updated();
+    }
+
+    public String getPermission_name() {
+        return permission_name;
+    }
+
+    public void setPermission_name(String permission_name) {
+        this.permission_name = permission_name;
     }
 }
