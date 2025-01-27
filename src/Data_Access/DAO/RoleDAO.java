@@ -17,7 +17,7 @@ import java.util.List;
 public class RoleDAO extends Data_Helper_Sqlite implements IDAO<RoleDTO> {
 
     @Override
-    public RoleDTO readBy(Integer id) throws Exception {
+    public RoleDTO readby(Integer id) throws Exception {
         RoleDTO registro = new RoleDTO();
         String query = "SELECT "
                         + "r.id_role, "
@@ -45,7 +45,7 @@ public class RoleDAO extends Data_Helper_Sqlite implements IDAO<RoleDTO> {
     }
 
     @Override
-    public List<RoleDTO> readAll() {
+    public List<RoleDTO> readall() {
         List<RoleDTO> tabla = new ArrayList<>();
         String query = "SELECT "
                         + "r.id_role, "
@@ -67,7 +67,7 @@ public class RoleDAO extends Data_Helper_Sqlite implements IDAO<RoleDTO> {
                 tabla.add(list);
             }
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "readAll()");
+            throw new PatException(e.getMessage(), getClass().getName(), "readall()");
         }
         return tabla;
     }

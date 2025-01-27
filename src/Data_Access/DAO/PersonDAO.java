@@ -37,7 +37,6 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
         try {
             Connection connect= opConnection();
             Statement stmt= connect.createStatement();
-            //System.out.println(query);
             ResultSet rs=stmt.executeQuery(query);
             while (rs.next()) {
                 registro= new PersonDTO(rs.getInt(1),

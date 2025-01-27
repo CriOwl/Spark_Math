@@ -1,6 +1,7 @@
-<<<<<<< HEAD
 package Data_Access.DAO;
 
+import Data_Access.DTO.Game1DTO;
+import Data_Access.Data_Helper_Sqlite;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,9 +11,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-
-import Data_Access.Data_Helper_Sqlite;
-import Data_Access.DTO.Game1DTO;
 
 public class Game1DAO extends Data_Helper_Sqlite implements IDAO<Game1DTO>{
     
