@@ -17,7 +17,7 @@ import java.util.List;
 public class Grades_Activity_game1DAO extends Data_Helper_Sqlite implements IDAO<Grades_Activity_game1DTO> {
 
     @Override
-    public Grades_Activity_game1DTO readBy(Integer id) throws Exception {
+    public Grades_Activity_game1DTO readby(Integer id) throws Exception {
         Grades_Activity_game1DTO registro = new Grades_Activity_game1DTO();
         String query = "SELECT "
                         + "g.id_grade_activity_game1, "
@@ -43,13 +43,13 @@ public class Grades_Activity_game1DAO extends Data_Helper_Sqlite implements IDAO
                                                         rs.getString(7));
             }
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "readBy()");
+            throw e;//new PatException(e.getMessage(), getClass().getName(), "readBy()");
         }
         return registro;
     }
 
     @Override
-    public List<Grades_Activity_game1DTO> readAll() {
+    public List<Grades_Activity_game1DTO> readall() {
         List<Grades_Activity_game1DTO> tabla = new ArrayList<>();
         String query = "SELECT "
                         + "g.id_grade_activity_game1, "
@@ -75,13 +75,13 @@ public class Grades_Activity_game1DAO extends Data_Helper_Sqlite implements IDAO
                 tabla.add(list);
             }
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "readAll()");
+            //throw e; //new PatException(e.getMessage(), getClass().getName(), "readAll()");
         }
         return tabla;
     }
 
     @Override
-    public boolean create(Grades_Activity_game1DTO entity) throws Exception {
+    public boolean created(Grades_Activity_game1DTO entity) throws Exception {
         String query = "INSERT INTO grades_activity_game1 (id_student_course, answer, id_game1, state, date_created, date_update) VALUES (?, ?, ?, ?, ?, ?);";
         try {
             Connection conn = opConnection();
@@ -95,7 +95,7 @@ public class Grades_Activity_game1DAO extends Data_Helper_Sqlite implements IDAO
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "create()");
+            throw e; //new PatException(e.getMessage(), getClass().getName(), "create()");
         }
     }
 
@@ -116,7 +116,7 @@ public class Grades_Activity_game1DAO extends Data_Helper_Sqlite implements IDAO
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "update()");
+            throw e; //new PatException(e.getMessage(), getClass().getName(), "update()");
         }
     }
 
@@ -133,7 +133,7 @@ public class Grades_Activity_game1DAO extends Data_Helper_Sqlite implements IDAO
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "delete()");
+            throw e; //new PatException(e.getMessage(), getClass().getName(), "delete()");
         }
     }
 }

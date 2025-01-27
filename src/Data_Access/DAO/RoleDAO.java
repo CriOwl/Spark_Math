@@ -7,9 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +22,8 @@ public class RoleDAO extends Data_Helper_Sqlite implements IDAO<RoleDTO> {
                         + "r.name, "
                         + "r.state, "
                         + "r.date_created, "
-                        + "r.date_update "
-                        + "FROM roles r "
+                        + "r.date_updated "
+                        + "FROM role r "
                         + "WHERE r.state = 1 AND r.id_role = " + id + ";";
         try {
             Connection conn = opConnection();
@@ -39,7 +37,7 @@ public class RoleDAO extends Data_Helper_Sqlite implements IDAO<RoleDTO> {
                                     rs.getString(5));
             }
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "readBy()");
+            throw e; //new PatException(e.getMessage(), getClass().getName(), "readBy()");
         }
         return registro;
     }
@@ -52,8 +50,9 @@ public class RoleDAO extends Data_Helper_Sqlite implements IDAO<RoleDTO> {
                         + "r.name, "
                         + "r.state, "
                         + "r.date_created, "
-                        + "r.date_update "
-                        + "FROM roles r;";
+                        + "r.date_updated "
+                        + "FROM role r "
+                        + "WHERE r.state = 1; ";
         try {
             Connection conn = opConnection();
             Statement stmt = conn.createStatement();
@@ -67,25 +66,26 @@ public class RoleDAO extends Data_Helper_Sqlite implements IDAO<RoleDTO> {
                 tabla.add(list);
             }
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "readall()");
+            System.out.println(e);
+            //throw new PatException(e.getMessage(), getClass().getName(), "readall()");
         }
         return tabla;
     }
 
     @Override
-    public boolean create(RoleDTO entity) throws Exception {
-        String query = "INSERT INTO roles (name, state, date_created, date_update) VALUES (?, ?, ?, ?);";
+    public boolean created(RoleDTO entity) throws Exception {
+        String query = "INSERT INTO role (name, state, date_created, date_updated) VALUES (?, ?, ?, ?);";
         try {
             Connection conn = opConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, entity.getName());
-            pstmt.setInt(2, entity.getState());
+            pstmt.setInt(2,    entity.getState());
             pstmt.setString(3, entity.getDate_created());
             pstmt.setString(4, entity.getDate_update());
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "create()");
+            throw e; //new PatException(e.getMessage(), getClass().getName(), "create()");
         }
     }
 
@@ -93,7 +93,7 @@ public class RoleDAO extends Data_Helper_Sqlite implements IDAO<RoleDTO> {
     public boolean update(RoleDTO entity) throws Exception {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        String query = "UPDATE roles SET name = ?, state = ?, date_update = ? WHERE id_role = ?;";
+        String query = "UPDATE role SET name = ?, state = ?, date_updated = ? WHERE id_role = ?;";
         try {
             Connection conn = opConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
@@ -104,7 +104,7 @@ public class RoleDAO extends Data_Helper_Sqlite implements IDAO<RoleDTO> {
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "update()");
+            throw e; //new PatException(e.getMessage(), getClass().getName(), "update()");
         }
     }
 
@@ -112,16 +112,17 @@ public class RoleDAO extends Data_Helper_Sqlite implements IDAO<RoleDTO> {
     public boolean delete(Integer id) throws Exception {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        String query = "UPDATE roles SET state = 0, date_update = ? WHERE id_role = ?;";
+        String query = "UPDATE role SET state = ?, date_updated = ? WHERE id_role = ?;";
         try {
             Connection conn = opConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, dtf.format(now));
-            pstmt.setInt(2, id);
+            pstmt.setInt(1, 0);
+            pstmt.setString(2, dtf.format(now).toString());
+            pstmt.setInt(3, id);
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "delete()");
+            throw e; //new PatException(e.getMessage(), getClass().getName(), "delete()");
         }
     }
 }

@@ -143,7 +143,7 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "create()");
+            throw e;//new PatException(e.getMessage(), getClass().getName(), "create()");
         }
     }
 
@@ -166,7 +166,7 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "create()");
+            throw e; //new PatException(e.getMessage(), getClass().getName(), "create()");
         }
     }
     
@@ -185,7 +185,7 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
             return true;
 
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "delete()");
+            throw e; //new PatException(e.getMessage(), getClass().getName(), "delete()");
         }
     }
 }

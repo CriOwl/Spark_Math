@@ -21,7 +21,14 @@ public class RoleDTO {
         this.date_created   = date_created;
         this.date_update    = date_update;
     }
-    
+
+    public RoleDTO(String name, Integer state, String date_created, String date_update) {
+        this.name = name;
+        this.state = state;
+        this.date_created = date_created;
+        this.date_update = date_update;
+    }
+
     public Integer getId_Role() {
         return id_Role;
     }

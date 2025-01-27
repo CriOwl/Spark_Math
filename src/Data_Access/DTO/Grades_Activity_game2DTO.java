@@ -7,10 +7,24 @@ public class Grades_Activity_game2DTO {
     private Integer id_game2;
     private Integer state;
     private String date_created;
-    private String date_update;
+    private String date_updated;
 
     public Grades_Activity_game2DTO() {
     }
+
+    
+
+    public Grades_Activity_game2DTO(Integer id_student_course, String answer1, Integer id_game2, Integer state,
+            String date_created, String date_updated) {
+        this.id_student_course  = id_student_course;
+        this.answer1            = answer1;
+        this.id_game2           = id_game2;
+        this.state              = state;
+        this.date_created       = date_created;
+        this.date_updated        = date_updated;
+    }
+
+
 
     public Grades_Activity_game2DTO(Integer id_student_course, String answer1, Integer id_game2) {
         this.id_student_course  = id_student_course;
@@ -19,14 +33,14 @@ public class Grades_Activity_game2DTO {
     }
 
     public Grades_Activity_game2DTO(Integer id_grade_activity_game2, Integer id_student_course, String answer1,
-            Integer id_game2, Integer state, String date_created, String date_update) {
+            Integer id_game2, Integer state, String date_created, String date_updated) {
         this.id_grade_activity_game2    = id_grade_activity_game2;
         this.id_student_course          = id_student_course;
         this.answer1                    = answer1;
         this.id_game2                   = id_game2;
         this.state                      = state;
         this.date_created               = date_created;
-        this.date_update                = date_update;
+        this.date_updated                = date_updated;
     }
     
     public Integer getId_grade_activity_game2() {
@@ -65,11 +79,11 @@ public class Grades_Activity_game2DTO {
     public void setDate_created(String date_created) {
         this.date_created = date_created;
     }
-    public String getDate_update() {
-        return date_update;
+    public String getDate_updated() {
+        return date_updated;
     }
-    public void setDate_update(String date_update) {
-        this.date_update = date_update;
+    public void setDate_updated(String date_updated) {
+        this.date_updated = date_updated;
     }
 
     @Override
@@ -81,7 +95,7 @@ public class Grades_Activity_game2DTO {
         +"\n    id_juego2: "                                +getId_game1()
         +"\n    Estado: "                                   +getState()
         +"\n    Fecha_creacion: "                           +getDate_created()
-        +"\n    Fecha_modificacion: "                       +getDate_update();
+        +"\n    Fecha_modificacion: "                       +getDate_updated();
     }
 
 }

@@ -14,10 +14,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Grades_Activity_game2DAO extends Data_Helper_Sqlite implements IDAO<Grades_Activity_game2DTO> {
 
     @Override
-    public Grades_Activity_game2DTO readBy(Integer id) throws Exception {
+    public Grades_Activity_game2DTO readby(Integer id) throws Exception {
         Grades_Activity_game2DTO registro = new Grades_Activity_game2DTO();
         String query = "SELECT "
                         + "g.id_grade_activity_game2, "
@@ -26,30 +27,34 @@ public class Grades_Activity_game2DAO extends Data_Helper_Sqlite implements IDAO
                         + "g.id_game2, "
                         + "g.state, "
                         + "g.date_created, "
-                        + "g.date_update "
+                        + "g.date_updated "
                         + "FROM grades_activity_game2 g "
+                        + "JOIN student_course sc ON g.id_student_course = sc.id_student_course "
+                        + "JOIN game2 ga ON g.id_game2 = ga.id_game2 "
                         + "WHERE g.state = 1 AND g.id_grade_activity_game2 = " + id + ";";
         try {
             Connection conn = opConnection();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                registro = new Grades_Activity_game2DTO(rs.getInt(1),
-                                                        rs.getInt(2),
-                                                        rs.getString(3),
-                                                        rs.getInt(4),
-                                                        rs.getInt(5),
-                                                        rs.getString(6),
-                                                        rs.getString(7));
+                registro = new Grades_Activity_game2DTO(
+                    rs.getInt(1),
+                    rs.getInt(2),
+                    rs.getString(3),
+                    rs.getInt(4),
+                    rs.getInt(5),
+                    rs.getString(6),
+                    rs.getString(7)
+                );
             }
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "readBy()");
+            throw e; //new PatException(e.getMessage(), getClass().getName(), "readby()");
         }
         return registro;
     }
 
     @Override
-    public List<Grades_Activity_game2DTO> readAll() {
+    public List<Grades_Activity_game2DTO> readall() {
         List<Grades_Activity_game2DTO> tabla = new ArrayList<>();
         String query = "SELECT "
                         + "g.id_grade_activity_game2, "
@@ -58,31 +63,37 @@ public class Grades_Activity_game2DAO extends Data_Helper_Sqlite implements IDAO
                         + "g.id_game2, "
                         + "g.state, "
                         + "g.date_created, "
-                        + "g.date_update "
-                        + "FROM grades_activity_game2 g;";
+                        + "g.date_updated "
+                        + "FROM grades_activity_game2 g; "
+                        + "JOIN student_course sc ON g.id_student_course = sc.id_student_course "
+                        + "JOIN game2 ga ON g.id_game2 = ga.id_game2 "
+                        + "WHERE g.state = 1";
         try {
             Connection conn = opConnection();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                Grades_Activity_game2DTO list = new Grades_Activity_game2DTO(rs.getInt(1),
-                                                                            rs.getInt(2),
-                                                                            rs.getString(3),
-                                                                            rs.getInt(4),
-                                                                            rs.getInt(5),
-                                                                            rs.getString(6),
-                                                                            rs.getString(7));
+                Grades_Activity_game2DTO list = new Grades_Activity_game2DTO(
+                    rs.getInt(1),
+                    rs.getInt(2),
+                    rs.getString(3),
+                    rs.getInt(4),
+                    rs.getInt(5),
+                    rs.getString(6),
+                    rs.getString(7)
+                );
                 tabla.add(list);
             }
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "readAll()");
+            System.out.println(e);
+            //throw new PatException(e.getMessage(), getClass().getName(), "readAll()");
         }
         return tabla;
     }
 
     @Override
-    public boolean create(Grades_Activity_game2DTO entity) throws Exception {
-        String query = "INSERT INTO grades_activity_game2 (id_student_course, answer1, id_game2, state, date_created, date_update) VALUES (?, ?, ?, ?, ?, ?);";
+    public boolean created(Grades_Activity_game2DTO entity) throws Exception {
+        String query = "INSERT INTO grades_activity_game2 (id_student_course, answer1, id_game2, state, date_created, date_updated) VALUES (?, ?, ?, ?, ?, ?);";
         try {
             Connection conn = opConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
@@ -91,11 +102,11 @@ public class Grades_Activity_game2DAO extends Data_Helper_Sqlite implements IDAO
             pstmt.setInt(3, entity.getId_game1());
             pstmt.setInt(4, entity.getState());
             pstmt.setString(5, entity.getDate_created());
-            pstmt.setString(6, entity.getDate_update());
+            pstmt.setString(6, entity.getDate_updated());
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "create()");
+            throw e; //new PatException(e.getMessage(), getClass().getName(), "created()");
         }
     }
 
@@ -107,16 +118,16 @@ public class Grades_Activity_game2DAO extends Data_Helper_Sqlite implements IDAO
         try {
             Connection conn = opConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setInt(1, entity.getId_student_course());
-            pstmt.setString(2, entity.getAnswer1());
-            pstmt.setInt(3, entity.getId_game1());
-            pstmt.setInt(4, entity.getState());
-            pstmt.setString(5, dtf.format(now));
-            pstmt.setInt(6, entity.getId_grade_activity_game2());
+            pstmt.setInt(1,     entity.getId_student_course());
+            pstmt.setString(2,  entity.getAnswer1());
+            pstmt.setInt(3,     entity.getId_game1());
+            pstmt.setInt(4,     entity.getState());
+            pstmt.setString(5,  dtf.format(now).toString());
+            pstmt.setInt(6,     entity.getId_grade_activity_game2());
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "update()");
+            throw e; // new PatException(e.getMessage(), getClass().getName(), "update()");
         }
     }
 
@@ -124,16 +135,17 @@ public class Grades_Activity_game2DAO extends Data_Helper_Sqlite implements IDAO
     public boolean delete(Integer id) throws Exception {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        String query = "UPDATE grades_activity_game2 SET state = 0, date_update = ? WHERE id_grade_activity_game2 = ?;";
+        String query = "UPDATE grades_activity_game2 SET state = ?, date_update = ? WHERE id_grade_activity_game2 = ?;";
         try {
             Connection conn = opConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, dtf.format(now));
+            pstmt.setInt(1, 0);
+            pstmt.setString(1, dtf.format(now).toString());
             pstmt.setInt(2, id);
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "delete()");
+            throw e; //new PatException(e.getMessage(), getClass().getName(), "delete()");
         }
     }
 }
