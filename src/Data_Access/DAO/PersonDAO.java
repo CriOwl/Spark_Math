@@ -127,7 +127,7 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
 
     @Override
     public boolean created(PersonDTO entity) throws Exception{
-        String query="INSERT INTO Person (name, last_name,DNI,email,password,birthdate,id_role) VALUES(?,?,?,?,?,?,?);";
+        String query="INSERT INTO Persona (name, last_name,DNI,email,password,birthdate,id_role) VALUES(?,?,?,?,?,?,?);";
         try {
             Connection conn = opConnection();
             PreparedStatement pstmt= conn.prepareStatement(query);
@@ -141,7 +141,8 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw e;//new PatException(e.getMessage(), getClass().getName(), "create()");
+            System.out.println(e);
+            return false;
         }
     }
 
@@ -149,7 +150,7 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
     public boolean update(PersonDTO entity)throws Exception{
         DateTimeFormatter dtf= DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime now= LocalDateTime.now();
-        String query="UPDATE Person SET name=?,last_name=?,DNI=?,email=?,password=?,id_role=?,date_update=? Where id_person=?";
+        String query="UPDATE Persona SET name=?,last_name=?,DNI=?,email=?,password=?,id_role=?,date_updated=? Where id_person=?";
         try {
             Connection conect= opConnection();
             PreparedStatement pstmt= conect.prepareStatement(query);
@@ -172,7 +173,7 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
     public boolean delete(Integer id)throws Exception{
         DateTimeFormatter dtf= DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime now= LocalDateTime.now();
-        String query="UPDATE Person SET state=?,date_update=? Where id_person=?";
+        String query="UPDATE Persona SET state=?,date_updated=? Where id_person=?";
         try {
             Connection conect= opConnection();
             PreparedStatement pstmt= conect.prepareStatement(query);
@@ -183,7 +184,8 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
             return true;
 
         } catch (SQLException e) {
-            throw e; //new PatException(e.getMessage(), getClass().getName(), "delete()");
+            System.out.println(e);
+            return false;
         }
     }
 }
