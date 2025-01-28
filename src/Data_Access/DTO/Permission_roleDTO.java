@@ -9,10 +9,20 @@ public class Permission_roleDTO {
     private String date_updated;
     private String role_name;
     private String permission_name;
+    private String method_name;
 
     
-    public Permission_roleDTO(String permission_name) {
+    public String getMethod_name() {
+        return method_name;
+    }
+
+    public void setMethod_name(String method_name) {
+        this.method_name = method_name;
+    }
+
+    public Permission_roleDTO(String permission_name,String name_method) {
         this.permission_name = permission_name;
+        this.method_name = name_method;
     }
 
     public String getRole_name() {
@@ -104,6 +114,7 @@ public class Permission_roleDTO {
         +"\n    id_rol: "                 +getId_role()
         +"\n    id_permiso: "             +getId_permission()
         +"\n    nombre_permiso: "         +getPermission_name()
+        +"\n    metodo:         "         +getMethod_name()
         +"\n    Estado: "                 +getState()
         +"\n    Nombre_role: "            +getRole_name()
         +"\n    Fecha_creacion: "         +getDate_created()

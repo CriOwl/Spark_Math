@@ -15,7 +15,7 @@ import java.util.List;
 public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permission_roleDTO> {
 
     @Override
-    public Permission_roleDTO readBy(Integer id) throws Exception {
+    public Permission_roleDTO readby(Integer id) throws Exception {
         Permission_roleDTO registro = new Permission_roleDTO();
         String query = "SELECT "
                         + "pr.id_permission_role, "
@@ -45,7 +45,7 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
     }
 
     @Override
-    public List<Permission_roleDTO> readAll() {
+    public List<Permission_roleDTO> readall() {
         List<Permission_roleDTO> tabla = new ArrayList<>();
         String query = "SELECT "
                         + "pr.id_permission_role, "
@@ -75,7 +75,7 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
     }
 
     @Override
-    public boolean create(Permission_roleDTO entity) throws Exception {
+    public boolean created(Permission_roleDTO entity) throws Exception {
         String query = "INSERT INTO permission_role (id_role, id_permission, state, date_created, date_updated) VALUES (?, ?, ?, ?, ?);";
         try {
             Connection conn = opConnection();
@@ -134,7 +134,8 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
         Permission_roleDTO registro=new Permission_roleDTO();
         String query = "SELECT "
                         + "p.name, "
-                        + "pr.state "
+                        + "pr.state, "
+                        + "p.name_method "
                         + "FROM Permission_role pr "
                         + "JOIN Permission p ON pr.id_permission=p.id_permission "
                         + "WHERE pr.state = 1 AND pr.id_role = " + id_role + ";";
@@ -143,7 +144,7 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                registro=new Permission_roleDTO(rs.getString(1));
+                registro=new Permission_roleDTO(rs.getString(1),rs.getString(3));
                 tabla.add(registro);
             }
         } catch (SQLException e) {

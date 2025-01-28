@@ -47,43 +47,52 @@ VALUES
     ('Estudiante');
 
 INSERT INTO
-    Permission (name, description)
+    Permission (name, description,name_method)
 VALUES
     (
         'Administrar Docentes',
-        'Permite al usuario administrar docentes'
+        'Permite al usuario administrar docentes',
+        'admin_teacher'
     ),
     (
         'Administrar Estudiantes',
-        'Permite al usuario administrar estudiantes'
+        'Permite al usuario administrar estudiantes',
+        'admin_student'
     ),
     (
         'Administrar Rector',
-        'Permite al usuario administrar rector'
+        'Permite al usuario administrar rector',
+        'admin_manage'
     ),
     (
         'Administrar Pruebas Generales',
-        'Permite al usuario administrar pruebas generales'
+        'Permite al usuario administrar pruebas generales',
+        'admin_general_test'
     ),
     (
-        'Administrar Pruebas Individuales',
-        'Permite al usuario administrar pruebas individuales'
+        'Administrar Pruebas Cursos',
+        'Permite al usuario administrar pruebas individuales',
+        'admin_course_test'
     ),
     (
         'Administrar Grados',
-        'Permite al usuario administrar grados'
+        'Permite al usuario administrar grados',
+        'admin_course'
     ),
     (
         'Administrar Instituciones',
-        'Permite al usuario administrar instituciones'
+        'Permite al usuario administrar instituciones',
+        'admin_institucions'
     ),
     (
         'Visualizar Reportes',
-        'Permite al usuario visualizar reportes'
+        'Permite al usuario visualizar reportes',
+        'view_reports'
     ),
     (
         'Realizar Actividades',
-        'Permite al usuario realizar actividades'
+        'Permite al usuario realizar actividades',
+        'activity'
     );
 
 INSERT INTO

@@ -4,9 +4,24 @@ public class PermissionDTO {
     private Integer id_permission;
     private String name;
     private String description;
+    private String name_method;
     private Integer state;
     private String date_created;
     private String date_updated;
+
+    public PermissionDTO(String name, String description, String name_method) {
+        this.name = name;
+        this.description = description;
+        this.name_method = name_method;
+    }
+
+    public String getName_method() {
+        return name_method;
+    }
+
+    public void setName_method(String name_method) {
+        this.name_method = name_method;
+    }
 
     public PermissionDTO() {
     }
@@ -68,6 +83,7 @@ public class PermissionDTO {
         +"\n    id_permiso: "             +getId_permission()
         +"\n    Nombre: "                 +getName()
         +"\n    Descripcion: "            +getDescription()
+        +"\n    Metodo"                   +getName_method()
         +"\n    Estado: "                 +getState()
         +"\n    Fecha_creacion: "         +getDate_created()
         +"\n    Fecha_modificacion: "     +getDate_updated();

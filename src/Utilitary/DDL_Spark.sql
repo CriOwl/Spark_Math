@@ -76,6 +76,7 @@ CREATE TABLE IF NOT EXISTS
         id_permission INTEGER PRIMARY KEY AUTOINCREMENT,
         name VARCHAR(30) NOT NULL,
         description TEXT NOT NULL,
+        name_method VARCHAR(50) NOT NULL,
         state INTEGER DEFAULT 1 CONSTRAINT states CHECK (state IN (0, 1)),
         date_created DATETIME DEFAULT (datetime('now', 'localtime')),
         date_updated DATETIME
@@ -190,17 +191,11 @@ CREATE TABLE IF NOT EXISTS Game2 (
     date_created DATETIME DEFAULT (datetime('now', 'localtime')),
     date_updated DATETIME
 );
-SELECT
-                    p.id_person, 
-                    p.name, 
-                    p.last_name, 
-                    p.DNI, 
-                    p.email, 
-                    p.password, 
-                    p.id_role,
-                    r.name,  
-                    p.state 
-                    FROM  vw_persona p 
-                    JOIN Role r ON p.id_role=r.id_role 
-                    WHERE p.state= 1 AND p.DNI = "112";
-SELECT p.id_person, p.name, p.last_name, p.DNI, p.email, p.password, p.id_role,r.name, p.state FROM  vw_persona p JOIN Role r ON p.id_role=r.id_role WHERE p.state= 1 AND p.DNI = 1255553;
+
+SELECT 
+                        p.name, 
+                        pr.state, 
+                        p.name_method
+                        FROM Permission_role pr 
+                        JOIN Permission p ON pr.id_permission=p.id_permission 
+                        WHERE pr.state = 1 AND pr.id_role = 2;

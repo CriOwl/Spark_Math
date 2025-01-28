@@ -1,10 +1,7 @@
 package BusinessLogic;
-import Math_Spark.*;
-
-import java.util.List;
-
 import Data_Access.VIEW.LoginDAO;
 import Data_Access.VIEW.LoginDTO;
+import Math_Spark.*;
 public class User {
     public void sistema(){
         String user;
@@ -21,18 +18,16 @@ public class User {
     private boolean login(String user,String password){
         LoginDAO person = new LoginDAO();
         LoginDTO hash=person.login(user);
-        Role permisos= new Role();
+        Role sd=new Role();
         try {
             if(hash.getPassword().equals(password)){
                 System.out.println("Bienvenido "+hash.getFull_name()+" Su rol es "+hash.getName_role());
-                List<String> permi = permisos.get_Permission(hash.getId_role());
-                for (String a : permi) {
-                    System.out.println(a);
-                }
+                sd.get_Permission(hash.getId_role());
             }
         return false;
         } catch (Exception e) {
             return true;
         }
+        
     }
 }
