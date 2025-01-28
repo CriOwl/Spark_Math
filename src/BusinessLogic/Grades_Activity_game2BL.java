@@ -20,7 +20,7 @@ public class Grades_Activity_game2BL{
 	}
 
 	public boolean create(Grades_Activity_game2 DTO Grades_Activity_game2DTO) throws Exception{
-		return sgag2DAO.create(Grades_Activity_game2DTO);
+		return gag2DAO.create(Grades_Activity_game2DTO);
 	}
 
 	public boolean update(Grades_Activity_game2 DTO Grades_Activity_game2DTO) throws Exception{

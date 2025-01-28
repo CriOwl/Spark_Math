@@ -14,24 +14,24 @@ public class Grades_Activity_game1BL{
 		return gag1DAO.readAll();
 	}
 
-	public SexoDTO getByIdSexo(int id_grade_activity_game2) throws Exception{
-		grades_Activity_game2 = gag2DAO.readBy(id_grade_activity_game2);
-		return grades_Activity_game2;
+	public SexoDTO getByid_grade_activity_game1(int id_grade_activity_game1) throws Exception{
+		grades_Activity_game1 = gag1DAO.readBy(id_grade_activity_game1);
+		return grades_Activity_game1;
 	}
 
-	public boolean create(Grades_Activity_game2 DTO Grades_Activity_game2DTO) throws Exception{
-		return sgag2DAO.create(Grades_Activity_game2DTO);
+	public boolean create(Grades_Activity_game1 DTO Grades_Activity_game1DTO) throws Exception{
+		return gag1DAO.create(Grades_Activity_game1DTO);
 	}
 
-	public boolean update(Grades_Activity_game2 DTO Grades_Activity_game2DTO) throws Exception{
-		return gag2DAO.update(Grades_Activity_game2DTO);
+	public boolean update(Grades_Activity_game1 DTO Grades_Activity_game1DTO) throws Exception{
+		return gag1DAO.update(Grades_Activity_game1DTO);
 	}
 
-	public boolean delete(Grades_Activity_game2 DTO Grades_Activity_game2DTO) throws Exception{
-		return gag2DAO.delete(Grades_Activity_game2DTO);
+	public boolean delete(Grades_Activity_game1 DTO Grades_Activity_game1DTO) throws Exception{
+		return gag1DAO.delete(Grades_Activity_game1DTO);
 	}
 
 	public Integer getMaxRow() throws Exception{
-		return gag2DAO.getMaxRow(Grades_Activity_game2DTO);
+		return gag1DAO.getMaxRow(Grades_Activity_game1DTO);
 	}
 }
