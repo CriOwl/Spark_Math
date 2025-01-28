@@ -15,7 +15,7 @@ public class Permisos{
                 mapa_permisos.put(name_permisions.get(i), Method_permissions.class.getMethod(name_method.get(i)));
             }
         } catch (Exception e) {
-            System.out.println("El meotodo o el permiso no existen");
+            System.out.println("El metodo o el permiso no existen");
         }
     }
     public void ejecutarAccion(String permiso) {
