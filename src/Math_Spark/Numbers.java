@@ -1,4 +1,4 @@
-package Math_Spark.Games.diagnostic;
+package Math_Spark;
 
 public class Numbers {
     private Integer main_number;

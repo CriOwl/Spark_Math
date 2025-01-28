@@ -8,9 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +35,6 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
         try {
             Connection connect= opConnection();
             Statement stmt= connect.createStatement();
-            //System.out.println(query);
             ResultSet rs=stmt.executeQuery(query);
             while (rs.next()) {
                 registro= new PersonDTO(rs.getInt(1),
@@ -51,6 +48,34 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
                                         rs.getInt(9),
                                         rs.getString(10),
                                         rs.getString(11));          
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return registro;
+    }
+    public PersonDTO readbylogin(String user)throws Exception{
+        PersonDTO registro=new PersonDTO();
+        String query=  "SELECT "
+                        +"p.id_person, "
+                        +"p.name, "
+                        +"p.last_name, "
+                        +"p.DNI, "
+                        +"p.password, "
+                        +"p.id_role," 
+                        +"FROM Persona p "
+                        +"WHERE p.state= 1 AND p.DNI = "+user;
+        try {
+            Connection connect= opConnection();
+            Statement stmt= connect.createStatement();
+            ResultSet rs=stmt.executeQuery(query);
+            while (rs.next()) {
+                registro= new PersonDTO(
+                    rs.getInt(1),
+                    rs.getString(2),
+                    rs.getString(3),
+                    rs.getString(4),
+                );          
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -102,7 +127,7 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
 
     @Override
     public boolean created(PersonDTO entity) throws Exception{
-        String query="INSERT INTO Person (name, last_name,DNI,email,password,birthdate,id_role) VALUES(?,?,?,?,?,?,?);";
+        String query="INSERT INTO Persona (name, last_name,DNI,email,password,birthdate,id_role) VALUES(?,?,?,?,?,?,?);";
         try {
             Connection conn = opConnection();
             PreparedStatement pstmt= conn.prepareStatement(query);
@@ -116,7 +141,8 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw e;//new PatException(e.getMessage(), getClass().getName(), "create()");
+            System.out.println(e);
+            return false;
         }
     }
 
@@ -124,7 +150,7 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
     public boolean update(PersonDTO entity)throws Exception{
         DateTimeFormatter dtf= DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime now= LocalDateTime.now();
-        String query="UPDATE Person SET name=?,last_name=?,DNI=?,email=?,password=?,id_role=?,date_update=? Where id_person=?";
+        String query="UPDATE Persona SET name=?,last_name=?,DNI=?,email=?,password=?,id_role=?,date_updated=? Where id_person=?";
         try {
             Connection conect= opConnection();
             PreparedStatement pstmt= conect.prepareStatement(query);
@@ -147,7 +173,7 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
     public boolean delete(Integer id)throws Exception{
         DateTimeFormatter dtf= DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime now= LocalDateTime.now();
-        String query="UPDATE Person SET state=?,date_update=? Where id_person=?";
+        String query="UPDATE Persona SET state=?,date_updated=? Where id_person=?";
         try {
             Connection conect= opConnection();
             PreparedStatement pstmt= conect.prepareStatement(query);
@@ -158,7 +184,8 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO <PersonDTO>{
             return true;
 
         } catch (SQLException e) {
-            throw e; //new PatException(e.getMessage(), getClass().getName(), "delete()");
+            System.out.println(e);
+            return false;
         }
     }
 }
