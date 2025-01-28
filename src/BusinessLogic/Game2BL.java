@@ -1,8 +1,8 @@
 package BusinessLogic;
 
 import java.util.List;
-import DataAccess.DAO.Game2DAO;
-import DataAccess.DTO.Game2DTO;
+import Data_Access.DAO.Game2DAO;
+import Data_Access.DTO.Game2DTO;
 
 public class Game2BL{
 	private Game2DTO game2;

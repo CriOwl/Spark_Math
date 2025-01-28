@@ -1,8 +1,8 @@
 package BusinessLogic;
 
 import java.util.List;
-import DataAccess.DAO.Student_courseDAO;
-import DataAccess.DTO.Student_courseDTO;
+import Data_Access.DAO.Student_courseDAO;
+import Data_Access.DTO.Student_courseDTO;
 
 public class Student_courseBL{
 	private Student_courseDTO Student_course;
