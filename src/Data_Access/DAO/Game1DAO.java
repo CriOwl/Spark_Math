@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> 0296549c0af69ea1b3dd04b65d95e26a3442a689
-package Data_Access.DAO;
-
 import Data_Access.DTO.Game1DTO;
 import Data_Access.Data_Helper_Sqlite;
 import java.sql.Connection;
