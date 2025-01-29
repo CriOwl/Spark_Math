@@ -17,7 +17,7 @@ public class Role {
                 list_method.add(registo.getMethod_name());
             }
         Permisos p=new Permisos(list_permissions, list_method);
-            p.ejecutarAccion("Realizar Actividades");
+            p.ejecutarAccion(String asdasd);
         } catch (Exception e) {
             System.out.println("No se pudieron cargas las listas");
         }
