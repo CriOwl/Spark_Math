@@ -1,9 +1,8 @@
 package BusinessLogic;
 
-import java.util.List;
-
 import Data_Access.VIEW.LoginDAO;
 import Data_Access.VIEW.LoginDTO;
+import java.util.List;
 
 public class User {
     private LoginDAO data_user;
@@ -22,11 +21,11 @@ public class User {
                 System.out.println("Bienvenido "+content_user.getFull_name()+" Su rol es "+content_user.getName_role());
                 rol.get_Permission(content_user.getId_role());
                 list_permissions=rol.getList_permissions();
+            return true;
             }
-        return true;
         } catch (Exception e) {
-            return false;
         }
+        return false;
     }
     
     public List<String> getList_permissions() {

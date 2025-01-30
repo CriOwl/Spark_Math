@@ -87,15 +87,13 @@ public class MainFrame extends JFrame {
         //container.remove();
     }
     private void Login_panel(){
-        main_windown.revalidate();
         login=new Login_panel();
         main_windown.add(login);
         login.login_button.addActionListener(e->change_panel(login.login_bl()));
     }
     private void change_panel(boolean state_login){
-        if(state_login){
+        if(!state_login){
             System.out.println("datos fallido");
-            Login_panel();
             return;
         }
         System.out.println("cambiando de panel");

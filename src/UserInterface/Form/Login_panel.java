@@ -36,7 +36,7 @@ public class Login_panel extends JPanel {
         password_box = new JPasswordField();
         password_box.setPreferredSize(Spark_Style.dimension_button);
         login_button = new JButton("Ingresar");
-        login_button.addActionListener(e->login_bl());
+        //login_button.addActionListener(e->login_bl());
         setLayout(new GridBagLayout());
         GridBagConstraints gc = new GridBagConstraints();
         gc.insets = new Insets(10, 10, 10, 10);
@@ -75,8 +75,8 @@ public class Login_panel extends JPanel {
         Spark_Style.show_mesg_correct("Cedula Correcta","Cedula");
         return true;
     }
-    public boolean  login_bl(){
-        if(!(user.login_public(DNI_box.getText(),new String(password_box.getPassword())))&& validate_dni(DNI_box.getText())){
+    public boolean login_bl(){
+        if(!(user.login_public(DNI_box.getText(),new String(password_box.getPassword())))){
             Spark_Style.show_mesg_advert("Datos Incorrectos", "Login");
             return false;
         }
