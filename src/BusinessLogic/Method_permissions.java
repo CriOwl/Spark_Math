@@ -2,7 +2,6 @@ package BusinessLogic;
 
 public class Method_permissions {
     public void admin_teacher(){
-        
         System.out.println("aaaaa");
     }
     public void admin_student(){

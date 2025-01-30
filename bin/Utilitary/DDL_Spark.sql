@@ -192,10 +192,5 @@ CREATE TABLE IF NOT EXISTS Game2 (
     date_updated DATETIME
 );
 
-SELECT 
-                        p.name, 
-                        pr.state, 
-                        p.name_method
-                        FROM Permission_role pr 
-                        JOIN Permission p ON pr.id_permission=p.id_permission 
-                        WHERE pr.state = 1 AND pr.id_role = 2;
+INSERT INTO Persona(name,last_name,DNI,email,password,birthdate,id_role)
+VALUES('Cristhian','Carrillo','1751375963','admin@gmail.com','admin','2005-10-25',1);

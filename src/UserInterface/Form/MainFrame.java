@@ -14,8 +14,11 @@ import javax.swing.text.AbstractDocument;
 import com.formdev.flatlaf.intellijthemes.FlatCarbonIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
 import UserInterface.Spark_Style;
+import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.Image;
+import java.awt.Window;
+import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
@@ -25,6 +28,8 @@ public class MainFrame extends JFrame {
     private  ImageIcon moon_theme_icon = new ImageIcon (new ImageIcon(Spark_Style.URL_MOON_THEMES).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
     private  ImageIcon sun_theme_icon = new ImageIcon(new ImageIcon(Spark_Style.URL_SUN_THEMES).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
     private  ImageIcon logo = new ImageIcon(Spark_Style.URL_LOGO);
+    private Login_panel login;
+    private Menu_panel menu;
     private JFrame main_windown;
     private boolean is_dark=true;
 
@@ -49,6 +54,7 @@ public class MainFrame extends JFrame {
         change_themes.setPreferredSize(new Dimension(40, 40));
         change_themes.setIcon(sun_theme_icon);
         change_themes.addActionListener(e -> change_icon_themes(this.is_dark));
+        Login_panel();
         main_windown.setVisible(true);
     }
 
@@ -67,4 +73,33 @@ public class MainFrame extends JFrame {
         SwingUtilities.updateComponentTreeUI(main_windown);
         this.is_dark=!is_dark;
     }
+    private void menu_panel(List<String> permisos){
+        System.out.println("Panel del menu");
+        main_windown.remove(login);
+        System.out.println("cargando menu");
+        menu=new Menu_panel(permisos);
+        Container container=getContentPane();
+        container.setLayout(new BorderLayout());
+        container.add(menu,BorderLayout.WEST);
+        container.add(menu,BorderLayout.CENTER);
+        main_windown.add(container);
+        main_windown.revalidate();
+        //container.remove();
+    }
+    private void Login_panel(){
+        main_windown.revalidate();
+        login=new Login_panel();
+        main_windown.add(login);
+        login.login_button.addActionListener(e->change_panel(login.login_bl()));
+    }
+    private void change_panel(boolean state_login){
+        if(state_login){
+            System.out.println("datos fallido");
+            Login_panel();
+            return;
+        }
+        System.out.println("cambiando de panel");
+        menu_panel(login.getList_permissions());
+    }
+    
 }

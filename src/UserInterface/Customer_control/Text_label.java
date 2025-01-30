@@ -1,11 +1,9 @@
 package UserInterface.Customer_control;
 
+import UserInterface.Spark_Style;
 import java.awt.Color;
 import java.awt.Font;
-
 import javax.swing.JLabel;
-
-import UserInterface.Spark_Style;
 
 public class Text_label extends JLabel {
     public Text_label(String text){
@@ -16,7 +14,7 @@ public class Text_label extends JLabel {
         set_customize();
     }
     private void set_customize(){
-        customize_label(getText(),Spark_Style.FONT,Spark_Style.COLOR_FONT_LIGHT,Spark_Style.ALIGNMENT_LEFT);
+        customize_label(getText(),Spark_Style.FONT,Spark_Style.COLOR_FONT,Spark_Style.ALIGNMENT_LEFT);
     }
     public void set_customize(String text,Font font, Color color, int alignment){
         customize_label(text, font,  color, alignment);
