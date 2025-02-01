@@ -1,3 +1,5 @@
+import Data_Access.VIEW.LoginDAO;
+import Data_Access.VIEW.LoginDTO;
 import UserInterface.Form.MainFrame;
 import UserInterface.Spark_Style;
 
@@ -5,6 +7,11 @@ public class App {
     public static void main(String[] args) throws Exception {
            /*  PersonDAO person=new PersonDAO();
             person.delete(11); */
+            LoginDAO login=new LoginDAO();
+            
+            for (LoginDTO elem : login.read_column()) {
+                System.out.println(elem.getName_column());
+            }
             System.out.println(Spark_Style.URL_MOON_THEMES);
             System.out.println(Spark_Style.URL_SUN_THEMES);
             MainFrame venta= new MainFrame("Spark_Math") ;

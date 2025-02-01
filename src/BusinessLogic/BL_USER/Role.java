@@ -1,4 +1,4 @@
-package BusinessLogic;
+package BusinessLogic.BL_USER;
 
 import Data_Access.DAO.PermissionRoleDAO;
 import Data_Access.DTO.Permission_roleDTO;

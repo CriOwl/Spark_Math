@@ -26,12 +26,12 @@ public class Text_box extends JTextField{
     private void customize_textfield(Font font){
         setFont(font);
         setOpaque(false);
-        setCaretColor(Spark_Style.COLOR_CURSOR);
+        //setCaretColor(Spark_Style.COLOR_CURSOR);
         setMargin(new Insets(10, 10, 10, 10));
     }
     public void customize_textfield(){
         setFont(Spark_Style.FONT);
-        setForeground(Spark_Style.COLOR_FONT_LIGHT);
+        ///setForeground(Spark_Style.COLOR_FONT_LIGHT);
         setCaretColor(Spark_Style.COLOR_CURSOR);
         setOpaque(false);
         setMargin(new Insets(10, 10, 10, 10));

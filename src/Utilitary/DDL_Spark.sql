@@ -192,5 +192,17 @@ CREATE TABLE IF NOT EXISTS Game2 (
     date_updated DATETIME
 );
 
-INSERT INTO Persona(name,last_name,DNI,email,password,birthdate,id_role)
-VALUES('Cristhian','Carrillo','1751375963','admin@gmail.com','admin','2005-10-25',1);
+INSERT INTO Persona(name,last_name,DNI,email,password,id_role)
+VALUES('Cristhian','Carrillo','1751375963','admin@gmail.com','admin',1); 
+SELECT         p.id_person, 
+               p.name, 
+               p.last_name, 
+               p.DNI, 
+               p.email,
+               p.password, 
+               p.id_role, 
+               r.name, 
+               p.state 
+               FROM  vw_persona p 
+               JOIN Role r ON p.id_role=r.id_role 
+               WHERE p.state= 1 AND p.DNI LIKE '%1%' ;

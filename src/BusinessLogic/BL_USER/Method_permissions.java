@@ -1,11 +1,11 @@
-package BusinessLogic;
+package BusinessLogic.BL_USER;
 
 public class Method_permissions {
     public void admin_teacher(){
         System.out.println("aaaaa");
     }
     public void admin_student(){
-
+        
     }
     public void admin_manage(){
 

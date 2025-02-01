@@ -1,6 +1,6 @@
 package UserInterface.Form;
 
-import BusinessLogic.User;
+import BusinessLogic.BL_USER.User;
 import UserInterface.Customer_control.Mascaras;
 import UserInterface.Customer_control.Text_box;
 import UserInterface.Customer_control.Text_label;

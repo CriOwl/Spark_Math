@@ -1,4 +1,4 @@
-package BusinessLogic;
+package BusinessLogic.BL_USER;
 
 import Data_Access.VIEW.LoginDAO;
 import Data_Access.VIEW.LoginDTO;
@@ -14,9 +14,9 @@ public class User {
     }
     private boolean login(String user,String password){
          data_user = new LoginDAO();
-         content_user=data_user.login(user);
          rol=new Role();
-        try {
+         try {
+            content_user=data_user.readby(user);
             if(content_user.getPassword().equals(password)){
                 System.out.println("Bienvenido "+content_user.getFull_name()+" Su rol es "+content_user.getName_role());
                 rol.get_Permission(content_user.getId_role());

@@ -1,5 +1,6 @@
 package UserInterface.Form;
 
+import UserInterface.Customer_control.Table_Spark;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -81,10 +82,23 @@ public class MainFrame extends JFrame {
         Container container=getContentPane();
         container.setLayout(new BorderLayout());
         container.add(menu,BorderLayout.WEST);
-        container.add(menu,BorderLayout.CENTER);
+        container.setPreferredSize(new Dimension(300,getHeight()));
         main_windown.add(container);
         main_windown.revalidate();
-        //container.remove();
+        Manage_panel manage_panel=new Manage_panel();
+        container.add(manage_panel,BorderLayout.CENTER);
+        main_windown.add(container);
+        main_windown.revalidate();
+
+       /*  JPanel panel=new JPanel();
+        main_windown.add(panel,BorderLayout.CENTER); */
+    }
+    private void change_panel(Component panel){
+        Manage_panel manage_panel=new Manage_panel();
+        //main_windown.remove(panel);
+        main_windown.add(manage_panel,BorderLayout.CENTER);
+    
+        main_windown.revalidate();
     }
     private void Login_panel(){
         login=new Login_panel();

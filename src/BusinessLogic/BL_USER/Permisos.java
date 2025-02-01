@@ -1,4 +1,4 @@
-package BusinessLogic;
+package BusinessLogic.BL_USER;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;

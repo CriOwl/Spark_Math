@@ -135,8 +135,7 @@ INSERT INTO
         DNI,
         email,
         password,
-        id_role,
-        birthdate
+        id_role
     )
 VALUES
     (
@@ -145,8 +144,7 @@ VALUES
         '1255553',
         'admin@gmail.com',
         'admin',
-        1,
-        '1990-01-01'
+        1
     ),
     (
         'rector',
@@ -154,8 +152,7 @@ VALUES
         '48465',
         'rector@gmail.com',
         'rector',
-        2,
-        '1990-01-01'
+        2
     ),
     (
         'docente',
@@ -163,8 +160,7 @@ VALUES
         '6453564',
         'docente@gmail.com',
         'docente',
-        3,
-        '1990-01-01'
+        3
     ),
     (
         'docente2',
@@ -172,8 +168,7 @@ VALUES
         'QWEQE',
         'docente2@gmail.com',
         'docente',
-        3,
-        '1990-01-01'
+        3
     ),
     (
         'estudiante_grado1',
@@ -181,8 +176,7 @@ VALUES
         '112',
         'estudiante',
         'estudiante',
-        4,
-        '1990-01-01'
+        4
     ),
     (
         'estudiante_grado2',
@@ -190,8 +184,7 @@ VALUES
         '1231',
         'estudiante',
         'estudiante',
-        4,
-        '1990-01-01'
+        4
     ),
     (
         'estudiante_grado3',
@@ -199,8 +192,7 @@ VALUES
         '123456',
         'estudiante',
         'estudiante',
-        4,
-        '1990-01-01'
+        4
     ),
     (
         'estudiante_grado4',
@@ -208,8 +200,7 @@ VALUES
         '12312312',
         'estudiante',
         'estudiante',
-        4,
-        '1990-01-01'
+        4
     ),
     (
         'estudiante_grado5',
@@ -217,8 +208,7 @@ VALUES
         '34512',
         'estudiante',
         'estudiante',
-        4,
-        '1990-01-01'
+        4
     );
 
 INSERT INTO
@@ -304,3 +294,4 @@ VALUES
     (2, 3, '8'),
     (2, 4, '10'),
     (9, 5, '12');
+PRAGMA table_info(vw_persona);
