@@ -7,7 +7,6 @@ import Data_Access.DTO.CourseDTO;
 public class CourseBL{
 	private CourseDTO course;
 	private CourseDTO cDAO = new CourseDAO();
-
 	public CourseBL(){}
 
 	public List<CourseDTO> getAll() throws Exception{
