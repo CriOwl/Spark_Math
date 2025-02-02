@@ -22,5 +22,4 @@ public class App {
                 System.out.println(registo.getPermission_name());
             } */
     }
-
 }

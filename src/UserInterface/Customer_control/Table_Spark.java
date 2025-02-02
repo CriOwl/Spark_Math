@@ -48,6 +48,5 @@ public class Table_Spark extends Jtable{
         setColumnSelectionAllowed(false);
         setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         setDefaultEditor(Object.class, null);        
-    }
-    
+    }   
 }

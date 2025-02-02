@@ -1,4 +1,5 @@
 package Data_Access.DAO;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,19 +23,19 @@ public class Catalog_levelDAO extends Data_Helper_Sqlite implements IDAO<Catalog
                      +" ,name                    " 
                      +" ,state                   " 
                      +" ,date_created            " 
-                     +" ,date_updated "
-                     +" FROM    Catalog_level   "
+                     +" ,date_updated            "
+                     +" FROM    Catalog_level    "
                      +" WHERE   state ='1' AND id_catalog_level =   "+ id.toString() ;
         try {
             Connection conn = opConnection();            
             Statement  stmt = conn.createStatement();     
             ResultSet rs   = stmt.executeQuery(query);  
             while (rs.next()) {
-                oS = new Catalog_levelDTO(rs.getInt(1)       // Id_catalog_level
-                                ,rs.getString(2)             // name             
-                                ,rs.getInt(3)                // state        
-                                ,rs.getString(4)             // date_created      
-                                ,rs.getString(5));           // date_update
+                oS = new Catalog_levelDTO(rs.getInt(1)                // Id_catalog_level
+                                         ,rs.getString(2)             // name             
+                                         ,rs.getInt(3)                // state        
+                                         ,rs.getString(4)             // date_created      
+                                         ,rs.getString(5));           // date_update
             }
         } 
         catch (SQLException e) {
@@ -50,14 +51,14 @@ public class Catalog_levelDAO extends Data_Helper_Sqlite implements IDAO<Catalog
                      +" ,name                    " 
                      +" ,state                   " 
                      +" ,date_created            " 
-                     +" ,date_updated "
-                     +" FROM    Catalog_level   "
-                     +" WHERE   state='1'";
+                     +" ,date_updated            "
+                     +" FROM    Catalog_level    "
+                     +" WHERE   state='1'        ";
 
         try {
             Connection conn = opConnection();            
             Statement  stmt = conn.createStatement();     
-            ResultSet rs   = stmt.executeQuery(query);    
+            ResultSet rs    = stmt.executeQuery(query);    
             while (rs.next()) {
                 Catalog_levelDTO s = new Catalog_levelDTO(rs.getInt(1)       // Id_catalog_level
                                                 ,rs.getString(2)             // name             
@@ -127,15 +128,15 @@ public class Catalog_levelDAO extends Data_Helper_Sqlite implements IDAO<Catalog
         String query =" SELECT COUNT(*) TotalReg FROM Catalog_level "
                      +" WHERE   state ='A' ";
         try {
-            Connection conn = opConnection();         // conectar a DB     
-            Statement  stmt = conn.createStatement();   // CRUD : select * ...    
-            ResultSet rs   = stmt.executeQuery(query);  // ejecutar la
+            Connection conn = opConnection();            // conectar a DB     
+            Statement  stmt = conn.createStatement();    // CRUD : select * ...    
+            ResultSet rs    = stmt.executeQuery(query);  // ejecutar la
             while (rs.next()) {
-                return rs.getInt(1);                    // TotalReg
+                return rs.getInt(1);                     // TotalReg
             }
         } 
         catch (SQLException e) {
-            throw e;// new PatException(e.getMessage(), getClass().getName(), "getMaxRow()");
+            throw e;                                     // new PatException(e.getMessage(), getClass().getName(), "getMaxRow()");
         }
         return 0;
     }

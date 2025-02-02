@@ -30,7 +30,7 @@ public class Student_courseBL{
 	public boolean delete(Student_course DTO Student_courseDTO) throws Exception{
 		return scDAO.delete(Student_courseDTO);
 	}
-
+	
 	public Integer getMaxRow() throws Exception{
 		return scDAO.getMaxRow(Student_courseDTO);
 	}
