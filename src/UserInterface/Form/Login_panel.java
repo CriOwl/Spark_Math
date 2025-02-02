@@ -67,6 +67,7 @@ public class Login_panel extends JPanel {
         gc.anchor = GridBagConstraints.CENTER;
         add(login_button, gc);
     }
+
     private boolean validate_dni(String DNI){
         if(!(Mascaras.validate_DNI(DNI))){
             Spark_Style.show_mesg_advert("Cedula incorrecta","Cedula");
@@ -75,6 +76,7 @@ public class Login_panel extends JPanel {
         Spark_Style.show_mesg_correct("Cedula Correcta","Cedula");
         return true;
     }
+
     public boolean login_bl(){
         if(!(user.login_public(DNI_box.getText(),new String(password_box.getPassword())))){
             Spark_Style.show_mesg_advert("Datos Incorrectos", "Login");
@@ -85,7 +87,6 @@ public class Login_panel extends JPanel {
         return true;
     }
 
-    
     public List<String> getList_permissions() {
         return list_permissions;
     }
