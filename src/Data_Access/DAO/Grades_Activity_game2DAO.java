@@ -18,22 +18,22 @@ public class Grades_Activity_game2DAO extends Data_Helper_Sqlite implements IDAO
     @Override
     public Grades_Activity_game2DTO readby(Integer id) throws Exception {
         Grades_Activity_game2DTO registro = new Grades_Activity_game2DTO();
-        String query = "SELECT "
-                        + "g.id_grade_activity_game2, "
-                        + "g.id_student_course, "
-                        + "g.answer1, "
-                        + "g.id_game2, "
-                        + "g.state, "
-                        + "g.date_created, "
-                        + "g.date_updated "
-                        + "FROM grades_activity_game2 g "
+        String query = "SELECT                                                                  "
+                        + "g.id_grade_activity_game2,                                           "
+                        + "g.id_student_course,                                                 "
+                        + "g.answer1,                                                           "
+                        + "g.id_game2,                                                          "
+                        + "g.state,                                                             "
+                        + "g.date_created,                                                      "
+                        + "g.date_updated                                                       "
+                        + "FROM grades_activity_game2 g                                         "
                         + "JOIN student_course sc ON g.id_student_course = sc.id_student_course "
-                        + "JOIN game2 ga ON g.id_game2 = ga.id_game2 "
-                        + "WHERE g.state = 1 AND g.id_grade_activity_game2 = " + id + ";";
+                        + "JOIN game2 ga ON g.id_game2 = ga.id_game2                            "
+                        + "WHERE g.state = 1 AND g.id_grade_activity_game2 = " + id + ";        ";
         try {
             Connection conn = opConnection();
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
+            Statement stmt  = conn.createStatement();
+            ResultSet rs    = stmt.executeQuery(query);
             while (rs.next()) {
                 registro = new Grades_Activity_game2DTO(
                     rs.getInt(1),
@@ -46,7 +46,7 @@ public class Grades_Activity_game2DAO extends Data_Helper_Sqlite implements IDAO
                 );
             }
         } catch (SQLException e) {
-            throw e; //new PatException(e.getMessage(), getClass().getName(), "readby()");
+            throw e;     //new PatException(e.getMessage(), getClass().getName(), "readby()");
         }
         return registro;
     }
@@ -54,22 +54,22 @@ public class Grades_Activity_game2DAO extends Data_Helper_Sqlite implements IDAO
     @Override
     public List<Grades_Activity_game2DTO> readall() {
         List<Grades_Activity_game2DTO> tabla = new ArrayList<>();
-        String query = "SELECT "
-                        + "g.id_grade_activity_game2, "
-                        + "g.id_student_course, "
-                        + "g.answer1, "
-                        + "g.id_game2, "
-                        + "g.state, "
-                        + "g.date_created, "
-                        + "g.date_updated "
-                        + "FROM grades_activity_game2 g; "
+        String query = "SELECT                                                                  "
+                        + "g.id_grade_activity_game2,                                           "
+                        + "g.id_student_course,                                                 "
+                        + "g.answer1,                                                           "
+                        + "g.id_game2,                                                          "
+                        + "g.state,                                                             "
+                        + "g.date_created,                                                      "
+                        + "g.date_updated                                                       "
+                        + "FROM grades_activity_game2 g;                                        "
                         + "JOIN student_course sc ON g.id_student_course = sc.id_student_course "
-                        + "JOIN game2 ga ON g.id_game2 = ga.id_game2 "
-                        + "WHERE g.state = 1";
+                        + "JOIN game2 ga ON g.id_game2 = ga.id_game2                            "
+                        + "WHERE g.state = 1                                                    ";
         try {
             Connection conn = opConnection();
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
+            Statement stmt  = conn.createStatement();
+            ResultSet rs    = stmt.executeQuery(query);
             while (rs.next()) {
                 Grades_Activity_game2DTO list = new Grades_Activity_game2DTO(
                     rs.getInt(1),
@@ -95,45 +95,45 @@ public class Grades_Activity_game2DAO extends Data_Helper_Sqlite implements IDAO
         try {
             Connection conn = opConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setInt(1, entity.getId_student_course());
-            pstmt.setString(2, entity.getAnswer1());
-            pstmt.setInt(3, entity.getId_game1());
-            pstmt.setInt(4, entity.getState());
-            pstmt.setString(5, entity.getDate_created());
-            pstmt.setString(6, entity.getDate_updated());
+            pstmt.setInt(1,           entity.getId_student_course());
+            pstmt.setString(2,        entity.getAnswer1());
+            pstmt.setInt(3,           entity.getId_game1());
+            pstmt.setInt(4,           entity.getState());
+            pstmt.setString(5,        entity.getDate_created());
+            pstmt.setString(6,        entity.getDate_updated());
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw e; //new PatException(e.getMessage(), getClass().getName(), "created()");
+            throw e;     //new PatException(e.getMessage(), getClass().getName(), "created()");
         }
     }
 
     @Override
     public boolean update(Grades_Activity_game2DTO entity) throws Exception {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
-        String query = "UPDATE grades_activity_game2 SET id_student_course = ?, answer1 = ?, id_game2 = ?, state = ?, date_update = ? WHERE id_grade_activity_game2 = ?;";
+        LocalDateTime now     = LocalDateTime.now();
+        String query          = "UPDATE grades_activity_game2 SET id_student_course = ?, answer1 = ?, id_game2 = ?, state = ?, date_update = ? WHERE id_grade_activity_game2 = ?;";
         try {
             Connection conn = opConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setInt(1,     entity.getId_student_course());
-            pstmt.setString(2,  entity.getAnswer1());
-            pstmt.setInt(3,     entity.getId_game1());
-            pstmt.setInt(4,     entity.getState());
-            pstmt.setString(5,  dtf.format(now).toString());
-            pstmt.setInt(6,     entity.getId_grade_activity_game2());
+            pstmt.setInt(1,           entity.getId_student_course());
+            pstmt.setString(2,        entity.getAnswer1());
+            pstmt.setInt(3,           entity.getId_game1());
+            pstmt.setInt(4,           entity.getState());
+            pstmt.setString(5,        dtf.format(now).toString());
+            pstmt.setInt(6,           entity.getId_grade_activity_game2());
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw e; // new PatException(e.getMessage(), getClass().getName(), "update()");
+            throw e;     // new PatException(e.getMessage(), getClass().getName(), "update()");
         }
     }
 
     @Override
     public boolean delete(Integer id) throws Exception {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
-        String query = "UPDATE grades_activity_game2 SET state = ?, date_update = ? WHERE id_grade_activity_game2 = ?;";
+        LocalDateTime now     = LocalDateTime.now();
+        String query          = "UPDATE grades_activity_game2 SET state = ?, date_update = ? WHERE id_grade_activity_game2 = ?;";
         try {
             Connection conn = opConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
@@ -143,7 +143,8 @@ public class Grades_Activity_game2DAO extends Data_Helper_Sqlite implements IDAO
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw e; //new PatException(e.getMessage(), getClass().getName(), "delete()");
+            throw e;     //new PatException(e.getMessage(), getClass().getName(), "delete()");
         }
     }
+    
 }
