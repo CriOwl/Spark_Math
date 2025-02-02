@@ -13,6 +13,7 @@ public class LoginDTO {
     
     public LoginDTO() {
     }
+    
     public LoginDTO(Integer id_person, String full_name, String dNI, String email, String password, Integer id_role,
             String name_role, Integer state) {
         this.id_person = id_person;

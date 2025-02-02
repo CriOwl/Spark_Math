@@ -1,9 +1,8 @@
 package UserInterface.Form;
 
 import BusinessLogic.BL_USER.BL_generalyView;
-import Data_Access.DAO.RoleDAO;
-import Data_Access.DAO.DAO_C.VWRoleDAO;
-import Data_Access.DTO.RoleDTO;
+import Data_Access.DAO.DAO_C.Catalog_levelDAO;
+import Data_Access.DTO.Catalog_levelDTO;
 import UserInterface.Customer_control.Button_Text;
 import UserInterface.Customer_control.Text_box;
 import UserInterface.Customer_control.Text_label;
@@ -20,7 +19,9 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-public class Manage_panel_role extends JPanel {
+public class Manage_panel_catalog_level extends JPanel {
+    List<Text_label> Label_text_list;
+    List<Text_box> Label_box_list;
     Button_Text Button_update;
     Button_Text Button_created;
     Button_Text Button_search;
@@ -30,7 +31,7 @@ public class Manage_panel_role extends JPanel {
     JTable table;
     JScrollPane scrollPane;
 
-    public Manage_panel_role() {
+    public Manage_panel_catalog_level() {
         setLayout(new GridBagLayout());
         Button_update = new Button_Text("Actualizar", Spark_Style.FONT_BOLD, null);
         Button_created = new Button_Text("Crear", Spark_Style.FONT_BOLD, null);
@@ -46,33 +47,34 @@ public class Manage_panel_role extends JPanel {
     }
 
     private void change_table() {
-        String name = search_box.getText().trim();
-        if (name.isEmpty() || name.isBlank()) {
+        String dni = search_box.getText().trim();
+        System.out.println(dni);
+        if (dni.isEmpty()||dni.isBlank()) {
             created_table();
-        } else {
-            search(name);
+        }else{
+            search(dni);
         }
         table.revalidate();
         table.repaint();
     }
 
     private void created_table() {
-        BL_generalyView<RoleDTO> bl_role = new BL_generalyView<>(VWRoleDAO::new);
+        BL_generalyView<Catalog_levelDTO> bl_catalog_level = new BL_generalyView<>(Catalog_levelDAO::new);
         try {
-            String[] columns = {"ID", "Nombre", "Estado", "Fecha Creación", "Fecha Actualización"};
-            List<RoleDTO> roles = bl_role.getAll();
-            Object[][] data = new Object[roles.size()][columns.length];
+            ///
+            String[] columns = bl_catalog_level.getColumn().stream().map(c -> c.getName()).toArray(String[]::new);
+            Object[][] data = new Object[bl_catalog_level.getAll().size()][columns.length];
 
             int index = 0;
-            for (RoleDTO role : roles) {
-                data[index][0] = role.getId_Role();
-                data[index][1] = role.getName();
-                data[index][2] = role.getState() == 1 ? "Activo" : "Inactivo";
-                data[index][3] = role.getDate_created();
-                data[index][4] = role.getDate_created();
+            for (Catalog_levelDTO user : new Catalog_levelDAO().readall()) {
+                data[index][0] = user.getId_catalog_level();
+                data[index][1] = user.getName();
+                data[index][2] = user.getState();
+                data[index][3] = user.getDate_created();
+                data[index][4] = user.getDate_update();
                 index++;
             }
-
+            ///
             if (table == null) {
                 table = new JTable();
                 table = new JTable(new DefaultTableModel(data, columns));
@@ -86,22 +88,24 @@ public class Manage_panel_role extends JPanel {
         }
     }
 
-    private void search(String name) {
-        BL_generalyView<RoleDTO> bl_role = new BL_generalyView<>(VWRoleDAO::new);
+    private void search(String DNI) {
+        BL_generalyView<Catalog_levelDTO> bl_catalog_level = new BL_generalyView<>(Catalog_levelDAO::new);
         try {
-            String[] columns = {"ID", "Nombre", "Estado", "Fecha Creación", "Fecha Actualización"};
-            List<RoleDTO> results = bl_role.search(name);
+            //
+            String[] columns = bl_catalog_level.getColumn().stream().map(c -> c.getName()).toArray(String[]::new);
+            List<Catalog_levelDTO> results = bl_catalog_level.search(DNI);
             Object[][] data = new Object[results.size()][columns.length];
 
             int index = 0;
-            for (RoleDTO role : results) {
-                data[index][0] = role.getId_Role();
-                data[index][1] = role.getName();
-                data[index][2] = role.getState() == 1 ? "Activo" : "Inactivo";
-                data[index][3] = role.getDate_created();
-                data[index][4] = role.getDate_created();
+            for (Catalog_levelDTO user : results) {
+                data[index][0] = user.getId_catalog_level();
+                data[index][1] = user.getName();
+                data[index][2] = user.getState();
+                data[index][3] = user.getDate_created();
+                data[index][4] = user.getDate_update();
                 index++;
             }
+            //
             table.setModel(new DefaultTableModel(data, columns));
             table.revalidate();
             table.repaint();

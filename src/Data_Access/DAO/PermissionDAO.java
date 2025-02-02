@@ -129,4 +129,22 @@ public class PermissionDAO extends Data_Helper_Sqlite implements IDAO<Permission
             throw e;// new PatException(e.getMessage(), getClass().getName(), "delete()");
         }
     }
+
+    @Override
+    public List<PermissionDTO> read_combobox() throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'read_combobox'");
+    }
+
+    @Override
+    public List<PermissionDTO> read_column() throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'read_column'");
+    }
+
+    @Override
+    public List<PermissionDTO> search_read(String DNI) throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'search_read'");
+    }
 }

@@ -1,4 +1,4 @@
-package Data_Access.DAO;
+package Data_Access.DAO.DAO_C;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Data_Access.Data_Helper_Sqlite;
-import Data_Access.DAO.DAO_C.IDAO;
+import Data_Access.IVIEWDAO;
 import Data_Access.DTO.Catalog_levelDTO;
 
-public class Catalog_levelDAO extends Data_Helper_Sqlite implements IDAO<Catalog_levelDTO> {
+public class Catalog_levelDAO extends Data_Helper_Sqlite implements IVIEWDAO<Catalog_levelDTO> {
 
     @Override
     public Catalog_levelDTO readby(Integer id) throws Exception {
@@ -74,70 +74,28 @@ public class Catalog_levelDAO extends Data_Helper_Sqlite implements IDAO<Catalog
         return lst; 
     }
 
+
     @Override
-    public boolean created(Catalog_levelDTO entity) throws Exception {
-        String query = " INSERT INTO Catalog_level (name) VALUES (?)";
-        try {
-            Connection        conn  = opConnection();
-            PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, entity.getName());
-            pstmt.executeUpdate();
-            return true;
-        } 
-        catch (SQLException e) {
-            throw e;
-        }
+    public List<Catalog_levelDTO> read_combobox() throws Exception {
+
+        throw new UnsupportedOperationException("Unimplemented method 'read_combobox'");
     }
 
     @Override
-    public boolean update(Catalog_levelDTO entity) throws Exception {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  
-        LocalDateTime now = LocalDateTime.now();
-        String query = " UPDATE Catalog_level SET name = ?, date_update = ? WHERE id_catalog_level = ?";
-        try {
-            Connection          conn = opConnection();
-            PreparedStatement pstmt  = conn.prepareStatement(query);
-            pstmt.setString(1, entity.getName());
-            pstmt.setString(2, dtf.format(now).toString());
-            pstmt.setInt(3, entity.getId_catalog_level());
-            pstmt.executeUpdate();
-            return true;
-        } 
-        catch (SQLException e) {
-            throw e;
-        }
+    public List<Catalog_levelDTO> read_column() throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'read_column'");
     }
 
     @Override
-    public boolean delete(Integer id) throws Exception {
-        String query = " UPDATE Catalog_level SET state = ? WHERE id_catalog_level = ?";
-        try {
-            Connection          conn = opConnection();
-            PreparedStatement  pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, "X");
-            pstmt.setInt(2, id);
-            pstmt.executeUpdate();
-            return true;
-        } 
-        catch (SQLException e) {
-            throw e;
-        }
+    public List<Catalog_levelDTO> search_read(String DNI) throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'search_read'");
     }
 
-    public Integer getMaxRow()  throws Exception  {
-        String query =" SELECT COUNT(*) TotalReg FROM Catalog_level "
-                     +" WHERE   state ='A' ";
-        try {
-            Connection conn = opConnection();            // conectar a DB     
-            Statement  stmt = conn.createStatement();    // CRUD : select * ...    
-            ResultSet rs    = stmt.executeQuery(query);  // ejecutar la
-            while (rs.next()) {
-                return rs.getInt(1);                     // TotalReg
-            }
-        } 
-        catch (SQLException e) {
-            throw e;                                     // new PatException(e.getMessage(), getClass().getName(), "getMaxRow()");
-        }
-        return 0;
+    @Override
+    public Catalog_levelDTO readby(String id) throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'readby'");
     }
 }

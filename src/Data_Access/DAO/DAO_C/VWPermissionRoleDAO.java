@@ -1,8 +1,8 @@
-package Data_Access.DAO;
+package Data_Access.DAO.DAO_C;
 
 import Data_Access.DTO.Permission_roleDTO;
 import Data_Access.Data_Helper_Sqlite;
-import Data_Access.DAO.DAO_C.IDAO;
+import Data_Access.IVIEWDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permission_roleDTO> {
+public class VWPermissionRoleDAO extends Data_Helper_Sqlite implements IVIEWDAO<Permission_roleDTO> {
 
     @Override
     public Permission_roleDTO readby(Integer id) throws Exception {
@@ -41,7 +41,8 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
                                                 rs.getString(6));
             }
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "readBy()");
+            System.out.println(e);
+            //throw new PatException(e.getMessage(), getClass().getName(), "readAll()");
         }
         return registro;
     }
@@ -71,64 +72,10 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
                 tabla.add(list);
             }
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "readAll()");
+            System.out.println(e);
+            //throw new PatException(e.getMessage(), getClass().getName(), "readAll()");
         }
         return tabla;
-    }
-
-    @Override
-    public boolean created(Permission_roleDTO entity) throws Exception {
-        String query = "INSERT INTO permission_role (id_role, id_permission, state, date_created, date_updated) VALUES (?, ?, ?, ?, ?);";
-        try {
-            Connection conn = opConnection();
-            PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setInt(1, entity.getId_role());
-            pstmt.setInt(2, entity.getId_permission());
-            pstmt.setInt(3, entity.getState());
-            pstmt.setString(4, entity.getDate_created());
-            pstmt.setString(5, entity.getDate_updated());
-            pstmt.executeUpdate();
-            return true;
-        } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "create()");
-        }
-    }
-
-    @Override
-    public boolean update(Permission_roleDTO entity) throws Exception {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
-        String query = "UPDATE permission_role SET id_role = ?, id_permission = ?, state = ?, date_updated = ? WHERE id_permission_role = ?;";
-        try {
-            Connection conn = opConnection();
-            PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setInt(1, entity.getId_role());
-            pstmt.setInt(2, entity.getId_permission());
-            pstmt.setInt(3, entity.getState());
-            pstmt.setString(4, dtf.format(now));
-            pstmt.setInt(5, entity.getId_permission_role());
-            pstmt.executeUpdate();
-            return true;
-        } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "update()");
-        }
-    }
-
-    @Override
-    public boolean delete(Integer id) throws Exception {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
-        String query = "UPDATE permission_role SET state = 0, date_updated = ? WHERE id_permission_role = ?;";
-        try {
-            Connection conn = opConnection();
-            PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, dtf.format(now));
-            pstmt.setInt(2, id);
-            pstmt.executeUpdate();
-            return true;
-        } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "delete()");
-        }
     }
 
     public List<Permission_roleDTO> role_permission_read(Integer id_role) throws Exception {
@@ -156,9 +103,9 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
     }
 
     @Override
-    public List<Permission_roleDTO> read_combobox() throws Exception {
+    public Permission_roleDTO readby(String id) throws Exception {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'read_combobox'");
+        throw new UnsupportedOperationException("Unimplemented method 'readby'");
     }
 
     @Override
@@ -171,5 +118,11 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
     public List<Permission_roleDTO> search_read(String DNI) throws Exception {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'search_read'");
+    }
+
+    @Override
+    public List<Permission_roleDTO> read_combobox() throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'read_combobox'");
     }
 }
