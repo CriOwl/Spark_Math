@@ -41,5 +41,4 @@ public class Menu_panel extends JPanel {
     private void contanier() {
 
     }
-
 }
