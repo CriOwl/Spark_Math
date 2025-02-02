@@ -73,7 +73,7 @@ public class Update_panel_person extends JPanel {
         institution=new JComboBox<>(data_institution());
         ((AbstractDocument) DNI_person_box.getDocument()).setDocumentFilter(new Mascaras(10));
         send=new Button_Text("Enviar", Spark_Style.FONT, null);
-        send.addActionListener(e->sent_data());
+        send.addActionListener(e->validate_data());
         cancel=new Button_Text("Cancelar", Spark_Style.FONT, null);
         cancel.setBackground(new Color(200,0,0));
         GridBagConstraints gbc=new GridBagConstraints();
@@ -186,7 +186,7 @@ public class Update_panel_person extends JPanel {
         return data_es;
     }
 
-    private void sent_data(){
+    private void validate_data(){
          String name=name_person_box.getText(); 
          String last_name=last_name_person_box.getText(); 
          String dni=DNI_person_box.getText(); 
@@ -195,7 +195,16 @@ public class Update_panel_person extends JPanel {
          String email=Email_person_box.getText(); 
         int id_role= Role_map.get(role.getSelectedItem());
         int id_institution=Institucion_map.get(institution.getSelectedItem());
+        if(name.isEmpty()||last_name.isEmpty()||dni.isEmpty()||birthdat.isEmpty()||password.isEmpty()||email.isEmpty()||id_role==0){
+            Spark_Style.show_mesg_advert("Complete todos los campos", "Registrar");
+            return;
+        }
         System.out.println(name+"---"+last_name+"---"+dni+"---"+email+"---"+password+"---"+birthdat+"---"+id_role+"---"+id_institution);
         PersonDTO person_created = new PersonDTO(name,last_name,dni,email,password,birthdat,id_role,id_institution);
+        send_data(person_created);
     }
+    public boolean  send_data(PersonDTO person){
+        return true;
+    }
+
 }
