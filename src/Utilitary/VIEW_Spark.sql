@@ -19,9 +19,9 @@ FROM
 
 CREATE VIEW vw_role AS
 SELECT 
-    r.id_role,
-    r.name AS role_name,
-    r.state,
+    r.id_role AS ID,
+    r.name AS Role,
+    r.state AS STATE,
     COUNT(pr.id_permission_role) AS permission_count,
     r.date_created,
     r.date_updated

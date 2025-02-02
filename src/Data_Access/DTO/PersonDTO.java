@@ -13,6 +13,28 @@ public class PersonDTO {
     private String name_role;
     private Integer state;
     private String date_created;
+    private Integer id_institution;
+    
+    public PersonDTO(String name, String last_name, String dNI, String email, String password, String birthdate,
+            Integer id_role, Integer id_institution) {
+        this.name = name;
+        this.last_name = last_name;
+        DNI = dNI;
+        this.email = email;
+        this.password = password;
+        this.birthdate = birthdate;
+        this.id_role = id_role;
+        this.id_institution = id_institution;
+    }
+
+    public Integer getId_institution() {
+        return id_institution;
+    }
+
+    public void setId_institution(Integer id_institution) {
+        this.id_institution = id_institution;
+    }
+
     private String date_update;
     
     public PersonDTO() {

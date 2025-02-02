@@ -22,6 +22,11 @@ public class RoleDTO {
         this.date_update    = date_update;
     }
 
+    public RoleDTO(Integer id_Role, String name) {
+        this.id_Role = id_Role;
+        this.name = name;
+    }
+
 
     public Integer getId_Role() {
         return id_Role;

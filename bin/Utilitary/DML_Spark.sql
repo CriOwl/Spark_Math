@@ -300,3 +300,7 @@ VALUES
     (2, 4, '10'),
     (9, 5, '12');
 PRAGMA table_info(vw_persona);
+INSERT INTO
+    ROLE (name)
+VALUES
+    ('Conserje');

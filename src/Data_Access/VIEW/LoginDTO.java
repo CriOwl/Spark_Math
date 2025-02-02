@@ -11,11 +11,6 @@ public class LoginDTO {
     private Integer state;
     private String name_column;
     
-    public LoginDTO(Integer id_person, String full_name, String dNI) {
-        this.id_person = id_person;
-        this.full_name = full_name;
-        DNI = dNI;
-    }
     public LoginDTO() {
     }
     public LoginDTO(Integer id_person, String full_name, String dNI, String email, String password, Integer id_role,

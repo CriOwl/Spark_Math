@@ -85,8 +85,9 @@ public class MainFrame extends JFrame {
         container.setPreferredSize(new Dimension(300,getHeight()));
         main_windown.add(container);
         main_windown.revalidate();
-        Update_panel_person manage_panel=new Update_panel_person();
-        container.add(manage_panel,BorderLayout.CENTER);
+        //Cambiar main_panel--
+        Update_panel_person update_panel=new Update_panel_person();
+        container.add(update_panel,BorderLayout.CENTER);
         main_windown.add(container);
         main_windown.revalidate();
 
