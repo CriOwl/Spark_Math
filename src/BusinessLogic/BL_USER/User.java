@@ -9,16 +9,18 @@ public class User {
     private LoginDTO content_user;
     private Role rol;
     private List<String> list_permissions;
+    
     public boolean login_public(String user,String password){
-    return login(user, password);
+        return login(user, password);
     }
+    
     private boolean login(String user,String password){
          data_user = new LoginDAO();
          rol=new Role();
          try {
             content_user=data_user.readby(user);
             if(content_user.getPassword().equals(password)){
-                System.out.println("Bienvenido "+content_user.getFull_name()+" Su rol es "+content_user.getName_role());
+                System.out.println("Bienvenido "+content_user.getFull_name()+". Su rol es "+content_user.getName_role()+".");
                 rol.get_Permission(content_user.getId_role());
                 list_permissions=rol.getList_permissions();
             return true;
@@ -31,4 +33,5 @@ public class User {
     public List<String> getList_permissions() {
         return list_permissions;
     }
+    
 }
