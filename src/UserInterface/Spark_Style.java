@@ -14,10 +14,7 @@ public abstract class Spark_Style {
     public static final Color COLOR_FONT_LIGHT = new Color(100, 100, 100);
     public static final Color COLOR_CURSOR = Color.black; //cambiar segun el estilo
     public static final Color COLOR_BORDER = Color.lightGray;
-    public static final Color COLOR_BACKGROUND = Color.lightGray;
-    public static final Color COLOR_BACKGROUND_SELECT = Color.lightGray;
-    public static final Color COLOR_BACKGROUND_GRID = Color.lightGray;
-    public static final Font  FONT         = new Font("Cambria Math", Font.PLAIN, 15);
+    public static final Font  FONT         = new Font("Cambria Math", Font.PLAIN, 20);
     public static final Font  FONT_BOLD    = new Font("Century Gothic", Font.BOLD, 20);
     public static final Font  FONT_SMALL   = new Font("JetBrains Mono", Font.PLAIN, 20);
     public static final Font  FONT_NUMBER   = new Font("Digital-7 Mono", Font.PLAIN, 20);
