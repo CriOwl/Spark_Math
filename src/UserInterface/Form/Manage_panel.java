@@ -1,6 +1,6 @@
 package UserInterface.Form;
 
-import BusinessLogic.BL_USER.BL_generaly;
+import BusinessLogic.BL_USER.BL_generalyView;
 import Data_Access.VIEW.LoginDAO;
 import Data_Access.VIEW.LoginDTO;
 import UserInterface.Customer_control.Button_Text;
@@ -32,8 +32,7 @@ public class Manage_panel extends JPanel {
     JScrollPane scrollPane;
 
     public Manage_panel() {
-        setLayout(new GridBagLayout()); // Se asegura un buen diseño
-
+        setLayout(new GridBagLayout());
         Button_update = new Button_Text("Actualizar", Spark_Style.FONT_BOLD, null);
         Button_created = new Button_Text("Crear", Spark_Style.FONT_BOLD, null);
         Button_deletd = new Button_Text("Borrar", Spark_Style.FONT_BOLD, null);
@@ -60,7 +59,7 @@ public class Manage_panel extends JPanel {
     }
 
     private void created_table() {
-        BL_generaly<LoginDTO> bl_login = new BL_generaly<>(LoginDAO::new);
+        BL_generalyView<LoginDTO> bl_login = new BL_generalyView<>(LoginDAO::new);
         try {
             String[] columns = bl_login.getColumn().stream().map(c -> c.getName_column()).toArray(String[]::new);
             Object[][] data = new Object[bl_login.getAll().size()][columns.length];
@@ -91,7 +90,7 @@ public class Manage_panel extends JPanel {
     }
 
     private void search(String DNI) {
-        BL_generaly<LoginDTO> bl_login = new BL_generaly<>(LoginDAO::new);
+        BL_generalyView<LoginDTO> bl_login = new BL_generalyView<>(LoginDAO::new);
         try {
             String[] columns = bl_login.getColumn().stream().map(c -> c.getName_column()).toArray(String[]::new);
             List<LoginDTO> results = bl_login.search(DNI);

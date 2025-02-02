@@ -55,6 +55,11 @@ VALUES
         'admin_teacher'
     ),
     (
+        'Administrar Roles',
+        'Permite al usuario administrar docentes',
+        'admin_role'
+    ),
+    (
         'Administrar Estudiantes',
         'Permite al usuario administrar estudiantes',
         'admin_student'

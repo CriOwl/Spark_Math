@@ -16,7 +16,7 @@ public class Text_label extends JLabel {
     private void set_customize(){
         customize_label(getText(),Spark_Style.FONT,Spark_Style.COLOR_FONT,Spark_Style.ALIGNMENT_LEFT);
     }
-    public void set_customize(String text,Font font, Color color, int alignment){
+       public void set_customize(String text,Font font, Color color, int alignment){
         customize_label(text, font,  color, alignment);
     }
     private void customize_label(String text,Font font, Color color, int alignment){

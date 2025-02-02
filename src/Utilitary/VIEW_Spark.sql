@@ -7,7 +7,7 @@ SELECT
     p.last_name,
     p.DNI,
     p.email,
-    p.password
+    p.password,
     p.id_role,
     r.name,
     p.state,
@@ -182,5 +182,8 @@ SELECT
 FROM 
     Catalog_level;
 
+
+DROP VIEW vw_persona;
+ 
 
 

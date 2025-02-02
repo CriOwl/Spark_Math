@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Data_Access.Data_Helper_Sqlite;
+import Data_Access.DAO.DAO_C.IDAO;
 import Data_Access.DTO.Catalog_levelDTO;
 
 public class Catalog_levelDAO extends Data_Helper_Sqlite implements IDAO<Catalog_levelDTO> {

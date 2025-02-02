@@ -26,7 +26,8 @@ CREATE TABLE IF NOT EXISTS
         id_role INTEGER NOT NULL REFERENCES Role (id_role),
         state INTEGER DEFAULT 1 CONSTRAINT states CHECK (state IN (0, 1)),
         date_created DATETIME DEFAULT (datetime('now', 'localtime')),
-        date_updated DATETIME
+        date_updated DATETIME,
+        id_institution INTEGER REFERENCES Institution (id_institution)
     );
 
 CREATE INDEX indx_id_DNI ON Persona (DNI);

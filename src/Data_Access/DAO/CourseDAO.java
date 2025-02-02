@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Data_Access.Data_Helper_Sqlite;
+import Data_Access.DAO.DAO_C.IDAO;
 import Data_Access.DTO.CourseDTO;
 
 public class CourseDAO extends Data_Helper_Sqlite implements IDAO<CourseDTO>{

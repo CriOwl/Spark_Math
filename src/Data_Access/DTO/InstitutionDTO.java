@@ -42,6 +42,16 @@ public class InstitutionDTO {
         this.amie = amie;
     }
 
+    public InstitutionDTO (Integer id_institution, String name,String amie) {
+        this.amie = amie;
+        this.id_institution = id_institution;
+        this.name = name;
+    }
+    
+    public InstitutionDTO(String name) {
+        this.name = name;
+    }
+
     public Integer getId_institution() {
         return id_institution;
     }

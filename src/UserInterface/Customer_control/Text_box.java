@@ -13,6 +13,7 @@ public class Text_box extends JTextField{
     public Text_box(){
         customize_textfield();
     }
+    
     public Text_box(Font font){
         customize_textfield(font);
     }
@@ -36,6 +37,5 @@ public class Text_box extends JTextField{
         setOpaque(false);
         setMargin(new Insets(10, 10, 10, 10));
     }
-
-
+    
 }

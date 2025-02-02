@@ -1,7 +1,8 @@
 package BusinessLogic;
 
 import java.util.List;
-import Data_Access.DAO.InstitutionDAO;
+
+import Data_Access.DAO.DAO_C.InstitutionDAO;
 import Data_Access.DTO.InstitutionDTO;
 
 public class InstitutionBL{

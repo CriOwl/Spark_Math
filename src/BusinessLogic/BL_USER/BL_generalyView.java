@@ -4,10 +4,10 @@ import Data_Access.IVIEWDAO;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class BL_generaly<T> {
+public class BL_generalyView<T> {
     private final IVIEWDAO<T> DAO;
 
-    public BL_generaly(Supplier<IVIEWDAO<T>> supplier) {
+    public BL_generalyView(Supplier<IVIEWDAO<T>> supplier) {
         this.DAO = supplier.get();
     }
 
@@ -18,11 +18,17 @@ public class BL_generaly<T> {
     public T getBy(String DNI) throws Exception {
         return DAO.readby(DNI);
     }
+    public T getBy(Integer id) throws Exception {
+        return DAO.readby(id);
+    }
 
     public List<T> getColumn() throws Exception {
         return DAO.read_column();
     }
     public List<T> search(String DNI) throws Exception {
         return DAO.search_read(DNI);
+    }
+    public List<T> read_elments()throws Exception {
+        return DAO.read_combobox();
     }
 }
