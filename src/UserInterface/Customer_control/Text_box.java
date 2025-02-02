@@ -36,6 +36,4 @@ public class Text_box extends JTextField{
         setOpaque(false);
         setMargin(new Insets(10, 10, 10, 10));
     }
-
-
 }
