@@ -52,6 +52,18 @@ public class InstitutionDTO {
         this.name = name;
     }
 
+    public InstitutionDTO(String name2, String amie2, int state2) {
+        //TODO Auto-generated constructor stub
+    }
+
+
+
+    public InstitutionDTO(String name2, int id_manager2, String amie2, int state2) {
+        //TODO Auto-generated constructor stub
+    }
+
+
+
     public Integer getId_institution() {
         return id_institution;
     }

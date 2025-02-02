@@ -26,7 +26,6 @@ public class ActivityDTO {
         this.name                       = name;
         this.id_course                  = id_course;
         this.id_catalog_activity_type   = id_catalog_activity_type;
-        this.description                = description;
         this.state                      = state;
         this.date_created               = date_created;
         this.date_update                = date_update;
