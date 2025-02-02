@@ -35,4 +35,3 @@ public class Button_Text extends JButton {
         setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 }
-
