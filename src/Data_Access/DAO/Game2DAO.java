@@ -46,7 +46,7 @@ public class Grades_Activity_game1DAO extends Data_Helper_Sqlite implements IDAO
                                                         rs.getString(7));
             }
         } catch (SQLException e) {
-            throw  e;               //new PatException(e.getMessage(), getClass().getName(), "readBy()");
+            throw  e; //new PatException(e.getMessage(), getClass().getName(), "readBy()");
         }
         return registro;
     }
