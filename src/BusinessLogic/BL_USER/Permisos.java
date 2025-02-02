@@ -1,4 +1,5 @@
 package BusinessLogic.BL_USER;
+
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
@@ -7,18 +8,20 @@ import java.util.Map;
 public class Permisos{
     private final Map<String,Method> mapa_permisos;
     private final Method_permissions method;
+    
     public Permisos(List<String> name_permisions,List<String> name_method) {
         this.mapa_permisos=new HashMap<>();
         this.method=new Method_permissions();
         try {
-            System.out.println("cargando...metodos");
+            System.out.println("cargando...métodos");
             for (int i = 0; i < name_permisions.size(); i++) {
                 mapa_permisos.put(name_permisions.get(i), Method_permissions.class.getMethod(name_method.get(i)));
             }
         } catch (Exception e) {
-            System.out.println("Existe un permiso que no cuenta con el metodo");
+            System.out.println("Existe un permiso que no cuenta con el método");
         }
     }
+    
     public void ejecutarAccion(String permiso) {
         Method metodo = mapa_permisos.get(permiso);
         if (metodo != null) {
