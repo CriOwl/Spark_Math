@@ -50,6 +50,7 @@ public class Update_panel_person extends JPanel {
     public Update_panel_person() {
         setup_panel();
     }
+
     private void setup_panel() {
         setLayout(new GridBagLayout());
         name_person = new Text_label("Nombre:");
@@ -145,6 +146,7 @@ public class Update_panel_person extends JPanel {
         gbc.anchor=GridBagConstraints.EAST;
         add(cancel,gbc);
     }
+
     private String[] data_institution(){
         BL_generalyTable<InstitutionDTO> bl_institution = new BL_generalyTable<>(InstitutionDAO::new);
         try {
@@ -160,6 +162,7 @@ public class Update_panel_person extends JPanel {
         }
         return array_institution;
     }
+
     private String[] data_rol(){
         BL_generalyTable<RoleDTO> bl_rol = new BL_generalyTable<>(RoleDAO::new);
         try {
@@ -175,12 +178,14 @@ public class Update_panel_person extends JPanel {
         }
         return array_role;
     }
+
     private String[] data_estado(){
         String[] data_es={"Activo","Inactivo"};
         state_map.put("Activo", 1);
         state_map.put("Inactivo", 0);
         return data_es;
     }
+
     private void sent_data(){
          String name=name_person_box.getText(); 
          String last_name=last_name_person_box.getText(); 

@@ -33,6 +33,7 @@ public class Table_Spark extends Jtable{
         setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         setDefaultEditor(Object.class, null);        
     }
+    
     private void set_customize(Font font, Color color_font, Color color_background,Color color_background_grid,Color setSelectionBackground){
         setFont(font);
         setForeground(color_font);

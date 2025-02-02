@@ -9,6 +9,7 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+
 public abstract class Spark_Style {
     public static final Color COLOR_FONT = new Color(250,250 , 250); 
     public static final Color COLOR_FONT_LIGHT = new Color(100, 100, 100);
@@ -42,8 +43,4 @@ public abstract class Spark_Style {
         ImageIcon check=new ImageIcon(new ImageIcon(URL_CHECK).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
         JOptionPane.showMessageDialog(null,msg,title,JOptionPane.PLAIN_MESSAGE,check);
     }
-
-
-    
-
 }

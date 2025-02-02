@@ -206,4 +206,4 @@ SELECT         p.id_person,
                p.state 
                FROM  vw_persona p 
                JOIN Role r ON p.id_role=r.id_role 
-               WHERE p.state= 1 AND p.DNI LIKE '%1%' ;
+               WHERE p.state= 1 AND p.DNI LIKE '%1%' ;        
