@@ -135,90 +135,80 @@ INSERT INTO
         DNI,
         email,
         password,
-        id_role,
-        birthdate
+        id_role
     )
 VALUES
     (
         'admin',
         'admin',
-        '1255553',
+        '1700000001',
         'admin@gmail.com',
         'admin',
-        1,
-        '1990-01-01'
+        1
     ),
     (
         'rector',
         'rector',
-        '48465',
+        '1700000002',
         'rector@gmail.com',
         'rector',
-        2,
-        '1990-01-01'
+        2
     ),
     (
         'docente',
         'docente',
-        '6453564',
+        '1700000003',
         'docente@gmail.com',
         'docente',
-        3,
-        '1990-01-01'
+        3
     ),
     (
         'docente2',
         'docente2',
-        'QWEQE',
+        '1700000004',
         'docente2@gmail.com',
         'docente',
-        3,
-        '1990-01-01'
+        3
     ),
     (
         'estudiante_grado1',
         'estudiante1',
-        '112',
+        '1700000005',
+        'estudiante@gmail.com',
         'estudiante',
-        'estudiante',
-        4,
-        '1990-01-01'
+        4
     ),
     (
         'estudiante_grado2',
         'estudiante2',
-        '1231',
+        '1700000006',
+        'estudiante2@gmail.com',
         'estudiante',
-        'estudiante',
-        4,
-        '1990-01-01'
+        4
     ),
     (
         'estudiante_grado3',
         'estudiante3',
-        '123456',
+        '1700000007',
+        'estudiante3@gmail.com',
         'estudiante',
-        'estudiante',
-        4,
-        '1990-01-01'
+        4
     ),
     (
         'estudiante_grado4',
         'estudiante4',
-        '12312312',
+        '1700000008',
+        'estudiante4@gmail.com',
         'estudiante',
-        'estudiante',
-        4,
-        '1990-01-01'
+        4
     ),
     (
         'estudiante_grado5',
         'estudiante5',
-        '34512',
+        '1700000009',
+        'estudiante5@gmail.com',
         'estudiante',
-        'estudiante',
-        4,
-        '1990-01-01'
+        4
     );
 
 INSERT INTO
@@ -304,3 +294,4 @@ VALUES
     (2, 3, '8'),
     (2, 4, '10'),
     (9, 5, '12');
+PRAGMA table_info(vw_persona);

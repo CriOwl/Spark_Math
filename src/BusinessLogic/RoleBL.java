@@ -2,6 +2,7 @@ package BusinessLogic;
 
 import java.util.List;
 
+import BusinessLogic.BL_USER.Role;
 import Data_Access.DAO.RoleDAO;
 import Data_Access.DTO.RoleDTO;
 import java.util.List;

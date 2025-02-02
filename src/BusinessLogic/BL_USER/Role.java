@@ -1,4 +1,4 @@
-package BusinessLogic;
+package BusinessLogic.BL_USER;
 
 import Data_Access.DAO.PermissionRoleDAO;
 import Data_Access.DTO.Permission_roleDTO;
@@ -21,17 +21,12 @@ public class Role {
             }
             Permisos p=new Permisos(list_permissions, list_method);
         } catch (Exception e) {
-            System.out.println("No se pudieron cargas las listas");
+            System.out.println("No se pudieron cargar las listas");
         }
     }
 
     public List<String> getList_permissions() {
         return list_permissions;
     }
-
-    
-    
-
-
     
 }

@@ -9,6 +9,7 @@ public class LoginDTO {
     private Integer id_role;
     private String name_role;
     private Integer state;
+    private String name_column;
     
     public LoginDTO() {
     }
@@ -22,6 +23,10 @@ public class LoginDTO {
         this.id_role = id_role;
         this.name_role = name_role;
         this.state = state;
+    }
+
+    public LoginDTO(String name_column) {
+        this.name_column = name_column;
     }
     public Integer getId_person() {
         return id_person;
@@ -81,7 +86,17 @@ public class LoginDTO {
         + "\n Clave: "                + getPassword()
         + "\n id_Role: "              + getId_role()
         + "\n Role: "                 + getName_role()
+        + "\n Nombre Columna: "       + getName_column()
         + "\n Estado: "               + getState();
     }
+
+    public String getName_column() {
+        return name_column;
+    }
+
+    public void setName_column(String name_column) {
+        this.name_column = name_column;
+    }
+    
 
 }

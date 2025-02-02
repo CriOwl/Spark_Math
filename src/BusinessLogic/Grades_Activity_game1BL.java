@@ -7,7 +7,6 @@ import Data_Access.DTO.Grades_Activity_game1DTO;
 public class Grades_Activity_game1BL{
 	private Grades_Activity_game1DTO grades_Activity_game1;
 	private Grades_Activity_game1DTO gag1DAO = new Grades_Activity_game1DAO();
-
 	public Grades_Activity_game1BL(){}
 
 	public List<Grades_Activity_game1DTO> getAll() throws Exception{

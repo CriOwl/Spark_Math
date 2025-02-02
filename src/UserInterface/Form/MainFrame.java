@@ -1,5 +1,6 @@
 package UserInterface.Form;
 
+import UserInterface.Customer_control.Table_Spark;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -81,21 +82,32 @@ public class MainFrame extends JFrame {
         Container container=getContentPane();
         container.setLayout(new BorderLayout());
         container.add(menu,BorderLayout.WEST);
-        container.add(menu,BorderLayout.CENTER);
+        container.setPreferredSize(new Dimension(300,getHeight()));
         main_windown.add(container);
         main_windown.revalidate();
-        //container.remove();
+        Manage_panel manage_panel=new Manage_panel();
+        container.add(manage_panel,BorderLayout.CENTER);
+        main_windown.add(container);
+        main_windown.revalidate();
+
+       /*  JPanel panel=new JPanel();
+        main_windown.add(panel,BorderLayout.CENTER); */
+    }
+    private void change_panel(Component panel){
+        Manage_panel manage_panel=new Manage_panel();
+        //main_windown.remove(panel);
+        main_windown.add(manage_panel,BorderLayout.CENTER);
+    
+        main_windown.revalidate();
     }
     private void Login_panel(){
-        main_windown.revalidate();
         login=new Login_panel();
         main_windown.add(login);
         login.login_button.addActionListener(e->change_panel(login.login_bl()));
     }
     private void change_panel(boolean state_login){
-        if(state_login){
+        if(!state_login){
             System.out.println("datos fallido");
-            Login_panel();
             return;
         }
         System.out.println("cambiando de panel");

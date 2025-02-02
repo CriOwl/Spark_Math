@@ -8,7 +8,6 @@ SELECT
     p.DNI,
     p.email,
     p.password
-    p.birthdate,
     p.id_role,
     r.name,
     p.state,

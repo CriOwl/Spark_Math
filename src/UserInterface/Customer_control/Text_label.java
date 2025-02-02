@@ -24,7 +24,7 @@ public class Text_label extends JLabel {
         setFont(font);
         setOpaque(false);
         setBackground(null);
-        setForeground(color);
+       // setForeground(color);
         setHorizontalAlignment(alignment);
     }
 }
