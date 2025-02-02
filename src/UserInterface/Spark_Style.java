@@ -43,8 +43,4 @@ public abstract class Spark_Style {
         ImageIcon check=new ImageIcon(new ImageIcon(URL_CHECK).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
         JOptionPane.showMessageDialog(null,msg,title,JOptionPane.PLAIN_MESSAGE,check);
     }
-
-
-    
-
 }
