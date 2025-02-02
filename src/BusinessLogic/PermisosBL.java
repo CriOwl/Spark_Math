@@ -8,16 +8,16 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class PermisosBL {
-	private PermissionDTO Permission;
-   	private PermissionDTO pDAO = new PermissionDAO();
+   private PermissionDTO Permission;
+   private PermissionDTO pDAO = new PermissionDAO();
 
-  	public PermisosBL(){}
+   public PermisosBL(){}
 
-  	public List<PermissionDTO> getAll() throws Exception{
-       		return pDAO.readAll();
-   	}
+   public List<PermissionDTO> getAll() throws Exception{
+        return pDAO.readAll();
+   }
 
-   	public PermissionDTO getByid_role(int id_permission) throws Exception{
+   public PermissionDTO getByid_role(int id_permission) throws Exception{
 		Permission = pDAO.readBy(id_permission);
 		return Permission;
 	}
