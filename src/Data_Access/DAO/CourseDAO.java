@@ -18,37 +18,37 @@ public class CourseDAO extends Data_Helper_Sqlite implements IDAO<CourseDTO>{
     @Override
     public CourseDTO readby(Integer id) throws Exception {
         CourseDTO oS = new CourseDTO();
-        String query =" SELECT id_course " 
-                     +" ,id_teacher              "
-                     +" ,id_catalog_level        "
-                     +" ,id_catalog_parallel     "
-                     +" ,id_institution        "
-                     +" ,id_catalog_time        "
-                     +" ,id_catalog_period        "
-                     +" ,state                   " 
-                     +" ,date_created            " 
-                     +" ,date_updated "
-                     +" FROM    Course   "
+        String query =" SELECT id_course                     " 
+                     +" ,id_teacher                          "
+                     +" ,id_catalog_level                    "
+                     +" ,id_catalog_parallel                 "
+                     +" ,id_institution                      "
+                     +" ,id_catalog_time                     "
+                     +" ,id_catalog_period                   "
+                     +" ,state                               " 
+                     +" ,date_created                        " 
+                     +" ,date_updated                        "
+                     +" FROM    Course                       "
                      +" WHERE   state ='1' AND id_course =   "+ id.toString() ;
         try {
-            Connection conn = opConnection();         // conectar a DB     
-            Statement  stmt = conn.createStatement();   // CRUD : select * ...    
-            ResultSet rs   = stmt.executeQuery(query);  // ejecutar la
+            Connection conn = opConnection();            // conectar a DB     
+            Statement  stmt = conn.createStatement();    // CRUD : select * ...    
+            ResultSet rs    = stmt.executeQuery(query);  // ejecutar la
             while (rs.next()) {
-                oS = new CourseDTO(rs.getInt(1)        // Id_course
-                                ,rs.getInt(2)          // id_teacher 
-                                ,rs.getInt(3)          // id_catalog_level
-                                ,rs.getInt(4)          // id_catalog_parallel
-                                ,rs.getInt(5)          // id_institution
-                                ,rs.getInt(6)          // id_catalog_time 
-                                ,rs.getInt(7)          // id_catalog_period 
-                                ,rs.getInt(8)          // state        
-                                ,rs.getString(9)       // date_created      
-                                ,rs.getString(10));    // date_update
+                oS = new CourseDTO(rs.getInt(1)          // Id_course
+                                  ,rs.getInt(2)          // id_teacher 
+                                  ,rs.getInt(3)          // id_catalog_level
+                                  ,rs.getInt(4)          // id_catalog_parallel
+                                  ,rs.getInt(5)          // id_institution
+                                  ,rs.getInt(6)          // id_catalog_time 
+                                  ,rs.getInt(7)          // id_catalog_period 
+                                  ,rs.getInt(8)          // state        
+                                  ,rs.getString(9)       // date_created      
+                                  ,rs.getString(10));    // date_update
             }
         } 
         catch (SQLException e) {
-            throw e;// new PatException(e.getMessage(), getClass().getName(), "readBy()");
+            throw e;                                     // new PatException(e.getMessage(), getClass().getName(), "readBy()");
         }
         return oS;
     }
@@ -56,39 +56,39 @@ public class CourseDAO extends Data_Helper_Sqlite implements IDAO<CourseDTO>{
     @Override
     public List<CourseDTO> readall() throws Exception {
         List <CourseDTO> lst = new ArrayList<>();
-        String query =" SELECT id_course " 
+        String query =" SELECT id_course         " 
                      +" ,id_teacher              "
                      +" ,id_catalog_level        "
                      +" ,id_catalog_parallel     "
-                     +" ,id_institution        "
-                     +" ,id_catalog_time        "
-                     +" ,id_catalog_period        "
+                     +" ,id_institution          "
+                     +" ,id_catalog_time         "
+                     +" ,id_catalog_period       "
                      +" ,state                   " 
                      +" ,date_created            " 
-                     +" ,date_updated "
-                     +" FROM    Course   "
-                     +" WHERE   state ='1'";
+                     +" ,date_updated            "
+                     +" FROM    Course           "
+                     +" WHERE   state ='1'       ";
 
         try {
-            Connection conn = opConnection();         // conectar a DB     
-            Statement  stmt = conn.createStatement();   // CRUD : select * ...    
-            ResultSet rs   = stmt.executeQuery(query);    // ejecutar la
+            Connection conn = opConnection();                     // conectar a DB     
+            Statement  stmt = conn.createStatement();             // CRUD : select * ...    
+            ResultSet rs    = stmt.executeQuery(query);           // ejecutar la
             while (rs.next()) {
-                CourseDTO s = new CourseDTO(rs.getInt(1)        // Id_course
-                                        ,rs.getInt(2)          // id_teacher 
-                                        ,rs.getInt(3)          // id_catalog_level
-                                        ,rs.getInt(4)          // id_catalog_parallel
-                                         ,rs.getInt(5)          // id_institution
-                                        ,rs.getInt(6)          // id_catalog_time 
-                                        ,rs.getInt(7)          // id_catalog_period 
-                                        ,rs.getInt(8)          // state        
-                                        ,rs.getString(9)       // date_created      
-                                ,rs.getString(10));           // date_update
+                CourseDTO s = new CourseDTO(rs.getInt(1)          // Id_course
+                                           ,rs.getInt(2)          // id_teacher 
+                                           ,rs.getInt(3)          // id_catalog_level
+                                           ,rs.getInt(4)          // id_catalog_parallel
+                                           ,rs.getInt(5)          // id_institution
+                                           ,rs.getInt(6)          // id_catalog_time 
+                                           ,rs.getInt(7)          // id_catalog_period 
+                                           ,rs.getInt(8)          // state        
+                                           ,rs.getString(9)       // date_created      
+                                           ,rs.getString(10));    // date_update
              lst.add(s);
             }
         } 
         catch (SQLException e) {
-            throw e;// new PatException(e.getMessage(), getClass().getName(), "readAll()");
+            throw e;                                               // new PatException(e.getMessage(), getClass().getName(), "readAll()");
         }
         return lst; 
     }
@@ -109,7 +109,7 @@ public class CourseDAO extends Data_Helper_Sqlite implements IDAO<CourseDTO>{
             return true;
         } 
         catch (SQLException e) {
-            throw e;// new PatException(e.getMessage(), getClass().getName(), "create()");
+            throw e;                                               // new PatException(e.getMessage(), getClass().getName(), "create()");
         }
     }
 
@@ -133,7 +133,7 @@ public class CourseDAO extends Data_Helper_Sqlite implements IDAO<CourseDTO>{
             return true;
         } 
         catch (SQLException e) {
-            throw e;// new PatException(e.getMessage(), getClass().getName(), "update()");
+            throw e;                                               // new PatException(e.getMessage(), getClass().getName(), "update()");
         }
     }
 
@@ -149,7 +149,7 @@ public class CourseDAO extends Data_Helper_Sqlite implements IDAO<CourseDTO>{
             return true;
         } 
         catch (SQLException e) {
-            throw e;// new PatException(e.getMessage(), getClass().getName(), "delete()");
+            throw e;                                               // new PatException(e.getMessage(), getClass().getName(), "delete()");
         }
     }
 
@@ -157,15 +157,15 @@ public class CourseDAO extends Data_Helper_Sqlite implements IDAO<CourseDTO>{
         String query =" SELECT COUNT(*) TotalReg FROM Course "
                      +" WHERE   state ='A' ";
         try {
-            Connection conn = opConnection();         // conectar a DB     
-            Statement  stmt = conn.createStatement();   // CRUD : select * ...    
-            ResultSet rs   = stmt.executeQuery(query);  // ejecutar la
+            Connection conn = opConnection();            // conectar a DB     
+            Statement  stmt = conn.createStatement();    // CRUD : select * ...    
+            ResultSet rs    = stmt.executeQuery(query);  // ejecutar la
             while (rs.next()) {
-                return rs.getInt(1);                    // TotalReg
+                return rs.getInt(1);                     // TotalReg
             }
         } 
         catch (SQLException e) {
-            throw e;// new PatException(e.getMessage(), getClass().getName(), "getMaxRow()");
+            throw e;                                               // new PatException(e.getMessage(), getClass().getName(), "getMaxRow()");
         }
         return 0;
     }
