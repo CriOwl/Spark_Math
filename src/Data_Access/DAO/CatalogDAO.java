@@ -30,12 +30,12 @@ public class CatalogDAO extends Data_Helper_Sqlite implements IDAO<CatalogDTO>{
             Statement  stmt = conn.createStatement();    
             ResultSet rs   = stmt.executeQuery(query);  
             while (rs.next()) {
-                oS = new CatalogDTO(rs.getInt(1)                // Id_catalog_level
-                                ,rs.getString(2)                // name
-                                ,rs.getInt(3)                   // id_catalog_level         
-                                ,rs.getInt(4)                   // state        
-                                ,rs.getString(5)                // date_created      
-                                ,rs.getString(6));              // date_update
+                oS = new CatalogDTO(rs.getInt(1)                   // Id_catalog_level
+                                   ,rs.getString(2)                // name
+                                   ,rs.getInt(3)                   // id_catalog_level         
+                                   ,rs.getInt(4)                   // state        
+                                   ,rs.getString(5)                // date_created      
+                                   ,rs.getString(6));              // date_update
             }
         } 
         catch (SQLException e) {
@@ -61,12 +61,12 @@ public class CatalogDAO extends Data_Helper_Sqlite implements IDAO<CatalogDTO>{
             Statement  stmt = conn.createStatement();       
             ResultSet rs   = stmt.executeQuery(query);    
             while (rs.next()) {
-                CatalogDTO s = new CatalogDTO(rs.getInt(1)              // Id_catalog_level
-                                        ,rs.getString(2)                // name
-                                        ,rs.getInt(3)                   // id_catalog_level         
-                                        ,rs.getInt(4)                   // state        
-                                        ,rs.getString(5)                // date_created      
-                                        ,rs.getString(6));              // date_update
+                CatalogDTO s = new CatalogDTO(rs.getInt(1)                   // Id_catalog_level
+                                             ,rs.getString(2)                // name
+                                             ,rs.getInt(3)                   // id_catalog_level         
+                                             ,rs.getInt(4)                   // state        
+                                             ,rs.getString(5)                // date_created      
+                                             ,rs.getString(6));              // date_update
              lst.add(s);
             }
         } 
@@ -133,7 +133,7 @@ public class CatalogDAO extends Data_Helper_Sqlite implements IDAO<CatalogDTO>{
         String query =" SELECT COUNT(*) TotalReg FROM Catalog "
                      +" WHERE   state ='A' ";
         try {
-            Connection conn = opConnection();         // conectar a DB     
+            Connection conn = opConnection();           // conectar a DB     
             Statement  stmt = conn.createStatement();   // CRUD : select * ...    
             ResultSet rs   = stmt.executeQuery(query);  // ejecutar la
             while (rs.next()) {
