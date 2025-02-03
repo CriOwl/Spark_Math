@@ -30,6 +30,9 @@ public class BL_generalyTable<T> {
     public List<T> read_elments() throws Exception {
         return dao.read_combobox();
     }
+    public List<T> read_elments2() throws Exception {
+        return dao.read_combobox2();
+    }
 
     public boolean cretated_elements(T entity) throws Exception {
         return dao.created(entity);

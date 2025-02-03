@@ -87,7 +87,7 @@ public class MainFrame extends JFrame {
         main_windown.add(container);
         main_windown.revalidate();
         //Cambiar main_panel--
-        Update_panel_person update_panel=new Update_panel_person();
+        Update_panel_rol update_panel=new Update_panel_rol();
         container.add(update_panel,BorderLayout.CENTER);
         main_windown.add(container);
         main_windown.revalidate();
@@ -96,7 +96,7 @@ public class MainFrame extends JFrame {
         main_windown.add(panel,BorderLayout.CENTER); */
     }
     private void change_panel(Component panel){
-        Manage_panel manage_panel=new Manage_panel();
+        Update_panel_person manage_panel=new Update_panel_person();
         //main_windown.remove(panel);
         main_windown.add(manage_panel,BorderLayout.CENTER);
     

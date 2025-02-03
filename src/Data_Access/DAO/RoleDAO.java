@@ -94,19 +94,21 @@ public class RoleDAO extends Data_Helper_Sqlite implements IDAO<RoleDTO> {
     public boolean update(RoleDTO entity) throws Exception {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        String query = "UPDATE role SET name = ?, state = ?, date_updated = ? WHERE id_role = ?;";
+        String query = "UPDATE role SET name = ?, id_hierarchy= ?, state = ?, date_updated = ? WHERE id_role = ?;";
         try {
             Connection conn = opConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, entity.getName());
-            pstmt.setInt(2, entity.getState());
-            pstmt.setString(3, dtf.format(now));
-            pstmt.setInt(4, entity.getId_Role());
+            pstmt.setInt(3, entity.getId_hierarchy());
+            pstmt.setInt(4, entity.getState());
+            pstmt.setString(5, dtf.format(now));
+            pstmt.setInt(6, entity.getId_Role());
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw e; // new PatException(e.getMessage(), getClass().getName(), "update()");
+            System.out.println(e);
         }
+        return false;
     }
 
     @Override
@@ -180,8 +182,7 @@ public class RoleDAO extends Data_Helper_Sqlite implements IDAO<RoleDTO> {
                 + "r.id_role, "
                 + "r.name, "
                 + "r.state, "
-                + "r.date_created, "
-                + "r.date_updated "
+                + "r.id_hierarchy "
                 + "FROM role r "
                 + "WHERE r.state = 1 AND r.id_role LIKE ?";
         try {
@@ -193,12 +194,60 @@ public class RoleDAO extends Data_Helper_Sqlite implements IDAO<RoleDTO> {
                 registro = new RoleDTO(rs.getInt(1),
                         rs.getString(2),
                         rs.getInt(3),
-                        rs.getString(4),
-                        rs.getString(5));
+                        rs.getInt(4));
+                tabla.add(registro);
             }
         } catch (SQLException e) {
             System.out.println(e);
         }
         return tabla;
+    }
+
+    @Override
+    public List<RoleDTO> read_combobox2() {
+        List<RoleDTO> list_role = new ArrayList<>();
+        String querry = "SELECT "
+                + "r.id_hierarchy "
+                + "FROM Role r "
+                + "WHERE r.state = 1";
+        try {
+            Connection cone = opConnection();
+            Statement stmt = cone.createStatement();
+            ResultSet rs = stmt.executeQuery(querry);
+            while (rs.next()) {
+                RoleDTO roles = new RoleDTO(
+                        rs.getInt(1));
+                        list_role.add(roles);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list_role;
+    }
+    @Override
+    public RoleDTO search_read_single(String name) throws Exception {
+        RoleDTO registro = new RoleDTO();
+        String query = "SELECT "
+                + "r.id_role, "
+                + "r.name, "
+                + "r.state, "
+                + "r.id_hierarchy "
+                + "FROM role r "
+                + "WHERE r.state = 1 AND r.id_role LIKE ?";
+        try {
+            Connection conn = opConnection();
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, "%"+name+"%");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                registro = new RoleDTO(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getInt(3),
+                        rs.getInt(4));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return registro;
     }
 }

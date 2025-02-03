@@ -4,6 +4,7 @@ public interface IDAO<T>{
     public T readby(Integer id)throws Exception;
     public List<T> readall()throws Exception;
     public List<T> read_combobox()throws Exception;
+    public List<T> read_combobox2()throws Exception;
     public boolean created(T entity)throws Exception;
     public boolean update(T entity)throws Exception;
     public List<T> read_column()throws  Exception;

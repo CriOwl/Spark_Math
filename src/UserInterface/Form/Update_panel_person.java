@@ -211,13 +211,11 @@ public class Update_panel_person extends JPanel {
         }
         PersonDTO person_created = new PersonDTO(id_person,name,last_name,dni,email,password,birthdat,id_role,id_institution,state);
         send_data(person_created);
-        System.out.println(name+"----"+last_name+"----"+dni+"----"+email+"----"+password+"----"+birthdat+"----"+id_role+"----"+id_institution+"---"+state);
     }
     public boolean send_data(PersonDTO person){
         BL_generalyTable<PersonDTO> table_person=new BL_generalyTable<>(PersonDAO::new);
         try {
          if(table_person.update_elements(person)){
-            System.out.println("----------------");
             Spark_Style.show_mesg_correct("Usuario creado ", "Estado");
             name_person_box.setText("");
             last_name_person_box.setText("");
@@ -258,7 +256,6 @@ public class Update_panel_person extends JPanel {
                 return entry.getKey();
             }
         }
-        System.out.println("-----------");
         return null; 
     }
 }

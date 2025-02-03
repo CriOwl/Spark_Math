@@ -298,5 +298,30 @@ public class PersonDAO extends Data_Helper_Sqlite implements IDAO<PersonDTO> {
         }
         return registro;
     }
+    @Override
+    public List<PersonDTO> read_combobox2() {
+        List<PersonDTO> list_person = new ArrayList<>();
+        String querry = "SELECT "
+                + "p.id_person, "
+                + "p.DNI, "
+                + "p.email "
+                + "FROM Person p "
+                + "WHERE p.state = 1";
+        try {
+            Connection cone = opConnection();
+            Statement stmt = cone.createStatement();
+            ResultSet rs = stmt.executeQuery(querry);
+            while (rs.next()) {
+                PersonDTO person = new PersonDTO(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3));
+                list_person.add(person);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list_person;
+    }
 
 }
