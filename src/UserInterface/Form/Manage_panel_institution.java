@@ -1,9 +1,8 @@
 package UserInterface.Form;
 
 import BusinessLogic.BL_USER.BL_generalyView;
-import Data_Access.DAO.RoleDAO;
-import Data_Access.DAO.DAO_C.VWRoleDAO;
-import Data_Access.DTO.RoleDTO;
+import Data_Access.DAO.DAO_C.VWInstitutionDAO;
+import Data_Access.DTO.InstitutionDTO;
 import UserInterface.Customer_control.Button_Text;
 import UserInterface.Customer_control.Text_box;
 import UserInterface.Customer_control.Text_label;
@@ -20,7 +19,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-public class Manage_panel_role extends JPanel {
+public class Manage_panel_institution extends JPanel {
     Button_Text Button_update;
     Button_Text Button_created;
     Button_Text Button_search;
@@ -30,7 +29,7 @@ public class Manage_panel_role extends JPanel {
     JTable table;
     JScrollPane scrollPane;
 
-    public Manage_panel_role() {
+    public Manage_panel_institution() {
         setLayout(new GridBagLayout());
         Button_update = new Button_Text("Actualizar", Spark_Style.FONT_BOLD, null);
         Button_created = new Button_Text("Crear", Spark_Style.FONT_BOLD, null);
@@ -57,19 +56,21 @@ public class Manage_panel_role extends JPanel {
     }
 
     private void created_table() {
-        BL_generalyView<RoleDTO> bl_role = new BL_generalyView<>(VWRoleDAO::new);
+        BL_generalyView<InstitutionDTO> bl_institution = new BL_generalyView<>(VWInstitutionDAO::new);
         try {
-            String[] columns = {"ID", "Nombre", "Estado", "Fecha Creación", "Fecha Actualización"};
-            List<RoleDTO> roles = bl_role.getAll();
-            Object[][] data = new Object[roles.size()][columns.length];
+            String[] columns = {"ID", "ID Manager", "Nombre", "AMIE", "Estado", "Fecha Creación", "Fecha Actualización"};
+            List<InstitutionDTO> institutions = bl_institution.getAll();
+            Object[][] data = new Object[institutions.size()][columns.length];
 
             int index = 0;
-            for (RoleDTO role : roles) {
-                data[index][0] = role.getId_Role();
-                data[index][1] = role.getName();
-                data[index][2] = role.getState() == 1 ? "Activo" : "Inactivo";
-                data[index][3] = role.getDate_created();
-                data[index][4] = role.getDate_created();
+            for (InstitutionDTO institution : institutions) {
+                data[index][0] = institution.getId_institution();
+                data[index][1] = institution.getId_manager();
+                data[index][2] = institution.getName();
+                data[index][3] = institution.getAmie();
+                data[index][4] = institution.getState() == 1 ? "Activo" : "Inactivo";
+                data[index][5] = institution.getDate_created();
+                data[index][6] = institution.getDate_updated();
                 index++;
             }
 
@@ -87,19 +88,21 @@ public class Manage_panel_role extends JPanel {
     }
 
     private void search(String name) {
-        BL_generalyView<RoleDTO> bl_role = new BL_generalyView<>(VWRoleDAO::new);
+        BL_generalyView<InstitutionDTO> bl_institution = new BL_generalyView<>(VWInstitutionDAO::new);
         try {
-            String[] columns = {"ID", "Nombre", "Estado", "Fecha Creación", "Fecha Actualización"};
-            List<RoleDTO> results = bl_role.search(name);
+            String[] columns = {"ID", "ID Manager", "Nombre", "AMIE", "Estado", "Fecha Creación", "Fecha Actualización"};
+            List<InstitutionDTO> results = bl_institution.search(name);
             Object[][] data = new Object[results.size()][columns.length];
 
             int index = 0;
-            for (RoleDTO role : results) {
-                data[index][0] = role.getId_Role();
-                data[index][1] = role.getName();
-                data[index][2] = role.getState() == 1 ? "Activo" : "Inactivo";
-                data[index][3] = role.getDate_created();
-                data[index][4] = role.getDate_created();
+            for (InstitutionDTO institution : results) {
+                data[index][0] = institution.getId_institution();
+                data[index][1] = institution.getId_manager();
+                data[index][2] = institution.getName();
+                data[index][3] = institution.getAmie();
+                data[index][4] = institution.getState() == 1 ? "Activo" : "Inactivo";
+                data[index][5] = institution.getDate_created();
+                data[index][6] = institution.getDate_updated();
                 index++;
             }
             table.setModel(new DefaultTableModel(data, columns));

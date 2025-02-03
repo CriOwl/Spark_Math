@@ -47,9 +47,11 @@ public class Update_panel_person extends JPanel {
     private HashMap<String, Integer> Institucion_map = new HashMap<>();
     private HashMap<String, Integer> Role_map = new HashMap<>();
     private HashMap<String, Integer> state_map = new HashMap<>();
+    
     public Update_panel_person() {
         setup_panel();
     }
+
     private void setup_panel() {
         setLayout(new GridBagLayout());
         name_person = new Text_label("Nombre:");
@@ -194,3 +196,4 @@ public class Update_panel_person extends JPanel {
         PersonDTO person_created = new PersonDTO(name,last_name,dni,email,password,birthdat,id_role,id_institution);
     }
 }
+

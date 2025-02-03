@@ -304,3 +304,22 @@ INSERT INTO
     ROLE (name)
 VALUES
     ('Conserje');
+
+INSERT INTO
+    Persona (
+        name,
+        last_name,
+        DNI,
+        email,
+        password,
+        id_role
+    )
+VALUES
+    (
+    'Gary',
+    'Defas',
+    '1234',
+    'email.com',
+    'qwert',
+    1);
+
