@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS
     Role (
         id_role INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
-        id_hierarchy INTEGER NOT NULL,
+        id_hierarchy INTEGER NOT NULL REFERENCES Catalog (id_catalog),
         state INTEGER DEFAULT 1 CONSTRAINT states CHECK (state IN (0, 1)),
         date_created DATETIME DEFAULT (datetime('now', 'localtime')),
         date_updated DATETIME
