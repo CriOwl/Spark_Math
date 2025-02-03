@@ -21,7 +21,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-public class Manage_panel_catalog extends JPanel {
+public class Manage_panel_course extends JPanel {
     List<Text_label> Label_text_list;
     List<Text_box> Label_box_list;
     Button_Text Button_update;
@@ -33,7 +33,7 @@ public class Manage_panel_catalog extends JPanel {
     JTable table;
     JScrollPane scrollPane;
 
-    public Manage_panel_catalog() {
+    public Manage_panel_course() {
         setLayout(new GridBagLayout());
         Button_update = new Button_Text("Actualizar", Spark_Style.FONT_BOLD, null);
         Button_created = new Button_Text("Crear", Spark_Style.FONT_BOLD, null);
