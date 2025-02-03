@@ -8,6 +8,7 @@ public interface IDAO<T>{
     public boolean update(T entity)throws Exception;
     public List<T> read_column()throws  Exception;
     public List<T> search_read(String DNI)throws  Exception;
+    public T search_read_single(String DNI)throws  Exception;
     public boolean delete(Integer id)throws Exception;
     
 }

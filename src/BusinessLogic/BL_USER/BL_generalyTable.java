@@ -42,5 +42,8 @@ public class BL_generalyTable<T> {
     public boolean delete(Integer id) throws Exception {
         return dao.delete(id);
     }
+    public T search_single(String DNI) throws Exception{
+        return dao.search_read_single(DNI);
+    }
 
 }

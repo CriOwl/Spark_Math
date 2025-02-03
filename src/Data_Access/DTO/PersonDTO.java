@@ -52,6 +52,23 @@ public class PersonDTO {
     }
     
     public PersonDTO(Integer id_person, String name, String last_name, String dNI, String email, String password,
+            String birthdate, Integer id_role, Integer state, String date_created, Integer id_institution,
+            String date_update) {
+        this.id_person = id_person;
+        this.name = name;
+        this.last_name = last_name;
+        DNI = dNI;
+        this.email = email;
+        this.password = password;
+        this.birthdate = birthdate;
+        this.id_role = id_role;
+        this.state = state;
+        this.date_created = date_created;
+        this.id_institution = id_institution;
+        this.date_update = date_update;
+    }
+
+    public PersonDTO(Integer id_person, String name, String last_name, String dNI, String email, String password,
             String birthdate, String name_role, Integer state, String date_created, String date_update) {
         this.id_person = id_person;
         this.name = name;
@@ -101,6 +118,20 @@ public class PersonDTO {
         DNI = dNI;
         this.password = password;
         this.id_role = id_role;
+    }
+
+    public PersonDTO(Integer id_person, String name, String last_name, String dNI, String email, String password,
+            String birthdate, Integer id_role, Integer id_institution, Integer state) {
+        this.id_person = id_person;
+        this.name = name;
+        this.last_name = last_name;
+        DNI = dNI;
+        this.email = email;
+        this.password = password;
+        this.birthdate = birthdate;
+        this.id_role = id_role;
+        this.state = state;
+        this.id_institution = id_institution;
     }
 
     public Integer getId_person() {
