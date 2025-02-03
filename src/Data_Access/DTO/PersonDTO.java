@@ -15,6 +15,17 @@ public class PersonDTO {
     private String date_created;
     private Integer id_institution;
     
+    
+    public PersonDTO(String name) {
+        this.name = name;
+    }
+
+    public PersonDTO(Integer id_person, String dNI, String email) {
+        this.id_person = id_person;
+        DNI = dNI;
+        this.email = email;
+    }
+
     public PersonDTO(String name, String last_name, String dNI, String email, String password, String birthdate,
             Integer id_role, Integer id_institution) {
         this.name = name;

@@ -184,6 +184,8 @@ FROM
 
 
 DROP VIEW vw_persona;
+
+PRAGMA table_info(vw_catalog);
  
 
 
