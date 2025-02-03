@@ -221,4 +221,31 @@ public class InstitutionDAO extends Data_Helper_Sqlite implements IDAO <Institut
         }
         return tabla;
     }
+    @Override
+    public List<InstitutionDTO> read_combobox2(){
+        List<InstitutionDTO> list_institution=new ArrayList<>();
+        String querry=  "SELECT " 
+                        + "i.id_institution, "
+                        + "i.name,"
+                        + "i.amie "
+                        + "FROM Institution i "
+                        + "WHERE i.state = 1" ;
+        try {
+            Connection cone=opConnection();
+            Statement stmt= cone.createStatement();
+            ResultSet rs= stmt.executeQuery(querry);
+            while(rs.next()){
+                InstitutionDTO institution = new InstitutionDTO(
+                    rs.getInt(1),
+                    rs.getString(2),
+                    rs.getString(3)
+                );
+                list_institution.add(institution);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        } 
+        return list_institution; 
+    }
+    
 }

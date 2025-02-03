@@ -9,15 +9,16 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+
 public abstract class Spark_Style {
     public static final Color COLOR_FONT = new Color(250,250 , 250); 
     public static final Color COLOR_FONT_LIGHT = new Color(100, 100, 100);
     public static final Color COLOR_CURSOR = Color.black; //cambiar segun el estilo
     public static final Color COLOR_BORDER = Color.lightGray;
-    public static final Font  FONT         = new Font("Cambria Math", Font.PLAIN, 20);
-    public static final Font  FONT_BOLD    = new Font("Century Gothic", Font.BOLD, 20);
-    public static final Font  FONT_SMALL   = new Font("JetBrains Mono", Font.PLAIN, 20);
-    public static final Font  FONT_NUMBER   = new Font("Digital-7 Mono", Font.PLAIN, 20);
+    public static final Font  FONT         = new Font("Cambria Math", Font.PLAIN, 15);
+    public static final Font  FONT_BOLD    = new Font("Century Gothic", Font.BOLD, 15);
+    public static final Font  FONT_SMALL   = new Font("JetBrains Mono", Font.PLAIN, 15);
+    public static final Font  FONT_NUMBER   = new Font("Digital-7 Mono", Font.PLAIN, 15);
     public static final Dimension  dimension_button   = new Dimension(150, 45);
 
     public static final int ALIGNMENT_LEFT  = SwingConstants.LEFT;
@@ -42,8 +43,4 @@ public abstract class Spark_Style {
         ImageIcon check=new ImageIcon(new ImageIcon(URL_CHECK).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
         JOptionPane.showMessageDialog(null,msg,title,JOptionPane.PLAIN_MESSAGE,check);
     }
-
-
-    
-
 }

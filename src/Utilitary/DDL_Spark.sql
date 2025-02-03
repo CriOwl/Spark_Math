@@ -6,8 +6,9 @@ DROP TABLE IF EXISTS Game1;
 DROP TABLE IF EXISTS Activity;
 DROP TABLE IF EXISTS Student_course;
 DROP TABLE IF EXISTS Course;            
+DROP TABLE IF EXISTS Persona;
+DROP TABLE IF EXISTS  Institution_manage;       
 DROP TABLE IF EXISTS Institution;   
-DROP TABLE IF EXISTS Persona;        
 DROP TABLE IF EXISTS Permission_role;
 DROP TABLE IF EXISTS Role;          
 DROP TABLE IF EXISTS Permission;     
@@ -38,6 +39,7 @@ CREATE TABLE IF NOT EXISTS
     Role (
         id_role INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
+        id_hierarchy INTEGER NOT NULL REFERENCES Catalog (id_catalog),
         state INTEGER DEFAULT 1 CONSTRAINT states CHECK (state IN (0, 1)),
         date_created DATETIME DEFAULT (datetime('now', 'localtime')),
         date_updated DATETIME
@@ -48,7 +50,6 @@ CREATE INDEX indx_id_role ON Role (id_role);
 CREATE TABLE IF NOT EXISTS
     Institution (
         id_institution INTEGER PRIMARY KEY AUTOINCREMENT,
-        id_manager INTEGER NOT NULL REFERENCES Persona (id_person),
         name TEXT NOT NULL,
         amie VARCHAR(8) UNIQUE NOT NULL,
         state INTEGER DEFAULT 1 CONSTRAINT states CHECK (state IN (0, 1)),
@@ -59,7 +60,15 @@ CREATE TABLE IF NOT EXISTS
 CREATE INDEX indx_id_institution ON Institution (id_institution);
 
 CREATE INDEX indx_amie ON Institution (amie);
-
+CREATE TABLE IF NOT EXISTS
+    Institution_manage (
+        id_institution_manage INTEGER PRIMARY KEY AUTOINCREMENT,
+        id_institution INTEGER NOT NULL REFERENCES Institution (id_institution),
+        id_manager INTEGER NOT NULL REFERENCES Persona (id_person),
+        state INTEGER DEFAULT 1 CONSTRAINT states CHECK (state IN (0, 1)),
+        date_created DATETIME DEFAULT (datetime('now', 'localtime')),
+        date_updated DATETIME
+    );
 CREATE TABLE IF NOT EXISTS
     Permission_role (
         id_permission_role INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -206,4 +215,4 @@ SELECT         p.id_person,
                p.state 
                FROM  vw_persona p 
                JOIN Role r ON p.id_role=r.id_role 
-               WHERE p.state= 1 AND p.DNI LIKE '%1%' ;
+               WHERE p.state= 1 AND p.DNI LIKE '%1%' ;        

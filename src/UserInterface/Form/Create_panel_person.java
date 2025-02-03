@@ -1,6 +1,5 @@
 package UserInterface.Form;
 
-
 import BusinessLogic.BL_USER.BL_generalyTable;
 import Data_Access.DAO.DAO_C.InstitutionDAO;
 import Data_Access.DAO.DAO_C.PersonDAO;
@@ -19,12 +18,11 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.text.AbstractDocument;
 
-public class Update_panel_person extends JPanel {
+public class Create_panel_person extends JPanel {
     Text_label name_person ;
     Text_label last_name_person ;
     Text_label DNI_person ;
@@ -34,14 +32,12 @@ public class Update_panel_person extends JPanel {
     Text_label Email_person ;
     Text_label State_person ;
     Text_label institution_person;
-    Text_label search_dni;
     Text_box name_person_box ;
     Text_box last_name_person_box ;
     Text_box DNI_person_box ;
     Text_box Birthdate_person_box ;
     Text_box Password_person_box ;
     Text_box Email_person_box ;
-    Text_box search_dni_box;
     JComboBox<String> State_person_box ;
     JComboBox<String> role;
     JComboBox<String> institution;
@@ -49,13 +45,10 @@ public class Update_panel_person extends JPanel {
     String [] array_role;
     Button_Text send;
     Button_Text cancel;
-    Button_Text search;
     private HashMap<String, Integer> Institucion_map = new HashMap<>();
     private HashMap<String, Integer> Role_map = new HashMap<>();
     private HashMap<String, Integer> state_map = new HashMap<>();
-    Integer id_person;
-    
-    public Update_panel_person() {
+    public Create_panel_person() {
         setup_panel();
     }
 
@@ -70,8 +63,6 @@ public class Update_panel_person extends JPanel {
         Email_person = new Text_label("Email:");
         State_person = new Text_label("Estado:");
         institution_person = new Text_label("Institucion:");
-        search_dni= new Text_label("Buscar por DNI");
-        search_dni_box=new Text_box();
         name_person_box = new Text_box();
         last_name_person_box = new Text_box();
         DNI_person_box = new Text_box();
@@ -85,80 +76,81 @@ public class Update_panel_person extends JPanel {
         send=new Button_Text("Enviar", Spark_Style.FONT, null);
         send.addActionListener(e->validate_data());
         cancel=new Button_Text("Cancelar", Spark_Style.FONT, null);
-        search=new Button_Text("Buscar", Spark_Style.FONT, null);
-        search.addActionListener(e->search_data());
         cancel.setBackground(new Color(200,0,0));
         GridBagConstraints gbc=new GridBagConstraints();
         gbc.insets=new Insets(5,20,5,20);
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.fill = GridBagConstraints.NONE;
-        add(search_dni, gbc);
-        gbc.gridx = 1;
-        gbc.gridwidth = 1;
-        gbc.weightx = 1;
-        gbc.weighty = 1;
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.fill=GridBagConstraints.BOTH;
-        add(search_dni_box, gbc);
-        gbc.gridx = 2;
+        gbc.gridx=0;
+        gbc.gridy=0;
+        gbc.weightx=1;
+        gbc.weighty=1;
+        gbc.fill=GridBagConstraints.HORIZONTAL;
+        add(name_person,gbc);
+        gbc.gridx=0;
+        gbc.gridy=1;
+        add(name_person_box,gbc);
+        gbc.gridx=0;
+        gbc.gridy=2;
+        add(last_name_person,gbc);
+        gbc.gridx=0;
+        gbc.gridy=3;
+        add(last_name_person_box,gbc);
+        gbc.gridx=0;
+        gbc.gridy=4;
+        add(DNI_person,gbc);
+        gbc.gridx=0;
+        gbc.gridy=5;
+        add(DNI_person_box,gbc);
+        gbc.gridx=0;
+        gbc.gridy=6;
+        add(Birthdate_person,gbc);
+        gbc.gridx=0;
+        gbc.gridy=7;
+        add(Birthdate_person_box,gbc);
+        gbc.gridx=0;
+        gbc.gridy=8;
+        add(Password_person,gbc);
+        gbc.gridx=0;
+        gbc.gridy=9;
+        add(Password_person_box,gbc);
+        gbc.gridx=0;
+        gbc.gridy=10;
+        add(id_role_person,gbc);
+        gbc.gridx=0;
+        gbc.gridy=11;
+        add(role,gbc);
+        gbc.gridx=0;
+        gbc.gridy=12;
+        add(Email_person,gbc);
+        gbc.gridx=0;
+        gbc.gridy=13;
+        add(Email_person_box,gbc);
+        gbc.gridx=0;
+        gbc.gridy=14;
+        add(State_person,gbc);
+        gbc.gridx=0;
+        gbc.gridy=15;
+        add(State_person_box,gbc); 
+        gbc.gridx=0;
+        gbc.gridy=16;
+        add(institution_person,gbc);
+        gbc.gridx=0;
+        gbc.gridy=17;
+        add(institution,gbc);
+        gbc.gridx=0;
+        gbc.gridy=18;
         gbc.fill=GridBagConstraints.NONE;
-        gbc.anchor = GridBagConstraints.EAST;
-        add(search, gbc);
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.gridwidth = 3;
-        gbc.weightx = 1;
-        gbc.weighty = 1;
-        gbc.fill = GridBagConstraints.BOTH;
-        add(name_person, gbc);
-        gbc.gridy = 2;
-        add(name_person_box, gbc);
-        gbc.gridy = 3;
-        add(last_name_person, gbc);
-        gbc.gridy = 4;
-        add(last_name_person_box, gbc);
-        gbc.gridy = 5;
-        add(DNI_person, gbc);
-        gbc.gridy = 6;
-        add(DNI_person_box, gbc);
-        gbc.gridy = 7;
-        add(Birthdate_person, gbc);
-        gbc.gridy = 8;
-        add(Birthdate_person_box, gbc);
-        gbc.gridy = 9;
-        add(Password_person, gbc);
-        gbc.gridy = 10;
-        add(Password_person_box, gbc);
-        gbc.gridy = 11;
-        add(id_role_person, gbc);
-        gbc.gridy = 12;
-        add(role, gbc);
-        gbc.gridy = 13;
-        add(Email_person, gbc);
-        gbc.gridy = 14;
-        add(Email_person_box, gbc);
-        gbc.gridy = 15;
-        add(State_person, gbc);
-        gbc.gridy = 16;
-        add(State_person_box, gbc);
-        gbc.gridy = 17;
-        add(institution_person, gbc);
-        gbc.gridy = 18;
-        add(institution, gbc);
-        gbc.gridy = 19;
-        gbc.fill = GridBagConstraints.NONE;
-        gbc.anchor = GridBagConstraints.CENTER;
-        add(send, gbc);
-        gbc.gridy = 20;
-        gbc.anchor = GridBagConstraints.EAST;
-        add(cancel, gbc);
+        gbc.anchor=GridBagConstraints.CENTER;
+        add(send,gbc);
+        gbc.gridx=0;
+        gbc.gridy=18;
+        gbc.fill=GridBagConstraints.NONE;
+        gbc.anchor=GridBagConstraints.EAST;
+        add(cancel,gbc);
     }
 
     private String[] data_institution(){
+        BL_generalyTable<InstitutionDTO> bl_institution = new BL_generalyTable<>(InstitutionDAO::new);
         try {
-            BL_generalyTable<InstitutionDTO> bl_institution=new BL_generalyTable<>(InstitutionDAO::new);
             List<InstitutionDTO> list_institution=bl_institution.read_elments();
             array_institution=new String [list_institution.size()];
             for (int index = 0; index < list_institution.size(); index++) {
@@ -204,18 +196,21 @@ public class Update_panel_person extends JPanel {
          String email=Email_person_box.getText(); 
         int id_role= Role_map.get(role.getSelectedItem());
         int id_institution=Institucion_map.get(institution.getSelectedItem());
-        int state=state_map.get(State_person_box.getSelectedItem());
         if(name.isEmpty()||last_name.isEmpty()||dni.isEmpty()||birthdat.isEmpty()||password.isEmpty()||email.isEmpty()||id_role==0){
             Spark_Style.show_mesg_advert("Complete todos los campos", "Registrar");
             return;
         }
-        PersonDTO person_created = new PersonDTO(id_person,name,last_name,dni,email,password,birthdat,id_role,id_institution,state);
+        if(!(Mascaras.validate_DNI(dni))){
+            Spark_Style.show_mesg_advert("Ingrese una cedula correcta", "Registrar");
+            return;
+        }
+        PersonDTO person_created = new PersonDTO(name,last_name,dni,email,password,birthdat,id_role,id_institution);
         send_data(person_created);
     }
     public boolean send_data(PersonDTO person){
         BL_generalyTable<PersonDTO> table_person=new BL_generalyTable<>(PersonDAO::new);
         try {
-         if(table_person.update_elements(person)){
+         if(table_person.cretated_elements(person)){
             Spark_Style.show_mesg_correct("Usuario creado ", "Estado");
             name_person_box.setText("");
             last_name_person_box.setText("");
@@ -225,37 +220,10 @@ public class Update_panel_person extends JPanel {
             Email_person_box.setText("");
             return true;
          }
+         Spark_Style.show_mesg_advert("El usuario que quiere crear tiene una cedula ya registrado", "Estado");
         } catch (Exception e) {
             System.out.println(e);
         }
         return false;
-    }
-    private void search_data(){
-        BL_generalyTable<PersonDTO> bl_person=new BL_generalyTable<>(PersonDAO::new);
-        try {
-        PersonDTO person= bl_person.search_single(search_dni_box.getText());
-        System.out.println(person.getId_institution());
-            name_person_box.setText(person.getName());
-            last_name_person_box.setText(person.getLast_name());
-            DNI_person_box.setText(person.getDNI());
-            Birthdate_person_box.setText(person.getBirthdate());
-            Password_person_box.setText(person.getPassword());
-            Email_person_box.setText(person.getEmail());
-            role.setSelectedItem(search(Role_map,person.getId_role()));
-            institution.setSelectedItem(search(Institucion_map,person.getId_institution()));
-            State_person_box.setSelectedItem(search(state_map,person.getId_state()));
-            id_person=person.getId_person();
-            System.out.println(person.getId_role());
-        } catch (Exception e) {
-        }
-    }
-    private <name,id> name search(Map<name,id> map,id value){
-    for (Map.Entry<name, id> entry : map.entrySet()) {
-            if (entry.getValue().equals(value)) {
-                System.out.println(entry.getKey());
-                return entry.getKey();
-            }
-        }
-        return null; 
     }
 }

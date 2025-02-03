@@ -20,7 +20,7 @@ public class User {
          try {
             content_user=data_user.readby(user);
             if(content_user.getPassword().equals(password)){
-                System.out.println("Bienvenido "+content_user.getFull_name()+". Su rol es "+content_user.getName_role()+".");
+                System.out.println("Bienvenido "+content_user.getName()+"   "+content_user.getLast_name()+". Su rol es "+content_user.getName_role()+".");
                 rol.get_Permission(content_user.getId_role());
                 list_permissions=rol.getList_permissions();
             return true;

@@ -74,6 +74,7 @@ public class MainFrame extends JFrame {
         SwingUtilities.updateComponentTreeUI(main_windown);
         this.is_dark=!is_dark;
     }
+    
     private void menu_panel(List<String> permisos){
         System.out.println("Panel del menu");
         main_windown.remove(login);
@@ -95,7 +96,7 @@ public class MainFrame extends JFrame {
         main_windown.add(panel,BorderLayout.CENTER); */
     }
     private void change_panel(Component panel){
-        Manage_panel manage_panel=new Manage_panel();
+        Update_panel_person manage_panel=new Update_panel_person();
         //main_windown.remove(panel);
         main_windown.add(manage_panel,BorderLayout.CENTER);
     

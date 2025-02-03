@@ -35,7 +35,8 @@ public class LoginDAO extends Data_Helper_Sqlite implements IVIEWDAO<LoginDTO> {
             while (rs.next()) {
                 person = new LoginDTO(
                         rs.getInt(1),
-                        rs.getString(2) + " " + rs.getString(3),
+                        rs.getString(2),
+                        rs.getString(3),
                         rs.getString(4),
                         rs.getString(5),
                         rs.getString(6),
@@ -73,7 +74,8 @@ public class LoginDAO extends Data_Helper_Sqlite implements IVIEWDAO<LoginDTO> {
             while (rs.next()) {
                 person = new LoginDTO(
                         rs.getInt(1),
-                        rs.getString(2) + " " + rs.getString(3),
+                        rs.getString(2),
+                        rs.getString(3),
                         rs.getString(4),
                         rs.getString(5),
                         rs.getString(6),
@@ -134,7 +136,8 @@ public class LoginDAO extends Data_Helper_Sqlite implements IVIEWDAO<LoginDTO> {
             while (rs.next()) {
                 person = new LoginDTO(
                         rs.getInt(1),
-                        rs.getString(2) + " " + rs.getString(3),
+                        rs.getString(2),
+                        rs.getString(3),
                         rs.getString(4),
                         rs.getString(5),
                         rs.getString(6),
@@ -172,7 +175,8 @@ public class LoginDAO extends Data_Helper_Sqlite implements IVIEWDAO<LoginDTO> {
             while (rs.next()) {
                 person = new LoginDTO(
                         rs.getInt(1),
-                        rs.getString(2) + " " + rs.getString(3),
+                        rs.getString(2),
+                        rs.getString(3),
                         rs.getString(4),
                         rs.getString(5),
                         rs.getString(6),
@@ -203,7 +207,8 @@ public class LoginDAO extends Data_Helper_Sqlite implements IVIEWDAO<LoginDTO> {
             while (rs.next()) {
                 LoginDTO person = new LoginDTO(
                         rs.getInt(1),
-                        rs.getString(2) + " " + rs.getString(3),
+                        rs.getString(2),
+                        rs.getString(3),
                         rs.getString(4));
                         list_person.add(person);
             }

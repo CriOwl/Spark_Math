@@ -39,12 +39,12 @@ VALUES
     ('Tarea', 5);
 
 INSERT INTO
-    ROLE (name)
+    ROLE (name,id_hierarchy)
 VALUES
-    ('Administrador'),
-    ('Rector'),
-    ('Docente'),
-    ('Estudiante');
+    ('Administrador',1),
+    ('Rector',2),
+    ('Docente',3),
+    ('Estudiante',4);
 
 INSERT INTO
     Permission (name, description,name_method)
@@ -217,13 +217,13 @@ VALUES
     );
 
 INSERT INTO
-    Institution (id_manager, name, amie)
+    Institution (name, amie)
 VALUES
-    (2, 'Instituto Nacional', '17H01524'),
-    (2, 'Escuela Nacional', '17H01525'),
-    (2, 'Colegio Nacional', '17H01526'),
-    (2, 'Unidad Educativa Nacional', '17H01527'),
-    (2, 'Centro Educativo Nacional', '17H01528');
+    ( 'Instituto Nacional', '17H01524'),
+    ( 'Escuela Nacional', '17H01525'),
+    ( 'Colegio Nacional', '17H01526'),
+    ( 'Unidad Educativa Nacional', '17H01527'),
+    ( 'Centro Educativo Nacional', '17H01528');
 
 INSERT INTO
     Course (
@@ -299,27 +299,8 @@ VALUES
     (2, 3, '8'),
     (2, 4, '10'),
     (9, 5, '12');
-PRAGMA table_info(vw_persona);
 INSERT INTO
-    ROLE (name)
+    ROLE (name,id_hierarchy)
 VALUES
-    ('Conserje');
-
-INSERT INTO
-    Persona (
-        name,
-        last_name,
-        DNI,
-        email,
-        password,
-        id_role
-    )
-VALUES
-    (
-    'Gary',
-    'Defas',
-    '1234',
-    'email.com',
-    'qwert',
-    1);
-
+    ('Conserje',2);
+SELECT * FROM pragma_table_info('vw_persona');

@@ -177,7 +177,12 @@ FROM
 
 DROP VIEW vw_persona;
 
+<<<<<<< HEAD
 DROP VIEW vw_catalog; 
+=======
+PRAGMA table_info(vw_catalog);
+ 
+>>>>>>> 424ffbe0808212f93b2f8038541ad4df898f3250
 
 
 SELECT c.ID, c.NOMBRE, c.tipo  

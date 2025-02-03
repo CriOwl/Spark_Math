@@ -6,6 +6,32 @@ public class RoleDTO {
     private Integer state;
     private String date_created;
     private String date_update;
+    private Integer id_hierarchy;
+
+    public RoleDTO(Integer id_hierarchy) {
+        this.id_hierarchy = id_hierarchy;
+    }
+
+    public Integer getId_hierarchy() {
+        return id_hierarchy;
+    }
+
+    public void setId_hierarchy(Integer id_hierarchy) {
+        this.id_hierarchy = id_hierarchy;
+    }
+
+    public RoleDTO(Integer id_Role, String name, Integer id_hierarchy, Integer state) {
+        this.id_Role = id_Role;
+        this.name = name;
+        this.state = state;
+        this.id_hierarchy = id_hierarchy;
+    }
+
+    public RoleDTO(String name, Integer id_hierarchy,Integer state) {
+        this.name = name;
+        this.state = state;
+        this.id_hierarchy = id_hierarchy;
+    }
 
     public RoleDTO() {
     }
