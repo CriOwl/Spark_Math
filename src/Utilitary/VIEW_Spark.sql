@@ -47,29 +47,25 @@ FROM
 
 CREATE VIEW vw_institution AS
 SELECT 
-    i.id_institution,
-    i.name AS institution_name,
-    i.amie,
-    CONCAT(p.name, ' ', p.last_name) AS manager_name,
-    i.state,
-    i.date_created,
-    i.date_updated
+    i.id_institution AS ID,
+    i.name AS INSTITUTION,
+    i.amie AS CODIGO,
+    CONCAT(p.name, ' ', p.last_name) AS MANAGER
 FROM 
     Institution i
     JOIN Persona p ON i.id_manager = p.id_person;
 
+DROP VIEW vw_institution;
+
 CREATE VIEW vw_course AS
 SELECT 
-    c.id_course,
-    CONCAT(p.name, ' ', p.last_name) AS teacher_name,
-    inst.name AS institution_name,
-    cat_lvl.name AS grade_level,
-    cat_par.name AS parallel,
-    cat_time.name AS schedule,
-    cat_period.name AS period,
-    c.state,
-    c.date_created,
-    c.date_updated
+    c.id_course AS ID,
+    CONCAT(p.name, ' ', p.last_name) AS PROFESOR,
+    inst.name AS INSTITUCION,
+    cat_lvl.name AS GRADO,
+    cat_par.name AS PARALELO,
+    cat_time.name AS JORNADA,
+    cat_period.name AS PERIODO
 FROM 
     Course c
     JOIN Persona p ON c.id_teacher = p.id_person
@@ -78,6 +74,9 @@ FROM
     JOIN Catalog cat_par ON c.id_catalog_parallel = cat_par.id_catalog
     JOIN Catalog cat_time ON c.id_catalog_time = cat_time.id_catalog
     JOIN Catalog cat_period ON c.id_catalog_period = cat_period.id_catalog;
+
+DROP VIEW vw_course;
+
 
 CREATE VIEW vw_activity AS
 SELECT 
@@ -157,19 +156,12 @@ FROM
 
 CREATE VIEW vw_catalog AS
 SELECT 
-    c.id_catalog,
-    c.name AS catalog_name,
-    cl.id_catalog_level,
-    cl.name AS catalog_level_name,
-    c.state AS catalog_state,
-    c.date_created AS catalog_date_created,
-    c.date_updated AS catalog_date_updated,
-    cl.state AS catalog_level_state,
-    cl.date_created AS catalog_level_date_created,
-    cl.date_updated AS catalog_level_date_updated
+    c.id_catalog AS ID,
+    c.name AS NOMBRE,
+    l.name AS TIPO
 FROM 
     Catalog c
-    LEFT JOIN Catalog_level cl ON c.id_catalog_level = cl.id_catalog_level;
+    JOIN Catalog_level l ON c.id_catalog_level = l.id_catalog_level;
 
 
 CREATE VIEW vw_catalog_level AS
@@ -184,6 +176,12 @@ FROM
 
 
 DROP VIEW vw_persona;
- 
 
+DROP VIEW vw_catalog; 
+
+
+SELECT c.ID, c.NOMBRE, c.tipo  
+FROM vw_catalog c ;
+--JOIN Catalog_level l ON c.id_catalog_level = l.id_catalog_level  
+--WHERE c.state = 1;
 

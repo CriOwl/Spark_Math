@@ -32,7 +32,7 @@ public abstract class Spark_Style {
     public static final URL URL_SPLASH= Spark_Style.class.getResource("src\\UserInterface\\Resources\\Img\\Kid_playing.png");
     public static final String URL_SUN_THEMES= "src\\UserInterface\\Resources\\Icon\\sun.png";
     public static final String URL_MOON_THEMES= "src\\UserInterface\\Resources\\Icon\\moon.png";
-    public static final String URL_CHECK= "src\\UserInterface\\Resources\\Icon\\moon.png";
+    public static final String URL_CHECK= "src\\UserInterface\\Resources\\Icon\\moon.png"; //camobarle
     
     public static final void show_mesg_advert(String msg,String title){
         JOptionPane.showMessageDialog(null, msg, title,JOptionPane.ERROR_MESSAGE);

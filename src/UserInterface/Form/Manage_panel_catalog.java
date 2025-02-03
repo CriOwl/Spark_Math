@@ -1,17 +1,10 @@
 package UserInterface.Form;
 
 import BusinessLogic.BL_USER.BL_generalyView;
-<<<<<<< HEAD
-import Data_Access.DAO.DAO_C.VWInstitutionDAO;
-import Data_Access.DTO.InstitutionDTO;
-=======
 import Data_Access.VIEW.CatalogoViewDAO;
 import Data_Access.VIEW.CatalogoViewDTO;
-import Data_Access.VIEW.InstitutionViewDAO;
-import Data_Access.VIEW.InstitutionViewDTO;
 import Data_Access.VIEW.LoginDAO;
 import Data_Access.VIEW.LoginDTO;
->>>>>>> PanelCatalogo
 import UserInterface.Customer_control.Button_Text;
 import UserInterface.Customer_control.Text_box;
 import UserInterface.Customer_control.Text_label;
@@ -28,12 +21,9 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-public class Manage_panel_institution extends JPanel {
-<<<<<<< HEAD
-=======
+public class Manage_panel_catalog extends JPanel {
     List<Text_label> Label_text_list;
     List<Text_box> Label_box_list;
->>>>>>> PanelCatalogo
     Button_Text Button_update;
     Button_Text Button_created;
     Button_Text Button_search;
@@ -43,7 +33,7 @@ public class Manage_panel_institution extends JPanel {
     JTable table;
     JScrollPane scrollPane;
 
-    public Manage_panel_institution() {
+    public Manage_panel_catalog() {
         setLayout(new GridBagLayout());
         Button_update = new Button_Text("Actualizar", Spark_Style.FONT_BOLD, null);
         Button_created = new Button_Text("Crear", Spark_Style.FONT_BOLD, null);
@@ -59,62 +49,33 @@ public class Manage_panel_institution extends JPanel {
     }
 
     private void change_table() {
-<<<<<<< HEAD
-        String name = search_box.getText().trim();
-        if (name.isEmpty() || name.isBlank()) {
-            created_table();
-        } else {
-            search(name);
-=======
         String dni = search_box.getText().trim();
         System.out.println(dni);
         if (dni.isEmpty()||dni.isBlank()) {
             created_table();
         }else{
             search(dni);
->>>>>>> PanelCatalogo
         }
         table.revalidate();
         table.repaint();
     }
 
     private void created_table() {
-<<<<<<< HEAD
-        BL_generalyView<InstitutionDTO> bl_institution = new BL_generalyView<>(VWInstitutionDAO::new);
-        try {
-            String[] columns = {"ID", "ID Manager", "Nombre", "AMIE", "Estado", "Fecha Creación", "Fecha Actualización"};
-            List<InstitutionDTO> institutions = bl_institution.getAll();
-            Object[][] data = new Object[institutions.size()][columns.length];
-
-            int index = 0;
-            for (InstitutionDTO institution : institutions) {
-                data[index][0] = institution.getId_institution();
-                data[index][1] = institution.getId_manager();
-                data[index][2] = institution.getName();
-                data[index][3] = institution.getAmie();
-                data[index][4] = institution.getState() == 1 ? "Activo" : "Inactivo";
-                data[index][5] = institution.getDate_created();
-                data[index][6] = institution.getDate_updated();
-                index++;
-            }
-
-=======
-        BL_generalyView<InstitutionViewDTO> bl_institution = new BL_generalyView<>(InstitutionViewDAO::new);
+        BL_generalyView<CatalogoViewDTO> bl_catalog = new BL_generalyView<>(CatalogoViewDAO::new);
         try {
             ///
-            String[] columns = bl_institution.getColumn().stream().map(c -> c.getName_column()).toArray(String[]::new);
-            Object[][] data = new Object[bl_institution.getAll().size()][columns.length];
+            String[] columns = bl_catalog.getColumn().stream().map(c -> c.getName_column()).toArray(String[]::new);
+            Object[][] data = new Object[bl_catalog.getAll().size()][columns.length];
 
             int index = 0;
-            for (InstitutionViewDTO user : new  InstitutionViewDAO().readall()) {
-                data[index][0] = user.getId_institution();
-                data[index][1] = user.getName();
-                data[index][2] = user.getAmie();
-                data[index][3] = user.getName_manager();
+            for (CatalogoViewDTO user : new CatalogoViewDAO().readall()) {
+                data[index][0] = user.getId_catalog();
+                data[index][1] = user.getCatalogo_name();
+                data[index][2] = user.getName_catalog_level();
                 index++;
+                System.out.println(user.getId_catalog());
             }
             ///
->>>>>>> PanelCatalogo
             if (table == null) {
                 table = new JTable();
                 table = new JTable(new DefaultTableModel(data, columns));
@@ -128,46 +89,23 @@ public class Manage_panel_institution extends JPanel {
         }
     }
 
-<<<<<<< HEAD
-    private void search(String name) {
-        BL_generalyView<InstitutionDTO> bl_institution = new BL_generalyView<>(VWInstitutionDAO::new);
+    private void search(String DNI) {
+        BL_generalyView<CatalogoViewDTO> bl_catalog = new BL_generalyView<>(CatalogoViewDAO::new);
         try {
-            String[] columns = {"ID", "ID Manager", "Nombre", "AMIE", "Estado", "Fecha Creación", "Fecha Actualización"};
-            List<InstitutionDTO> results = bl_institution.search(name);
+            //
+            String[] columns = bl_catalog.getColumn().stream().map(c -> c.getName_column()).toArray(String[]::new);
+            List<CatalogoViewDTO> results = bl_catalog.search(DNI);
             Object[][] data = new Object[results.size()][columns.length];
 
             int index = 0;
-            for (InstitutionDTO institution : results) {
-                data[index][0] = institution.getId_institution();
-                data[index][1] = institution.getId_manager();
-                data[index][2] = institution.getName();
-                data[index][3] = institution.getAmie();
-                data[index][4] = institution.getState() == 1 ? "Activo" : "Inactivo";
-                data[index][5] = institution.getDate_created();
-                data[index][6] = institution.getDate_updated();
+            for (CatalogoViewDTO user : results) {
+                data[index][0] = user.getId_catalog();
+                data[index][1] = user.getCatalogo_name();
+                data[index][2] = user.getName_catalog_level();
                 index++;
+                System.out.println(user.getId_catalog());
             }
-=======
-    private void search(String AMIE) {
-        BL_generalyView<InstitutionViewDTO> bl_institution = new BL_generalyView<>(InstitutionViewDAO::new);
-        try {
             //
-            String[] columns = bl_institution.getColumn().stream().map(c -> c.getName_column()).toArray(String[]::new);
-            List<InstitutionViewDTO> results = bl_institution.search(AMIE);
-            Object[][] data = new Object[results.size()][columns.length];
-
-            int index = 0;
-            for (InstitutionViewDTO user : results) {
-                data[index][0] = user.getId_institution();
-                data[index][1] = user.getName();
-                data[index][2] = user.getAmie();
-                data[index][3] = user.getName_manager();
-                index++;
-                System.out.println(user.getId_institution());
-            }
-
-            //
->>>>>>> PanelCatalogo
             table.setModel(new DefaultTableModel(data, columns));
             table.revalidate();
             table.repaint();
@@ -232,8 +170,4 @@ public class Manage_panel_institution extends JPanel {
         gbc.anchor = GridBagConstraints.EAST;
         add(Button_search, gbc);
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> PanelCatalogo
