@@ -166,7 +166,7 @@ public class LoginDAO extends Data_Helper_Sqlite implements IVIEWDAO<LoginDTO> {
                 + "p.state "
                 + "FROM  vw_persona p "
                 + "JOIN Role r ON p.id_role=r.id_role "
-                + "WHERE p.state= 1 AND p.p.id_person = ?";
+                + "WHERE p.state= 1 AND p.id_person = ?";
         try {
             Connection connect = opConnection();
             PreparedStatement stmt = connect.prepareStatement(query);
@@ -196,7 +196,7 @@ public class LoginDAO extends Data_Helper_Sqlite implements IVIEWDAO<LoginDTO> {
                         + "p.id_person, "
                         + "p.name, "
                         + "p.last_name, "
-                        + "p.DNI, "
+                        + "p.DNI "
                         + "FROM  vw_persona p "
                         + "WHERE p.state= 1";
         try {

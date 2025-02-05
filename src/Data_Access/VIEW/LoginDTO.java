@@ -15,8 +15,13 @@ public class LoginDTO {
     public LoginDTO() {
     }
     
+<<<<<<< HEAD
+    public LoginDTO(Integer id_person, String full_name, String dNI, String email, String password, Integer id_role,
+            String name_role, Integer state) {
+=======
     public LoginDTO(Integer id_person, String name, String last_name, String dNI, String email, String password,
             Integer id_role, String name_role, Integer state) {
+>>>>>>> 424ffbe0808212f93b2f8038541ad4df898f3250
         this.id_person = id_person;
         this.name = name;
         this.last_name = last_name;

@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RoleDAO extends Data_Helper_Sqlite implements IDAO<RoleDTO> {
+public class RoleDAO extends Data_Helper_Sqlite implements  IDAO<RoleDTO> {
 
     @Override
     public RoleDTO readby(Integer id) throws Exception {

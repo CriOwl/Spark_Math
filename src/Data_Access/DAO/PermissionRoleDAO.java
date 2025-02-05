@@ -154,4 +154,22 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
         }
         return tabla;
     }
+
+    @Override
+    public List<Permission_roleDTO> read_combobox() throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'read_combobox'");
+    }
+
+    @Override
+    public List<Permission_roleDTO> read_column() throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'read_column'");
+    }
+
+    @Override
+    public List<Permission_roleDTO> search_read(String DNI) throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'search_read'");
+    }
 }
