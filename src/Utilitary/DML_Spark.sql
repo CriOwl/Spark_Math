@@ -103,6 +103,11 @@ VALUES
         'Realizar Actividades',
         'Permite al usuario realizar actividades',
         'activity'
+    ),
+    (
+        'Jugar',
+        'Permite al usuario jugar para el diagnostico',
+        'play'
     );
 
 INSERT INTO
@@ -136,7 +141,8 @@ VALUES
     (3, 8),
     (3, 9),
     (4, 8),
-    (4, 9);
+    (4, 9),
+    (4, 11);
 
 INSERT INTO
     Persona (
