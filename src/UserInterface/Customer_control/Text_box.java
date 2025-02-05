@@ -32,7 +32,7 @@ public class Text_box extends JTextField{
     }
     public void customize_textfield(){
         setFont(Spark_Style.FONT);
-        ///setForeground(Spark_Style.COLOR_FONT_LIGHT);
+        //setForeground(Spark_Style.COLOR_FONT_LIGHT);
         setCaretColor(Spark_Style.COLOR_CURSOR);
         setOpaque(false);
         setMargin(new Insets(10, 10, 10, 10));

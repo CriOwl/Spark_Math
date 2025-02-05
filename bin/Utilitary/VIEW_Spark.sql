@@ -174,8 +174,8 @@ FROM
 
 CREATE VIEW vw_catalog_level AS
 SELECT 
-    id_catalog_level,
-    name AS catalog_level_name,
+    id_catalog_level AS ID,
+    name AS catalog_level_name AS NOMBRE,
     state AS catalog_level_state,
     date_created AS catalog_level_date_created,
     date_updated AS catalog_level_date_updated
