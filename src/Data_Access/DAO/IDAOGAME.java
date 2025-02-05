@@ -1,8 +1,8 @@
-package DataAccess;
+package Data_Access.DAO;
 
 import java.util.List;
 
-public interface IDAO<T>{
+public interface IDAOGAME<T>{
     public T readBy(Integer id)throws Exception;
     public List<T> readAll()throws Exception;
     public boolean create(T entity)throws Exception;
