@@ -20,16 +20,16 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 public class Manage_panel extends JPanel {
-    List<Text_label> Label_text_list;
-    List<Text_box> Label_box_list;
-    Button_Text Button_update;
-    Button_Text Button_created;
-    Button_Text Button_search;
-    Button_Text Button_deletd;
-    Text_box search_box;
-    Text_label search_text;
-    JTable table;
-    JScrollPane scrollPane;
+    private List<Text_label> Label_text_list;
+    private List<Text_box> Label_box_list;
+    private Button_Text Button_update;
+    private Button_Text Button_created;
+    private Button_Text Button_search;
+    private Button_Text Button_deletd;
+    private Text_box search_box;
+    private Text_label search_text;
+    private JTable table;
+    private JScrollPane scrollPane;
 
     public Manage_panel() {
         setLayout(new GridBagLayout());

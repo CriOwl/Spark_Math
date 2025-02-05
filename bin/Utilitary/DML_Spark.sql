@@ -6,7 +6,8 @@ VALUES
     ('Paralelo'),
     ('Jornada'),
     ('Periodo'),
-    ('Tipo de actividad');
+    ('Tipo de actividad'),
+    ('Jerarquia');
 
 INSERT INTO
     Catalog (name, id_catalog_level)
@@ -15,7 +16,6 @@ VALUES
     ('2° Grado', 1),
     ('3° Grado', 1),
     ('4° Grado', 1),
-    ('Inicial II', 1),
     ('A', 2),
     ('B', 2),
     ('C', 2),
@@ -36,15 +36,20 @@ VALUES
     ('2027-S', 4),
     ('2027-C', 4),
     ('Diagnostico', 5),
-    ('Tarea', 5);
+    ('Tarea', 6),
+    ('Nivel 1', 6),
+    ('Nivel 2', 6),
+    ('Nivel 3', 6),
+    ('Nivel 4', 6),
+    ('Nivel 5', 6);
 
 INSERT INTO
     ROLE (name,id_hierarchy)
 VALUES
-    ('Administrador',1),
-    ('Rector',2),
-    ('Docente',3),
-    ('Estudiante',4);
+    ('Administrador',26),
+    ('Rector',27),
+    ('Docente',28),
+    ('Estudiante',29);
 
 INSERT INTO
     Permission (name, description,name_method)
@@ -299,19 +304,16 @@ VALUES
     (2, 3, '8'),
     (2, 4, '10'),
     (9, 5, '12');
-
-
-INSERT INTO Institution_manage (id_institution, id_manager )
-VALUES 
-    (1, 1),
-    (2, 2),
-    (3, 3),
-    (4, 4),
-    (5, 5);
-
-
 INSERT INTO
     ROLE (name,id_hierarchy)
 VALUES
     ('Conserje',2);
 SELECT * FROM pragma_table_info('vw_persona');
+
+SELECT 
+                r.id_role, 
+                r.name, 
+                r.state, 
+                r.id_hierarchy 
+                FROM role r 
+                WHERE r.state = 1 AND r.name LIKE '%a%';

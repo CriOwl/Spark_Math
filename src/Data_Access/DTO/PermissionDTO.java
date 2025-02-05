@@ -9,10 +9,11 @@ public class PermissionDTO {
     private String date_created;
     private String date_updated;
 
-    public PermissionDTO(String name, String description, String name_method) {
+    public PermissionDTO(String name, String description, String name_method,Integer State) {
         this.name = name;
         this.description = description;
         this.name_method = name_method;
+        this.state       = State;
     }
 
     public String getName_method() {
@@ -31,14 +32,12 @@ public class PermissionDTO {
         this.description    = description;
     }
 
-    public PermissionDTO(Integer id_permission, String name, String description, Integer state, String date_created,
-            String date_updated) {
+    public PermissionDTO(Integer id_permission, String name, String description, String name_method, Integer state) {
         this.id_permission  = id_permission;
         this.name           = name;
         this.description    = description;
         this.state          = state;
-        this.date_created   = date_created;
-        this.date_updated   = date_updated;
+        this.name_method = name_method;     
     }
     public Integer getId_permission() {
         return id_permission;

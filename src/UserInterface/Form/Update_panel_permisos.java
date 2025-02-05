@@ -1,12 +1,8 @@
 package UserInterface.Form;
 
-
-import BusinessLogic.BL_USER.BL_catalog;
 import BusinessLogic.BL_USER.BL_generalyTable;
-import Data_Access.DAO.DAO_C.CatalogDAO;
-import Data_Access.DAO.DAO_C.RoleDAO;
-import Data_Access.DTO.CatalogDTO;
-import Data_Access.DTO.RoleDTO;
+import Data_Access.DAO.PermissionDAO;
+import Data_Access.DTO.PermissionDTO;
 import UserInterface.Customer_control.Button_Text;
 import UserInterface.Customer_control.Text_box;
 import UserInterface.Customer_control.Text_label;
@@ -16,42 +12,43 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
-public class Update_panel_rol extends JPanel {
-    private Text_label name_rol ;
-    private Text_label hierarchy ;
-    private Text_label State_person ;
+public class Update_panel_permisos extends JPanel {
+    private Text_label name_permission ;
+    private Text_label description ;
+    private Text_label State_permission ;
     private Text_label search_name;
-    private Text_box name_rol_box ;
+    private Text_label name_method;
+    private Text_box name_method_box;
     private Text_box search_name_box;
+    private Text_box name_permission_box;
+    private Text_box description_box;
     private JComboBox<String> State_person_box;
-    private JComboBox<String> hierarchy_combo;
-    private String [] array_hierarchy;
     private Button_Text send;
     private Button_Text cancel;
     private Button_Text search;
-    private HashMap<String, Integer> hierarchy_map = new HashMap<>();
-    private HashMap<String, Integer> state_map = new HashMap<>();
-    Integer id_rol;
+    private final HashMap<String, Integer> state_map = new HashMap<>();
+    Integer id_permission;
     
-    public Update_panel_rol() {
+    public Update_panel_permisos() {
         setup_panel();
     }
 
     private void setup_panel() {
         setLayout(new GridBagLayout());
-        name_rol     = new Text_label("Nombre del rol");
-        hierarchy    = new Text_label("Categoria");
-        State_person = new Text_label("Estado") ;
+        name_permission     = new Text_label("Nombre del permiso");
+        description    = new Text_label("Descripcion");
+        State_permission = new Text_label("Estado") ;
         search_name  = new Text_label("Buscar por nombre");
-        name_rol_box    = new Text_box();
+        name_method  = new Text_label("Nombre del metodo");
+        name_method_box   = new Text_box();
+        description_box   = new Text_box();
+        name_permission_box   = new Text_box();
         search_name_box = new Text_box();
         State_person_box = new JComboBox<>(data_estado());
-        hierarchy_combo=new JComboBox<>(data_hierarchy());
         send=new Button_Text("Enviar", Spark_Style.FONT, null);
         send.addActionListener(e->validate_data());
         cancel=new Button_Text("Cancelar", Spark_Style.FONT, null);
@@ -82,41 +79,28 @@ public class Update_panel_rol extends JPanel {
         gbc.weightx = 1;
         gbc.weighty = 1;
         gbc.fill = GridBagConstraints.BOTH;
-        add(name_rol, gbc);
+        add(name_permission, gbc);
         gbc.gridy = 2;
-        add(name_rol_box, gbc);
+        add(name_permission_box, gbc);
         gbc.gridy = 3;
-        add(hierarchy, gbc);
+        add(description, gbc);
         gbc.gridy = 4;
-        add(hierarchy_combo, gbc);
+        add(description_box, gbc);
         gbc.gridy = 5;
-        add(State_person, gbc);
+        add(State_permission, gbc);
         gbc.gridy = 6;
         add(State_person_box, gbc);
         gbc.gridy = 7;
+        add(name_method, gbc);
+        gbc.gridy = 8;
+        add(name_method_box, gbc);
+        gbc.gridy = 9;
         gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.CENTER;
         add(send, gbc);
-        gbc.gridy = 20;
+        gbc.gridy = 9;
         gbc.anchor = GridBagConstraints.EAST;
         add(cancel, gbc);
-    }
-
-    private String[] data_hierarchy(){
-        try {
-            BL_catalog bl_catalog=new BL_catalog(new CatalogDAO());
-            List<CatalogDTO> list_role_hierarchy=bl_catalog.read_elments_role();
-            array_hierarchy=new String [list_role_hierarchy.size()];
-            for (int index = 0; index < list_role_hierarchy.size(); index++) {
-                array_hierarchy[index]=list_role_hierarchy.get(index).getName();
-                hierarchy_map.put(list_role_hierarchy.get(index).getName(),list_role_hierarchy.get(index).getId_catalog());
-
-            }
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return array_hierarchy;
     }
 
 
@@ -128,26 +112,28 @@ public class Update_panel_rol extends JPanel {
     }
 
     private void validate_data(){
-         String name=name_rol_box.getText();
-        int id_hierarchy= hierarchy_map.get(hierarchy_combo.getSelectedItem());
+        String name=name_permission_box.getText();
+        String description=description_box.getText();
+        String method=name_method_box.getText();
         int state=state_map.get(State_person_box.getSelectedItem());
-        if(name.isEmpty()||id_hierarchy==0||id_rol==0){
-            if(id_rol==0){
+        if(name.isEmpty()||description.isEmpty()||method.isEmpty()){
+            if(id_permission==0){
             Spark_Style.show_mesg_advert("Rol no encontrado use el buscador", "Registrar Rol");
-
             }
             Spark_Style.show_mesg_advert("Complete todos los campos", "Registrar Rol");
             return;
         }
-        RoleDTO role_created = new RoleDTO(id_rol,name,id_hierarchy,state);
-        send_data(role_created);
+        PermissionDTO permission = new PermissionDTO(id_permission,name,description,method,state);
+        send_data(permission);
     }
-    public boolean send_data(RoleDTO role){
-        BL_generalyTable<RoleDTO> table_role=new BL_generalyTable<>(RoleDAO::new);
+    public boolean send_data(PermissionDTO permission){
+        BL_generalyTable<PermissionDTO> table_permission=new BL_generalyTable<>(PermissionDAO::new);
         try {
-         if(table_role.update_elements(role)){
+         if(table_permission.update_elements(permission)){
             Spark_Style.show_mesg_correct("Usuario creado ", "Estado");
-            name_rol_box.setText("");
+            name_permission_box.setText("");
+            description_box.setText("");
+            name_method_box.setText("");
             return true;
          }
         } catch (Exception e) {
@@ -156,15 +142,16 @@ public class Update_panel_rol extends JPanel {
         return false;
     }
     private void search_data(){
-        BL_generalyTable<RoleDTO> bl_role=new BL_generalyTable<>(RoleDAO::new);
+        BL_generalyTable<PermissionDTO> bl_permission=new BL_generalyTable<>(PermissionDAO::new);
         try {
             System.out.println(search_name_box.getText()+"-----------------------4");
-        RoleDTO rol= bl_role.search_single(search_name_box.getText());
-            name_rol_box.setText(rol.getName());
-            hierarchy_combo.setSelectedItem(search(hierarchy_map,rol.getId_hierarchy()));
-            State_person_box.setSelectedItem(search(state_map,rol.getState()));
-            id_rol=rol.getId_Role();
-            System.out.println(rol.getId_Role());
+            PermissionDTO permission= bl_permission.search_single(search_name_box.getText());
+            name_permission_box.setText(permission.getName());
+            description_box.setText(permission.getDescription());
+            name_method_box.setText(permission.getName_method());
+            State_person_box.setSelectedItem(search(state_map,permission.getState()));
+            id_permission=permission.getId_permission();
+            System.out.println(permission.getId_permission());
         } catch (Exception e) {
         }
     }

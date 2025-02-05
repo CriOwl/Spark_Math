@@ -8,13 +8,12 @@ DROP TABLE IF EXISTS Student_course;
 DROP TABLE IF EXISTS Course;            
 DROP TABLE IF EXISTS Institution;   
 DROP TABLE IF EXISTS Persona;
-DROP TABLE IF EXISTS Institution_manage;       
+DROP TABLE IF EXISTS  Institution_manage;       
 DROP TABLE IF EXISTS Permission_role;
 DROP TABLE IF EXISTS Role;          
 DROP TABLE IF EXISTS Permission;     
 DROP TABLE IF EXISTS Catalog;
 DROP TABLE IF EXISTS Catalog_level;
-
 
 CREATE TABLE IF NOT EXISTS
     Persona (
@@ -216,4 +215,13 @@ SELECT         p.id_person,
                p.state 
                FROM  vw_persona p 
                JOIN Role r ON p.id_role=r.id_role 
-               WHERE p.state= 1 AND p.DNI LIKE '%1%' ;        
+               WHERE p.state= 1 AND p.DNI LIKE '%1%' ;      
+
+SELECT 
+                c.id_catalog, 
+                c.name, 
+                l.name, 
+                c.id_catalog_level 
+                FROM Catalog c 
+                JOIN Catalog_level l ON c.id_catalog_level = l.id_catalog_level 
+                WHERE c.state = 1 AND c.id_catalog_level=6 ; 

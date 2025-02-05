@@ -17,8 +17,6 @@ FROM
     Persona p
     JOIN Role r ON p.id_role = r.id_role;
 
-
-DROP VIEW vw_role;
 CREATE VIEW vw_role AS
 SELECT 
     r.id_role AS ID,
@@ -33,9 +31,6 @@ FROM
 GROUP BY 
     r.id_role, r.name, r.state, r.date_created, r.date_updated;
 
-
-
-DROP VIEW vw_permission_role;
 CREATE VIEW vw_permission_role AS
 SELECT 
     pr.id_permission_role,
@@ -50,24 +45,19 @@ FROM
     JOIN Role r ON pr.id_role = r.id_role
     JOIN Permission p ON pr.id_permission = p.id_permission;
 
-
-DROP VIEW vw_institution;
 CREATE VIEW vw_institution AS
 SELECT 
-    i.id_institution_manage AS ID,
-    ins.name AS INSTITUCION,
-    ins.amie AS CODIGO,
-    CONCAT(p.name, ' ', p.last_name) AS MANAGER
+    i.id_institution,
+    i.name AS institution_name,
+    i.amie,
+    CONCAT(p.name, ' ', p.last_name) AS manager_name,
+    i.state,
+    i.date_created,
+    i.date_updated
 FROM 
-    Institution_manage i
-    JOIN Institution ins ON i.id_institution_manage = ins.id_institution
+    Institution i
     JOIN Persona p ON i.id_manager = p.id_person;
 
-
-
-PRAGMA table_info(Institution);
-
-DROP VIEW vw_course;
 CREATE VIEW vw_course AS
 SELECT 
     c.id_course,
@@ -89,8 +79,6 @@ FROM
     JOIN Catalog cat_time ON c.id_catalog_time = cat_time.id_catalog
     JOIN Catalog cat_period ON c.id_catalog_period = cat_period.id_catalog;
 
-
-DROP VIEW vw_activity;
 CREATE VIEW vw_activity AS
 SELECT 
     a.id_activity,
@@ -108,8 +96,6 @@ FROM
     JOIN Institution inst ON c.id_institution = inst.id_institution
     JOIN Catalog cat ON a.id_catalog_activity_type = cat.id_catalog;
 
-
-DROP VIEW vw_student_course;
 CREATE VIEW vw_student_course AS
 SELECT 
     sc.id_student_course,
@@ -125,8 +111,6 @@ FROM
     JOIN Course c ON sc.id_course = c.id_course
     JOIN Institution inst ON c.id_institution = inst.id_institution;
 
-
-DROP VIEW vw_grades_activity_game1;
 CREATE VIEW vw_grades_activity_game1 AS
 SELECT 
     gag1.id_grade_activity_game1,
@@ -148,8 +132,6 @@ FROM
     JOIN Persona p ON sc.id_student = p.id_person
     JOIN Game1 g1 ON gag1.id_game1 = g1.id_game1;
 
-
-DROP VIEW vw_grades_activity_game2;
 CREATE VIEW vw_grades_activity_game2 AS
 SELECT 
     gag2.id_grade_activity_game2,
@@ -173,21 +155,27 @@ FROM
     JOIN Game2 g2 ON gag2.id_game2 = g2.id_game2;
 
 
-DROP VIEW vw_catalog;
 CREATE VIEW vw_catalog AS
 SELECT 
-    c.id_catalog AS ID,
-    c.name AS NOMBRE,
-    l.name AS TIPO
+    c.id_catalog,
+    c.name AS catalog_name,
+    cl.id_catalog_level,
+    cl.name AS catalog_level_name,
+    c.state AS catalog_state,
+    c.date_created AS catalog_date_created,
+    c.date_updated AS catalog_date_updated,
+    cl.state AS catalog_level_state,
+    cl.date_created AS catalog_level_date_created,
+    cl.date_updated AS catalog_level_date_updated
 FROM 
     Catalog c
-    JOIN Catalog_level l ON c.id_catalog_level = l.id_catalog_level;
+    LEFT JOIN Catalog_level cl ON c.id_catalog_level = cl.id_catalog_level;
 
-DROP VIEW vw_catalog_level;
+
 CREATE VIEW vw_catalog_level AS
 SELECT 
-    id_catalog_level,
-    name AS catalog_level_name,
+    id_catalog_level AS ID,
+    name AS catalog_level_name AS NOMBRE,
     state AS catalog_level_state,
     date_created AS catalog_level_date_created,
     date_updated AS catalog_level_date_updated
@@ -198,28 +186,6 @@ FROM
 DROP VIEW vw_persona;
 
 PRAGMA table_info(vw_catalog);
+ 
 
 
---view terminada
-DROP VIEW vw_docente;
-CREATE VIEW vw_docente AS
-SELECT
-    c.id_course AS ID,
-    CONCAT(p.name, ' ' , p.last_name) AS PROFESOR,
-    ins.name AS INSTITUCION,
-    ins.amie AS AMIE,
-    cat_per.name AS PERIODO,
-    cat_t.name AS JORNADA,
-    CONCAT(cat_l.name,' ', cat_p.name) AS CURSO
-FROM
-    Course c
-    JOIN Persona p ON c.id_teacher = p.id_person
-    JOIN Institution ins ON c.id_institution = ins.id_institution
-    JOIN Catalog cat_l ON c.id_catalog_level = cat_l.id_catalog
-    JOIN Catalog cat_per ON c.id_catalog_period = cat_per.id_catalog
-    JOIN Catalog cat_p ON c.id_catalog_parallel = cat_p.id_catalog
-    JOIN Catalog cat_t ON c.id_catalog_time = cat_t.id_catalog;
-
-
-
---
