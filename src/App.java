@@ -14,7 +14,7 @@ public class App {
             }
             System.out.println(Spark_Style.URL_MOON_THEMES);
             System.out.println(Spark_Style.URL_SUN_THEMES);
-            MainFrame venta= new MainFrame("Spark_Math") ;
+            MainFrame venta= new MainFrame("Spark_Math");
             /* User system=new User();
             system.sistema();  */
             /* PermissionRoleDAO consulta=new PermissionRoleDAO();

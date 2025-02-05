@@ -51,7 +51,7 @@ public class InstitutionViewDAO extends Data_Helper_Sqlite implements IVIEWDAO<I
     public List<InstitutionViewDTO> readall() throws Exception {
         List<InstitutionViewDTO> institutions = new ArrayList<>();
         InstitutionViewDTO insitution = new InstitutionViewDTO();
-        String query = "SELECT i.ID, i.INSTITUTION, i.CODIGO,  i.MANAGER FROM vw_institution i ";
+        String query = "SELECT i.ID, i.INSTITUCION, i.CODIGO,  i.MANAGER FROM vw_institution i ";
         try {
             Connection connect = opConnection();
             Statement stmt = connect.createStatement();

@@ -17,6 +17,8 @@ FROM
     Persona p
     JOIN Role r ON p.id_role = r.id_role;
 
+
+DROP VIEW vw_role;
 CREATE VIEW vw_role AS
 SELECT 
     r.id_role AS ID,
@@ -31,6 +33,9 @@ FROM
 GROUP BY 
     r.id_role, r.name, r.state, r.date_created, r.date_updated;
 
+
+
+DROP VIEW vw_permission_role;
 CREATE VIEW vw_permission_role AS
 SELECT 
     pr.id_permission_role,
@@ -45,27 +50,36 @@ FROM
     JOIN Role r ON pr.id_role = r.id_role
     JOIN Permission p ON pr.id_permission = p.id_permission;
 
-CREATE VIEW vw_institution AS
-SELECT 
-    i.id_institution AS ID,
-    i.name AS INSTITUTION,
-    i.amie AS CODIGO,
-    CONCAT(p.name, ' ', p.last_name) AS MANAGER
-FROM 
-    Institution i
-    JOIN Persona p ON i.id_manager = p.id_person;
 
 DROP VIEW vw_institution;
+CREATE VIEW vw_institution AS
+SELECT 
+    i.id_institution_manage AS ID,
+    ins.name AS INSTITUCION,
+    ins.amie AS CODIGO,
+    CONCAT(p.name, ' ', p.last_name) AS MANAGER
+FROM 
+    Institution_manage i
+    JOIN Institution ins ON i.id_institution_manage = ins.id_institution
+    JOIN Persona p ON i.id_manager = p.id_person;
 
+
+
+PRAGMA table_info(Institution);
+
+DROP VIEW vw_course;
 CREATE VIEW vw_course AS
 SELECT 
-    c.id_course AS ID,
-    CONCAT(p.name, ' ', p.last_name) AS PROFESOR,
-    inst.name AS INSTITUCION,
-    cat_lvl.name AS GRADO,
-    cat_par.name AS PARALELO,
-    cat_time.name AS JORNADA,
-    cat_period.name AS PERIODO
+    c.id_course,
+    CONCAT(p.name, ' ', p.last_name) AS teacher_name,
+    inst.name AS institution_name,
+    cat_lvl.name AS grade_level,
+    cat_par.name AS parallel,
+    cat_time.name AS schedule,
+    cat_period.name AS period,
+    c.state,
+    c.date_created,
+    c.date_updated
 FROM 
     Course c
     JOIN Persona p ON c.id_teacher = p.id_person
@@ -75,9 +89,8 @@ FROM
     JOIN Catalog cat_time ON c.id_catalog_time = cat_time.id_catalog
     JOIN Catalog cat_period ON c.id_catalog_period = cat_period.id_catalog;
 
-DROP VIEW vw_course;
 
-
+DROP VIEW vw_activity;
 CREATE VIEW vw_activity AS
 SELECT 
     a.id_activity,
@@ -95,6 +108,8 @@ FROM
     JOIN Institution inst ON c.id_institution = inst.id_institution
     JOIN Catalog cat ON a.id_catalog_activity_type = cat.id_catalog;
 
+
+DROP VIEW vw_student_course;
 CREATE VIEW vw_student_course AS
 SELECT 
     sc.id_student_course,
@@ -110,6 +125,8 @@ FROM
     JOIN Course c ON sc.id_course = c.id_course
     JOIN Institution inst ON c.id_institution = inst.id_institution;
 
+
+DROP VIEW vw_grades_activity_game1;
 CREATE VIEW vw_grades_activity_game1 AS
 SELECT 
     gag1.id_grade_activity_game1,
@@ -131,6 +148,8 @@ FROM
     JOIN Persona p ON sc.id_student = p.id_person
     JOIN Game1 g1 ON gag1.id_game1 = g1.id_game1;
 
+
+DROP VIEW vw_grades_activity_game2;
 CREATE VIEW vw_grades_activity_game2 AS
 SELECT 
     gag2.id_grade_activity_game2,
@@ -154,6 +173,7 @@ FROM
     JOIN Game2 g2 ON gag2.id_game2 = g2.id_game2;
 
 
+DROP VIEW vw_catalog;
 CREATE VIEW vw_catalog AS
 SELECT 
     c.id_catalog AS ID,
@@ -163,7 +183,7 @@ FROM
     Catalog c
     JOIN Catalog_level l ON c.id_catalog_level = l.id_catalog_level;
 
-
+DROP VIEW vw_catalog_level;
 CREATE VIEW vw_catalog_level AS
 SELECT 
     id_catalog_level,
@@ -177,16 +197,29 @@ FROM
 
 DROP VIEW vw_persona;
 
-<<<<<<< HEAD
-DROP VIEW vw_catalog; 
-=======
 PRAGMA table_info(vw_catalog);
- 
->>>>>>> 424ffbe0808212f93b2f8038541ad4df898f3250
 
 
-SELECT c.ID, c.NOMBRE, c.tipo  
-FROM vw_catalog c ;
---JOIN Catalog_level l ON c.id_catalog_level = l.id_catalog_level  
---WHERE c.state = 1;
+--view terminada
+DROP VIEW vw_docente;
+CREATE VIEW vw_docente AS
+SELECT
+    c.id_course AS ID,
+    CONCAT(p.name, ' ' , p.last_name) AS PROFESOR,
+    ins.name AS INSTITUCION,
+    ins.amie AS AMIE,
+    cat_per.name AS PERIODO,
+    cat_t.name AS JORNADA,
+    CONCAT(cat_l.name,' ', cat_p.name) AS CURSO
+FROM
+    Course c
+    JOIN Persona p ON c.id_teacher = p.id_person
+    JOIN Institution ins ON c.id_institution = ins.id_institution
+    JOIN Catalog cat_l ON c.id_catalog_level = cat_l.id_catalog
+    JOIN Catalog cat_per ON c.id_catalog_period = cat_per.id_catalog
+    JOIN Catalog cat_p ON c.id_catalog_parallel = cat_p.id_catalog
+    JOIN Catalog cat_t ON c.id_catalog_time = cat_t.id_catalog;
 
+
+
+--

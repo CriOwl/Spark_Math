@@ -299,6 +299,17 @@ VALUES
     (2, 3, '8'),
     (2, 4, '10'),
     (9, 5, '12');
+
+
+INSERT INTO Institution_manage (id_institution, id_manager )
+VALUES 
+    (1, 1),
+    (2, 2),
+    (3, 3),
+    (4, 4),
+    (5, 5);
+
+
 INSERT INTO
     ROLE (name,id_hierarchy)
 VALUES
