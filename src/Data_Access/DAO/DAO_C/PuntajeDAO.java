@@ -92,7 +92,7 @@ public class PuntajeDAO extends Data_Helper_Sqlite implements IDAOGAME<PuntajeDT
     public boolean create(PuntajeDTO entity) throws Exception {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  
         LocalDateTime now = LocalDateTime.now();
-        String query = " INSERT INTO Puntaje (IdUsuario,FechaJuego,Aciertos,Errores) VALUES (?,?,?,?)";
+        String query = " INSERT INTO Puntaje (id_person,FechaJuego,Aciertos,Errores) VALUES (?,?,?,?)";
         try {
             Connection        conn  = opConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);

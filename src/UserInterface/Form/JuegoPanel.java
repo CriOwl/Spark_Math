@@ -12,11 +12,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import BusinessLogic.BL_USER.JuegoBL;
+import Data_Access.DTO.PuntajeDTO;
 // import BusinessLogic.JuegoBL;
 // import DataAccess.DTO.PuntajeDTO;
 // import UserInterface.CustomerControl.PoliButton;
 // import UserInterface.CustomerControl.PoliLabel;
 import UserInterface.Customer_control.Text_label;
+import UserInterface.Form.Login_panel;
 
 public class JuegoPanel extends JPanel {
     private JButton btnNum1, btnNum2;
@@ -28,11 +32,14 @@ public class JuegoPanel extends JPanel {
     private int rondaActual = 1;
     private final int TOTAL_RONDAS = 10;
     private JFrame gameWindow;
-    //private JuegoBL juegoBL = new JuegoBL();
+    //private Login_panel lp;
+    private Integer userId;
+    private JuegoBL juegoBL = new JuegoBL();
 
-    public JuegoPanel(JFrame gameWindow) {
+    public JuegoPanel(JFrame gameWindow, Integer id) {
         this.gameWindow = gameWindow; // Inicializar la referencia
         customizeComponent(gameWindow);
+        this.userId = id;
     }
 
 
@@ -135,15 +142,15 @@ public class JuegoPanel extends JPanel {
         }
     }
 
-    private void guardarPartida() {
+        private void guardarPartida() {
         try {
             
-            if (mainForm.getUsuarioActual() == null) {
+            if (this.userId == null) {
                 throw new Exception("Usuario no autenticado");
             }
             
             PuntajeDTO puntaje = new PuntajeDTO(
-                mainForm.getUsuarioActual().getIdUsuario(),
+                this.userId,
                 "",
                 aciertos,
                 errores
