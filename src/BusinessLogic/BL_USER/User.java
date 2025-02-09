@@ -36,9 +36,9 @@ public class User {
 
     public int getIdUsuario() {
         if (content_user != null) {
-            return userId; // Suponiendo que getId_usuario() devuelve el ID del usuario.
+            return userId; 
         }
-        return -1; // Retorna -1 si no hay usuario autenticado
+        return -1; 
     }
  
     public List<String> getList_permissions() {

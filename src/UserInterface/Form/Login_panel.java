@@ -21,15 +21,11 @@ public class Login_panel extends JPanel {
     public JButton login_button;
     private final User user=new User();
     private List<String> list_permissions;
-<<<<<<< HEAD
     private HashMap<String,String> map_panel;
 
     public HashMap<String, String> getMap_panel() {
         return map_panel;
     }
-=======
-    public Integer userId = null;
->>>>>>> 98efd9424c37b12aae1e3481d403779fe8fe0b83
 
     public Login_panel() {
         init_component();
