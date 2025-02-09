@@ -170,5 +170,4 @@ public class CourseDAO extends Data_Helper_Sqlite implements IDAO<CourseDTO>{
         }
         return 0;
     }
-
 }

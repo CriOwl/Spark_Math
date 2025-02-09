@@ -36,6 +36,7 @@ public class Menu_panel extends JPanel {
         // Hacer visible la ventana del juego
         gameWindow.setVisible(true);
     }
+   
 
     private void customizepanel(List<String> Opciones_permisos, Integer userId) {
         init_component(Opciones_permisos, userId);

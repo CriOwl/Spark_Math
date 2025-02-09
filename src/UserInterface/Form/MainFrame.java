@@ -1,11 +1,8 @@
 package UserInterface.Form;
 
-import UserInterface.Customer_control.Table_Spark;
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
 
-import javax.naming.spi.ObjectFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -17,10 +14,7 @@ import UserInterface.Spark_Style;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.Image;
-import java.awt.Window;
 import java.util.List;
-import java.util.function.Supplier;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 
