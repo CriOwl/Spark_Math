@@ -8,13 +8,13 @@ public class App {
            /*  PersonDAO person=new PersonDAO();
             person.delete(11); */
             LoginDAO login=new LoginDAO();
-            
-            for (LoginDTO elem : login.read_column()) {
+            System.out.println(login.login("1751375963","admin"));
+             for (LoginDTO elem : login.read_column()) {
                 System.out.println(elem.getName_column());
             }
             System.out.println(Spark_Style.URL_MOON_THEMES);
             System.out.println(Spark_Style.URL_SUN_THEMES);
-            MainFrame venta= new MainFrame("Spark_Math");
+            MainFrame venta= new MainFrame("Spark_Math"); 
             /* User system=new User();
             system.sistema();  */
             /* PermissionRoleDAO consulta=new PermissionRoleDAO();

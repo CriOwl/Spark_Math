@@ -2,13 +2,12 @@ package BusinessLogic.BL_USER;
 
 
 
-import java.util.List;
-
 import Data_Access.DAO.DAO_C.CatalogDAO;
 import Data_Access.DTO.CatalogDTO;
+import java.util.List;
 
 public class BL_catalog {
-    private CatalogDAO catalogdao;
+    private final CatalogDAO catalogdao;
 
     public BL_catalog(CatalogDAO catalog) {
         this.catalogdao = catalog;
@@ -34,8 +33,8 @@ public class BL_catalog {
         return catalogdao.update(entity);
     }
 
-    public boolean delete(Integer id) throws Exception {
-        return catalogdao.delete(id);
+    public boolean delete(CatalogDTO entity) throws Exception {
+        return catalogdao.delete(entity);
     }
     public CatalogDTO search_single(String DNI) throws Exception{
         return catalogdao.search_read_single(DNI);

@@ -225,3 +225,10 @@ SELECT
                 FROM Catalog c 
                 JOIN Catalog_level l ON c.id_catalog_level = l.id_catalog_level 
                 WHERE c.state = 1 AND c.id_catalog_level=6 ; 
+
+SELECT 
+            p.id_role,
+            r.name 
+            FROM Persona p 
+            JOIN Role  r ON p.id_role=r.id_role 
+            WHERE p.DNI='' AND password='';

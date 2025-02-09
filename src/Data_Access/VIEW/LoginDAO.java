@@ -217,5 +217,31 @@ public class LoginDAO extends Data_Helper_Sqlite implements IVIEWDAO<LoginDTO> {
         }
         return list_person;
     }
+    public LoginDTO login(String DNI, String password){
+        LoginDTO persona= new LoginDTO();
+        String query= "SELECT "
+                      +"p.id_role,"   
+                      +"r.name "   
+                      +"From Persona p "   
+                      +"JOIN Role r ON p.id_role=r.id_role "   
+                      +"WHERE p.DNI= ? AND p.password= ? ";
+        try {
+            Connection conect=opConnection();
+            PreparedStatement pst=conect.prepareStatement(query);
+            pst.setString(1, DNI);
+            pst.setString(2, password);
+            ResultSet rs=pst.executeQuery();
+            while(rs.next()){
+                persona = new LoginDTO(
+                    rs.getInt(1),
+                    rs.getString(2)
+                    );
+                    return persona;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }       
+        return persona;
+    }
 
 }

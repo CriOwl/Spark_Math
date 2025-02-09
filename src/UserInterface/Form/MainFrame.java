@@ -10,25 +10,25 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import javax.swing.text.AbstractDocument;
-
 import com.formdev.flatlaf.intellijthemes.FlatCarbonIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatMonokaiProIJTheme;
 import UserInterface.Spark_Style;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.Window;
 import java.util.List;
+import java.util.function.Supplier;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 
 public class MainFrame extends JFrame {
-    private JButton change_themes = new JButton();
-    private  ImageIcon moon_theme_icon = new ImageIcon (new ImageIcon(Spark_Style.URL_MOON_THEMES).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
-    private  ImageIcon sun_theme_icon = new ImageIcon(new ImageIcon(Spark_Style.URL_SUN_THEMES).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
-    private  ImageIcon logo = new ImageIcon(Spark_Style.URL_LOGO);
+    private  final JButton change_themes = new JButton();
+    private  final ImageIcon moon_theme_icon = new ImageIcon (new ImageIcon(Spark_Style.URL_MOON_THEMES).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+    private  final ImageIcon sun_theme_icon = new ImageIcon(new ImageIcon(Spark_Style.URL_SUN_THEMES).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+    private  final ImageIcon logo = new ImageIcon(Spark_Style.URL_LOGO);
     private Login_panel login;
     private Menu_panel menu;
     private JFrame main_windown;
@@ -40,11 +40,8 @@ public class MainFrame extends JFrame {
 
     public void created_windown(String name_app) {
         try {
-            UIManager.setLookAndFeel(new FlatCarbonIJTheme());
-        } catch (Exception e) {
-        }
+        UIManager.setLookAndFeel(new FlatCarbonIJTheme());
         main_windown = new JFrame(name_app);
-        main_windown.setLocation(700, 0);
         main_windown.setExtendedState(JFrame.MAXIMIZED_BOTH);
         main_windown.setIconImage(logo.getImage());
         main_windown.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -57,6 +54,9 @@ public class MainFrame extends JFrame {
         change_themes.addActionListener(e -> change_icon_themes(this.is_dark));
         Login_panel();
         main_windown.setVisible(true);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     private void  change_icon_themes(boolean is_dark) {
@@ -66,7 +66,7 @@ public class MainFrame extends JFrame {
                     UIManager.setLookAndFeel(new FlatCyanLightIJTheme());
                 } else {
                     change_themes.setIcon(sun_theme_icon);
-                    UIManager.setLookAndFeel(new FlatCarbonIJTheme());
+                    UIManager.setLookAndFeel(new FlatMonokaiProIJTheme());
                 }
             } catch (Exception e) {
                 System.out.println("No se puede cargar el tema");
@@ -76,34 +76,24 @@ public class MainFrame extends JFrame {
     }
     
     private void menu_panel(List<String> permisos){
-        System.out.println("Panel del menu");
         main_windown.remove(login);
-        System.out.println("cargando menu");
         menu=new Menu_panel(permisos);
+        for (int i = 0; i < permisos.size(); i++) {
+        }
         Container container=getContentPane();
         container.setLayout(new BorderLayout());
         container.add(menu,BorderLayout.WEST);
         container.setPreferredSize(new Dimension(300,getHeight()));
         main_windown.add(container);
         main_windown.revalidate();
-        //Cambiar main_panel--
-<<<<<<< HEAD
-        Update_panel_rol update_panel = new Update_panel_rol();
-=======
-        Manage_panel_catalog update_panel = new Manage_panel_catalog();
->>>>>>> 0461c40bf167da391b8fa22fafeedac65c26fdf7
+        Update_panel_permisos update_panel = new Update_panel_permisos();
         container.add(update_panel,BorderLayout.CENTER);
         main_windown.add(container);
         main_windown.revalidate();
-
-       /*  JPanel panel=new JPanel();
-        main_windown.add(panel,BorderLayout.CENTER); */
     }
-    private void change_panel(Component panel){
-        Update_panel_person manage_panel=new Update_panel_person();
-        //main_windown.remove(panel);
-        main_windown.add(manage_panel,BorderLayout.CENTER);
-    
+    private void change_panel_menu(JPanel panel){
+        main_windown.remove(panel);
+        main_windown.add(panel,BorderLayout.CENTER);
         main_windown.revalidate();
     }
     private void Login_panel(){

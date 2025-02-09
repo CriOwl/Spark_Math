@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 
+
 public class Menu_panel extends JPanel {
-    private List<Button_Text> lista_botones;
-    private JPanel menu_panel;
+    public List<Button_Text> lista_botones;
 
     public Menu_panel(List<String> Opciones_permisos) {
         customizepanel(Opciones_permisos);
@@ -23,7 +23,6 @@ public class Menu_panel extends JPanel {
     }
 
     private void customizepanel(List<String> Opciones_permisos) {
-       
         init_component(Opciones_permisos);
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -34,11 +33,11 @@ public class Menu_panel extends JPanel {
             gbc.fill=GridBagConstraints.HORIZONTAL;
             gbc.anchor = GridBagConstraints.WEST;
             lista_botones.get(i).setPreferredSize(new Dimension(250, 50));
+            //lista_botones.get(i).addActionListener();
             add(lista_botones.get(i), gbc);
         }
     }
+    
 
-    private void contanier() {
 
-    }
 }

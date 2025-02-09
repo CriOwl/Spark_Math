@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CatalogDAO extends Data_Helper_Sqlite {
-
+    
     public CatalogDTO readby(Integer id) throws Exception {
         CatalogDTO registro = new CatalogDTO();
         String query = " SELECT "
@@ -197,7 +197,4 @@ public class CatalogDAO extends Data_Helper_Sqlite {
         }
         return registro;
     }
-   
-    
-
 }
