@@ -220,6 +220,7 @@ public class LoginDAO extends Data_Helper_Sqlite implements IVIEWDAO<LoginDTO> {
     public LoginDTO login(String DNI, String password){
         LoginDTO persona= new LoginDTO();
         String query= "SELECT "
+                      +"p.id_person, "
                       +"p.id_role,"   
                       +"r.name "   
                       +"From Persona p "   
@@ -234,7 +235,8 @@ public class LoginDAO extends Data_Helper_Sqlite implements IVIEWDAO<LoginDTO> {
             while(rs.next()){
                 persona = new LoginDTO(
                     rs.getInt(1),
-                    rs.getString(2)
+                    rs.getInt(2),
+                    rs.getString(3)
                     );
                     return persona;
             }

@@ -22,6 +22,7 @@ public class Login_panel extends JPanel {
     private final User user=new User();
     private List<String> list_permissions;
     private HashMap<String,String> map_panel;
+    private Integer userId;
 
     public HashMap<String, String> getMap_panel() {
         return map_panel;
@@ -42,7 +43,7 @@ public class Login_panel extends JPanel {
         password_box = new JPasswordField();
         password_box.setPreferredSize(Spark_Style.dimension_button);
         login_button = new JButton("Ingresar");
-        //login_button.addActionListener(e->login_bl());
+        login_button.addActionListener(e->login_bl());
         setLayout(new GridBagLayout());
         GridBagConstraints gc = new GridBagConstraints();
         gc.insets = new Insets(10, 10, 10, 10);
