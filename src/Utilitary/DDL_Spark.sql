@@ -14,6 +14,7 @@ DROP TABLE IF EXISTS Role;
 DROP TABLE IF EXISTS Permission;     
 DROP TABLE IF EXISTS Catalog;
 DROP TABLE IF EXISTS Catalog_level;
+DROP TABLE IF EXISTS Puntaje;
 
 CREATE TABLE IF NOT EXISTS
     Persona (
@@ -200,6 +201,18 @@ CREATE TABLE IF NOT EXISTS Game2 (
     state INTEGER DEFAULT 1 CONSTRAINT states CHECK (state IN (0, 1)),
     date_created DATETIME DEFAULT (datetime('now', 'localtime')),
     date_updated DATETIME
+);
+
+CREATE TABLE Puntaje (
+    id_score INTEGER PRIMARY KEY AUTOINCREMENT
+    ,id_person INTEGER NOT NULL REFERENCES Persona(id_person)
+    ,FechaJuego DATETIME
+    ,Aciertos INTEGER DEFAULT 0
+    ,Errores INTEGER DEFAULT 0
+    
+    ,Estado VARCHAR(1) DEFAULT ('A') CONSTRAINT verficador CHECK(Estado IN ('A','I')) 
+    ,Fecha_creacion DATETIME DEFAULT (datetime('now','localtime'))
+    ,Fecha_modificacion DATETIME
 );
 
 INSERT INTO Persona(name,last_name,DNI,email,password,id_role)

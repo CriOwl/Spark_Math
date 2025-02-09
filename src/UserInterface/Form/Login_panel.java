@@ -21,11 +21,15 @@ public class Login_panel extends JPanel {
     public JButton login_button;
     private final User user=new User();
     private List<String> list_permissions;
+<<<<<<< HEAD
     private HashMap<String,String> map_panel;
 
     public HashMap<String, String> getMap_panel() {
         return map_panel;
     }
+=======
+    public Integer userId = null;
+>>>>>>> 98efd9424c37b12aae1e3481d403779fe8fe0b83
 
     public Login_panel() {
         init_component();
@@ -88,14 +92,21 @@ public class Login_panel extends JPanel {
             Spark_Style.show_mesg_advert("Datos Incorrectos", "Login");
             return false;
         }
+            userId = user.getIdUsuario();
+            System.out.println("ID del usuario autenticado: " + userId);
+
         list_permissions=new ArrayList<>();
         list_permissions=user.getList_permissions();
         map_panel=user.getMap_permission();
         return true;
     }
 
+
     public List<String> getList_permissions() {
         return list_permissions;
     }
 
+    public Integer getUser_id(){
+        return userId;
+    }
 }

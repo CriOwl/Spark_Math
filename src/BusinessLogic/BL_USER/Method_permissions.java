@@ -28,5 +28,8 @@ public class Method_permissions {
     public void activity(){
         System.out.println("asdasdsad");
     }
+    public void play(){
+        
+    }
     
 }

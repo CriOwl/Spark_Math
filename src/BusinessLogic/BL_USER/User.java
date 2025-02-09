@@ -11,6 +11,8 @@ public class User {
     private Role rol;
     private List<String> list_permissions;
     private HashMap<String,String> map_permission;
+    public Integer userId;
+
     
     public boolean login_public(String user,String password){
         return login(user, password);
@@ -24,13 +26,21 @@ public class User {
                 rol=new Role(content_user.getId_role());
                 list_permissions=rol.getList_permissions();
                 map_permission=rol.getMap_permission();
+                userId = content_user.getId_person();
             return true;
             }
         } catch (Exception e) {
         }
         return false;
     }
-     
+
+    public int getIdUsuario() {
+        if (content_user != null) {
+            return userId; // Suponiendo que getId_usuario() devuelve el ID del usuario.
+        }
+        return -1; // Retorna -1 si no hay usuario autenticado
+    }
+ 
     public List<String> getList_permissions() {
         return list_permissions;
     }
