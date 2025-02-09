@@ -65,6 +65,16 @@ VALUES
         'admin_role'
     ),
     (
+        'Administrar Permisos',
+        'Permite al usuario administrar docentes',
+        'admin_role'
+    ),
+    (
+        'Asociar Permisos a Roles',
+        'Permite al usuario administrar docentes',
+        'admin_role'
+    ),
+    (
         'Administrar Estudiantes',
         'Permite al usuario administrar estudiantes',
         'admin_student'
@@ -103,6 +113,11 @@ VALUES
         'Realizar Actividades',
         'Permite al usuario realizar actividades',
         'activity'
+    ),
+    (
+        'Jugar',
+        'Permite al usuario jugar para el diagnostico',
+        'play'
     );
 
 INSERT INTO
@@ -136,7 +151,8 @@ VALUES
     (3, 8),
     (3, 9),
     (4, 8),
-    (4, 9);
+    (4, 9),
+    (4, 11);
 
 INSERT INTO
     Persona (

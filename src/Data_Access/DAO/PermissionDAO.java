@@ -238,7 +238,6 @@ public class PermissionDAO extends Data_Helper_Sqlite implements IDAO<Permission
     }
     @Override
     public PermissionDTO search_read_single(String name) throws Exception {
-        System.out.println(name+"--------852");
         PermissionDTO registro = new PermissionDTO();
         String query = "SELECT "
                 + "p.id_permission, "

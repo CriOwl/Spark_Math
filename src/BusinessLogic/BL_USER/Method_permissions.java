@@ -1,32 +1,47 @@
 package BusinessLogic.BL_USER;
 
+import javax.swing.JPanel;
+
 public class Method_permissions {
-    public void admin_teacher(){
-        System.out.println("aaaaa");
-    }
-    public void admin_student(){
+    public JPanel adminTeacher(){
+        return new JPanel();
         
     }
-    public void admin_manage(){
-
-    }
-    public void admin_general_test(){
-
-    }
-    public void admin_course_test(){
-
-    }
-    public void admin_course(){
-
-    }
-    public void admin_institutions(){
-
-    }
-    public void view_reports(){
+    public JPanel adminPermission(){
+        return new JPanel();
         
     }
-    public void activity(){
+    public JPanel adminPermissionRole(){
+        return new JPanel();
+
+    }
+    public JPanel adminPerson(){
+        return new JPanel();
+
+    }
+    public JPanel adminInstitution(){
+        return new JPanel();
+
+    }
+    public JPanel adminCatalogo(){
+        return new JPanel();
+
+    }
+    public JPanel adminCourse(){
+        return new JPanel();
+
+    }
+    public JPanel view_reports(){
+        return new JPanel();
+        
+    }
+    public JPanel activity(){
         System.out.println("asdasdsad");
+        return new JPanel();
+    }
+    public JPanel play(){
+        return new JPanel();
+        
     }
     
 }

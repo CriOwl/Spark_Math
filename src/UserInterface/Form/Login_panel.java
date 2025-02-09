@@ -7,6 +7,7 @@ import UserInterface.Customer_control.Text_label;
 import UserInterface.Spark_Style;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.text.AbstractDocument;
@@ -18,8 +19,14 @@ public class Login_panel extends JPanel {
     private JButton validate_DNI;
     private JPasswordField password_box;
     public JButton login_button;
-    private User user=new User();
+    private final User user=new User();
     private List<String> list_permissions;
+    private HashMap<String,String> map_panel;
+    private Integer userId;
+
+    public HashMap<String, String> getMap_panel() {
+        return map_panel;
+    }
 
     public Login_panel() {
         init_component();
@@ -36,7 +43,7 @@ public class Login_panel extends JPanel {
         password_box = new JPasswordField();
         password_box.setPreferredSize(Spark_Style.dimension_button);
         login_button = new JButton("Ingresar");
-        //login_button.addActionListener(e->login_bl());
+        login_button.addActionListener(e->login_bl());
         setLayout(new GridBagLayout());
         GridBagConstraints gc = new GridBagConstraints();
         gc.insets = new Insets(10, 10, 10, 10);
@@ -82,13 +89,21 @@ public class Login_panel extends JPanel {
             Spark_Style.show_mesg_advert("Datos Incorrectos", "Login");
             return false;
         }
+            userId = user.getIdUsuario();
+            System.out.println("ID del usuario autenticado: " + userId);
+
         list_permissions=new ArrayList<>();
         list_permissions=user.getList_permissions();
+        map_panel=user.getMap_permission();
         return true;
     }
+
 
     public List<String> getList_permissions() {
         return list_permissions;
     }
 
+    public Integer getUser_id(){
+        return userId;
+    }
 }

@@ -15,23 +15,20 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-public class Manage_panel extends JPanel {
-    private List<Text_label> Label_text_list;
-    private List<Text_box> Label_box_list;
-    private Button_Text Button_update;
-    private Button_Text Button_created;
-    private Button_Text Button_search;
-    private Button_Text Button_deletd;
-    private Text_box search_box;
-    private Text_label search_text;
+public class Manage_panel_person extends JPanel {
+    private final Button_Text Button_update;
+    private final Button_Text Button_created;
+    private final Button_Text Button_search;
+    private final Button_Text Button_deletd;
+    private final Text_box search_box;
+    private final Text_label search_text;
     private JTable table;
     private JScrollPane scrollPane;
 
-    public Manage_panel() {
+    public Manage_panel_person() {
         setLayout(new GridBagLayout());
         Button_update = new Button_Text("Actualizar", Spark_Style.FONT_BOLD, null);
         Button_created = new Button_Text("Crear", Spark_Style.FONT_BOLD, null);
@@ -67,7 +64,7 @@ public class Manage_panel extends JPanel {
             int index = 0;
             for (LoginDTO user : new LoginDAO().readall()) {
                 data[index][0] = user.getId_person();
-                data[index][1] = user.getFull_name();
+                data[index][1] = user.getName();
                 data[index][2] = user.getDNI();
                 data[index][3] = user.getEmail();
                 data[index][4] = user.getPassword();
@@ -99,7 +96,7 @@ public class Manage_panel extends JPanel {
             int index = 0;
             for (LoginDTO user : results) {
                 data[index][0] = user.getId_person();
-                data[index][1] = user.getFull_name();
+                data[index][1] = user.getName();
                 data[index][2] = user.getDNI();
                 data[index][3] = user.getEmail();
                 data[index][4] = user.getPassword();
@@ -114,23 +111,6 @@ public class Manage_panel extends JPanel {
         } catch (Exception e) {
             System.out.println(e);
         }
-    }
-
-    private void customize_table(JTable tabla) {
-        tabla.setFont(Spark_Style.FONT);
-        tabla.setForeground(Spark_Style.COLOR_FONT);
-        tabla.setBackground(Spark_Style.COLOR_BACKGROUND);
-        tabla.setGridColor(Spark_Style.COLOR_BACKGROUND_GRID);
-        tabla.setSelectionBackground(Spark_Style.COLOR_BACKGROUND_SELECT);
-        tabla.setSelectionForeground(Spark_Style.COLOR_FONT);
-        tabla.setRowHeight(30);
-        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-        tabla.setOpaque(false);
-        tabla.setFocusable(true);
-        tabla.setRowSelectionAllowed(true);
-        tabla.setColumnSelectionAllowed(false);
-        tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        tabla.setDefaultEditor(Object.class, null);
     }
 
     private void setup_panel() {

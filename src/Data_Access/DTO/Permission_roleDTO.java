@@ -12,6 +12,15 @@ public class Permission_roleDTO {
     private String method_name;
 
     
+    public Permission_roleDTO(Integer id_permission_role, Integer id_role, String role_name, Integer id_permission, 
+            String permission_name) {
+        this.id_permission_role = id_permission_role;
+        this.id_role = id_role;
+        this.id_permission = id_permission;
+        this.role_name = role_name;
+        this.permission_name = permission_name;
+    }
+
     public String getMethod_name() {
         return method_name;
     }
@@ -61,12 +70,11 @@ public class Permission_roleDTO {
 
     
     
-    public Permission_roleDTO(Integer id_role, Integer id_permission, Integer state, String date_created,
+    public Permission_roleDTO(Integer id_role, Integer id_permission, Integer state, 
             String date_updated) {
         this.id_role        = id_role;
         this.id_permission  = id_permission;
         this.state          = state;
-        this.date_created   = date_created;
         this.date_updated   = date_updated;
     }
 

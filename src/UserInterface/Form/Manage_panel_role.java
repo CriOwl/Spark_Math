@@ -1,7 +1,6 @@
 package UserInterface.Form;
 
 import BusinessLogic.BL_USER.BL_generalyView;
-import Data_Access.DAO.RoleDAO;
 import Data_Access.DAO.DAO_C.VWRoleDAO;
 import Data_Access.DTO.RoleDTO;
 import UserInterface.Customer_control.Button_Text;
@@ -16,17 +15,16 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 public class Manage_panel_role extends JPanel {
-    private Button_Text Button_update;
-    private Button_Text Button_created;
-    private Button_Text Button_search;
-    private Button_Text Button_deletd;
-    private Text_box search_box;
-    private Text_label search_text;
+    private final Button_Text Button_update;
+    private final Button_Text Button_created;
+    private final Button_Text Button_search;
+    private final Button_Text Button_deletd;
+    private final Text_box search_box;
+    private final Text_label search_text;
     private JTable table;
     private JScrollPane scrollPane;
 
@@ -110,23 +108,7 @@ public class Manage_panel_role extends JPanel {
         }
     }
 
-    private void customize_table(JTable tabla) {
-        tabla.setFont(Spark_Style.FONT);
-        tabla.setForeground(Spark_Style.COLOR_FONT);
-        tabla.setBackground(Spark_Style.COLOR_BACKGROUND);
-        tabla.setGridColor(Spark_Style.COLOR_BACKGROUND_GRID);
-        tabla.setSelectionBackground(Spark_Style.COLOR_BACKGROUND_SELECT);
-        tabla.setSelectionForeground(Spark_Style.COLOR_FONT);
-        tabla.setRowHeight(30);
-        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-        tabla.setOpaque(false);
-        tabla.setFocusable(true);
-        tabla.setRowSelectionAllowed(true);
-        tabla.setColumnSelectionAllowed(false);
-        tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        tabla.setDefaultEditor(Object.class, null);
-    }
-
+   
     private void setup_panel() {
         JTableHeader header = table.getTableHeader();
         header.setFont(Spark_Style.FONT_BOLD);
