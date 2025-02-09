@@ -18,8 +18,6 @@ public class CatalogoViewDTO{
         this.name_catalog_level = name_catalog_level;
     }
 
-
-
     public CatalogoViewDTO(String name_column) {
         this.name_column = name_column;
     }
