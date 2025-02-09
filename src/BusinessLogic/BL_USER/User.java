@@ -9,7 +9,7 @@ public class User {
     private LoginDTO content_user;
     private Role rol;
     private List<String> list_permissions;
-    
+    public Integer userId;
     public boolean login_public(String user,String password){
         return login(user, password);
     }
@@ -23,13 +23,21 @@ public class User {
                 System.out.println("Bienvenido "+content_user.getName()+"   "+content_user.getLast_name()+". Su rol es "+content_user.getName_role()+".");
                 rol.get_Permission(content_user.getId_role());
                 list_permissions=rol.getList_permissions();
+                userId = content_user.getId_person();
             return true;
             }
         } catch (Exception e) {
         }
         return false;
     }
-    
+
+    public int getIdUsuario() {
+        if (content_user != null) {
+            return userId; // Suponiendo que getId_usuario() devuelve el ID del usuario.
+        }
+        return -1; // Retorna -1 si no hay usuario autenticado
+    }
+
     public List<String> getList_permissions() {
         return list_permissions;
     }

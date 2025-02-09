@@ -20,6 +20,7 @@ public class Login_panel extends JPanel {
     public JButton login_button;
     private User user=new User();
     private List<String> list_permissions;
+    public Integer userId = null;
 
     public Login_panel() {
         init_component();
@@ -82,13 +83,20 @@ public class Login_panel extends JPanel {
             Spark_Style.show_mesg_advert("Datos Incorrectos", "Login");
             return false;
         }
+            userId = user.getIdUsuario();
+            System.out.println("ID del usuario autenticado: " + userId);
+
         list_permissions=new ArrayList<>();
         list_permissions=user.getList_permissions();
         return true;
     }
 
+
     public List<String> getList_permissions() {
         return list_permissions;
     }
 
+    public Integer getUser_id(){
+        return userId;
+    }
 }

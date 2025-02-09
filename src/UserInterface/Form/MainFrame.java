@@ -75,11 +75,11 @@ public class MainFrame extends JFrame {
         this.is_dark=!is_dark;
     }
     
-    private void menu_panel(List<String> permisos){
+    private void menu_panel(List<String> permisos, Integer userId){
         System.out.println("Panel del menu");
         main_windown.remove(login);
         System.out.println("cargando menu");
-        menu=new Menu_panel(permisos);
+        menu=new Menu_panel(permisos, userId);
         Container container=getContentPane();
         container.setLayout(new BorderLayout());
         container.add(menu,BorderLayout.WEST);
@@ -87,11 +87,7 @@ public class MainFrame extends JFrame {
         main_windown.add(container);
         main_windown.revalidate();
         //Cambiar main_panel--
-<<<<<<< HEAD
         Update_panel_rol update_panel = new Update_panel_rol();
-=======
-        Manage_panel_catalog update_panel = new Manage_panel_catalog();
->>>>>>> 0461c40bf167da391b8fa22fafeedac65c26fdf7
         container.add(update_panel,BorderLayout.CENTER);
         main_windown.add(container);
         main_windown.revalidate();
@@ -117,7 +113,7 @@ public class MainFrame extends JFrame {
             return;
         }
         System.out.println("cambiando de panel");
-        menu_panel(login.getList_permissions());
+        menu_panel(login.getList_permissions(), login.getUser_id());
     }
     
 }
