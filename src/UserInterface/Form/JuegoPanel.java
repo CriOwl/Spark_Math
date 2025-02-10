@@ -24,13 +24,13 @@ public class JuegoPanel extends JPanel {
     private final JuegoBL juegoBL = new JuegoBL();
     
     private SerialPort comPort;
-    private int selectedIndex = 0; // Índice del botón seleccionado
+    private int selectedIndex = 0; 
 
     public JuegoPanel(JFrame gameWindow, Integer id) {
         this.gameWindow = gameWindow;
         this.userId = id;
         customizeComponent();
-        setupSerial(); // Iniciar comunicación con Arduino
+        setupSerial();
     }
 
     private void customizeComponent() {
@@ -147,42 +147,52 @@ public class JuegoPanel extends JPanel {
     }
 
     private void setupSerial() {
-        comPort = SerialPort.getCommPort("COM6");
+        comPort = SerialPort.getCommPort("COM6"); 
         comPort.setBaudRate(115200);
+        comPort.setComPortTimeouts(SerialPort.TIMEOUT_SCANNER, 0, 0);
+    
         if (!comPort.openPort()) {
             System.err.println("⚠️ No se pudo abrir el puerto.");
             return;
         }
         System.out.println("✅ Puerto abierto: " + comPort.getSystemPortName());
-
+    
         new Thread(() -> {
-            try (InputStream in = comPort.getInputStream(); Scanner scanner = new Scanner(in)) {
-                while (scanner.hasNextLine()) {
-                    String data = scanner.nextLine().trim();
-                    System.out.println("📩 Recibido: " + data);  // Depuración
-                    SwingUtilities.invokeLater(() -> handleCommand(data));
+            try {
+                InputStream in = comPort.getInputStream();
+                Scanner scanner = new Scanner(in);
+                while (true) {
+                    if (scanner.hasNextLine()) {
+                        String data = scanner.nextLine().trim();
+                        System.out.println("📩 Recibido: " + data);
+                        SwingUtilities.invokeLater(() -> handleCommand(data));
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }).start();
     }
+    
+   
 
     private void handleCommand(String command) {
-        System.out.println("🔍 Comando recibido: " + command); // Debugging
-        
-        if (command.equalsIgnoreCase("UP")) {
-            selectedIndex = 0;
-        } else if (command.equalsIgnoreCase("DOWN")) {
-            selectedIndex = 1;
-        } else if (command.equalsIgnoreCase("SELECT")) {
-            JButton selectedButton = (selectedIndex == 0) ? btnNum1 : btnNum2;
-            verificarRespuesta(selectedButton);
+        switch (command) {
+            case "UP":
+                selectedIndex = (selectedIndex == 0) ? 1 : 0;
+                break;
+            case "DOWN":
+                selectedIndex = (selectedIndex == 1) ? 0 : 1;
+                break;
+            case "SELECT":
+                JButton selectedButton = (selectedIndex == 0) ? btnNum1 : btnNum2;
+                verificarRespuesta(selectedButton);
+                break;
+            default:
+                System.err.println("⚠️ Comando desconocido: " + command);
         }
-
-        System.out.println("🔄 Botón seleccionado: " + selectedIndex); // Depuración
         highlightButton();
-    }
+    }   
 
     private void highlightButton() {
         btnNum1.setBackground(selectedIndex == 0 ? Color.YELLOW : null);

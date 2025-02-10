@@ -13,7 +13,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
 public abstract class Spark_Style {
-    public static final Color COLOR_FONT = new Color(250, 250, 250);
+    public static final Color COLOR_FONT = new Color(130, 130, 0);
     public static final Color COLOR_FONT_LIGHT = new Color(100, 100, 100);
     public static final Color COLOR_CURSOR = Color.black; // cambiar segun el estilo
     public static final Color COLOR_BACKGROUND          = Color.black;

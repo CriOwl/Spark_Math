@@ -1,0 +1,203 @@
+@startuml
+' Definición de paquetes
+package Data_Access {
+    abstract class Data_Helper_Sqlite {
+        - static String Bd_Path
+        - static Connection conexion
+        + Data_Helper_Sqlite()
+        + static synchronized Connection opConnection() throws SQLException
+        + static void closeConnection() throws SQLException
+    }
+
+    interface IVIEWDAO<T> {
+        + T readby(Integer id) throws Exception
+        + T readby(String id) throws Exception
+        + List<T> readall() throws Exception
+        + List<T> read_column() throws Exception
+        + List<T> search_read(String DNI) throws Exception
+        + List<T> read_combobox() throws Exception
+    }
+}
+
+package Math_Spark {
+    class Count {
+        - final int a
+        - final int error
+        - int state
+        - int main_number
+        - final int[][] matrix
+        - final String alphabet
+        + void game()
+        - boolean validate_matrix(String[] matrix)
+        - boolean validate(String validation)
+        - int validate_state(char character)
+        - int operate_number(String operation)
+    }
+
+    class Numbers {
+        - Integer main_number
+        - int[] number
+        - final int error
+        + void game()
+        - int validate(int main_number, int number_1, int number_2)
+        + int randomise_up(int main_number)
+        + int randomise_under(int main_number)
+    }
+
+    class Sucession {
+    }
+
+    class Utilitary {
+        + static Scanner keyboard
+    }
+}
+
+package BusinessLogic.BL_USER {
+    class BL_catalog {
+        - CatalogDAO catalogdao
+        + BL_catalog(CatalogDAO catalog)
+        + List<CatalogDTO> getAll() throws Exception
+        + CatalogDTO getBy(Integer id) throws Exception
+        + List<CatalogDTO> read_elments_role() throws Exception
+        + boolean cretated_elements(CatalogDTO entity) throws Exception
+        + boolean update_elements(CatalogDTO entity) throws Exception
+        + boolean delete(CatalogDTO entity) throws Exception
+        + CatalogDTO search_single(String DNI) throws Exception
+    }
+
+    class BL_generalyTable<T> {
+        - IDAO<T> dao
+        + BL_generalyTable(Supplier<IDAO<T>> suplier)
+        + List<T> getAll() throws Exception
+        + T getBy(Integer id) throws Exception
+        + List<T> getColumn() throws Exception
+        + List<T> search() throws Exception
+        + List<T> read_elments() throws Exception
+        + List<T> read_elments2() throws Exception
+        + boolean cretated_elements(T entity) throws Exception
+        + boolean update_elements(T entity) throws Exception
+        + boolean delete(Integer id) throws Exception
+        + T search_single(String DNI) throws Exception
+    }
+
+    class BL_generalyView<T> {
+        - IVIEWDAO<T> DAO
+        + BL_generalyView(Supplier<IVIEWDAO<T>> supplier)
+        + List<T> getAll() throws Exception
+        + T getBy(String DNI) throws Exception
+        + T getBy(Integer id) throws Exception
+        + List<T> getColumn() throws Exception
+        + List<T> search(String DNI) throws Exception
+        + List<T> read_elments() throws Exception
+    }
+
+    class BLFactory<T> {
+        - IDAOGAME<T> oDAO
+        + BLFactory(Supplier<IDAOGAME<T>> supplier)
+        + List<T> getAll() throws Exception
+        + T getBy(Integer id) throws Exception
+        + boolean add(T oT) throws Exception
+        + boolean upd(T oT) throws Exception
+        + boolean del(Integer id) throws Exception
+    }
+
+    class JuegoBL {
+        - BLFactory<PuntajeDTO> puntajeBL
+        - PuntajeDTO puntajeActual
+        - PuntajeDAO puntajeDAO
+        + JuegoBL()
+        + boolean guardarPuntaje(PuntajeDTO puntaje) throws Exception
+        + void actualizarPuntaje(boolean correcto) throws Exception
+    }
+
+    class Method_permissions {
+        + JPanel adminTeacher()
+        + JPanel adminPermission()
+        + JPanel adminPermissionRole()
+        + JPanel adminPerson()
+        + JPanel adminInstitution()
+        + JPanel adminCatalogo()
+        + JPanel adminCourse()
+        + JPanel view_reports()
+        + JPanel activity()
+        + JPanel play()
+    }
+
+    class Permisos {
+        - Map<String, Method> mapa_permisos
+        - Method_permissions method
+        + Permisos(List<String> name_permisions, List<String> name_method)
+        + void ejecutarAccion(String permiso)
+    }
+
+    class Role {
+        - List<String> list_permissions
+        - HashMap<String, String> map_permission
+        + Role(Integer id_role)
+        - void get_Permission(Integer id_role)
+        + List<String> getList_permissions()
+        + HashMap<String, String> getMap_permission()
+    }
+
+    class User {
+        - LoginDAO data_user
+        - LoginDTO content_user
+        - Role rol
+        - List<String> list_permissions
+        - HashMap<String, String> map_permission
+        - Integer userId
+        + boolean login_public(String user, String password)
+        - boolean login(String user, String password)
+        + int getIdUsuario()
+        + List<String> getList_permissions()
+        + HashMap<String, String> getMap_permission()
+    }
+}
+
+package UserInterface {
+    abstract class Spark_Style {
+        + static final Color COLOR_FONT
+        + static final Color COLOR_FONT_LIGHT
+        + static final Color COLOR_CURSOR
+        + static final Color COLOR_BACKGROUND
+        + static final Color COLOR_BACKGROUND_GRID
+        + static final Color COLOR_BACKGROUND_SELECT
+        + static final Font FONT
+        + static final Font FONT_BOLD
+        + static final Font FONT_SMALL
+        + static final Font FONT_NUMBER
+        + static final Dimension dimension_button
+        + static final int ALIGNMENT_LEFT
+        + static final int ALIGNMENT_RIGHT
+        + static final int ALIGNMENT_CENTER
+        + static final Cursor CURSOR_HAND
+        + static final Cursor CURSOR_DEFAULT
+        + static final String URL_MAIN
+        + static final String URL_LOGO
+        + static final URL URL_SPLASH
+        + static final String URL_SUN_THEMES
+        + static final String URL_MOON_THEMES
+        + static final String URL_CHECK
+        + static void show_mesg_advert(String msg, String title)
+        + static void show_mesg_correct(String msg, String title)
+        + static void show_mesg_yes_no(String msg, String title)
+        + static JTable customize_table(JTable tabla)
+    }
+}
+
+' Relaciones entre clases
+Data_Helper_Sqlite <|-- Data_Access.VIEW.LoginDAO
+IVIEWDAO <|.. Data_Access.VIEW.LoginDAO
+BL_catalog --> CatalogDAO
+BL_generalyTable --> IDAO
+BL_generalyView --> IVIEWDAO
+BLFactory --> IDAOGAME
+JuegoBL --> BLFactory
+JuegoBL --> PuntajeDAO
+Permisos --> Method_permissions
+Role --> PermissionRoleDAO
+User --> LoginDAO
+User --> Role
+Spark_Style <|-- UserInterface.Form.MainFrame
+
+@enduml

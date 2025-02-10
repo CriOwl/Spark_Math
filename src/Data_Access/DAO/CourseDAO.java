@@ -200,4 +200,10 @@ public class CourseDAO extends Data_Helper_Sqlite implements IDAO<CourseDTO>{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'search_read_single'");
     }
+
+    @Override
+    public List<CourseDTO> search_read() throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'search_read'");
+    }
 }

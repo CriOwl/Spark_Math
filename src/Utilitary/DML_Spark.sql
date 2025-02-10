@@ -70,24 +70,9 @@ VALUES
         'PermisoPanel'
     ),
     (
-        'Asociar Permisos a Roles',
-        'Permite al usuario administrar docentes',
-        'RolPermisoPanel'
-    ),
-    (
         'Administrar Estudiantes',
         'Permite al usuario administrar estudiantes',
         'AdminPanel'
-    ),
-    (
-        'Administrar Rector',
-        'Permite al usuario administrar rector',
-        'AdminPanel'
-    ),
-    (
-        'Administrar Grados',
-        'Permite al usuario administrar grados',
-        'admin_course'
     ),
     (
         'Administrar Instituciones',
@@ -121,7 +106,18 @@ VALUES
     (1, 6),
     (1, 7),
     (1, 8),
-    (1, 9);
+    (2, 1),
+    (2, 4),
+    (2, 6),
+    (2, 7),
+    (2, 8),
+    (3, 4),
+    (3, 6),
+    (3, 7),
+    (3, 8),
+    (4, 8),
+    (4, 7),
+    (4, 6);
 
 
 INSERT INTO

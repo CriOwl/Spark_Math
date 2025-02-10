@@ -3,12 +3,10 @@ package UserInterface.Form;
 import UserInterface.Customer_control.Table_Spark;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-
 import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatCarbonIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
@@ -30,7 +28,7 @@ public class MainFrame extends JFrame {
     private final ImageIcon logo = new ImageIcon(Spark_Style.URL_LOGO);
     private Login_panel login;
     private Menu_panel menu;
-    private JPanel pnlMain = new Update_panel_permission_role();
+    private JPanel pnlMain = new MainPanel();
     private JFrame main_windown;
     private boolean is_dark = true;
 
@@ -66,7 +64,7 @@ public class MainFrame extends JFrame {
                 UIManager.setLookAndFeel(new FlatCyanLightIJTheme());
             } else {
                 change_themes.setIcon(sun_theme_icon);
-                UIManager.setLookAndFeel(new FlatMonokaiProIJTheme());
+                UIManager.setLookAndFeel(new FlatArcDarkIJTheme());
             }
         } catch (Exception e) {
             System.out.println("No se puede cargar el tema");
@@ -86,7 +84,6 @@ public class MainFrame extends JFrame {
         container.setPreferredSize(new Dimension(300, getHeight()));
         main_windown.add(container);
         main_windown.revalidate();
-        // Cambiar main_panel--
         for (int i = 0; i < menu.lista_botones.size(); i++) {
             System.out.println(login.getMap_panel().get(menu.lista_botones.get(i).getText()));
             JPanel panel = crearPanel(login.getMap_panel().get(menu.lista_botones.get(i).getText()));
