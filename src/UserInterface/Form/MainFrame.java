@@ -81,7 +81,8 @@ public class MainFrame extends JFrame {
         main_windown.add(container);
         main_windown.revalidate();
         //Cambiar main_panel--
-        Manage_panel_estudiante update_panel = new Manage_panel_estudiante();
+        //Manage_panel_estudiante update_panel = new Manage_panel_estudiante();
+        Create_panel_estudiante update_panel = new Create_panel_estudiante();
         container.add(update_panel,BorderLayout.CENTER);
         main_windown.add(container);
         main_windown.revalidate();

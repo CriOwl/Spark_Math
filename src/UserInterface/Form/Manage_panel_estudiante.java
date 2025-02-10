@@ -3,8 +3,6 @@ package UserInterface.Form;
 import BusinessLogic.BL_USER.BL_generalyView;
 import Data_Access.VIEW.EstudianteViewDAO;
 import Data_Access.VIEW.EstudianteViewDTO;
-import Data_Access.VIEW.LoginDAO;
-import Data_Access.VIEW.LoginDTO;
 import UserInterface.Customer_control.Button_Text;
 import UserInterface.Customer_control.Text_box;
 import UserInterface.Customer_control.Text_label;
@@ -29,6 +27,8 @@ public class Manage_panel_estudiante extends JPanel {
     private final Text_label search_text;
     private JTable table;
     private JScrollPane scrollPane;
+
+    
 
     public Manage_panel_estudiante() {
         setLayout(new GridBagLayout());

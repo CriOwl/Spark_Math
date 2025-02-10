@@ -1,10 +1,34 @@
 package Data_Access.DTO;
 
 public class CourseDTO {
+    public CourseDTO(Integer id_course, String level, String parallel) {
+        this.id_course = id_course;
+        this.level = level;
+        this.parallel = parallel;
+    }
+
     private Integer id_course;
     private Integer id_teacher;
     private Integer id_catalog_level;
+    private String  level;
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
     private Integer id_catalog_parallel;
+    private String  parallel;
+    public String getParallel() {
+        return parallel;
+    }
+
+    public void setParallel(String parallel) {
+        this.parallel = parallel;
+    }
+
     private Integer id_institution;
     private Integer id_catalog_time;
     private Integer id_catalog_period;

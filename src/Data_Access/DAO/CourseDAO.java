@@ -13,6 +13,7 @@ import java.util.List;
 import Data_Access.Data_Helper_Sqlite;
 import Data_Access.DAO.DAO_C.IDAO;
 import Data_Access.DTO.CourseDTO;
+import Data_Access.DTO.PersonDTO;
 
 public class CourseDAO extends Data_Helper_Sqlite implements IDAO<CourseDTO>{
     
@@ -94,6 +95,35 @@ public class CourseDAO extends Data_Helper_Sqlite implements IDAO<CourseDTO>{
         return lst; 
     }
 
+    public List<CourseDTO> readLevel() throws Exception {
+        List<CourseDTO> lst = new ArrayList<>();
+        
+        String query = " SELECT c.id_course, " 
+                     + " cl.name AS level_name, "   // Nombre del nivel
+                     + " cp.name AS parallel_name " // Nombre del paralelo
+                     + " FROM Course c "
+                     + " JOIN Catalog cl ON c.id_catalog_level = cl.id_catalog " // Unir con Catalog para Level
+                     + " JOIN Catalog cp ON c.id_catalog_parallel = cp.id_catalog " // Unir con Catalog para Parallel
+                     + " WHERE c.state = '1'";
+    
+        try {
+            Connection conn = opConnection();  
+            Statement stmt = conn.createStatement();  
+            ResultSet rs = stmt.executeQuery(query);  
+    
+            while (rs.next()) {
+                // Concatenar nivel y paralelo: "Primero - A", "Segundo - B"
+                String courseName = rs.getString("level_name") + " - " + rs.getString("parallel_name");
+                
+                CourseDTO s = new CourseDTO(rs.getInt("id_course"), courseName);
+                lst.add(s);
+            }
+        } catch (SQLException e) {
+            throw e;
+        }
+        return lst;
+    }
+
     @Override
     public boolean created(CourseDTO entity) throws Exception {
         String query = " INSERT INTO Course (id_teacher, id_catalog_level, id_catalog_parralel, id_institution, id_catalog_time, id_catalog_period) VALUES (?)";
@@ -172,9 +202,30 @@ public class CourseDAO extends Data_Helper_Sqlite implements IDAO<CourseDTO>{
     }
 
     @Override
-    public List<CourseDTO> read_combobox() throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'read_combobox'");
+    public List<CourseDTO> read_combobox() {
+        List<CourseDTO> list_course = new ArrayList<>();
+        String querry = "SELECT c.id_course, " 
+                 + " cl.name AS level_name, "   
+                 + " cp.name AS parallel_name " 
+                 + " FROM Course c "
+                 + " JOIN Catalog cl ON c.id_catalog_level = cl.id_catalog " 
+                 + " JOIN Catalog cp ON c.id_catalog_parallel = cp.id_catalog " 
+                 + " WHERE c.state = '1'";
+        try {
+            Connection cone = opConnection();
+            Statement stmt = cone.createStatement();
+            ResultSet rs = stmt.executeQuery(querry);
+            while (rs.next()) {
+                CourseDTO course = new CourseDTO(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3));
+            list_course.add(course);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list_course;
     }
 
     @Override
