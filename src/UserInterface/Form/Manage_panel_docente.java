@@ -1,5 +1,8 @@
 package UserInterface.Form;
 
+import BusinessLogic.BL_USER.BL_generalyView;
+import Data_Access.VIEW.DocentesViewDAO;
+import Data_Access.VIEW.DocentesViewDTO;
 import UserInterface.Customer_control.Button_Text;
 import UserInterface.Customer_control.Text_box;
 import UserInterface.Customer_control.Text_label;
@@ -13,10 +16,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-
-import BusinessLogic.BL_USER.BL_generalyView;
-import Data_Access.VIEW.DocentesViewDAO;
-import Data_Access.VIEW.DocentesViewDTO;
 
 public class Manage_panel_docente extends JPanel {
     private final Button_Text Button_update;
@@ -35,7 +34,7 @@ public class Manage_panel_docente extends JPanel {
         Button_deletd = new Button_Text("Borrar", Spark_Style.FONT_BOLD, null);
         Button_search = new Button_Text("Buscar", Spark_Style.FONT_BOLD, null);
         search_box = new Text_box(Spark_Style.FONT_BOLD, null);
-        search_text = new Text_label("Grado:");
+        search_text = new Text_label("Nombre:");
 
         Button_search.addActionListener(e -> change_table());
 

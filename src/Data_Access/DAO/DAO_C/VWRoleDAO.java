@@ -3,7 +3,6 @@ package Data_Access.DAO.DAO_C;
 import Data_Access.DTO.RoleDTO;
 import Data_Access.Data_Helper_Sqlite;
 import Data_Access.IVIEWDAO;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -128,8 +127,8 @@ public class VWRoleDAO extends Data_Helper_Sqlite implements IVIEWDAO<RoleDTO> {
                 + "r.state, "
                 + "r.date_created, "
                 + "r.date_updated "
-                + "FROM role r "
-                + "WHERE r.state = 1 AND r.id_role LIKE ?";
+                + "FROM Role r "
+                + "WHERE r.state = 1 AND r.name LIKE ?";
         try {
             Connection conn = opConnection();
             PreparedStatement stmt = conn.prepareStatement(query);
@@ -141,6 +140,7 @@ public class VWRoleDAO extends Data_Helper_Sqlite implements IVIEWDAO<RoleDTO> {
                         rs.getInt(3),
                         rs.getString(4),
                         rs.getString(5));
+                        tabla.add(registro);
             }
         } catch (SQLException e) {
             System.out.println(e);

@@ -29,7 +29,7 @@ FROM
     LEFT JOIN Permission_role pr ON r.id_role = pr.id_role
 GROUP BY 
     r.id_role, r.name, r.state, r.date_created, r.date_updated;
-
+DROP VIEW vw_permission_role;
 CREATE VIEW vw_permission_role AS
 SELECT 
     pr.id_permission_role,
@@ -43,7 +43,7 @@ FROM
     Permission_role pr
     JOIN Role r ON pr.id_role = r.id_role
     JOIN Permission p ON pr.id_permission = p.id_permission;
-
+DROP VIEW vw_institution;
 CREATE VIEW vw_institution AS
 SELECT 
     i.id_institution,
@@ -56,7 +56,7 @@ SELECT
 FROM 
     Institution i
     JOIN Persona p ON i.id_manager = p.id_person;
-
+DROP VIEW vw_course;
 CREATE VIEW vw_course AS
 SELECT 
     c.id_course,
@@ -78,7 +78,7 @@ FROM
     JOIN Catalog cat_time ON c.id_catalog_time = cat_time.id_catalog
     JOIN Catalog cat_period ON c.id_catalog_period = cat_period.id_catalog;
 
-
+DROP VIEW vw_activity;
 CREATE VIEW vw_activity AS
 SELECT 
     a.id_activity,
@@ -95,7 +95,7 @@ FROM
     JOIN Course c ON a.id_course = c.id_course
     JOIN Institution inst ON c.id_institution = inst.id_institution
     JOIN Catalog cat ON a.id_catalog_activity_type = cat.id_catalog;
-
+DROP VIEW vw_student_course;
 CREATE VIEW vw_student_course AS
 SELECT 
     sc.id_student_course,
@@ -155,7 +155,7 @@ FROM
     JOIN Game2 g2 ON gag2.id_game2 = g2.id_game2;
 
 
-
+DROP VIEW vw_catalog_level;
 CREATE VIEW vw_catalog_level AS
 SELECT 
     id_catalog_level AS ID,
