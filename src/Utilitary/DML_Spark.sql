@@ -36,7 +36,7 @@ VALUES
     ('2027-S', 4),
     ('2027-C', 4),
     ('Diagnostico', 5),
-    ('Tarea', 6),
+    ('Tarea', 5),
     ('Nivel 1', 6),
     ('Nivel 2', 6),
     ('Nivel 3', 6),
@@ -57,42 +57,32 @@ VALUES
     (
         'Administrar Docentes',
         'Permite al usuario administrar docentes',
-        'admin_teacher'
+        'DocentePanel'
     ),
     (
         'Administrar Roles',
         'Permite al usuario administrar docentes',
-        'admin_role'
+        'RolPanel'
     ),
     (
         'Administrar Permisos',
         'Permite al usuario administrar docentes',
-        'admin_role'
+        'PermisoPanel'
     ),
     (
         'Asociar Permisos a Roles',
         'Permite al usuario administrar docentes',
-        'admin_role'
+        'RolPermisoPanel'
     ),
     (
         'Administrar Estudiantes',
         'Permite al usuario administrar estudiantes',
-        'admin_student'
+        'AdminPanel'
     ),
     (
         'Administrar Rector',
         'Permite al usuario administrar rector',
-        'admin_manage'
-    ),
-    (
-        'Administrar Pruebas Generales',
-        'Permite al usuario administrar pruebas generales',
-        'admin_general_test'
-    ),
-    (
-        'Administrar Pruebas Cursos',
-        'Permite al usuario administrar pruebas individuales',
-        'admin_course_test'
+        'AdminPanel'
     ),
     (
         'Administrar Grados',
@@ -102,7 +92,7 @@ VALUES
     (
         'Administrar Instituciones',
         'Permite al usuario administrar instituciones',
-        'admin_institucions'
+        'InstitucionPanel'
     ),
     (
         'Visualizar Reportes',

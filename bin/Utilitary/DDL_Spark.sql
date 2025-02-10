@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS Grades_activity_game1;
 DROP TABLE IF EXISTS Grades_activity_game2;
 DROP TABLE IF EXISTS Game2;
 DROP TABLE IF EXISTS Game1;
+DROP TABLE IF EXISTS Puntaje;
 DROP TABLE IF EXISTS Activity;
 DROP TABLE IF EXISTS Student_course;
 DROP TABLE IF EXISTS Course;            
@@ -14,7 +15,6 @@ DROP TABLE IF EXISTS Role;
 DROP TABLE IF EXISTS Permission;     
 DROP TABLE IF EXISTS Catalog;
 DROP TABLE IF EXISTS Catalog_level;
-DROP TABLE IF EXISTS Puntaje;
 
 CREATE TABLE IF NOT EXISTS
     Persona (
@@ -247,3 +247,14 @@ SELECT
                 JOIN Role r ON p.id_role=r.id_role 
                 JOIN Permission n ON p.id_permission=n.id_permission 
                 WHERE p.state = 1 AND r.name LIKE '%a%';
+SELECT 
+                p.id_permission_role, 
+                p.id_role, 
+                r.name, 
+                p.id_permission, 
+                n.name,
+                n.name_method  
+                FROM Permission_role p 
+                JOIN Role r ON p.id_role=r.id_role 
+                JOIN Permission n ON p.id_permission=n.id_permission 
+                WHERE p.state = 1  AND p.id_role= 2;

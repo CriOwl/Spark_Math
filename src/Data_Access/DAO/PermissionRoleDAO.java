@@ -155,7 +155,8 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
                 + "p.id_role, "
                 + "r.name, "
                 + "p.id_permission, "
-                + "n.name "
+                + "n.name, "
+                + "n.name_method "
                 + "FROM Permission_role p "
                 + "JOIN Role r ON p.id_role=r.id_role "
                 + "JOIN Permission n ON p.id_permission=n.id_permission "
@@ -170,7 +171,8 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
                         rs.getInt(2),
                         rs.getString(3),
                         rs.getInt(4),
-                        rs.getString(5)
+                        rs.getString(5),
+                        rs.getString(6)
                         );
                         listRegistro.add(registro);
             }

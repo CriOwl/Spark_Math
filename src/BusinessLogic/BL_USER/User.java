@@ -4,6 +4,11 @@ import Data_Access.VIEW.LoginDAO;
 import Data_Access.VIEW.LoginDTO;
 import java.util.HashMap;
 import java.util.List;
+import com.fazecast.jSerialComm.SerialPort;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Scanner;
+
 
 public class User {
     private LoginDAO data_user;

@@ -32,7 +32,7 @@ public abstract class Spark_Style {
     public static final Cursor CURSOR_HAND = new Cursor(Cursor.HAND_CURSOR);
     public static final Cursor CURSOR_DEFAULT = new Cursor(Cursor.DEFAULT_CURSOR);
 
-    public static final URL URL_MAIN = Spark_Style.class.getResource("src\\UserInterface\\Resources\\Img\\Kid_playing.png");
+    public static final String URL_MAIN = "src\\UserInterface\\Resources\\Img\\Kid_playing.png";
     public static final String URL_LOGO = "src\\UserInterface\\Resources\\Icon\\Logo_Spark_Math.png";
     public static final URL URL_SPLASH = Spark_Style.class.getResource("src\\UserInterface\\Resources\\Img\\Kid_playing.png");
     public static final String URL_SUN_THEMES = "src\\UserInterface\\Resources\\Icon\\sun.png";

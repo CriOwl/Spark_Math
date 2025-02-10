@@ -87,7 +87,6 @@ public class Update_panel_institution extends JPanel {
         String name = name_box.getText();
         String amie = amie_box.getText();
         int state = state_map.get(state_box.getSelectedItem());
-        System.out.println(name + "---" + amie + "---" + state);
         InstitutionDTO institution = new InstitutionDTO(name,amie,state);
 
     }

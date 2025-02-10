@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 public class Menu_panel extends JPanel {
-    private List<Button_Text> lista_botones;
+    public List<Button_Text> lista_botones;
 
     public Menu_panel(List<String> Opciones_permisos, Integer userId) {
         customizepanel(Opciones_permisos, userId);
@@ -17,7 +17,6 @@ public class Menu_panel extends JPanel {
         lista_botones = new ArrayList<>();
         for (int i = 0; i < Opciones_permisos.size(); i++) {
             lista_botones.add(new Button_Text(Opciones_permisos.get(i), Spark_Style.FONT, Spark_Style.COLOR_FONT));
-            lista_botones.get(i).addActionListener(e->open_Game(userId));
             if(Opciones_permisos.get(i).equals("Jugar")){
                 lista_botones.get(i).addActionListener(e -> open_Game(userId));
             }

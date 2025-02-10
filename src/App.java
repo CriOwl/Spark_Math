@@ -8,6 +8,7 @@ public class App {
            /*  PersonDAO person=new PersonDAO();
             person.delete(11); */
             LoginDAO login=new LoginDAO();
+            
             System.out.println(login.login("1751375963","admin"));
              for (LoginDTO elem : login.read_column()) {
                 System.out.println(elem.getName_column());

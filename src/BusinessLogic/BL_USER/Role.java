@@ -22,6 +22,7 @@ public class Role {
                 list_permissions.add(registo.getPermission_name());
                 map_permission.put(registo.getPermission_name(), registo.getMethod_name());
             }
+            System.out.println(map_permission.toString()+"-----/-8/-/-8");
         } catch (Exception e) {
             System.out.println("No se pudieron cargar las listas");
         }
@@ -34,5 +35,6 @@ public class Role {
     public HashMap<String, String> getMap_permission() {
         return map_permission;
     }
+    
     
 }
