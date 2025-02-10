@@ -281,8 +281,8 @@ SELECT
     cat_per.name AS PERIODO,
     cat_t.name AS JORNADA,
     CONCAT(cat_l.name, ' ', cat_p.name) AS CURSO,
-     CONCAT(prof.name, ' ', prof.last_name) AS PROFESOR,
-    sc.state AS ESTADO
+    d.PROFESOR
+    --sc.state AS ESTADO
 FROM
     Student_course sc
     JOIN Persona p ON sc.id_student = p.id_person
@@ -292,7 +292,10 @@ FROM
     JOIN Catalog cat_p ON c.id_catalog_parallel = cat_p.id_catalog
     JOIN Catalog cat_t ON c.id_catalog_time = cat_t.id_catalog
     JOIN Catalog cat_per ON c.id_catalog_period = cat_per.id_catalog
-    JOIN Persona prof ON c.id_teacher = prof.id_person
-WHERE p.state = 1 AND p.id_role = 4 AND prof.id_role = 3 AND sc.state = 1;  -- Solo estudiantes activos
+    JOIN vw_docente d ON d.ID = c.id_course
+WHERE p.state = 1 AND p.id_role = 4 AND sc.state = 1;  -- Solo estudiantes activos
 
-SELECT * FROM vw_estudiante
+SELECT * FROM vw_estudiante;
+
+SELECT DISTINCT CURSO FROM vw_estudiante;
+SELECT DISTINCT CURSO FROM vw_docente;

@@ -72,8 +72,8 @@ public class Manage_panel_estudiante extends JPanel {
                 data[index][4] = user.getInstitucion();
                 data[index][5] = user.getAmie();
                 data[index][6] = user.getPeriodo();
-                data[index][8] = user.getJornada();
-                data[index][9] = user.getCurso();
+                data[index][7] = user.getJornada();
+                data[index][8] = user.getCurso();
                 data[index][9] = user.getProfesor();
                 index++;
             }
@@ -105,8 +105,8 @@ public class Manage_panel_estudiante extends JPanel {
                 data[index][4] = user.getInstitucion();
                 data[index][5] = user.getAmie();
                 data[index][6] = user.getPeriodo();
-                data[index][8] = user.getJornada();
-                data[index][9] = user.getCurso();
+                data[index][7] = user.getJornada();
+                data[index][8] = user.getCurso();
                 data[index][9] = user.getProfesor();
                 index++;
             }
