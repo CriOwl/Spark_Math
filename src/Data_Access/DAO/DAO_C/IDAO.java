@@ -1,5 +1,7 @@
 package Data_Access.DAO.DAO_C;
 import java.util.List;
+
+import Data_Access.DTO.Student_courseDTO;
 public interface IDAO<T>{
     public T readby(Integer id)throws Exception;
     public List<T> readall()throws Exception;

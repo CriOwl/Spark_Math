@@ -37,21 +37,27 @@ public class Student_courseDAO extends Data_Helper_Sqlite implements IDAO  <Stud
             ResultSet rs=stmt.executeQuery(query);
             while(rs.next()){
                 registro= Student_courseDTO(
-                    rs.getInt(1),
-                    rs.getString(2),
-                    rs.getString(3),
-                    rs.getInt(4),
-                    rs.getString(5),
-                    rs.getString(6)
-                );
-            }
-        } catch (SQLException e) {
-            throw e;
-        }
-        return registro;
-    }
-
-    @Override
+                                    rs.getInt(1),
+                                    rs.getString(2),
+                                    rs.getString(3),
+                                    rs.getInt(4),
+                                    rs.getString(5),
+                                    rs.getString(6)
+                                );
+                            }
+                        } catch (SQLException e) {
+                            throw e;
+                        }
+                        return registro;
+                    }
+                
+                    private Student_courseDTO Student_courseDTO(int int1, String string, String string2, int int2, String string3,
+                            String string4) {
+                        // TODO Auto-generated method stub
+                        throw new UnsupportedOperationException("Unimplemented method 'Student_courseDTO'");
+                    }
+                
+                    @Override
     public List<Student_courseDTO> readall() throws Exception {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'readall'");
@@ -72,7 +78,7 @@ public class Student_courseDAO extends Data_Helper_Sqlite implements IDAO  <Stud
     @Override
     public boolean created(Student_courseDTO entity) throws Exception {
         String query = " INSERT INTO Student_course (id_student, id_course)"
-                + " VALUES(?,?,?)";
+                + " VALUES(?,?)";
         try {
             Connection conect = opConnection();
             PreparedStatement pstm = conect.prepareStatement(query);

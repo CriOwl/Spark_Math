@@ -76,68 +76,72 @@ public class Create_panel_estudiante extends JPanel {
         cancel=new Button_Text("Cancelar", Spark_Style.FONT, null);
         cancel.setBackground(new Color(200,0,0));
         GridBagConstraints gbc=new GridBagConstraints();
-        gbc.insets=new Insets(5,20,5,20);
-        gbc.gridx=0;
-        gbc.gridy=0;
-        gbc.weightx=1;
-        gbc.weighty=1;
-        gbc.fill=GridBagConstraints.HORIZONTAL;
-        add(name_person,gbc);
-        gbc.gridx=0;
-        gbc.gridy=1;
-        add(name_person_box,gbc);
-        gbc.gridx=0;
-        gbc.gridy=2;
-        add(last_name_person,gbc);
-        gbc.gridx=0;
-        gbc.gridy=3;
-        add(last_name_person_box,gbc);
-        gbc.gridx=0;
-        gbc.gridy=4;
-        add(DNI_person,gbc);
-        gbc.gridx=0;
-        gbc.gridy=5;
-        add(DNI_person_box,gbc);
-        gbc.gridx=0;
-        gbc.gridy=6;
-        add(Birthdate_person,gbc);
-        gbc.gridx=0;
-        gbc.gridy=7;
-        add(Birthdate_person_box,gbc);
-        gbc.gridx=0;
-        gbc.gridy=8;
-        add(Password_person,gbc);
-        gbc.gridx=0;
-        gbc.gridy=9;
-        add(Password_person_box,gbc);
-        gbc.gridx=0;
-        gbc.gridy=10;
-        add(Email_person,gbc);
-        gbc.gridx=0;
-        gbc.gridy=13;
-        add(Email_person_box,gbc);
-        gbc.gridx=0;
-        gbc.gridy=14;
-        add(State_person,gbc);
-        gbc.gridx=0;
-        gbc.gridy=15;
-        add(State_person_box,gbc); 
-        gbc.gridx=0;
-        gbc.gridy=16;
-        add(course_person,gbc);
-        gbc.gridx=0;
-        gbc.gridy=17;
-        add(course,gbc);
-        gbc.gridx=0;
-        gbc.gridy=18;
-        gbc.fill=GridBagConstraints.NONE;
-        gbc.anchor=GridBagConstraints.CENTER;
-        add(send,gbc);
-        gbc.gridx=0;
-        gbc.gridy=18;
-        gbc.fill=GridBagConstraints.NONE;
-        gbc.anchor=GridBagConstraints.EAST;
-        add(cancel,gbc);
+        gbc.insets = new Insets(5, 5, 5, 5); // Espaciado entre componentes
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        // Primera columna (Labels)
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        add(name_person, gbc);
+
+        gbc.gridy = 1;
+        add(last_name_person, gbc);
+
+        gbc.gridy = 2;
+        add(DNI_person, gbc);
+
+        gbc.gridy = 3;
+        add(Birthdate_person, gbc);
+
+        gbc.gridy = 4;
+        add(Password_person, gbc);
+
+        gbc.gridy = 5;
+        add(Email_person, gbc);
+
+        gbc.gridy = 6;
+        add(State_person, gbc);
+
+        gbc.gridy = 7;
+        add(course_person, gbc);
+
+        // Segunda columna (Text boxes y ComboBoxes)
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        add(name_person_box, gbc);
+
+        gbc.gridy = 1;
+        add(last_name_person_box, gbc);
+
+        gbc.gridy = 2;
+        add(DNI_person_box, gbc);
+
+        gbc.gridy = 3;
+        add(Birthdate_person_box, gbc);
+
+        gbc.gridy = 4;
+        add(Password_person_box, gbc);
+
+        gbc.gridy = 5;
+        add(Email_person_box, gbc);
+
+        gbc.gridy = 6;
+        add(State_person_box, gbc);
+
+        gbc.gridy = 7;
+        add(course, gbc);
+
+        // Botones
+        gbc.gridx = 0;
+        gbc.gridy = 8;
+        gbc.gridwidth = 2; // Ocupa dos columnas
+        gbc.fill = GridBagConstraints.NONE; // No estirar
+        gbc.anchor = GridBagConstraints.CENTER; // Centrar
+        add(send, gbc);
+
+        gbc.gridy = 9;
+        add(cancel, gbc);
+        
     }
 
     private String[] data_course(){
@@ -197,13 +201,13 @@ public class Create_panel_estudiante extends JPanel {
         }
         PersonDTO person_created = new PersonDTO(name,last_name,dni,email,password,birthdat, 4,null);
         Student_courseDTO student_course = new Student_courseDTO(1,id_course);
-        send_data(person_created, student_course);
+        send_data(person_created,student_course);
     }
-    
     public boolean send_data(PersonDTO person, Student_courseDTO student_courseDTO){
         BL_generalyTable<PersonDTO> table_person=new BL_generalyTable<>(PersonDAO::new);
+        BL_generalyTable<Student_courseDTO> table_course=new BL_generalyTable<>(Student_courseDAO::new);
         try {
-         if(table_person.cretated_elements(person)){
+         if(table_person.cretated_elements(person) && table_course.cretated_elements(student_courseDTO)){
             Spark_Style.show_mesg_correct("Usuario creado ", "Estado");
             name_person_box.setText("");
             last_name_person_box.setText("");
