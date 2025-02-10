@@ -264,3 +264,35 @@ FROM
     JOIN Permission p ON pr.id_permission = p.id_permission  -- Relaciona con la tabla Permission para obtener el nombre del permiso
 WHERE 
     pr.state = 1;  -- Solo asociaciones activas
+
+
+
+
+-- tabla estudiantes
+DROP VIEW IF EXISTS vw_estudiante;
+CREATE VIEW vw_estudiante AS
+SELECT
+    sc.id_student_course AS ID,
+    CONCAT(p.name, ' ', p.last_name) AS ESTUDIANTE,
+    p.DNI AS CEDULA,
+    p.email AS CORREO,
+    i.name AS INSTITUCION,
+    i.amie AS AMIE,
+    cat_per.name AS PERIODO,
+    cat_t.name AS JORNADA,
+    CONCAT(cat_l.name, ' ', cat_p.name) AS CURSO,
+     CONCAT(prof.name, ' ', prof.last_name) AS PROFESOR,
+    sc.state AS ESTADO
+FROM
+    Student_course sc
+    JOIN Persona p ON sc.id_student = p.id_person
+    JOIN Course c ON sc.id_course = c.id_course
+    JOIN Institution i ON c.id_institution = i.id_institution
+    JOIN Catalog cat_l ON c.id_catalog_level = cat_l.id_catalog
+    JOIN Catalog cat_p ON c.id_catalog_parallel = cat_p.id_catalog
+    JOIN Catalog cat_t ON c.id_catalog_time = cat_t.id_catalog
+    JOIN Catalog cat_per ON c.id_catalog_period = cat_per.id_catalog
+    JOIN Persona prof ON c.id_teacher = prof.id_person
+WHERE p.state = 1 AND p.id_role = 4 AND prof.id_role = 3 AND sc.state = 1;  -- Solo estudiantes activos
+
+SELECT * FROM vw_estudiante

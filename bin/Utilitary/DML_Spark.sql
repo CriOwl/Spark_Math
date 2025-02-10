@@ -333,3 +333,5 @@ SELECT
                 r.id_hierarchy 
                 FROM role r 
                 WHERE r.state = 1 AND r.name LIKE '%a%';
+
+                
