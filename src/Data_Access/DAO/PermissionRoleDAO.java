@@ -42,7 +42,7 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
                                                 rs.getString(6));
             }
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "readBy()");
+            System.out.println(e);
         }
         return registro;
     }
@@ -72,7 +72,7 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
                 tabla.add(list);
             }
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "readAll()");
+            System.out.println(e);
         }
         return tabla;
     }
@@ -91,7 +91,7 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "create()");
+            throw e;
         }
     }
 
@@ -111,7 +111,7 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "update()");
+            throw e;
         }
     }
 
@@ -128,9 +128,8 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            System.out.println(e);
+            throw e;
         }
-        return false;
     }
 
     public List<Permission_roleDTO> role_permission_read(Integer id_role) throws Exception {

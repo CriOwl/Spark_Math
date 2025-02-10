@@ -170,7 +170,6 @@ public class CatalogoViewDAO extends Data_Helper_Sqlite implements IVIEWDAO<Cata
             while (rs.next()) {
                 column = new CatalogoViewDTO(
                         rs.getString(2)
-
                 );
                 columns.add(column);
             }

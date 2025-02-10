@@ -99,4 +99,28 @@ public class VWPermissionRoleDAO extends Data_Helper_Sqlite implements IVIEWDAO<
         return tabla;
     }
 
+    @Override
+    public Permission_roleDTO readby(String id) throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'readby'");
+    }
+
+    @Override
+    public List<Permission_roleDTO> read_column() throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'read_column'");
+    }
+
+    @Override
+    public List<Permission_roleDTO> search_read(String DNI) throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'search_read'");
+    }
+
+    @Override
+    public List<Permission_roleDTO> read_combobox() throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'read_combobox'");
+    }
+
 }

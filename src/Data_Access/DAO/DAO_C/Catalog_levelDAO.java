@@ -71,5 +71,29 @@ public class Catalog_levelDAO extends Data_Helper_Sqlite implements IVIEWDAO<Cat
         return lst; 
     }
 
+    @Override
+    public Catalog_levelDTO readby(String id) throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'readby'");
+    }
+
+    @Override
+    public List<Catalog_levelDTO> read_column() throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'read_column'");
+    }
+
+    @Override
+    public List<Catalog_levelDTO> search_read(String DNI) throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'search_read'");
+    }
+
+    @Override
+    public List<Catalog_levelDTO> read_combobox() throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'read_combobox'");
+    }
+
 
 }
