@@ -1,12 +1,9 @@
 package Data_Access.DAO.DAO_C;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,11 +71,10 @@ public class Catalog_levelDAO extends Data_Helper_Sqlite implements IVIEWDAO<Cat
         return lst; 
     }
 
-
     @Override
-    public List<Catalog_levelDTO> read_combobox() throws Exception {
-
-        throw new UnsupportedOperationException("Unimplemented method 'read_combobox'");
+    public Catalog_levelDTO readby(String id) throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'readby'");
     }
 
     @Override
@@ -94,8 +90,10 @@ public class Catalog_levelDAO extends Data_Helper_Sqlite implements IVIEWDAO<Cat
     }
 
     @Override
-    public Catalog_levelDTO readby(String id) throws Exception {
+    public List<Catalog_levelDTO> read_combobox() throws Exception {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'readby'");
+        throw new UnsupportedOperationException("Unimplemented method 'read_combobox'");
     }
+
+
 }

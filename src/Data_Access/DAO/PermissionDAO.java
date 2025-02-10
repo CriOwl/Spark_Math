@@ -63,13 +63,15 @@ public class PermissionDAO extends Data_Helper_Sqlite implements IDAO<Permission
             Statement stmt = connect.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                PermissionDTO list =new PermissionDTO(rs.getInt(1),
-                                            rs.getString(2),
-                                            rs.getString(3),
-                                            rs.getInt(4),
-                                            rs.getString(5),
-                                            rs.getString(6));
-                                            tabla.add(list);
+                PermissionDTO list =new PermissionDTO(
+                    rs.getInt(1),
+                    rs.getString(2),
+                    rs.getString(3),
+                    rs.getInt(4),
+                    rs.getString(5),
+                    rs.getString(6)
+                    );
+                    tabla.add(list);
                 }
 
         } catch (SQLException e) {

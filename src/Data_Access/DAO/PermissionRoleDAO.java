@@ -42,7 +42,7 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
                                                 rs.getString(6));
             }
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "readBy()");
+            System.out.println(e);
         }
         return registro;
     }
@@ -72,7 +72,7 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
                 tabla.add(list);
             }
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "readAll()");
+            System.out.println(e);
         }
         return tabla;
     }
@@ -93,7 +93,7 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            System.out.println(e);
+            throw e;
         }
         return false;
     }
@@ -111,26 +111,26 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            System.out.println(e);
+            throw e;
         }
         return false;
     }
 
     @Override
     public boolean delete(Integer id) throws Exception {
-        String query = "UPDATE Permission_role "
-                        +"SET state = 0, date_updated = datetime('now', 'localtime') "
-                        +"WHERE id_permission_role= ? ";
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        String query = "UPDATE permission_role SET state = 0, date_updated = ? WHERE id_permission_role = ?;";
         try {
             Connection conn = opConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setInt(1, id);
+            pstmt.setString(1, dtf.format(now));
+            pstmt.setInt(2, id);
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            System.out.println(e);
+            throw e;
         }
-        return false;
     }
     public boolean delete_permissions(Permission_roleDTO entity) throws Exception {
         String query = "UPDATE Permission_role "
@@ -144,9 +144,8 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            System.out.println(e);
+            throw e;
         }
-        return false;
     }
 
     public List<Permission_roleDTO> role_permission_read(Integer id_role) throws Exception {

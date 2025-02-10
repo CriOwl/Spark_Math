@@ -17,14 +17,13 @@ FROM
     Persona p
     JOIN Role r ON p.id_role = r.id_role;
 
+
+DROP VIEW vw_role;
 CREATE VIEW vw_role AS
 SELECT 
     r.id_role AS ID,
     r.name AS Role,
-    r.state AS STATE,
-    COUNT(pr.id_permission_role) AS permission_count,
-    r.date_created,
-    r.date_updated
+    COUNT(pr.id_permission_role) AS permission_count
 FROM 
     Role r
     LEFT JOIN Permission_role pr ON r.id_role = pr.id_role
@@ -78,6 +77,7 @@ FROM
     JOIN Catalog cat_par ON c.id_catalog_parallel = cat_par.id_catalog
     JOIN Catalog cat_time ON c.id_catalog_time = cat_time.id_catalog
     JOIN Catalog cat_period ON c.id_catalog_period = cat_period.id_catalog;
+
 
 CREATE VIEW vw_activity AS
 SELECT 
@@ -155,27 +155,11 @@ FROM
     JOIN Game2 g2 ON gag2.id_game2 = g2.id_game2;
 
 
-CREATE VIEW vw_catalog AS
-SELECT 
-    c.id_catalog,
-    c.name AS catalog_name,
-    cl.id_catalog_level,
-    cl.name AS catalog_level_name,
-    c.state AS catalog_state,
-    c.date_created AS catalog_date_created,
-    c.date_updated AS catalog_date_updated,
-    cl.state AS catalog_level_state,
-    cl.date_created AS catalog_level_date_created,
-    cl.date_updated AS catalog_level_date_updated
-FROM 
-    Catalog c
-    LEFT JOIN Catalog_level cl ON c.id_catalog_level = cl.id_catalog_level;
-
 
 CREATE VIEW vw_catalog_level AS
 SELECT 
     id_catalog_level AS ID,
-    name AS catalog_level_name AS NOMBRE,
+    name AS NOMBRE,
     state AS catalog_level_state,
     date_created AS catalog_level_date_created,
     date_updated AS catalog_level_date_updated
@@ -187,5 +171,96 @@ DROP VIEW vw_persona;
 
 PRAGMA table_info(vw_catalog);
  
+--view terminada
+DROP VIEW vw_docente;
+CREATE VIEW vw_docente AS
+SELECT
+    c.id_course AS ID,
+    CONCAT(p.name, ' ' , p.last_name) AS PROFESOR,
+    ins.name AS INSTITUCION,
+    ins.amie AS AMIE,
+    cat_per.name AS PERIODO,
+    cat_t.name AS JORNADA,
+    CONCAT(cat_l.name,' ', cat_p.name) AS CURSO
+FROM
+    Course c
+    JOIN Persona p ON c.id_teacher = p.id_person
+    JOIN Institution ins ON c.id_institution = ins.id_institution
+    JOIN Catalog cat_l ON c.id_catalog_level = cat_l.id_catalog
+    JOIN Catalog cat_per ON c.id_catalog_period = cat_per.id_catalog
+    JOIN Catalog cat_p ON c.id_catalog_parallel = cat_p.id_catalog
+    JOIN Catalog cat_t ON c.id_catalog_time = cat_t.id_catalog;
 
 
+
+/*
+    VISTA RECTORES DESDE LA PERSPECTIVA DEL ADMINISTRADOR
+    ID_ADMINISTRADOR CON REFERENICA DE PERSONA
+
+    --ID, INSTITUTION, NOMBRE DEL RECTOR, JORNADA 
+*/
+
+DROP VIEW vw_rectores;
+
+CREATE VIEW vw_rectores AS
+SELECT 
+    p.id_person AS ID,
+    CONCAT(p.name,' ', p.last_name ) AS RECTOR,
+    p.DNI AS CEDULA,
+    p.email AS CORREO,
+    i.name AS INSTITUCION,
+    i.amie AS AMIE
+    -- c.id_catalog_period AS periodo,  
+    -- c.id_catalog_time AS jornada    
+FROM 
+    Persona p
+    JOIN Role r ON p.id_role = r.id_role
+    JOIN Institution_manage im ON p.id_person = im.id_manager
+    JOIN Institution i ON im.id_institution = i.id_institution
+    --LEFT JOIN Course c ON c.id_institution = i.id_institution  
+WHERE r.name = 'Rector' AND p.state = 1;
+
+
+--vista para los roles
+DROP VIEW vw_roles;
+CREATE VIEW vw_roles AS
+SELECT 
+    r.id_role AS id_rol,
+    r.name AS nombre_rol,
+    r.id_hierarchy AS jerarquia
+FROM 
+    Role r
+WHERE 
+    r.state = 1;  -- Asegúrate de que solo tomas roles activos
+
+
+
+-- PERMISOS VISTA
+DROP VIEW vw_permisos;
+CREATE VIEW vw_permisos AS
+SELECT 
+    p.id_permission AS ID,
+    p.name AS PERMISO,
+    p.description AS DESCRIPCION,
+    p.name_method AS METODO
+FROM 
+    Permission p
+WHERE 
+    p.state = 1;  -- Solo permisos activos
+
+
+
+--PERMISOS ROLES
+
+DROP VIEW vw_permiso_rol;
+CREATE VIEW vw_permiso_rol AS
+SELECT 
+    pr.id_permission_role AS ID,
+    r.name AS ROL,
+    p.name AS PERMISO
+FROM 
+    Permission_role pr
+    JOIN Role r ON pr.id_role = r.id_role  -- Relaciona con la tabla Role para obtener el nombre del rol
+    JOIN Permission p ON pr.id_permission = p.id_permission  -- Relaciona con la tabla Permission para obtener el nombre del permiso
+WHERE 
+    pr.state = 1;  -- Solo asociaciones activas

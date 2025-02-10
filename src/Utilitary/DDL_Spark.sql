@@ -204,14 +204,14 @@ CREATE TABLE IF NOT EXISTS Game2 (
 );
 
 CREATE TABLE Puntaje (
-    id_score INTEGER PRIMARY KEY AUTOINCREMENT
-    ,id_person INTEGER NOT NULL REFERENCES Persona(id_person)
-    ,FechaJuego DATETIME
-    ,Aciertos INTEGER DEFAULT 0
-    ,Errores INTEGER DEFAULT 0
-    ,state INTEGER DEFAULT 1 CONSTRAINT states CHECK (state IN (0, 1))
-    ,Fecha_creacion DATETIME DEFAULT (datetime('now','localtime'))
-    ,Fecha_modificacion DATETIME
+    id_score INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_person INTEGER NOT NULL REFERENCES Persona(id_person),
+    FechaJuego DATETIME,
+    Aciertos INTEGER DEFAULT 0,
+    Errores INTEGER DEFAULT 0,
+    state INTEGER DEFAULT 1 CONSTRAINT states CHECK (state IN (0, 1)),
+    Fecha_creacion DATETIME DEFAULT (datetime('now','localtime')),
+    Fecha_modificacion DATETIME
 );
 
 INSERT INTO Persona(name,last_name,DNI,email,password,id_role)

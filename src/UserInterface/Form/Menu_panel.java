@@ -31,11 +31,12 @@ public class Menu_panel extends JPanel {
         gameWindow.setSize(800, 600); // Tamaño de la ventana del juego
 
         // Crear el panel de juego y agregarlo a la nueva ventana
-        JuegoPanel juegoPanel = new JuegoPanel(gameWindow, userId);
+        Juego_panel_2 juegoPanel = new Juego_panel_2(gameWindow, userId);
         gameWindow.add(juegoPanel);
         // Hacer visible la ventana del juego
         gameWindow.setVisible(true);
     }
+   
 
     private void customizepanel(List<String> Opciones_permisos, Integer userId) {
         init_component(Opciones_permisos, userId);

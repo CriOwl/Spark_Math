@@ -171,4 +171,33 @@ public class CourseDAO extends Data_Helper_Sqlite implements IDAO<CourseDTO>{
         return 0;
     }
 
+    @Override
+    public List<CourseDTO> read_combobox() throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'read_combobox'");
+    }
+
+    @Override
+    public List<CourseDTO> read_combobox2() throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'read_combobox2'");
+    }
+
+    @Override
+    public List<CourseDTO> read_column() throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'read_column'");
+    }
+
+    @Override
+    public List<CourseDTO> search_read(String DNI) throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'search_read'");
+    }
+
+    @Override
+    public CourseDTO search_read_single(String DNI) throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'search_read_single'");
+    }
 }

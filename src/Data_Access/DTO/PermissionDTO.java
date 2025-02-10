@@ -16,6 +16,21 @@ public class PermissionDTO {
         this.state       = State;
     }
 
+    
+
+    public PermissionDTO(Integer id_permission, String name, String description, String name_method, Integer state,
+            String date_created, String date_updated) {
+        this.id_permission = id_permission;
+        this.name = name;
+        this.description = description;
+        this.name_method = name_method;
+        this.state = state;
+        this.date_created = date_created;
+        this.date_updated = date_updated;
+    }
+
+
+
     public String getName_method() {
         return name_method;
     }

@@ -1,11 +1,8 @@
 package UserInterface.Form;
 
-import UserInterface.Customer_control.Table_Spark;
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
 
-import javax.naming.spi.ObjectFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -19,10 +16,7 @@ import UserInterface.Spark_Style;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.Image;
-import java.awt.Window;
 import java.util.List;
-import java.util.function.Supplier;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 
@@ -89,7 +83,7 @@ public class MainFrame extends JFrame {
         main_windown.add(container);
         main_windown.revalidate();
         //Cambiar main_panel--
-        Update_panel_person update_panel = new Update_panel_person();
+        Manage_panel_docente update_panel = new Manage_panel_docente();
         container.add(update_panel,BorderLayout.CENTER);
         main_windown.add(container);
         main_windown.revalidate();
@@ -99,6 +93,7 @@ public class MainFrame extends JFrame {
         main_windown.add(panel,BorderLayout.CENTER);
         main_windown.revalidate();
     }
+    
     private void Login_panel(){
         login=new Login_panel();
         main_windown.add(login);
