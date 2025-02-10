@@ -1,8 +1,8 @@
 package UserInterface.Form;
 
 import BusinessLogic.BL_USER.BL_generalyView;
-import Data_Access.DAO.DAO_C.VWPermissionRoleDAO;
-import Data_Access.DTO.Permission_roleDTO;
+import Data_Access.VIEW.PermisoRoleViewDAO;
+import Data_Access.VIEW.PermisoRoleViewDTO;
 import UserInterface.Customer_control.Button_Text;
 import UserInterface.Customer_control.Text_box;
 import UserInterface.Customer_control.Text_label;
@@ -55,20 +55,16 @@ public class Manage_panel_permission_role extends JPanel {
     }
 
     private void created_table() {
-        BL_generalyView<Permission_roleDTO> bl_permission_role = new BL_generalyView<>(VWPermissionRoleDAO::new);
+        BL_generalyView<PermisoRoleViewDTO> bl_permission_role = new BL_generalyView<>(PermisoRoleViewDAO::new);
         try {
-            String[] columns = {"ID", "Rol", "Permiso", "Estado", "Fecha Creación", "Fecha Actualización"};
-            List<Permission_roleDTO> permissionRoles = bl_permission_role.getAll();
-            Object[][] data = new Object[permissionRoles.size()][columns.length];
+            String[] columns = bl_permission_role.getColumn().stream().map(c -> c.getName_column()).toArray(String[]::new);
+            Object[][] data = new Object[bl_permission_role.getAll().size()][columns.length];
 
             int index = 0;
-            for (Permission_roleDTO permissionRole : permissionRoles) {
-                data[index][0] = permissionRole.getId_permission_role();
-                data[index][1] = permissionRole.getId_role();
-                data[index][2] = permissionRole.getId_permission();
-                data[index][3] = permissionRole.getState() == 1 ? "Activo" : "Inactivo";
-                data[index][4] = permissionRole.getDate_created();
-                data[index][5] = permissionRole.getDate_updated();
+            for (PermisoRoleViewDTO permissionRole : new PermisoRoleViewDAO().readall()) {
+                data[index][0] = permissionRole.getId();
+                data[index][1] = permissionRole.getRol();
+                data[index][2] = permissionRole.getPermiso();
                 index++;
             }
 
@@ -86,21 +82,20 @@ public class Manage_panel_permission_role extends JPanel {
     }
 
     private void search(String role) {
-        BL_generalyView<Permission_roleDTO> bl_permission_role = new BL_generalyView<>(VWPermissionRoleDAO::new);
+        BL_generalyView<PermisoRoleViewDTO> bl_permission_role = new BL_generalyView<>(PermisoRoleViewDAO::new);
         try {
-            String[] columns = {"ID", "Rol", "Permiso", "Estado", "Fecha Creación", "Fecha Actualización"};
-            List<Permission_roleDTO> results = bl_permission_role.search(role);
+            String[] columns = bl_permission_role.getColumn().stream().map(c -> c.getName_column()).toArray(String[]::new);
+
+            List<PermisoRoleViewDTO> results = bl_permission_role.search(role);
             Object[][] data = new Object[results.size()][columns.length];
 
             int index = 0;
-            for (Permission_roleDTO permissionRole : results) {
-                data[index][0] = permissionRole.getId_permission_role();
-                data[index][1] = permissionRole.getId_role();
-                data[index][2] = permissionRole.getId_permission();
-                data[index][3] = permissionRole.getState() == 1 ? "Activo" : "Inactivo";
-                data[index][4] = permissionRole.getDate_created();
-                data[index][5] = permissionRole.getDate_updated();
+            for (PermisoRoleViewDTO permissionRole : results) {
+                data[index][0] = permissionRole.getId();
+                data[index][1] = permissionRole.getRol();
+                data[index][2] = permissionRole.getPermiso();
                 index++;
+                System.out.println(permissionRole.getId());
             }
             table.setModel(new DefaultTableModel(data, columns));
             table.revalidate();

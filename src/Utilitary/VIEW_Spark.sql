@@ -193,13 +193,6 @@ FROM
 
 
 
-/*
-    VISTA RECTORES DESDE LA PERSPECTIVA DEL ADMINISTRADOR
-    ID_ADMINISTRADOR CON REFERENICA DE PERSONA
-
-    --ID, INSTITUTION, NOMBRE DEL RECTOR, JORNADA 
-*/
-
 DROP VIEW vw_rectores;
 
 CREATE VIEW vw_rectores AS
@@ -231,7 +224,7 @@ SELECT
 FROM 
     Role r
 WHERE 
-    r.state = 1;  -- Asegúrate de que solo tomas roles activos
+    r.state = 1;  
 
 
 
@@ -246,11 +239,10 @@ SELECT
 FROM 
     Permission p
 WHERE 
-    p.state = 1;  -- Solo permisos activos
+    p.state = 1; 
 
 
 
---PERMISOS ROLES
 
 DROP VIEW vw_permiso_rol;
 CREATE VIEW vw_permiso_rol AS
@@ -260,7 +252,7 @@ SELECT
     p.name AS PERMISO
 FROM 
     Permission_role pr
-    JOIN Role r ON pr.id_role = r.id_role  -- Relaciona con la tabla Role para obtener el nombre del rol
-    JOIN Permission p ON pr.id_permission = p.id_permission  -- Relaciona con la tabla Permission para obtener el nombre del permiso
+    JOIN Role r ON pr.id_role = r.id_role  
+    JOIN Permission p ON pr.id_permission = p.id_permission  
 WHERE 
-    pr.state = 1;  -- Solo asociaciones activas
+    pr.state = 1;  

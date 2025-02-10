@@ -124,6 +124,7 @@ public class MainFrame extends JFrame {
                 return new Manage_panel_institution();
             case "AdminPanel":
                 return new Manage_panel_person();
+            
         }
         return new MainPanel();
     }
