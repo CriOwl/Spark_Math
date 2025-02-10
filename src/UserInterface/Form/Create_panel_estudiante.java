@@ -76,7 +76,7 @@ public class Create_panel_estudiante extends JPanel {
         cancel=new Button_Text("Cancelar", Spark_Style.FONT, null);
         cancel.setBackground(new Color(200,0,0));
         GridBagConstraints gbc=new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5); // Espaciado entre componentes
+         gbc.insets = new Insets(5, 5, 5, 5); // Espaciado entre componentes
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         // Primera columna (Labels)
@@ -150,8 +150,9 @@ public class Create_panel_estudiante extends JPanel {
             List<CourseDTO> list_course=bl_course.read_elments();
             array_course=new String [list_course.size()];
             for (int index = 0; index < list_course.size(); index++) {
-                array_course[index]=list_course.get(index).getLevel() + " - " + list_course.get(index).getParallel();
-                Course_map.put(list_course.get(index).getLevel(), list_course.get(index).getId_course());
+                String key = list_course.get(index).getLevel() + " - " + list_course.get(index).getParallel();
+            array_course[index] = key;
+            Course_map.put(key, list_course.get(index).getId_course());
             }
 
         } catch (Exception e) {
@@ -199,7 +200,7 @@ public class Create_panel_estudiante extends JPanel {
             Spark_Style.show_mesg_advert("Ingrese una cedula correcta", "Registrar");
             return;
         }
-        PersonDTO person_created = new PersonDTO(name,last_name,dni,email,password,birthdat, 4,null);
+        PersonDTO person_created = new PersonDTO(name,last_name,dni,email,password,birthdat, 4, 1);
         Student_courseDTO student_course = new Student_courseDTO(1,id_course);
         send_data(person_created,student_course);
     }
