@@ -58,12 +58,12 @@ public class Manage_panel_institution extends JPanel {
     private void created_table() {
         BL_generalyView<InstitutionViewDTO> bl_institution = new BL_generalyView<>(InstitutionViewDAO::new);
         try {
-            ///
             String[] columns = bl_institution.getColumn().stream().map(c -> c.getName_column()).toArray(String[]::new);
-            Object[][] data = new Object[bl_institution.getAll().size()][columns.length];
+            List<InstitutionViewDTO> results = bl_institution.getAll();
+            Object[][] data = new Object[results.size()][columns.length];
 
             int index = 0;
-            for (InstitutionViewDTO user : new  InstitutionViewDAO().readall()) {
+            for (InstitutionViewDTO user : results ) {
                 data[index][0] = user.getId_institution();
                 data[index][1] = user.getName();
                 data[index][2] = user.getAmie();

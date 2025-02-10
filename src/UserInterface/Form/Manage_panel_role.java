@@ -22,7 +22,6 @@ public class Manage_panel_role extends JPanel {
     private final Button_Text Button_update;
     private final Button_Text Button_created;
     private final Button_Text Button_search;
-    private final Button_Text Button_deletd;
     private final Text_box search_box;
     private final Text_label search_text;
     private JTable table;
@@ -32,11 +31,11 @@ public class Manage_panel_role extends JPanel {
         setLayout(new GridBagLayout());
         Button_update = new Button_Text("Actualizar", Spark_Style.FONT_BOLD, null);
         Button_created = new Button_Text("Crear", Spark_Style.FONT_BOLD, null);
-        Button_deletd = new Button_Text("Borrar", Spark_Style.FONT_BOLD, null);
         Button_search = new Button_Text("Buscar", Spark_Style.FONT_BOLD, null);
         search_box = new Text_box(Spark_Style.FONT_BOLD, null);
         search_text = new Text_label("Nombre:");
-
+        Button_created.addActionListener(e->change_panel(new Create_panel_rol()));
+        Button_update.addActionListener(e->change_panel(new Update_panel_rol()));
         Button_search.addActionListener(e -> change_table());
 
         created_table();
@@ -131,9 +130,6 @@ public class Manage_panel_role extends JPanel {
         add(Button_update, gbc);
         gbc.gridx = 1;
         add(Button_created, gbc);
-        gbc.gridx = 2;
-        gbc.gridwidth = 1;
-        add(Button_deletd, gbc);
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.CENTER;
@@ -147,5 +143,20 @@ public class Manage_panel_role extends JPanel {
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.EAST;
         add(Button_search, gbc);
+    }
+    private void change_panel(JPanel newPanel) {
+        removeAll(); 
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 10, 5, 5);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        add(newPanel, gbc);
+        revalidate();
+        repaint(); 
     }
 }

@@ -55,18 +55,15 @@ public class LoginDAO extends Data_Helper_Sqlite implements IVIEWDAO<LoginDTO> {
         List<LoginDTO> persons = new ArrayList<>();
         LoginDTO person = new LoginDTO();
         String query = "SELECT "
-                + "p.id_person, "
-                + "p.name, "
-                + "p.last_name, "
-                + "p.DNI, "
-                + "p.email, "
-                + "p.password, "
-                + "p.id_role, "
-                + "r.name, "
-                + "p.state "
-                + "FROM  vw_persona p "
-                + "JOIN Role r ON p.id_role=r.id_role "
-                + "WHERE p.state= 1";
+                + "ID, "
+                + "NOMBRE, "
+                + "APELLIDO, "
+                + "CEDULA, "
+                + "EMAIL, "
+                + "CLAVE, "
+                + "ROL, "
+                + "ESTADO "
+                + "FROM  vw_persona  ";
         try {
             Connection connect = opConnection();
             Statement stmt = connect.createStatement();
@@ -79,9 +76,8 @@ public class LoginDAO extends Data_Helper_Sqlite implements IVIEWDAO<LoginDTO> {
                         rs.getString(4),
                         rs.getString(5),
                         rs.getString(6),
-                        rs.getInt(7),
-                        rs.getString(8),
-                        rs.getInt(9));
+                        rs.getString(7),
+                        rs.getInt(8));
                 persons.add(person);
             }
         } catch (SQLException e) {
@@ -116,18 +112,16 @@ public class LoginDAO extends Data_Helper_Sqlite implements IVIEWDAO<LoginDTO> {
         List<LoginDTO> persons = new ArrayList<>();
         LoginDTO person = new LoginDTO();
         String query = "SELECT "
-                + "p.id_person, "
-                + "p.name, "
-                + "p.last_name, "
-                + "p.DNI, "
-                + "p.email, "
-                + "p.password, "
-                + "p.id_role, "
-                + "r.name, "
-                + "p.state "
-                + "FROM  vw_persona p "
-                + "JOIN Role r ON p.id_role=r.id_role "
-                + "WHERE p.state= 1 AND p.DNI LIKE ? ";
+                + "ID, "
+                + "NOMBRE, "
+                + "APELLIDO, "
+                + "CEDULA, "
+                + "EMAIL, "
+                + "CLAVE, "
+                + "ROL, "
+                + "ESTADO "
+                + "FROM  vw_persona  "
+                + "WHERE ESTADO= 1 AND CEDULA LIKE ? ";
         try {
             Connection connect = opConnection();
             PreparedStatement stmt = connect.prepareStatement(query);
@@ -135,15 +129,14 @@ public class LoginDAO extends Data_Helper_Sqlite implements IVIEWDAO<LoginDTO> {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 person = new LoginDTO(
-                        rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getInt(7),
-                        rs.getString(8),
-                        rs.getInt(9));
+                    rs.getInt(1),
+                    rs.getString(2),
+                    rs.getString(3),
+                    rs.getString(4),
+                    rs.getString(5),
+                    rs.getString(6),
+                    rs.getString(7),
+                    rs.getInt(8));
                 persons.add(person);
             }
         } catch (SQLException e) {

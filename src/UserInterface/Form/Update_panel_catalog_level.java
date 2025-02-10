@@ -76,8 +76,6 @@ public class Update_panel_catalog_level extends JPanel {
     private void sent_data() {
         String name = name_box.getText();
         int state = state_map.get(state_box.getSelectedItem());
-        System.out.println(name + "---" + state);
         Catalog_levelDTO catalogLevel = new Catalog_levelDTO(state, name, state, name, name);
-        // Aquí puedes agregar la lógica para guardar en la base de datos
     }
 }

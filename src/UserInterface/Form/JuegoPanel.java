@@ -3,15 +3,12 @@ package UserInterface.Form;
 import BusinessLogic.BL_USER.JuegoBL;
 import Data_Access.DTO.PuntajeDTO;
 import UserInterface.Customer_control.Text_label;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import com.fazecast.jSerialComm.SerialPort;
+
+import javax.swing.*;
+import java.awt.*;
+import java.io.InputStream;
+import java.util.Scanner;
 
 public class JuegoPanel extends JPanel {
     private JButton btnNum1, btnNum2;
@@ -25,29 +22,28 @@ public class JuegoPanel extends JPanel {
     private JFrame gameWindow;
     private final Integer userId;
     private final JuegoBL juegoBL = new JuegoBL();
+    
+    private SerialPort comPort;
+    private int selectedIndex = 0; // Índice del botón seleccionado
 
     public JuegoPanel(JFrame gameWindow, Integer id) {
-        this.gameWindow = gameWindow; // Inicializar la referencia
-        customizeComponent(gameWindow);
+        this.gameWindow = gameWindow;
         this.userId = id;
+        customizeComponent();
+        setupSerial(); // Iniciar comunicación con Arduino
     }
 
-    private void customizeComponent(JFrame gameWindow) {
-        this.gameWindow = gameWindow;
+    private void customizeComponent() {
         setLayout(new BorderLayout());
         setBackground(Color.WHITE);
 
-        // Panel Superior
         JPanel panelSuperior = new JPanel(new GridLayout(1, 2));
         Text_label lblTitulo = new Text_label("¿Cuál es Mayor?");
-        // lblTitulo.setFont(PoliCursoStyle.FONT_BOLD.deriveFont(24f));
         lblRonda = new Text_label("Ronda: 1/" + TOTAL_RONDAS);
-        // lblRonda.setFont(PoliCursoStyle.FONT_BOLD.deriveFont(18f));
         panelSuperior.add(lblTitulo);
         panelSuperior.add(lblRonda);
         add(panelSuperior, BorderLayout.NORTH);
 
-        // Panel Central
         JPanel panelNumeros = new JPanel(new GridLayout(1, 2, 20, 20));
         panelNumeros.setBackground(Color.WHITE);
 
@@ -58,53 +54,32 @@ public class JuegoPanel extends JPanel {
         panelNumeros.add(btnNum2);
         add(panelNumeros, BorderLayout.CENTER);
 
-        // Panel Inferior
         JPanel panelContadores = new JPanel(new GridLayout(1, 2));
-
         lblAciertos = new Text_label("Aciertos: 0");
-        lblAciertos.setForeground(Color.GREEN); // Color verde
-
+        lblAciertos.setForeground(Color.GREEN);
         lblErrores = new Text_label("Errores: 0");
-        lblErrores.setForeground(Color.RED); // Color rojo
-
+        lblErrores.setForeground(Color.RED);
         panelContadores.add(lblAciertos);
         panelContadores.add(lblErrores);
+        add(panelContadores, BorderLayout.SOUTH);
 
-        add(panelContadores, BorderLayout.SOUTH); // Reemplazar el panelInfo
-
-        // Panel Inferior (Mensajes)
         JPanel panelMensajes = new JPanel();
-        lblMensaje = new Text_label("Selecciona el número mayor"); // Inicializa aquí
-        // lblMensaje.setFont(PoliCursoStyle.FONT_BOLD.deriveFont(16f));
+        lblMensaje = new Text_label("Selecciona el número mayor");
         panelMensajes.add(lblMensaje);
         add(panelMensajes, BorderLayout.SOUTH);
 
+        highlightButton();
         nuevoJuego();
     }
 
     private JButton crearBotonNumero() {
         JButton btn = new JButton("nada");
         btn.setPreferredSize(new Dimension(150, 150));
-        // btn.setFont(PoliCursoStyle.FONT_BOLD.deriveFont(48f));
-        // btn.setCursor(PoliCursoStyle.CURSOR_HAND);
-        btn.addActionListener(this::verificarRespuesta);
+        btn.addActionListener(e -> verificarRespuesta(btn));
         return btn;
     }
 
-    private void nuevoJuego() {
-        num1 = generarNumeroAleatorio();
-        num2 = generarNumeroAleatorio();
-        while (num1 == num2)
-            num2 = generarNumeroAleatorio();
-
-        btnNum1.setText(String.valueOf(num1));
-        btnNum2.setText(String.valueOf(num2));
-        lblMensaje.setText("Selecciona el número mayor");
-        // lblMensaje.setForeground(PoliCursoStyle.COLOR_FONT);
-    }
-
-    private void verificarRespuesta(ActionEvent e) {
-        JButton btnSeleccionado = (JButton) e.getSource();
+    private void verificarRespuesta(JButton btnSeleccionado) {
         int seleccion = Integer.parseInt(btnSeleccionado.getText());
         int otroNumero = (btnSeleccionado == btnNum1) ? num2 : num1;
 
@@ -120,65 +95,97 @@ public class JuegoPanel extends JPanel {
             lblMensaje.setForeground(Color.RED);
         }
 
-        rondaActual++; // Incrementar la ronda aquí
-
+        rondaActual++;
         if (rondaActual <= TOTAL_RONDAS) {
             lblRonda.setText("Ronda: " + rondaActual + "/" + TOTAL_RONDAS);
             nuevoJuego();
         } else {
             guardarPartida();
             mostrarResultados();
-
         }
     }
 
     private void guardarPartida() {
         try {
-
             if (this.userId == null) {
                 throw new Exception("Usuario no autenticado");
             }
 
-            PuntajeDTO puntaje = new PuntajeDTO(
-                    this.userId,
-                    "",
-                    aciertos,
-                    errores);
-
+            PuntajeDTO puntaje = new PuntajeDTO(this.userId, "", aciertos, errores);
             if (!juegoBL.guardarPuntaje(puntaje)) {
                 throw new Exception("Error al guardar puntaje");
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this,
-                    "Error: " + ex.getMessage(),
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void mostrarResultados() {
-        JOptionPane.showMessageDialog(this,
-                "Resultados:\n" +
-                        "✅ Aciertos: " + aciertos + "\n" +
-                        "❌ Errores: " + errores,
+        JOptionPane.showMessageDialog(this, 
+                "Resultados:\n✅ Aciertos: " + aciertos + "\n❌ Errores: " + errores,
                 "Fin de la Partida",
                 JOptionPane.INFORMATION_MESSAGE);
-
         if (gameWindow != null) {
-            gameWindow.dispose(); // Cerrar solo la ventana del juego
+            gameWindow.dispose();
         }
     }
 
-    // private void reiniciarJuego() {
-    // aciertos = 0;
-    // errores = 0;
-    // rondaActual = 1;
-    // lblPuntaje.setText("Puntaje: 0");
-    // lblRonda.setText("Ronda: 1/" + TOTAL_RONDAS);
-    // nuevoJuego();
-    // }
-
     private int generarNumeroAleatorio() {
         return (int) (Math.random() * 50) + 1;
+    }
+
+    private void nuevoJuego() {
+        num1 = generarNumeroAleatorio();
+        num2 = generarNumeroAleatorio();
+        while (num1 == num2) num2 = generarNumeroAleatorio();
+
+        btnNum1.setText(String.valueOf(num1));
+        btnNum2.setText(String.valueOf(num2));
+        lblMensaje.setText("Selecciona el número mayor");
+
+        highlightButton();
+    }
+
+    private void setupSerial() {
+        comPort = SerialPort.getCommPort("COM6");
+        comPort.setBaudRate(115200);
+        if (!comPort.openPort()) {
+            System.err.println("⚠️ No se pudo abrir el puerto.");
+            return;
+        }
+        System.out.println("✅ Puerto abierto: " + comPort.getSystemPortName());
+
+        new Thread(() -> {
+            try (InputStream in = comPort.getInputStream(); Scanner scanner = new Scanner(in)) {
+                while (scanner.hasNextLine()) {
+                    String data = scanner.nextLine().trim();
+                    System.out.println("📩 Recibido: " + data);  // Depuración
+                    SwingUtilities.invokeLater(() -> handleCommand(data));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+    private void handleCommand(String command) {
+        System.out.println("🔍 Comando recibido: " + command); // Debugging
+        
+        if (command.equalsIgnoreCase("UP")) {
+            selectedIndex = 0;
+        } else if (command.equalsIgnoreCase("DOWN")) {
+            selectedIndex = 1;
+        } else if (command.equalsIgnoreCase("SELECT")) {
+            JButton selectedButton = (selectedIndex == 0) ? btnNum1 : btnNum2;
+            verificarRespuesta(selectedButton);
+        }
+
+        System.out.println("🔄 Botón seleccionado: " + selectedIndex); // Depuración
+        highlightButton();
+    }
+
+    private void highlightButton() {
+        btnNum1.setBackground(selectedIndex == 0 ? Color.YELLOW : null);
+        btnNum2.setBackground(selectedIndex == 1 ? Color.YELLOW : null);
     }
 }

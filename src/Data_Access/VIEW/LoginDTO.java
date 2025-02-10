@@ -18,6 +18,18 @@ public class LoginDTO {
         this.id_person=id_person;
     }
 
+    public LoginDTO(Integer id_person, String name, String last_name, String dNI, String email, String password,
+            String name_role, Integer state) {
+        this.id_person = id_person;
+        this.name = name;
+        this.last_name = last_name;
+        DNI = dNI;
+        this.email = email;
+        this.password = password;
+        this.name_role = name_role;
+        this.state = state;
+    }
+
     public LoginDTO() {
     }
     

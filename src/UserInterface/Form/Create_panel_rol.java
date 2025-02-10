@@ -47,6 +47,7 @@ public class Create_panel_rol extends JPanel {
         send=new Button_Text("Enviar", Spark_Style.FONT, null);
         send.addActionListener(e->validate_data());
         cancel=new Button_Text("Cancelar", Spark_Style.FONT, null);
+        cancel.addActionListener(e->change_panel(new Manage_panel_role()));
         cancel.setBackground(new Color(200,0,0));
         GridBagConstraints gbc=new GridBagConstraints();
         gbc.insets=new Insets(5,20,5,20);
@@ -125,6 +126,21 @@ public class Create_panel_rol extends JPanel {
             System.out.println(e);
         }
         return false;
+    }
+    private void change_panel(JPanel newPanel) {
+        removeAll(); 
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 10, 5, 5);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        add(newPanel, gbc);
+        revalidate();
+        repaint(); 
     }
 }
 
