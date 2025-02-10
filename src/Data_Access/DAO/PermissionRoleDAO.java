@@ -79,7 +79,10 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
 
     @Override
     public boolean created(Permission_roleDTO entity) throws Exception {
-        String query = "INSERT INTO permission_role (id_role, id_permission, state, date_created, date_updated) VALUES (?, ?, ?, ?, ?);";
+        String query = "INSERT INTO permission_role (id_role, id_permission, state, date_created)"
+                        +"SELECT ?, ?, 1, datetime('now', 'localtime') "
+                        +"WHERE NOT EXISTS ( SELECT 1 FROM Permission_role "
+                        +"WHERE id_role = ? AND id_permission = ?) ";
         try {
             Connection conn = opConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
@@ -87,44 +90,57 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
             pstmt.setInt(2, entity.getId_permission());
             pstmt.setInt(3, entity.getState());
             pstmt.setString(4, entity.getDate_created());
-            pstmt.setString(5, entity.getDate_updated());
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "create()");
+            System.out.println(e);
         }
+        return false;
     }
 
     @Override
     public boolean update(Permission_roleDTO entity) throws Exception {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
-        String query = "UPDATE permission_role SET id_role = ?, id_permission = ?, state = ?, date_updated = ? WHERE id_permission_role = ?;";
+        String query = "UPDATE Permission_role "
+                        +"SET state = 1, date_updated = datetime('now', 'localtime') "
+                        +"WHERE id_role = ? AND id_permission = ? ";
         try {
             Connection conn = opConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, entity.getId_role());
             pstmt.setInt(2, entity.getId_permission());
-            pstmt.setInt(3, entity.getState());
-            pstmt.setString(4, dtf.format(now));
-            pstmt.setInt(5, entity.getId_permission_role());
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "update()");
+            System.out.println(e);
         }
+        return false;
     }
 
     @Override
     public boolean delete(Integer id) throws Exception {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
-        String query = "UPDATE permission_role SET state = 0, date_updated = ? WHERE id_permission_role = ?;";
+        String query = "UPDATE Permission_role "
+                        +"SET state = 0, date_updated = datetime('now', 'localtime') "
+                        +"WHERE id_permission_role= ? ";
         try {
             Connection conn = opConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, dtf.format(now));
-            pstmt.setInt(2, id);
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+    public boolean delete_permissions(Permission_roleDTO entity) throws Exception {
+        String query = "UPDATE Permission_role "
+                        +"SET state = 0, date_updated = datetime('now', 'localtime') "
+                        +"WHERE id_role = ? AND id_permission = ? ";
+        try {
+            Connection conn = opConnection();
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, entity.getId_role());
+            pstmt.setInt(2, entity.getId_permission());
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -134,27 +150,35 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
     }
 
     public List<Permission_roleDTO> role_permission_read(Integer id_role) throws Exception {
-        List<Permission_roleDTO> tabla=new ArrayList<>();
-        Permission_roleDTO registro=new Permission_roleDTO();
-        String query = "SELECT "
-                        + "p.name, "
-                        + "pr.state, "
-                        + "p.name_method "
-                        + "FROM Permission_role pr "
-                        + "JOIN Permission p ON pr.id_permission=p.id_permission "
-                        + "WHERE pr.state = 1 AND pr.id_role = " + id_role + ";";
+        List<Permission_roleDTO> listRegistro = new ArrayList<>();
+        String querry = "SELECT "
+                + "p.id_permission_role, "
+                + "p.id_role, "
+                + "r.name, "
+                + "p.id_permission, "
+                + "n.name "
+                + "FROM Permission_role p "
+                + "JOIN Role r ON p.id_role=r.id_role "
+                + "JOIN Permission n ON p.id_permission=n.id_permission "
+                + "WHERE p.state = 1  AND p.id_role= "+id_role;
         try {
-            Connection conn = opConnection();
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
+            Connection cone = opConnection();
+            Statement stmt = cone.createStatement();
+            ResultSet rs = stmt.executeQuery(querry);
             while (rs.next()) {
-                registro=new Permission_roleDTO(rs.getString(1),rs.getString(3));
-                tabla.add(registro);
+                Permission_roleDTO registro = new Permission_roleDTO(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5)
+                        );
+                        listRegistro.add(registro);
             }
         } catch (SQLException e) {
             System.out.println(e);
         }
-        return tabla;
+        return listRegistro;
     }
 
     @Override
@@ -178,9 +202,7 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
                 Permission_roleDTO registro = new Permission_roleDTO(
                         rs.getInt(1),
                         rs.getInt(2),
-                        rs.getString(3),
-                        rs.getInt(4),
-                        rs.getString(3));
+                        rs.getInt(3));
                         listRegistro.add(registro);
             }
         } catch (SQLException e) {
@@ -195,7 +217,7 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
     }
 
     @Override
-    public List<Permission_roleDTO> search_read(String Role) throws Exception {
+    public List<Permission_roleDTO> search_read() throws Exception {
         List<Permission_roleDTO> listRegistro = new ArrayList<>();
         String querry = "SELECT "
                 + "p.id_permission_role, "
@@ -206,7 +228,7 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
                 + "FROM Permission_role p "
                 + "JOIN Role r ON p.id_role=r.id_role "
                 + "JOIN Permission n ON p.id_permission=n.id_permission "
-                + "WHERE p.state = 1 AND r.name LIKE ?";
+                + "WHERE p.state = 1 ";
         try {
             Connection cone = opConnection();
             Statement stmt = cone.createStatement();
@@ -215,7 +237,10 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
                 Permission_roleDTO registro = new Permission_roleDTO(
                         rs.getInt(1),
                         rs.getInt(2),
-                        rs.getInt(3));
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5)
+                        );
                         listRegistro.add(registro);
             }
         } catch (SQLException e) {

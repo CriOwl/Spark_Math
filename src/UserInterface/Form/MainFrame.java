@@ -10,6 +10,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+
+import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatCarbonIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatMonokaiProIJTheme;
@@ -40,7 +42,7 @@ public class MainFrame extends JFrame {
 
     public void created_windown(String name_app) {
         try {
-        UIManager.setLookAndFeel(new FlatCarbonIJTheme());
+        UIManager.setLookAndFeel(new FlatArcDarkIJTheme()); 
         main_windown = new JFrame(name_app);
         main_windown.setExtendedState(JFrame.MAXIMIZED_BOTH);
         main_windown.setIconImage(logo.getImage());
@@ -87,7 +89,7 @@ public class MainFrame extends JFrame {
         main_windown.add(container);
         main_windown.revalidate();
         //Cambiar main_panel--
-        Update_panel_permission_role update_panel = new Update_panel_permission_role();
+        Update_panel_person update_panel = new Update_panel_person();
         container.add(update_panel,BorderLayout.CENTER);
         main_windown.add(container);
         main_windown.revalidate();

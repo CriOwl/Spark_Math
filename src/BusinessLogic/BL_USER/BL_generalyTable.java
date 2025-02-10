@@ -23,8 +23,8 @@ public class BL_generalyTable<T> {
         return dao.read_column();
     }
 
-    public List<T> search(String DNI) throws Exception {
-        return dao.search_read(DNI);
+    public List<T> search() throws Exception {
+        return dao.search_read();
     }
 
     public List<T> read_elments() throws Exception {

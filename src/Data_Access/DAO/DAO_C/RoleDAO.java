@@ -131,7 +131,7 @@ public class RoleDAO extends Data_Helper_Sqlite implements  IDAO<RoleDTO> {
     @Override
     public List<RoleDTO> read_combobox() {
         List<RoleDTO> list_role = new ArrayList<>();
-        /* String querry = "SELECT "
+        String querry = "SELECT "
                 + "r.id_role, "
                 + "r.name "
                 + "FROM Role r "
@@ -148,7 +148,7 @@ public class RoleDAO extends Data_Helper_Sqlite implements  IDAO<RoleDTO> {
             }
         } catch (SQLException e) {
             System.out.println(e);
-        } */
+        } 
         return list_role;
     }
 
@@ -229,7 +229,6 @@ public class RoleDAO extends Data_Helper_Sqlite implements  IDAO<RoleDTO> {
     }
     @Override
     public RoleDTO search_read_single(String name) throws Exception {
-        System.out.println(name+"--------852");
         RoleDTO registro = new RoleDTO();
         String query = "SELECT "
                 + "r.id_role, "

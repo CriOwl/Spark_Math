@@ -14,7 +14,6 @@ public abstract class Data_Helper_Sqlite {
     protected static synchronized Connection opConnection() throws SQLException {
         try {
             if (conexion == null) {
-                System.out.println("eeeeeeeeeeeeee");
                 conexion = DriverManager.getConnection(Bd_Path);
             }
         } catch (SQLException e) {

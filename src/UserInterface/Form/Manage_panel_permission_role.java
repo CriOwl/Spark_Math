@@ -19,14 +19,14 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 public class Manage_panel_permission_role extends JPanel {
-    Button_Text Button_update;
-    Button_Text Button_created;
-    Button_Text Button_search;
-    Button_Text Button_deletd;
-    Text_box search_box;
-    Text_label search_text;
-    JTable table;
-    JScrollPane scrollPane;
+    private final Button_Text Button_update;
+    private final Button_Text Button_created;
+    private final Button_Text Button_search;
+    private final Button_Text Button_deletd;
+    private final Text_box search_box;
+    private final Text_label search_text;
+    private JTable table;
+    private JScrollPane scrollPane;
 
     public Manage_panel_permission_role() {
         setLayout(new GridBagLayout());
