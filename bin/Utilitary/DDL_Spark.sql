@@ -6,9 +6,9 @@ DROP TABLE IF EXISTS Game1;
 DROP TABLE IF EXISTS Activity;
 DROP TABLE IF EXISTS Student_course;
 DROP TABLE IF EXISTS Course;            
+DROP TABLE IF EXISTS  Institution_manage;       
 DROP TABLE IF EXISTS Institution;   
 DROP TABLE IF EXISTS Persona;
-DROP TABLE IF EXISTS  Institution_manage;       
 DROP TABLE IF EXISTS Permission_role;
 DROP TABLE IF EXISTS Role;          
 DROP TABLE IF EXISTS Permission;     
@@ -204,15 +204,14 @@ CREATE TABLE IF NOT EXISTS Game2 (
 );
 
 CREATE TABLE Puntaje (
-    id_score INTEGER PRIMARY KEY AUTOINCREMENT
-    ,id_person INTEGER NOT NULL REFERENCES Persona(id_person)
-    ,FechaJuego DATETIME
-    ,Aciertos INTEGER DEFAULT 0
-    ,Errores INTEGER DEFAULT 0
-    
-    ,Estado VARCHAR(1) DEFAULT ('A') CONSTRAINT verficador CHECK(Estado IN ('A','I')) 
-    ,Fecha_creacion DATETIME DEFAULT (datetime('now','localtime'))
-    ,Fecha_modificacion DATETIME
+    id_score INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_person INTEGER NOT NULL REFERENCES Persona(id_person),
+    FechaJuego DATETIME,
+    Aciertos INTEGER DEFAULT 0,
+    Errores INTEGER DEFAULT 0,
+    state INTEGER DEFAULT 1 CONSTRAINT states CHECK (state IN (0, 1)),
+    Fecha_creacion DATETIME DEFAULT (datetime('now','localtime')),
+    Fecha_modificacion DATETIME
 );
 
 INSERT INTO Persona(name,last_name,DNI,email,password,id_role)
@@ -230,11 +229,21 @@ SELECT         p.id_person,
                JOIN Role r ON p.id_role=r.id_role 
                WHERE p.state= 1 AND p.DNI LIKE '%1%' ;      
 
+
 SELECT 
-                c.id_catalog, 
-                c.name, 
-                l.name, 
-                c.id_catalog_level 
-                FROM Catalog c 
-                JOIN Catalog_level l ON c.id_catalog_level = l.id_catalog_level 
-                WHERE c.state = 1 AND c.id_catalog_level=6 ; 
+            p.id_role,
+            r.name 
+            FROM Persona p 
+            JOIN Role  r ON p.id_role=r.id_role 
+            WHERE p.DNI='' AND password='';
+
+SELECT 
+                p.id_permission_role, 
+                p.id_role, 
+                r.name, 
+                p.id_permission, 
+                n.name 
+                FROM Permission_role p 
+                JOIN Role r ON p.id_role=r.id_role 
+                JOIN Permission n ON p.id_permission=n.id_permission 
+                WHERE p.state = 1 AND r.name LIKE '%a%';

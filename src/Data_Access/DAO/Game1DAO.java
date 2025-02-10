@@ -145,7 +145,7 @@ public class Game1DAO extends Data_Helper_Sqlite implements IDAO<Game1DTO>{
 
     public Integer getMaxRow()  throws Exception  {
         String query =" SELECT COUNT(*) TotalReg FROM Game1 "
-                     +" WHERE   state ='A' ";
+                     +" WHERE   state ='1' ";
         try {
             Connection conn = opConnection();            // conectar a DB     
             Statement  stmt = conn.createStatement();    // CRUD : select * ...    
@@ -158,6 +158,36 @@ public class Game1DAO extends Data_Helper_Sqlite implements IDAO<Game1DTO>{
             throw e;                                     // new PatException(e.getMessage(), getClass().getName(), "getMaxRow()");
         }
         return 0;
+    }
+
+    @Override
+    public List<Game1DTO> read_combobox() throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'read_combobox'");
+    }
+
+    @Override
+    public List<Game1DTO> read_combobox2() throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'read_combobox2'");
+    }
+
+    @Override
+    public List<Game1DTO> read_column() throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'read_column'");
+    }
+
+    @Override
+    public List<Game1DTO> search_read(String DNI) throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'search_read'");
+    }
+
+    @Override
+    public Game1DTO search_read_single(String DNI) throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'search_read_single'");
     }
 }
 

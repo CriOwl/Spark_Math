@@ -4,8 +4,7 @@ import Data_Access.DAO.DAO_C.PuntajeDAO;
 //import Data_Access.DAO.DAO_C.UsuarioDAO;
 import Data_Access.DTO.PuntajeDTO;
 //import Data_Access.DTO.DAO_C.UsuarioDTO;
-import Data_Access.Data_Helper_Sqlite;
-import java.util.List;
+
 
 public class JuegoBL {
     //private final BLFactory<UsuarioDTO> usuarioBL;

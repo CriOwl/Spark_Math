@@ -1,7 +1,7 @@
 package Data_Access.DAO;
 
 import Data_Access.DTO.Game2DTO;
-import Data_Access.DTO.Grades_Activity_game1DTO;
+import Data_Access.DTO.Game2DTO;
 import Data_Access.Data_Helper_Sqlite;
 import Data_Access.DAO.DAO_C.IDAO;
 
@@ -10,18 +10,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Grades_Activity_game1DAO extends Data_Helper_Sqlite implements IDAO<Grades_Activity_game1DTO> {
+public class Game2DAO extends Data_Helper_Sqlite implements IDAO<Game2DTO> {
 
     @Override
-    public Grades_Activity_game1DTO readby(Integer id) throws Exception {
-        Grades_Activity_game1DTO registro = new Grades_Activity_game1DTO();
+    public Game2DAO readby(Integer id) throws Exception {
+        Game2DAO registro = new Game2DTO();
         String query = "SELECT                                                          "
                         + "g.id_grade_activity_game1,                                   "
                         + "g.id_student_course,                                         "
@@ -37,7 +35,7 @@ public class Grades_Activity_game1DAO extends Data_Helper_Sqlite implements IDAO
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                registro = new Grades_Activity_game1DTO(rs.getInt(1),
+                registro = new Game2DTO(rs.getInt(1),
                                                         rs.getInt(2),
                                                         rs.getString(3),
                                                         rs.getInt(4),
@@ -52,8 +50,8 @@ public class Grades_Activity_game1DAO extends Data_Helper_Sqlite implements IDAO
     }
 
     @Override
-    public List<Grades_Activity_game1DTO> readall() {
-        List<Grades_Activity_game1DTO> tabla = new ArrayList<>();
+    public List<Game2DTO> readall() {
+        List<Game2DTO> tabla = new ArrayList<>();
         String query = "SELECT                          "
                         + "g.id_grade_activity_game1,   "
                         + "g.id_student_course,         "
@@ -68,7 +66,7 @@ public class Grades_Activity_game1DAO extends Data_Helper_Sqlite implements IDAO
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                Grades_Activity_game1DTO list = new Grades_Activity_game1DTO(rs.getInt(1),
+                Game2DTO list = new Game2DTO(rs.getInt(1),
                                                                              rs.getInt(2),
                                                                              rs.getString(3),
                                                                              rs.getInt(4),
@@ -84,7 +82,7 @@ public class Grades_Activity_game1DAO extends Data_Helper_Sqlite implements IDAO
     }
 
     @Override
-    public boolean created(Grades_Activity_game1DTO entity) throws Exception {
+    public boolean created(Game2DTO entity) throws Exception {
         String query = "INSERT INTO grades_activity_game1 (id_student_course, answer, id_game1, state, date_created, date_update) VALUES (?, ?, ?, ?, ?, ?);";
         try {
             Connection conn = opConnection();
@@ -103,7 +101,7 @@ public class Grades_Activity_game1DAO extends Data_Helper_Sqlite implements IDAO
     }
 
     @Override
-    public boolean update(Grades_Activity_game1DTO entity) throws Exception {
+    public boolean update(Game2DTO entity) throws Exception {
         DateTimeFormatter dtf       = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime now           = LocalDateTime.now();
         String query                = "UPDATE grades_activity_game1 SET id_student_course = ?, answer = ?, id_game1 = ?, state = ?, date_update = ? WHERE id_grade_activity_game1 = ?;";
@@ -138,5 +136,35 @@ public class Grades_Activity_game1DAO extends Data_Helper_Sqlite implements IDAO
         } catch (SQLException e) {
             throw e;                //new PatException(e.getMessage(), getClass().getName(), "delete()");
         }
+    }
+
+    @Override
+    public List<Game2DTO> read_combobox() throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'read_combobox'");
+    }
+
+    @Override
+    public List<Game2DTO> read_combobox2() throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'read_combobox2'");
+    }
+
+    @Override
+    public List<Game2DTO> read_column() throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'read_column'");
+    }
+
+    @Override
+    public List<Game2DTO> search_read(String DNI) throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'search_read'");
+    }
+
+    @Override
+    public Game2DTO search_read_single(String DNI) throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'search_read_single'");
     }
 }

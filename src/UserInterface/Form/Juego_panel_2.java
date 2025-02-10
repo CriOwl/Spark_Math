@@ -13,11 +13,11 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class JuegoPanel extends JPanel {
-    private JButton btnNum1, btnNum2;
+public class Juego_panel_2 extends JPanel {
+    private JButton btnNum1, btnNum2, btnNum3, btnNum4, btnNum5;
     private Text_label lblAciertos, lblErrores;
     private Text_label lblMensaje, lblRonda;
-    private int num1, num2;
+    private int num1, num2, num3, num4, num5, num6, num7, num8, num9, num10;
     private int aciertos = 0;
     private int errores = 0;
     private int rondaActual = 1;
@@ -26,36 +26,39 @@ public class JuegoPanel extends JPanel {
     private final Integer userId;
     private final JuegoBL juegoBL = new JuegoBL();
 
-    public JuegoPanel(JFrame gameWindow, Integer id) {
+    public Juego_panel_2(JFrame gameWindow, Integer id) {
         this.gameWindow = gameWindow; // Inicializar la referencia
-        customizeComponent(gameWindow);
         this.userId = id;
+        customizeComponent();
     }
 
-    private void customizeComponent(JFrame gameWindow) {
-        this.gameWindow = gameWindow;
+    private void customizeComponent() {
         setLayout(new BorderLayout());
         setBackground(Color.WHITE);
 
         // Panel Superior
         JPanel panelSuperior = new JPanel(new GridLayout(1, 2));
-        Text_label lblTitulo = new Text_label("¿Cuál es Mayor?");
-        // lblTitulo.setFont(PoliCursoStyle.FONT_BOLD.deriveFont(24f));
+        Text_label lblTitulo = new Text_label("¿Cuál resta es mayor?");
         lblRonda = new Text_label("Ronda: 1/" + TOTAL_RONDAS);
-        // lblRonda.setFont(PoliCursoStyle.FONT_BOLD.deriveFont(18f));
         panelSuperior.add(lblTitulo);
         panelSuperior.add(lblRonda);
         add(panelSuperior, BorderLayout.NORTH);
 
         // Panel Central
-        JPanel panelNumeros = new JPanel(new GridLayout(1, 2, 20, 20));
+        JPanel panelNumeros = new JPanel(new GridLayout(1, 5, 20, 20));
         panelNumeros.setBackground(Color.WHITE);
 
         btnNum1 = crearBotonNumero();
         btnNum2 = crearBotonNumero();
+        btnNum3 = crearBotonNumero();
+        btnNum4 = crearBotonNumero();
+        btnNum5 = crearBotonNumero();
 
         panelNumeros.add(btnNum1);
         panelNumeros.add(btnNum2);
+        panelNumeros.add(btnNum3);
+        panelNumeros.add(btnNum4);
+        panelNumeros.add(btnNum5);
         add(panelNumeros, BorderLayout.CENTER);
 
         // Panel Inferior
@@ -74,8 +77,7 @@ public class JuegoPanel extends JPanel {
 
         // Panel Inferior (Mensajes)
         JPanel panelMensajes = new JPanel();
-        lblMensaje = new Text_label("Selecciona el número mayor"); // Inicializa aquí
-        // lblMensaje.setFont(PoliCursoStyle.FONT_BOLD.deriveFont(16f));
+        lblMensaje = new Text_label("Selecciona la resta mayor"); // Inicializa aquí
         panelMensajes.add(lblMensaje);
         add(panelMensajes, BorderLayout.SOUTH);
 
@@ -85,8 +87,6 @@ public class JuegoPanel extends JPanel {
     private JButton crearBotonNumero() {
         JButton btn = new JButton("nada");
         btn.setPreferredSize(new Dimension(150, 150));
-        // btn.setFont(PoliCursoStyle.FONT_BOLD.deriveFont(48f));
-        // btn.setCursor(PoliCursoStyle.CURSOR_HAND);
         btn.addActionListener(this::verificarRespuesta);
         return btn;
     }
@@ -94,21 +94,36 @@ public class JuegoPanel extends JPanel {
     private void nuevoJuego() {
         num1 = generarNumeroAleatorio();
         num2 = generarNumeroAleatorio();
-        while (num1 == num2)
-            num2 = generarNumeroAleatorio();
+        num3 = generarNumeroAleatorio();
+        num4 = generarNumeroAleatorio();
+        num5 = generarNumeroAleatorio();
+        num6 = generarNumeroAleatorio();
+        num7 = generarNumeroAleatorio();
+        num8 = generarNumeroAleatorio();
+        num9 = generarNumeroAleatorio();
+        num10 = generarNumeroAleatorio();
 
-        btnNum1.setText(String.valueOf(num1));
-        btnNum2.setText(String.valueOf(num2));
-        lblMensaje.setText("Selecciona el número mayor");
-        // lblMensaje.setForeground(PoliCursoStyle.COLOR_FONT);
+        btnNum1.setText(num1 + "-" + num2);
+        btnNum2.setText(num3 + "-" + num4);
+        btnNum3.setText(num5 + "-" + num6);
+        btnNum4.setText(num7 + "-" + num8);
+        btnNum5.setText(num9 + "-" + num10);
+        lblMensaje.setText("Selecciona la resta mayor");
     }
 
     private void verificarRespuesta(ActionEvent e) {
         JButton btnSeleccionado = (JButton) e.getSource();
-        int seleccion = Integer.parseInt(btnSeleccionado.getText());
-        int otroNumero = (btnSeleccionado == btnNum1) ? num2 : num1;
+        String[] partes = btnSeleccionado.getText().split("-");
+        int seleccion = Integer.parseInt(partes[0]) - Integer.parseInt(partes[1]);
+        int resta1 = num1 - num2;
+        int resta2 = num3 - num4;
+        int resta3 = num5 - num6;
+        int resta4 = num7 - num8;
+        int resta5 = num9 - num10;
+        int mayorResta = Math.max(Math.max(Math.max(resta1, resta2), Math.max(resta3, resta4)), resta5);
 
-        if (seleccion > otroNumero) {
+        boolean esCorrecta = seleccion == mayorResta;
+        if (esCorrecta) {
             aciertos++;
             lblAciertos.setText("Aciertos: " + aciertos);
             lblMensaje.setText("¡Correcto!");
@@ -128,7 +143,6 @@ public class JuegoPanel extends JPanel {
         } else {
             guardarPartida();
             mostrarResultados();
-
         }
     }
 
@@ -158,25 +172,16 @@ public class JuegoPanel extends JPanel {
 
     private void mostrarResultados() {
         JOptionPane.showMessageDialog(this,
-                "Resultados:\n" +
-                        "✅ Aciertos: " + aciertos + "\n" +
-                        "❌ Errores: " + errores,
-                "Fin de la Partida",
-                JOptionPane.INFORMATION_MESSAGE);
+            "Resultados:\n" +
+            "✅ Aciertos: " + aciertos + "\n" +
+            "❌ Errores: " + errores,
+            "Fin de la Partida",
+            JOptionPane.INFORMATION_MESSAGE);
 
         if (gameWindow != null) {
             gameWindow.dispose(); // Cerrar solo la ventana del juego
         }
     }
-
-    // private void reiniciarJuego() {
-    // aciertos = 0;
-    // errores = 0;
-    // rondaActual = 1;
-    // lblPuntaje.setText("Puntaje: 0");
-    // lblRonda.setText("Ronda: 1/" + TOTAL_RONDAS);
-    // nuevoJuego();
-    // }
 
     private int generarNumeroAleatorio() {
         return (int) (Math.random() * 50) + 1;

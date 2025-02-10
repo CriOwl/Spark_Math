@@ -1,6 +1,7 @@
 package Data_Access.DAO;
 
 import Data_Access.DTO.Permission_roleDTO;
+import Data_Access.DTO.PersonDTO;
 import Data_Access.Data_Helper_Sqlite;
 import Data_Access.DAO.DAO_C.IDAO;
 
@@ -41,7 +42,7 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
                                                 rs.getString(6));
             }
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "readBy()");
+            System.out.println(e);
         }
         return registro;
     }
@@ -71,7 +72,7 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
                 tabla.add(list);
             }
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "readAll()");
+            System.out.println(e);
         }
         return tabla;
     }
@@ -90,7 +91,7 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "create()");
+            throw e;
         }
     }
 
@@ -110,7 +111,7 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "update()");
+            throw e;
         }
     }
 
@@ -127,7 +128,7 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new PatException(e.getMessage(), getClass().getName(), "delete()");
+            throw e;
         }
     }
 
@@ -157,19 +158,79 @@ public class PermissionRoleDAO extends Data_Helper_Sqlite implements IDAO<Permis
 
     @Override
     public List<Permission_roleDTO> read_combobox() throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'read_combobox'");
+        List<Permission_roleDTO> listRegistro = new ArrayList<>();
+        String querry = "SELECT "
+                + "p.id_permission_role, "
+                + "p.id_role, "
+                + "r.name, "
+                + "p.id_permission, "
+                + "n.name "
+                + "FROM Permission_role p "
+                + "JOIN Role r ON p.id_role=r.id_role "
+                + "JOIN Permission n ON p.id_permission=n.id_permission "
+                + "WHERE p.state = 1 ";
+        try {
+            Connection cone = opConnection();
+            Statement stmt = cone.createStatement();
+            ResultSet rs = stmt.executeQuery(querry);
+            while (rs.next()) {
+                Permission_roleDTO registro = new Permission_roleDTO(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(3));
+                        listRegistro.add(registro);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return listRegistro;
     }
 
     @Override
     public List<Permission_roleDTO> read_column() throws Exception {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'read_column'");
     }
 
     @Override
-    public List<Permission_roleDTO> search_read(String DNI) throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'search_read'");
+    public List<Permission_roleDTO> search_read(String Role) throws Exception {
+        List<Permission_roleDTO> listRegistro = new ArrayList<>();
+        String querry = "SELECT "
+                + "p.id_permission_role, "
+                + "p.id_role, "
+                + "r.name, "
+                + "p.id_permission, "
+                + "n.name "
+                + "FROM Permission_role p "
+                + "JOIN Role r ON p.id_role=r.id_role "
+                + "JOIN Permission n ON p.id_permission=n.id_permission "
+                + "WHERE p.state = 1 AND r.name LIKE ?";
+        try {
+            Connection cone = opConnection();
+            Statement stmt = cone.createStatement();
+            ResultSet rs = stmt.executeQuery(querry);
+            while (rs.next()) {
+                Permission_roleDTO registro = new Permission_roleDTO(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3));
+                        listRegistro.add(registro);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return listRegistro;
+    }
+
+    @Override
+    public List<Permission_roleDTO> read_combobox2() throws Exception {
+        
+        throw new UnsupportedOperationException("Unimplemented method 'read_combobox2'");
+    }
+
+    @Override
+    public Permission_roleDTO search_read_single(String DNI) throws Exception {
+        throw new UnsupportedOperationException("Unimplemented method 'search_read_single'");
     }
 }

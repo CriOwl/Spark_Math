@@ -3,23 +3,25 @@ package BusinessLogic.BL_USER;
 import Data_Access.DAO.PermissionRoleDAO;
 import Data_Access.DTO.Permission_roleDTO;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
 public class Role {
-    List<String> list_permissions;
-    List<String> list_method;
-    
-    public  void get_Permission(Integer id_role){
+    private List<String> list_permissions;
+    private HashMap <String,String> map_permission;
+    public Role(Integer id_role){
+        get_Permission(id_role);
+    }
+    private void get_Permission(Integer id_role){
+        map_permission=new HashMap<>();
         list_permissions=new ArrayList<>();
-        list_method=new ArrayList<>();
         PermissionRoleDAO consulta=new PermissionRoleDAO();
         try {
             for (Permission_roleDTO registo : consulta.role_permission_read(id_role)) {
                 list_permissions.add(registo.getPermission_name());
-                list_method.add(registo.getMethod_name());
+                map_permission.put(registo.getPermission_name(), registo.getMethod_name());
             }
-            Permisos p=new Permisos(list_permissions, list_method);
         } catch (Exception e) {
             System.out.println("No se pudieron cargar las listas");
         }
@@ -27,6 +29,10 @@ public class Role {
 
     public List<String> getList_permissions() {
         return list_permissions;
+    }
+
+    public HashMap<String, String> getMap_permission() {
+        return map_permission;
     }
     
 }

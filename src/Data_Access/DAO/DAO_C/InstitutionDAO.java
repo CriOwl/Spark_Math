@@ -247,5 +247,11 @@ public class InstitutionDAO extends Data_Helper_Sqlite implements IDAO <Institut
         } 
         return list_institution; 
     }
+
+    @Override
+    public InstitutionDTO search_read_single(String DNI) throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'search_read_single'");
+    }
     
 }

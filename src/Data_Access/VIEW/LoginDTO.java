@@ -12,6 +12,12 @@ public class LoginDTO {
     private Integer state;
     private String name_column;
     
+    public LoginDTO(Integer id_person ,Integer id_role, String name_role) {
+        this.id_role = id_role;
+        this.name_role = name_role;
+        this.id_person=id_person;
+    }
+
     public LoginDTO() {
     }
     

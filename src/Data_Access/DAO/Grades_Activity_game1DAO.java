@@ -2,6 +2,8 @@ package Data_Access.DAO;
 
 import Data_Access.DTO.Grades_Activity_game1DTO;
 import Data_Access.Data_Helper_Sqlite;
+import Data_Access.DAO.DAO_C.IDAO;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -133,5 +135,35 @@ public class Grades_Activity_game1DAO extends Data_Helper_Sqlite implements IDAO
         } catch (SQLException e) {
             throw e;               //new PatException(e.getMessage(), getClass().getName(), "delete()");
         }
+    }
+
+    @Override
+    public List<Grades_Activity_game1DTO> read_combobox() throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'read_combobox'");
+    }
+
+    @Override
+    public List<Grades_Activity_game1DTO> read_combobox2() throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'read_combobox2'");
+    }
+
+    @Override
+    public List<Grades_Activity_game1DTO> read_column() throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'read_column'");
+    }
+
+    @Override
+    public List<Grades_Activity_game1DTO> search_read(String DNI) throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'search_read'");
+    }
+
+    @Override
+    public Grades_Activity_game1DTO search_read_single(String DNI) throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'search_read_single'");
     }
 }

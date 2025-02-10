@@ -3,8 +3,6 @@ package UserInterface.Form;
 import BusinessLogic.BL_USER.BL_generalyView;
 import Data_Access.VIEW.CatalogoViewDAO;
 import Data_Access.VIEW.CatalogoViewDTO;
-import Data_Access.VIEW.LoginDAO;
-import Data_Access.VIEW.LoginDTO;
 import UserInterface.Customer_control.Button_Text;
 import UserInterface.Customer_control.Text_box;
 import UserInterface.Customer_control.Text_label;
@@ -17,13 +15,11 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 public class Manage_panel_catalog extends JPanel {
-    List<Text_label> Label_text_list;
-    List<Text_box> Label_box_list;
+
     Button_Text Button_update;
     Button_Text Button_created;
     Button_Text Button_search;
@@ -114,22 +110,7 @@ public class Manage_panel_catalog extends JPanel {
         }
     }
 
-    private void customize_table(JTable tabla) {
-        tabla.setFont(Spark_Style.FONT);
-        tabla.setForeground(Spark_Style.COLOR_FONT);
-        tabla.setBackground(Spark_Style.COLOR_BACKGROUND);
-        tabla.setGridColor(Spark_Style.COLOR_BACKGROUND_GRID);
-        tabla.setSelectionBackground(Spark_Style.COLOR_BACKGROUND_SELECT);
-        tabla.setSelectionForeground(Spark_Style.COLOR_FONT);
-        tabla.setRowHeight(30);
-        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-        tabla.setOpaque(false);
-        tabla.setFocusable(true);
-        tabla.setRowSelectionAllowed(true);
-        tabla.setColumnSelectionAllowed(false);
-        tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        tabla.setDefaultEditor(Object.class, null);
-    }
+   
 
     private void setup_panel() {
         JTableHeader header = table.getTableHeader();

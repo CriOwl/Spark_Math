@@ -15,7 +15,6 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
@@ -111,22 +110,6 @@ public class Manage_panel_permission_role extends JPanel {
         }
     }
 
-    private void customize_table(JTable tabla) {
-        tabla.setFont(Spark_Style.FONT);
-        tabla.setForeground(Spark_Style.COLOR_FONT);
-        tabla.setBackground(Spark_Style.COLOR_BACKGROUND);
-        tabla.setGridColor(Spark_Style.COLOR_BACKGROUND_GRID);
-        tabla.setSelectionBackground(Spark_Style.COLOR_BACKGROUND_SELECT);
-        tabla.setSelectionForeground(Spark_Style.COLOR_FONT);
-        tabla.setRowHeight(30);
-        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-        tabla.setOpaque(false);
-        tabla.setFocusable(true);
-        tabla.setRowSelectionAllowed(true);
-        tabla.setColumnSelectionAllowed(false);
-        tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        tabla.setDefaultEditor(Object.class, null);
-    }
 
     private void setup_panel() {
         JTableHeader header = table.getTableHeader();

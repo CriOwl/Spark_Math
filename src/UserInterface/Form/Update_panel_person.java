@@ -50,9 +50,9 @@ public class Update_panel_person extends JPanel {
     private Button_Text send;
     private Button_Text cancel;
     private Button_Text search;
-    private HashMap<String, Integer> Institucion_map = new HashMap<>();
-    private HashMap<String, Integer> Role_map = new HashMap<>();
-    private HashMap<String, Integer> state_map = new HashMap<>();
+    private final HashMap<String, Integer> Institucion_map = new HashMap<>();
+    private final HashMap<String, Integer> Role_map = new HashMap<>();
+    private final HashMap<String, Integer> state_map = new HashMap<>();
     Integer id_person;
     
     public Update_panel_person() {

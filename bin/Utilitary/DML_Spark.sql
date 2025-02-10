@@ -65,6 +65,16 @@ VALUES
         'admin_role'
     ),
     (
+        'Administrar Permisos',
+        'Permite al usuario administrar docentes',
+        'admin_role'
+    ),
+    (
+        'Asociar Permisos a Roles',
+        'Permite al usuario administrar docentes',
+        'admin_role'
+    ),
+    (
         'Administrar Estudiantes',
         'Permite al usuario administrar estudiantes',
         'admin_student'

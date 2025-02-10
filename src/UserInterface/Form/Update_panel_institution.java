@@ -1,7 +1,5 @@
 package UserInterface.Form;
 
-import BusinessLogic.BL_USER.BL_generalyTable;
-import Data_Access.DAO.DAO_C.InstitutionDAO;
 import Data_Access.DTO.InstitutionDTO;
 import UserInterface.Customer_control.Button_Text;
 import UserInterface.Customer_control.Text_box;
@@ -16,16 +14,15 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
 public class Update_panel_institution extends JPanel {
-    Text_label name_label;
-    Text_label amie_label;
-    Text_label state_label;
-    Text_box name_box;
-    Text_box amie_box;
-    JComboBox<String> state_box;
-
+    private Text_label name_label;
+    private Text_label amie_label;
+    private Text_label state_label;
+    private Text_box name_box;
+    private Text_box amie_box;
+    private JComboBox<String> state_box;
     Button_Text send;
     Button_Text cancel;
-    private HashMap<String, Integer> state_map = new HashMap<>();
+    private final HashMap<String, Integer> state_map = new HashMap<>();
 
     public Update_panel_institution() {
         setup_panel();

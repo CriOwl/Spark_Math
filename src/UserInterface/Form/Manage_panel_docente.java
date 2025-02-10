@@ -1,8 +1,5 @@
 package UserInterface.Form;
 
-import BusinessLogic.BL_USER.BL_generalyView;
-import Data_Access.VIEW.InstitutionViewDAO;
-import Data_Access.VIEW.InstitutionViewDTO;
 import UserInterface.Customer_control.Button_Text;
 import UserInterface.Customer_control.Text_box;
 import UserInterface.Customer_control.Text_label;
@@ -11,31 +8,34 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-public class Manage_panel_institution extends JPanel {
-    Button_Text Button_update;
-    Button_Text Button_created;
-    Button_Text Button_search;
-    Button_Text Button_deletd;
-    Text_box search_box;
-    Text_label search_text;
-    JTable table;
-    JScrollPane scrollPane;
+import BusinessLogic.BL_USER.BL_generalyView;
+import Data_Access.VIEW.DocentesViewDAO;
+import Data_Access.VIEW.DocentesViewDTO;
 
-    public Manage_panel_institution() {
+public class Manage_panel_docente extends JPanel {
+    private final Button_Text Button_update;
+    private final Button_Text Button_created;
+    private final Button_Text Button_search;
+    private final Button_Text Button_deletd;
+    private final Text_box search_box;
+    private final Text_label search_text;
+    private JTable table;
+    private JScrollPane scrollPane;
+
+    public Manage_panel_docente() {
         setLayout(new GridBagLayout());
         Button_update = new Button_Text("Actualizar", Spark_Style.FONT_BOLD, null);
         Button_created = new Button_Text("Crear", Spark_Style.FONT_BOLD, null);
         Button_deletd = new Button_Text("Borrar", Spark_Style.FONT_BOLD, null);
         Button_search = new Button_Text("Buscar", Spark_Style.FONT_BOLD, null);
         search_box = new Text_box(Spark_Style.FONT_BOLD, null);
-        search_text = new Text_label("Nombre:");
+        search_text = new Text_label("Grado:");
 
         Button_search.addActionListener(e -> change_table());
 
@@ -56,58 +56,60 @@ public class Manage_panel_institution extends JPanel {
     }
 
     private void created_table() {
-        BL_generalyView<InstitutionViewDTO> bl_institution = new BL_generalyView<>(InstitutionViewDAO::new);
+        BL_generalyView<DocentesViewDTO> bl_docente = new BL_generalyView<>(DocentesViewDAO::new);
         try {
-            ///
-            String[] columns = bl_institution.getColumn().stream().map(c -> c.getName_column()).toArray(String[]::new);
-            Object[][] data = new Object[bl_institution.getAll().size()][columns.length];
-
+            String[] colums = bl_docente.getColumn().stream().map(e -> e.getName_column()).toArray(String[]::new);
+            Object[][] data = new Object[bl_docente.getAll().size()][colums.length];
             int index = 0;
-            for (InstitutionViewDTO user : new  InstitutionViewDAO().readall()) {
-                data[index][0] = user.getId_institution();
-                data[index][1] = user.getName();
-                data[index][2] = user.getAmie();
-                data[index][3] = user.getName_manager();
+            for(DocentesViewDTO docente : new DocentesViewDAO().readall()){
+                data[index][0] = docente.getId_course();
+                data[index][1] = docente.getProfesor();
+                data[index][2] = docente.getInstitucion();
+                data[index][3] = docente.getAmie();
+                data[index][4] = docente.getPeriodo();
+                data[index][5] = docente.getJornada();
+                data[index][6] = docente.getCurso();
                 index++;
             }
-            if (table == null) {
+            if(table == null ){
                 table = new JTable();
-                table = new JTable(new DefaultTableModel(data, columns));
+                table = new JTable(new DefaultTableModel(data, colums));
                 scrollPane = new JScrollPane(table);
             }
-            table.setModel(new DefaultTableModel(data, columns));
+            table.setModel(new DefaultTableModel(data, colums));
             table.revalidate();
             table.repaint();
         } catch (Exception e) {
             System.out.println(e);
         }
+        
     }
 
-    private void search(String AMIE) {
-        BL_generalyView<InstitutionViewDTO> bl_institution = new BL_generalyView<>(InstitutionViewDAO::new);
+    private void search(String DNI) {
+        BL_generalyView<DocentesViewDTO> bl_docente = new BL_generalyView<>(DocentesViewDAO::new);
         try {
-            //
-            String[] columns = bl_institution.getColumn().stream().map(c -> c.getName_column()).toArray(String[]::new);
-            List<InstitutionViewDTO> results = bl_institution.search(AMIE);
-            Object[][] data = new Object[results.size()][columns.length];
+            String[] columns = bl_docente.getColumn().stream().map(c -> c.getName_column()).toArray(String[]::new);
+            Object[][] data = new Object[bl_docente.getAll().size()][columns.length];
 
             int index = 0;
-            for (InstitutionViewDTO user : results) {
-                data[index][0] = user.getId_institution();
-                data[index][1] = user.getName();
-                data[index][2] = user.getAmie();
-                data[index][3] = user.getName_manager();
+            for (DocentesViewDTO docente : new DocentesViewDAO().search_read(DNI)) {
+                data[index][0] = docente.getId_course();
+                data[index][1] = docente.getProfesor();
+                data[index][2] = docente.getInstitucion();
+                data[index][3] = docente.getAmie();
+                data[index][4] = docente.getPeriodo();
+                data[index][5] = docente.getJornada();
+                data[index][6] = docente.getCurso();
                 index++;
-                System.out.println(user.getId_institution());
             }
-
-            //
             table.setModel(new DefaultTableModel(data, columns));
             table.revalidate();
             table.repaint();
+            
         } catch (Exception e) {
             System.out.println(e);
         }
+    
     }
 
     private void setup_panel() {
