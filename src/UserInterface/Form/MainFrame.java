@@ -91,6 +91,7 @@ public class MainFrame extends JFrame {
         main_windown.add(panel,BorderLayout.CENTER);
         main_windown.revalidate();
     }
+
     private void Login_panel(){
         login=new Login_panel();
         main_windown.add(login);
