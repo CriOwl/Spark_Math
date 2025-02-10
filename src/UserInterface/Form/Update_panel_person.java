@@ -88,6 +88,7 @@ public class Update_panel_person extends JPanel {
         search=new Button_Text("Buscar", Spark_Style.FONT, null);
         search.addActionListener(e->search_data());
         cancel.setBackground(new Color(200,0,0));
+        cancel.addActionListener(e->change_panel(new Manage_panel_person()));
         GridBagConstraints gbc=new GridBagConstraints();
         gbc.insets=new Insets(5,20,5,20);
         gbc.gridx = 0;
@@ -257,5 +258,20 @@ public class Update_panel_person extends JPanel {
             }
         }
         return null; 
+    }
+    private void change_panel(JPanel newPanel) {
+        removeAll(); 
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 10, 5, 5);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        add(newPanel, gbc);
+        revalidate();
+        repaint(); 
     }
 }

@@ -95,19 +95,19 @@ VALUES
         'InstitucionPanel'
     ),
     (
-        'Visualizar Reportes',
-        'Permite al usuario visualizar reportes',
-        'view_reports'
-    ),
-    (
-        'Realizar Actividades',
-        'Permite al usuario realizar actividades',
-        'activity'
-    ),
-    (
-        'Jugar',
+        'Juego1',
         'Permite al usuario jugar para el diagnostico',
-        'play'
+        'Juego1'
+    ),
+    (
+        'Juego2',
+        'Permite al usuario jugar para el diagnostico',
+        'Juego2'
+    ),
+    (
+        'Juego3',
+        'Permite al usuario jugar para el diagnostico',
+        'Juego3'
     );
 
 INSERT INTO
@@ -121,28 +121,8 @@ VALUES
     (1, 6),
     (1, 7),
     (1, 8),
-    (1, 9),
-    (2, 1),
-    (2, 2),
-    (2, 3),
-    (2, 4),
-    (2, 5),
-    (2, 6),
-    (2, 7),
-    (2, 8),
-    (2, 9),
-    (3, 1),
-    (3, 2),
-    (3, 3),
-    (3, 4),
-    (3, 5),
-    (3, 6),
-    (3, 7),
-    (3, 8),
-    (3, 9),
-    (4, 8),
-    (4, 9),
-    (4, 11);
+    (1, 9);
+
 
 INSERT INTO
     Persona (
@@ -310,6 +290,9 @@ VALUES
     (2, 3, '8'),
     (2, 4, '10'),
     (9, 5, '12');
+INSERT INTO Institution_manage (id_institution_manage, id_institution, id_manager) VALUES
+(1, 1, 1),
+(2,2,2);
 INSERT INTO
     ROLE (name,id_hierarchy)
 VALUES

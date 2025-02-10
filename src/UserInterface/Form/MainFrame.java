@@ -30,7 +30,7 @@ public class MainFrame extends JFrame {
     private final ImageIcon logo = new ImageIcon(Spark_Style.URL_LOGO);
     private Login_panel login;
     private Menu_panel menu;
-    private JPanel pnlMain = new MainPanel();
+    private JPanel pnlMain = new Update_panel_permission_role();
     private JFrame main_windown;
     private boolean is_dark = true;
 
@@ -97,7 +97,7 @@ public class MainFrame extends JFrame {
         main_windown.revalidate();
     }
 
-    private void setPanel(JPanel formularioPanel) {
+    public void setPanel(JPanel formularioPanel) {
         Container container = getContentPane();
         if (pnlMain != null) {
             container.remove(pnlMain);
@@ -124,6 +124,15 @@ public class MainFrame extends JFrame {
                 return new Manage_panel_institution();
             case "AdminPanel":
                 return new Manage_panel_person();
+<<<<<<< HEAD
+=======
+            case "Juego1":
+                return new JuegoPanel(new JFrame("Juego1"),login.getUser_id());
+            case "Juego2":
+                return new Juego_panel_2(new JFrame("Juego2"),login.getUser_id());
+            case "Juego3":
+                return new Juego_panel_3(new JFrame("Juego3"),login.getUser_id());
+>>>>>>> cd2d5eca869136a892c4d9a5261bfb44f5e6bd06
             
         }
         return new MainPanel();

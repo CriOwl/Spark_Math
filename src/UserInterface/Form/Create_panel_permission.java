@@ -12,7 +12,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.HashMap;
-import java.util.Map;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
@@ -48,6 +47,7 @@ public class Create_panel_permission extends JPanel {
         send.addActionListener(e->validate_data());
         cancel=new Button_Text("Cancelar", Spark_Style.FONT, null);
         cancel.setBackground(new Color(200,0,0));
+        cancel.addActionListener(e->change_panel(new Manage_panel_permission_role()));
         GridBagConstraints gbc=new GridBagConstraints();
         gbc.insets=new Insets(5,20,5,20);
         gbc.gridx = 0;
@@ -114,5 +114,20 @@ public class Create_panel_permission extends JPanel {
             System.out.println(e);
         }
         return false;
+    }
+    private void change_panel(JPanel newPanel) {
+        removeAll(); 
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 10, 5, 5);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        add(newPanel, gbc);
+        revalidate();
+        repaint(); 
     }
 }

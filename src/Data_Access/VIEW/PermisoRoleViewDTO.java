@@ -10,6 +10,12 @@ public class PermisoRoleViewDTO {
     public PermisoRoleViewDTO() {
     }
 
+    
+    public PermisoRoleViewDTO(String name_column) {
+        this.name_column = name_column;
+    }
+
+
     public PermisoRoleViewDTO(Integer id, String rol, String permiso) {
         this.id = id;
         this.rol = rol;

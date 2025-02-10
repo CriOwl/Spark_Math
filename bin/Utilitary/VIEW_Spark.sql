@@ -2,17 +2,14 @@
 DROP VIEW vw_persona;
 CREATE VIEW vw_persona AS
 SELECT 
-    p.id_person,
-    p.name,
-    p.last_name,
-    p.DNI,
-    p.email,
-    p.password,
-    p.id_role,
-    r.name,
-    p.state,
-    p.date_created,
-    p.date_updated
+    p.id_person AS ID,
+    p.name AS  NOMBRE,
+    p.last_name AS APELLIDO,
+    p.DNI AS CEDULA,
+    p.email AS EMAIL,
+    p.password AS CLAVE,
+    r.name AS ROL,
+    p.state AS ESTADO
 FROM 
     Persona p
     JOIN Role r ON p.id_role = r.id_role;
@@ -44,18 +41,15 @@ FROM
     JOIN Role r ON pr.id_role = r.id_role
     JOIN Permission p ON pr.id_permission = p.id_permission;
 DROP VIEW vw_institution;
-CREATE VIEW vw_institution AS
+   CREATE VIEW vw_institution AS
 SELECT 
-    i.id_institution,
-    i.name AS institution_name,
-    i.amie,
-    CONCAT(p.name, ' ', p.last_name) AS manager_name,
-    i.state,
-    i.date_created,
-    i.date_updated
-FROM 
-    Institution i
-    JOIN Persona p ON i.id_manager = p.id_person;
+    i.id_institution AS ID,
+    i.name AS INSTITUCION,
+    i.amie AS CODIGO,
+    CONCAT(p.name, ' ', p.last_name) AS MANAGER
+FROM Institution_manage im
+JOIN Institution i ON im.id_institution = i.id_institution
+JOIN Persona p ON im.id_manager = p.id_person;
 DROP VIEW vw_course;
 CREATE VIEW vw_course AS
 SELECT 
