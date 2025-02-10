@@ -187,13 +187,6 @@ FROM
 
 
 
-/*
-    VISTA RECTORES DESDE LA PERSPECTIVA DEL ADMINISTRADOR
-    ID_ADMINISTRADOR CON REFERENICA DE PERSONA
-
-    --ID, INSTITUTION, NOMBRE DEL RECTOR, JORNADA 
-*/
-
 DROP VIEW vw_rectores;
 
 CREATE VIEW vw_rectores AS
@@ -225,7 +218,7 @@ SELECT
 FROM 
     Role r
 WHERE 
-    r.state = 1;  -- Asegúrate de que solo tomas roles activos
+    r.state = 1;  
 
 
 
@@ -240,11 +233,10 @@ SELECT
 FROM 
     Permission p
 WHERE 
-    p.state = 1;  -- Solo permisos activos
+    p.state = 1; 
 
 
 
---PERMISOS ROLES
 
 DROP VIEW vw_permiso_rol;
 CREATE VIEW vw_permiso_rol AS
@@ -254,7 +246,39 @@ SELECT
     p.name AS PERMISO
 FROM 
     Permission_role pr
-    JOIN Role r ON pr.id_role = r.id_role  -- Relaciona con la tabla Role para obtener el nombre del rol
-    JOIN Permission p ON pr.id_permission = p.id_permission  -- Relaciona con la tabla Permission para obtener el nombre del permiso
+    JOIN Role r ON pr.id_role = r.id_role  
+    JOIN Permission p ON pr.id_permission = p.id_permission  
 WHERE 
-    pr.state = 1;  -- Solo asociaciones activas
+    pr.state = 1;  
+
+-- tabla estudiantes
+DROP VIEW IF EXISTS vw_estudiante;
+CREATE VIEW vw_estudiante AS
+SELECT
+    sc.id_student_course AS ID,
+    CONCAT(p.name, ' ', p.last_name) AS ESTUDIANTE,
+    p.DNI AS CEDULA,
+    p.email AS CORREO,
+    i.name AS INSTITUCION,
+    i.amie AS AMIE,
+    cat_per.name AS PERIODO,
+    cat_t.name AS JORNADA,
+    CONCAT(cat_l.name, ' ', cat_p.name) AS CURSO,
+    d.PROFESOR
+    --sc.state AS ESTADO
+FROM
+    Student_course sc
+    JOIN Persona p ON sc.id_student = p.id_person
+    JOIN Course c ON sc.id_course = c.id_course
+    JOIN Institution i ON c.id_institution = i.id_institution
+    JOIN Catalog cat_l ON c.id_catalog_level = cat_l.id_catalog
+    JOIN Catalog cat_p ON c.id_catalog_parallel = cat_p.id_catalog
+    JOIN Catalog cat_t ON c.id_catalog_time = cat_t.id_catalog
+    JOIN Catalog cat_per ON c.id_catalog_period = cat_per.id_catalog
+    JOIN vw_docente d ON d.ID = c.id_course
+WHERE p.state = 1 AND p.id_role = 4 AND sc.state = 1;  -- Solo estudiantes activos
+
+SELECT * FROM vw_estudiante;
+
+SELECT DISTINCT CURSO FROM vw_estudiante;
+SELECT DISTINCT CURSO FROM vw_docente;

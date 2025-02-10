@@ -173,8 +173,29 @@ public class CourseDAO extends Data_Helper_Sqlite implements IDAO<CourseDTO>{
 
     @Override
     public List<CourseDTO> read_combobox() throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'read_combobox'");
+        List<CourseDTO> list_course = new ArrayList<>();
+        String querry = "SELECT c.id_course, " 
+                 + " cl.name AS level_name, "   
+                 + " cp.name AS parallel_name " 
+                 + " FROM Course c "
+                 + " JOIN Catalog cl ON c.id_catalog_level = cl.id_catalog " 
+                 + " JOIN Catalog cp ON c.id_catalog_parallel = cp.id_catalog " 
+                 + " WHERE c.state = '1'";
+        try {
+            Connection cone = opConnection();
+            Statement stmt = cone.createStatement();
+            ResultSet rs = stmt.executeQuery(querry);
+            while (rs.next()) {
+                CourseDTO course = new CourseDTO(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3));
+            list_course.add(course);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list_course;
     }
 
     @Override
