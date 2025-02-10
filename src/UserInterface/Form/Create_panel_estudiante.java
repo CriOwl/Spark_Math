@@ -1,16 +1,12 @@
 package UserInterface.Form;
 
 import BusinessLogic.BL_USER.BL_generalyTable;
-import Data_Access.DAO.DAO_C.InstitutionDAO;
+import Data_Access.DAO.CourseDAO;
 import Data_Access.DAO.DAO_C.PersonDAO;
-import Data_Access.DAO.DAO_C.RoleDAO;
-import Data_Access.DTO.InstitutionDTO;
-import Data_Access.DTO.PersonDTO;
-import Data_Access.DTO.RoleDTO;
-import Data_Access.DTO.Student_courseDTO;
 import Data_Access.DAO.Student_courseDAO;
 import Data_Access.DTO.CourseDTO;
-import Data_Access.DAO.CourseDAO;
+import Data_Access.DTO.PersonDTO;
+import Data_Access.DTO.Student_courseDTO;
 import UserInterface.Customer_control.Button_Text;
 import UserInterface.Customer_control.Mascaras;
 import UserInterface.Customer_control.Text_box;
@@ -74,6 +70,7 @@ public class Create_panel_estudiante extends JPanel {
         send=new Button_Text("Enviar", Spark_Style.FONT, null);
         send.addActionListener(e->validate_data());
         cancel=new Button_Text("Cancelar", Spark_Style.FONT, null);
+        cancel.addActionListener(e->change_panel(new Manage_panel_estudiante()));
         cancel.setBackground(new Color(200,0,0));
         GridBagConstraints gbc=new GridBagConstraints();
          gbc.insets = new Insets(5, 5, 5, 5); // Espaciado entre componentes
@@ -223,5 +220,21 @@ public class Create_panel_estudiante extends JPanel {
             System.out.println(e);
         }
         return false;
+    }
+
+    private void change_panel(JPanel newPanel) {
+        removeAll(); 
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 10, 5, 5);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        add(newPanel, gbc);
+        revalidate();
+        repaint(); 
     }
 }

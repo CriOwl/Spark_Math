@@ -120,16 +120,15 @@ public class MainFrame extends JFrame {
             case "InstitucionPanel":
                 return new Manage_panel_institution();
             case "AdminPanel":
-                return new Manage_panel_person();
-<<<<<<< HEAD
-=======
+            return new Manage_panel_person();
+            case "EstudiantePanel":
+            return new Manage_panel_estudiante();
             case "Juego1":
                 return new JuegoPanel(new JFrame("Juego1"),login.getUser_id());
             case "Juego2":
                 return new Juego_panel_2(new JFrame("Juego2"),login.getUser_id());
             case "Juego3":
                 return new Juego_panel_3(new JFrame("Juego3"),login.getUser_id());
->>>>>>> cd2d5eca869136a892c4d9a5261bfb44f5e6bd06
             
         }
         return new MainPanel();

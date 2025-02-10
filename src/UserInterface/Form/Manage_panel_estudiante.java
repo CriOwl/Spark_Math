@@ -11,7 +11,6 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -19,7 +18,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 public class Manage_panel_estudiante extends JPanel {
-    private final Button_Text Button_update;
     private final Button_Text Button_created;
     private final Button_Text Button_search;
     private final Button_Text Button_deletd;
@@ -32,15 +30,13 @@ public class Manage_panel_estudiante extends JPanel {
 
     public Manage_panel_estudiante() {
         setLayout(new GridBagLayout());
-        Button_update = new Button_Text("Actualizar", Spark_Style.FONT_BOLD, null);
         Button_created = new Button_Text("Crear", Spark_Style.FONT_BOLD, null);
         Button_deletd = new Button_Text("Borrar", Spark_Style.FONT_BOLD, null);
         Button_search = new Button_Text("Buscar", Spark_Style.FONT_BOLD, null);
         search_box = new Text_box(Spark_Style.FONT_BOLD, null);
         search_text = new Text_label("DNI:");
-
+        Button_created.addActionListener(e->change_panel(new Create_panel_estudiante()));
         Button_search.addActionListener(e -> change_table());
-
         created_table();
         setup_panel();
     }
@@ -137,7 +133,6 @@ public class Manage_panel_estudiante extends JPanel {
         gbc.weighty = 0;
         gbc.gridx = 0;
         gbc.anchor = GridBagConstraints.CENTER;
-        add(Button_update, gbc);
         gbc.gridx = 1;
         add(Button_created, gbc);
         gbc.gridx = 2;
@@ -156,5 +151,20 @@ public class Manage_panel_estudiante extends JPanel {
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.EAST;
         add(Button_search, gbc);
+    }
+    private void change_panel(JPanel newPanel) {
+        removeAll(); 
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 10, 5, 5);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        add(newPanel, gbc);
+        revalidate();
+        repaint(); 
     }
 }

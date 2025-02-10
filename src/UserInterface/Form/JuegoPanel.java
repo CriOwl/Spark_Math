@@ -173,7 +173,6 @@ public class JuegoPanel extends JPanel {
             }
         }).start();
     }
-    
    
 
     private void handleCommand(String command) {
